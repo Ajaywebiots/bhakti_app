@@ -21,6 +21,7 @@ class AppTheme {
   Color fieldCardBg;
   Color trans;
   Color black;
+  Color rulesClr;
   Color containerClr;
   Color shadowClr;
   Color green;
@@ -42,6 +43,7 @@ class AppTheme {
     required this.fieldCardBg,
     required this.trans,
     required this.black,
+    required this.rulesClr,
     required this.containerClr,
     required this.shadowClr,
     required this.online,
@@ -68,6 +70,7 @@ class AppTheme {
             whiteColor: const Color(0xffFFFFFF),
             trans: Colors.transparent,
             black: const Color(0xff000000),
+            rulesClr: const Color(0xff3A3A3A),
             containerClr: const Color(0xffEEE9EF),
             shadowClr: const Color(0x1E929292),
             green: Colors.green,
@@ -89,6 +92,7 @@ class AppTheme {
             whiteColor: const Color(0xffFFFFFF),
             trans: Colors.transparent,
             black: const Color(0xff000000),
+            rulesClr: const Color(0xff3A3A3A),
             containerClr: const Color(0xffEEE9EF),
             shadowClr: const Color(0x1E929292),
             green: Colors.green,

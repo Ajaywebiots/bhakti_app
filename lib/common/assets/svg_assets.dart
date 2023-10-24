@@ -16,4 +16,5 @@ class SvgAssets {
   final calendar = 'assets/svg/calendar.svg';
   final menu = 'assets/svg/menu.svg';
   final chanting = 'assets/svg/chanting.svg';
+  final lineRuler = 'assets/svg/lineRuler.svg';
 }

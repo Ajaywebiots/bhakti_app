@@ -17,4 +17,5 @@ class AppFonts {
   final chanting = "Chanting";
   final mangalaArti = "Mangala Arti";
   final sandhyaArti = "Sandhya Arti";
+  final regulations = "Regulations";
 }

@@ -6,6 +6,7 @@ import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/home_screen_provider/home_screen_provider.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_circle_design_layout.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_container.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/regulation_list_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -16,7 +17,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(builder: (context1, value, child) {
@@ -200,16 +200,18 @@ class _HomeScreenState extends State<HomeScreen> {
                           child: Row(children: [
                             Container(
                                 decoration: BoxDecoration(
-                                    color: appColor(context).appTheme.whiteColor,
-                                    borderRadius: BorderRadius.circular(8),
-                                    boxShadow: const [
-                                      BoxShadow(
-                                        color: Color(0x0F000000),
-                                        blurRadius: 16,
-                                        offset: Offset(0, 2),
-                                        spreadRadius: 0,
-                                      )
-                                    ]),
+                                  color: appColor(context).appTheme.whiteColor,
+                                  borderRadius: BorderRadius.circular(8),
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: appColor(context)
+                                            .appTheme
+                                            .shadowClr,
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 4),
+                                        spreadRadius: 0)
+                                  ],
+                                ),
                                 height: Sizes.s86,
                                 width: Sizes.s106,
                                 child: Column(
@@ -239,15 +241,17 @@ class _HomeScreenState extends State<HomeScreen> {
                             const HSpace(Sizes.s10),
                             Container(
                                 decoration: BoxDecoration(
-                                    color: appColor(context).appTheme.whiteColor,
+                                    color:
+                                        appColor(context).appTheme.whiteColor,
                                     borderRadius: BorderRadius.circular(8),
-                                    boxShadow: const [
+                                    boxShadow: [
                                       BoxShadow(
-                                        color: Color(0x0F000000),
-                                        blurRadius: 16,
-                                        offset: Offset(0, 2),
-                                        spreadRadius: 0,
-                                      )
+                                          color: appColor(context)
+                                              .appTheme
+                                              .shadowClr,
+                                          blurRadius: 8,
+                                          offset: const Offset(0, 4),
+                                          spreadRadius: 0)
                                     ]),
                                 height: Sizes.s86,
                                 width: Sizes.s106,
@@ -278,13 +282,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             const HSpace(Sizes.s10),
                             Container(
                                 decoration: BoxDecoration(
-                                    color: appColor(context).appTheme.whiteColor,
+                                    color:
+                                        appColor(context).appTheme.whiteColor,
                                     borderRadius: BorderRadius.circular(8),
-                                    boxShadow: const [
+                                    boxShadow: [
                                       BoxShadow(
-                                          color: Color(0x0F000000),
-                                          blurRadius: 16,
-                                          offset: Offset(0, 2),
+                                          color: appColor(context)
+                                              .appTheme
+                                              .shadowClr,
+                                          blurRadius: 8,
+                                          offset: const Offset(0, 4),
                                           spreadRadius: 0)
                                     ]),
                                 height: Sizes.s86,
@@ -316,13 +323,16 @@ class _HomeScreenState extends State<HomeScreen> {
                             const HSpace(Sizes.s10),
                             Container(
                                 decoration: BoxDecoration(
-                                    color: appColor(context).appTheme.whiteColor,
+                                    color:
+                                        appColor(context).appTheme.whiteColor,
                                     borderRadius: BorderRadius.circular(8),
-                                    boxShadow: const [
+                                    boxShadow: [
                                       BoxShadow(
-                                          color: Color(0x0F000000),
-                                          blurRadius: 16,
-                                          offset: Offset(0, 2),
+                                          color: appColor(context)
+                                              .appTheme
+                                              .shadowClr,
+                                          blurRadius: 8,
+                                          offset: const Offset(0, 4),
                                           spreadRadius: 0)
                                     ]),
                                 height: Sizes.s86,
@@ -351,7 +361,57 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   .appTheme
                                                   .lightText))
                                     ]))
-                          ]))
+                          ])),
+                      const VSpace(Sizes.s25),
+                      Text(appFonts.regulations,
+                          style: appCss.philosopherBold18),
+                      const VSpace(Sizes.s15),
+                      Expanded(
+                          child: Container(
+                              decoration: BoxDecoration(
+                                color: appColor(context).appTheme.whiteColor,
+                                boxShadow: [
+                                  BoxShadow(
+                                      color:
+                                          appColor(context).appTheme.shadowClr,
+                                      blurRadius: 8,
+                                      offset: const Offset(0, 4),
+                                      spreadRadius: 0)
+                                ],
+                              ),
+                              width: 335,
+                              height: 220,
+                              child: ListView.builder(
+                                  itemCount: rulesList.length,
+                                  itemBuilder: (context, index) {
+                                    return Container(
+                                        decoration: BoxDecoration(
+                                            boxShadow: [
+                                    BoxShadow(
+                                        color: appColor(context)
+                                            .appTheme
+                                            .shadowClr,
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 4),
+                                        spreadRadius: 0)
+                                  ],
+                                            borderRadius:
+                                                BorderRadius.circular(8)),
+                                        child: Column(crossAxisAlignment: CrossAxisAlignment.start,
+                                            children: [
+                                          Row(children: [
+                                            Text(rulesList[index]['rule'],
+                                                style: appCss.dmDenseMedium16
+                                                    .textColor(appColor(context)
+                                                        .appTheme
+                                                        .rulesClr))
+                                          ]),
+                                          index == 4
+                                              ? Container()
+                                              : SvgPicture.asset(
+                                                  eSvgAssets.lineRuler)
+                                        ]));
+                                  })))
                     ]).paddingOnly(
                     top: MediaQuery.of(context).size.height / 10,
                     left: Insets.i20,
