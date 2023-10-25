@@ -17,4 +17,8 @@ class SvgAssets {
   final menu = 'assets/svg/menu.svg';
   final chanting = 'assets/svg/chanting.svg';
   final lineRuler = 'assets/svg/lineRuler.svg';
+  final add = 'assets/svg/add.svg';
+  final hearing = 'assets/svg/hearing.svg';
+  final preaching = 'assets/svg/preaching.svg';
+  final bookDistribution = 'assets/svg/bookDistribution.svg';
 }

@@ -17,12 +17,14 @@ class AppTheme {
   Color twoText;
   Color threeText;
   Color whiteBg;
+  Color whiteContainer;
   Color stroke;
   Color fieldCardBg;
   Color trans;
   Color black;
   Color rulesClr;
   Color containerClr;
+  Color containerClr1;
   Color shadowClr;
   Color green;
   Color online;
@@ -39,12 +41,14 @@ class AppTheme {
     required this.twoText,
     required this.threeText,
     required this.whiteBg,
+    required this.whiteContainer,
     required this.stroke,
     required this.fieldCardBg,
     required this.trans,
     required this.black,
     required this.rulesClr,
     required this.containerClr,
+    required this.containerClr1,
     required this.shadowClr,
     required this.online,
     required this.red,
@@ -65,6 +69,7 @@ class AppTheme {
             twoText: const Color(0xff3d3d3d),
             threeText: const Color(0xff868686),
             whiteBg: const Color(0xffFFFFFF),
+            whiteContainer: const Color(0x0F000000),
             stroke: const Color(0xffE5E8EA),
             fieldCardBg: const Color(0xffF5F6F7),
             whiteColor: const Color(0xffFFFFFF),
@@ -72,6 +77,7 @@ class AppTheme {
             black: const Color(0xff000000),
             rulesClr: const Color(0xff3A3A3A),
             containerClr: const Color(0xffEEE9EF),
+            containerClr1: const Color(0xffFCF6FD),
             shadowClr: const Color(0x1E929292),
             green: Colors.green,
             online: Colors.green,
@@ -87,6 +93,7 @@ class AppTheme {
             twoText: const Color(0xff3d3d3d),
             threeText: const Color(0xff3d3d3d),
             whiteBg: const Color(0xff1A1C28),
+            whiteContainer: const Color(0x0F000000),
             stroke: const Color(0xff3A3D48),
             fieldCardBg: const Color(0xff262935),
             whiteColor: const Color(0xffFFFFFF),
@@ -94,6 +101,7 @@ class AppTheme {
             black: const Color(0xff000000),
             rulesClr: const Color(0xff3A3A3A),
             containerClr: const Color(0xffEEE9EF),
+            containerClr1: const Color(0xffFCF6FD),
             shadowClr: const Color(0x1E929292),
             green: Colors.green,
             online: Colors.green,

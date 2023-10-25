@@ -18,4 +18,8 @@ class AppFonts {
   final mangalaArti = "Mangala Arti";
   final sandhyaArti = "Sandhya Arti";
   final regulations = "Regulations";
+  final association = "Association";
+  final books = "Books";
+  final bookDistribution = "Book Distribution";
+  final notes = "Notes";
 }

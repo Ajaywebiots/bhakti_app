@@ -3,6 +3,9 @@ class ImageAssets {
   final bhaktiImg = "assets/images/bhakti_img.png";
   final bhaktiLogo = "assets/images/bhakti_logo.png";
   final img = "assets/images/img.png";
+  final bhagvad = "assets/images/bhagvad.png";
+  final selfRealization = "assets/images/selfRealization.png";
+  final srila = "assets/images/srila.png";
 
 
 

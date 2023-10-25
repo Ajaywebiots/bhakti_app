@@ -1,7 +1,5 @@
 import 'package:google_fonts/google_fonts.dart';
-
-import '../../config.dart';
-
+import 'package:bhakti_app/config.dart';
 part 'scale.dart';
 
 
@@ -81,6 +79,7 @@ class AppCss {
   //Text Style dmDense medium
   TextStyle dmDenseMedium28 = dmDense(fontWeight: medium,fontsize:FontSizes.f28);
   TextStyle dmDenseMedium22 = dmDense(fontWeight: medium,fontsize:FontSizes.f22);
+  TextStyle dmDenseMedium21 = dmDense(fontWeight: medium,fontsize:FontSizes.f21);
   TextStyle dmDenseMedium20 = dmDense(fontWeight: medium,fontsize:FontSizes.f20);
   TextStyle dmDenseMedium18 = dmDense(fontWeight: medium,fontsize:FontSizes.f18);
   TextStyle dmDenseMedium16 = dmDense(fontWeight: medium,fontsize:FontSizes.f16);

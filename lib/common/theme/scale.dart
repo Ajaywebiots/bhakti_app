@@ -88,7 +88,9 @@ class Insets {
   static const double i185 = 185 * scale;
   static const double i190 = 190 * scale;
   static const double i221 = 221 * scale;
+  static const double i220 = 220 * scale;
   static const double i300 = 300 * scale;
+  static const double i335 = 335 * scale;
   static const double i450 = 450 * scale;
   static const double i500 = 500 * scale;
 }
@@ -241,16 +243,19 @@ class Sizes {
   static const double s110 = 110 * scale;
   static const double s115 = 115 * scale;
   static const double s116 = 116 * scale;
+  static const double s119 = 119 * scale;
   static const double s120 = 120 * scale;
   static const double s125 = 125 * scale;
   static const double s128 = 128 * scale;
   static const double s130 = 130 * scale;
+  static const double s132 = 132 * scale;
   static const double s135 = 135 * scale;
   static const double s138 = 138 * scale;
   static const double s140 = 140 * scale;
   static const double s141 = 141 * scale;
   static const double s142 = 142 * scale;
   static const double s145 = 145 * scale;
+  static const double s146 = 146 * scale;
   static const double s148 = 148 * scale;
   static const double s150 = 150 * scale;
   static const double s155 = 155 * scale;
@@ -259,6 +264,7 @@ class Sizes {
   static const double s165 = 165 * scale;
   static const double s170 = 170 * scale;
   static const double s175 = 175 * scale;
+  static const double s179 = 179 * scale;
   static const double s180 = 180 * scale;
   static const double s182 = 182 * scale;
   static const double s184 = 184 * scale;

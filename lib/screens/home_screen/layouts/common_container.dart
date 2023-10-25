@@ -1,13 +1,13 @@
-import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CommonContainer extends StatelessWidget {
-  final String? text,timeText,svgImage;
+  final String? text, timeText, svgImage;
+  final bool isSwitch = false;
+
   const CommonContainer({super.key, this.text, this.timeText, this.svgImage});
 
   @override
