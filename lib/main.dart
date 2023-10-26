@@ -1,6 +1,7 @@
 import 'dart:developer';
 import 'package:bhakti_app/providers/home_screen_provider/home_screen_provider.dart';
 import 'package:bhakti_app/providers/login_screen_provider/login_screen_provider.dart';
+import 'package:bhakti_app/providers/setup_profile_provider/setup_profile_provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'common/assets/index.dart';
 import 'common/theme/app_theme.dart';
@@ -26,7 +27,8 @@ class MyApp extends StatelessWidget {
                       create: (_) => ThemeService(snapData.data!)),
                   ChangeNotifierProvider(create: (_) => LoadingProvider()),
                   ChangeNotifierProvider(create: (_) => LoginScreenProvider()),
-                  ChangeNotifierProvider(create: (_) => HomeScreenProvider())
+                  ChangeNotifierProvider(create: (_) => HomeScreenProvider()),
+                  ChangeNotifierProvider(create: (_) => SetUpProfileProvider()),
                 ],
                 child: Consumer<ThemeService>(builder: (context, theme, child) {
                   log("THEME ${theme.isDarkMode}");
