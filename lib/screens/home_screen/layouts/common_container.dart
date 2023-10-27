@@ -10,6 +10,8 @@ class CommonContainer extends StatelessWidget {
   final bool isSwitch = false;
   final ValueChanged<bool>? onToggle;
   final bool? status;
+  final GestureTapCallback? onTap;
+
 
   const CommonContainer(
       {super.key,
@@ -17,7 +19,7 @@ class CommonContainer extends StatelessWidget {
       this.timeText,
       this.svgImage,
       this.onToggle,
-      this.status = false});
+      this.status = false,required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -60,6 +62,6 @@ class CommonContainer extends StatelessWidget {
                       style: appCss.dmDenseMedium14
                           .textColor(appColor(context).appTheme.lightText))
                   .paddingOnly(left: 10, top: 4)
-            ]));
+            ])).inkWell(onTap: onTap);
   }
 }

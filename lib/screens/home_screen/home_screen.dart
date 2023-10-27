@@ -1,5 +1,5 @@
-import 'dart:developer';
 import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/screens/home_screen/ruler_picker/ruler_picker_bn.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
@@ -8,9 +8,10 @@ import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/week_calendar.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_container.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_regulation.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/common_bottom_bar.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/regulation_list_model.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/chanting_common_layout.dart';
 import 'package:bhakti_app/providers/home_screen_provider/home_screen_provider.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/common_chanting_container.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_circle_design_layout.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -21,11 +22,16 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+  int valueKG = 0;
+  int valueCM = 0;
+
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeScreenProvider>(builder: (context1, value, child) {
+    return Consumer<HomeScreenProvider>(
+        builder: (context1, homeScreenPvr, child) {
       return SafeArea(
           child: Scaffold(
+              bottomNavigationBar: const CommonBottomBar(),
               extendBodyBehindAppBar: true,
               appBar: AppBar(
                   centerTitle: false,
@@ -68,8 +74,128 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(children: [
                         Expanded(
                             child: Stack(children: [
-                          CommonContainer(status: false,onToggle: (val){},
-
+                          CommonContainer(
+                              status: false,
+                              onTap: () {
+                                showDialog(
+                                    context: context,
+                                    builder: (BuildContext context) {
+                                      return Dialog(
+                                          alignment: Alignment.center,
+                                          child: Container(
+                                              height: 367,
+                                              width: 335,
+                                              padding: const EdgeInsets.all(20),
+                                              child: Column(
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Center(
+                                                        child: Text(
+                                                            'Sleep Time',
+                                                            style: appCss
+                                                                .philosopherBold18
+                                                                .textColor(appColor(
+                                                                        context)
+                                                                    .appTheme
+                                                                    .primary))),
+                                                    const VSpace(Insets.i20),
+                                                    Text(
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        'Hour',
+                                                        style: appCss
+                                                            .dmDenseMedium14
+                                                            .textColor(appColor(
+                                                                    context)
+                                                                .appTheme
+                                                                .primary)),
+                                                    SizedBox(
+                                                      width: 305,
+                                                      height: 50,
+                                                      child: RulerPicker(
+                                                        onChange: (val) {
+                                                          setState(() {
+                                                            valueKG = val;
+                                                          });
+                                                        },
+                                                        background:
+                                                            Colors.white,
+                                                        lineColor: appColor(context).appTheme.primary,
+                                                        direction:
+                                                            Axis.horizontal,
+                                                        startValue: 70,
+                                                        maxValue: 200,
+                                                      ),
+                                                    ),
+                                                    const VSpace(Insets.i15),
+                                                    Text(
+                                                        textAlign:
+                                                            TextAlign.start,
+                                                        'Minutes',
+                                                        style: appCss
+                                                            .dmDenseMedium14
+                                                            .textColor(appColor(
+                                                                    context)
+                                                                .appTheme
+                                                                .primary)),
+                                                    const VSpace(Insets.i30),
+                                                    Row(
+                                                        mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .spaceEvenly,
+                                                        children: [
+                                                          Container(
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                              decoration: BoxDecoration(
+                                                                  border: Border.all(
+                                                                      width: 1,
+                                                                      color: appColor(context)
+                                                                          .appTheme
+                                                                          .primary),
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8)),
+                                                              height: 44,
+                                                              width: 120,
+                                                              child: Text(
+                                                                  "Cancel",
+                                                                  style: appCss
+                                                                      .dmDenseMedium14
+                                                                      .textColor(appColor(context)
+                                                                          .appTheme
+                                                                          .primary))),
+                                                          Container(
+                                                              alignment:
+                                                                  Alignment
+                                                                      .center,
+                                                              decoration: BoxDecoration(
+                                                                  borderRadius:
+                                                                      BorderRadius
+                                                                          .circular(
+                                                                              8),
+                                                                  color: appColor(
+                                                                          context)
+                                                                      .appTheme
+                                                                      .primary),
+                                                              height: 44,
+                                                              width: 120,
+                                                              child: Text(
+                                                                  "Save",
+                                                                  style: appCss
+                                                                      .dmDenseMedium14
+                                                                      .textColor(appColor(
+                                                                              context)
+                                                                          .appTheme
+                                                                          .whiteColor)))
+                                                        ])
+                                                  ])));
+                                    });
+                              },
+                              onToggle: (val) {},
                               text: appFonts.sleptAt,
                               timeText: '10:30 PM',
                               svgImage: eSvgAssets.sleptTimeIcon),
@@ -108,7 +234,9 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                             child: Stack(children: [
                           CommonContainer(
-                              status: false,onToggle: (val){},
+                              onTap: () {},
+                              status: false,
+                              onToggle: (val) {},
                               text: appFonts.wokeUpAt,
                               timeText: '04:30 AM',
                               svgImage: eSvgAssets.wokeTime),
@@ -143,7 +271,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               child: CommonCircleDesign(
                                   height: Sizes.s10, width: Sizes.s10))
                         ]))
-                      ]).paddingOnly(),
+                      ]),
                       const VSpace(Sizes.s25),
                       Text(appFonts.worship, style: appCss.philosopherBold18),
                       const VSpace(Sizes.s15),
@@ -153,8 +281,11 @@ class _HomeScreenState extends State<HomeScreen> {
                             Expanded(
                                 child: Stack(children: [
                               CommonContainer(
+                                  onTap: () {},
                                   text: appFonts.mangalaArti,
-                                  timeText: '10:30 AM',status: false,onToggle: (val){},
+                                  timeText: '10:30 AM',
+                                  status: false,
+                                  onToggle: (val) {},
                                   svgImage: eSvgAssets.mangalaAarti),
                               const Positioned(
                                   right: 58,
@@ -176,6 +307,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Expanded(
                                 child: Stack(children: [
                               CommonContainer(
+                                  onTap: () {},
                                   text: appFonts.sandhyaArti,
                                   timeText: '',
                                   onToggle: (value) {},
@@ -206,21 +338,7 @@ class _HomeScreenState extends State<HomeScreen> {
                       const VSpace(Sizes.s25),
                       Text(appFonts.chanting, style: appCss.philosopherBold18),
                       const VSpace(Sizes.s15),
-                      const SingleChildScrollView(
-                          scrollDirection: Axis.horizontal,
-                          child: Row(children: [
-                            CommonChantingContainer(
-                                text: 'Before 6:30 am', chantingText: '8'),
-                            HSpace(Sizes.s10),
-                            CommonChantingContainer(
-                                text: 'Before 8:30 am', chantingText: '4'),
-                            HSpace(Sizes.s10),
-                            CommonChantingContainer(
-                                text: 'Before 10:00 am', chantingText: '8'),
-                            HSpace(Sizes.s10),
-                            CommonChantingContainer(
-                                text: 'Before 10:00 am', chantingText: '4')
-                          ])),
+                      const ChantingCommon(),
                       const VSpace(Sizes.s25),
                       Text(appFonts.regulations,
                           style: appCss.philosopherBold18),
@@ -239,7 +357,6 @@ class _HomeScreenState extends State<HomeScreen> {
                               ]),
                           child: Column(
                               children: rulesList.asMap().entries.map((e) {
-                            log("conValue = ::: ${e.key}");
                             return Column(children: [
                               CommonRegulation(
                                   status: e.value['isOn'],
@@ -344,25 +461,24 @@ class _HomeScreenState extends State<HomeScreen> {
                                                   eSvgAssets.preaching),
                                               const HSpace(Insets.i8),
                                               Column(
-                                                crossAxisAlignment:
-                                                    CrossAxisAlignment.start,
-                                                children: [
-                                                  Text("01:00",
-                                                      style: appCss
-                                                          .dmDenseMedium16
-                                                          .textColor(
-                                                              appColor(context)
-                                                                  .appTheme
-                                                                  .primary)),
-                                                  Text("Preaching",
-                                                      style: appCss
-                                                          .dmDenseMedium14
-                                                          .textColor(
-                                                              appColor(context)
-                                                                  .appTheme
-                                                                  .rulesClr))
-                                                ],
-                                              ),
+                                                  crossAxisAlignment:
+                                                      CrossAxisAlignment.start,
+                                                  children: [
+                                                    Text("01:00",
+                                                        style: appCss
+                                                            .dmDenseMedium16
+                                                            .textColor(appColor(
+                                                                    context)
+                                                                .appTheme
+                                                                .primary)),
+                                                    Text("Preaching",
+                                                        style: appCss
+                                                            .dmDenseMedium14
+                                                            .textColor(appColor(
+                                                                    context)
+                                                                .appTheme
+                                                                .rulesClr))
+                                                  ])
                                             ]).paddingOnly(left: 10, top: 4)
                                       ])),
                               const Positioned(
@@ -527,156 +643,155 @@ class _HomeScreenState extends State<HomeScreen> {
                       Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
-                            Stack(children: [
-                              Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: appColor(context)
-                                                .appTheme
-                                                .shadowClr,
-                                            blurRadius: 8,
-                                            offset: const Offset(0, 4),
-                                            spreadRadius: 0)
-                                      ],
-                                      color: appColor(context)
-                                          .appTheme
-                                          .whiteColor),
-                                  height: Sizes.s86,
-                                  width: Sizes.s105,
-                                  child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              const HSpace(Insets.i8),
-                                              SvgPicture.asset(
-                                                  eSvgAssets.bookDistribution),
-                                              const HSpace(Insets.i8),
-                                              Text("10",
-                                                  style: appCss.dmDenseMedium16
+                            Expanded(
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: appColor(context)
+                                                  .appTheme
+                                                  .shadowClr,
+                                              blurRadius: 8,
+                                              offset: const Offset(0, 4),
+                                              spreadRadius: 0)
+                                        ],
+                                        color: appColor(context)
+                                            .appTheme
+                                            .whiteColor),
+                                    height: Sizes.s86,
+                                    child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                const HSpace(Insets.i8),
+                                                SvgPicture.asset(eSvgAssets
+                                                    .bookDistribution),
+                                                const HSpace(Insets.i8),
+                                                Text("10",
+                                                    style: appCss
+                                                        .dmDenseMedium16
+                                                        .textColor(
+                                                            appColor(context)
+                                                                .appTheme
+                                                                .primary)),
+                                              ]),
+                                          Text("Small Books",
+                                                  style: appCss.dmDenseMedium12
                                                       .textColor(
                                                           appColor(context)
                                                               .appTheme
-                                                              .primary)),
-                                            ]),
-                                        Text("Small Books",
-                                                style: appCss.dmDenseMedium12
-                                                    .textColor(appColor(context)
-                                                        .appTheme
-                                                        .lightText))
-                                            .paddingOnly(left: 8)
-                                      ]))
-                            ]),
+                                                              .lightText))
+                                              .paddingOnly(left: 8)
+                                        ]))),
                             const HSpace(Sizes.s10),
-                            Stack(children: [
-                              Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: appColor(context)
-                                                .appTheme
-                                                .shadowClr,
-                                            blurRadius: 8,
-                                            offset: const Offset(0, 4),
-                                            spreadRadius: 0)
-                                      ],
-                                      color: appColor(context)
-                                          .appTheme
-                                          .whiteColor),
-                                  height: Sizes.s86,
-                                  width: Sizes.s105,
-                                  child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              const HSpace(Insets.i8),
-                                              SvgPicture.asset(
-                                                  eSvgAssets.bookDistribution),
-                                              const HSpace(Insets.i8),
-                                              Text("5",
-                                                  style: appCss.dmDenseMedium16
+                            Expanded(
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: appColor(context)
+                                                  .appTheme
+                                                  .shadowClr,
+                                              blurRadius: 8,
+                                              offset: const Offset(0, 4),
+                                              spreadRadius: 0)
+                                        ],
+                                        color: appColor(context)
+                                            .appTheme
+                                            .whiteColor),
+                                    height: Sizes.s86,
+                                    child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                const HSpace(Insets.i8),
+                                                SvgPicture.asset(eSvgAssets
+                                                    .bookDistribution),
+                                                const HSpace(Insets.i8),
+                                                Text("5",
+                                                    style: appCss
+                                                        .dmDenseMedium16
+                                                        .textColor(
+                                                            appColor(context)
+                                                                .appTheme
+                                                                .primary))
+                                              ]),
+                                          Text("Medium Books",
+                                                  style: appCss.dmDenseMedium12
                                                       .textColor(
                                                           appColor(context)
                                                               .appTheme
-                                                              .primary))
-                                            ]),
-                                        Text("Medium Books",
-                                                style: appCss.dmDenseMedium12
-                                                    .textColor(appColor(context)
-                                                        .appTheme
-                                                        .lightText))
-                                            .paddingOnly(left: 8)
-                                      ]))
-                            ]),
+                                                              .lightText))
+                                              .paddingOnly(left: 8)
+                                        ]))),
                             const HSpace(Insets.i10),
-                            Stack(children: [
-                              Container(
-                                  decoration: BoxDecoration(
-                                      borderRadius: BorderRadius.circular(8),
-                                      boxShadow: [
-                                        BoxShadow(
-                                            color: appColor(context)
-                                                .appTheme
-                                                .shadowClr,
-                                            blurRadius: 8,
-                                            offset: const Offset(0, 4),
-                                            spreadRadius: 0)
-                                      ],
-                                      color: appColor(context)
-                                          .appTheme
-                                          .whiteColor),
-                                  height: Sizes.s86,
-                                  width: Sizes.s105,
-                                  child: Column(
-                                      mainAxisAlignment:
-                                          MainAxisAlignment.center,
-                                      crossAxisAlignment:
-                                          CrossAxisAlignment.start,
-                                      children: [
-                                        Row(
-                                            crossAxisAlignment:
-                                                CrossAxisAlignment.center,
-                                            children: [
-                                              const HSpace(Insets.i8),
-                                              SvgPicture.asset(
-                                                  eSvgAssets.bookDistribution),
-                                              const HSpace(Insets.i8),
-                                              Text("1",
-                                                  style: appCss.dmDenseMedium16
+                            Expanded(
+                                child: Container(
+                                    decoration: BoxDecoration(
+                                        borderRadius: BorderRadius.circular(8),
+                                        boxShadow: [
+                                          BoxShadow(
+                                              color: appColor(context)
+                                                  .appTheme
+                                                  .shadowClr,
+                                              blurRadius: 8,
+                                              offset: const Offset(0, 4),
+                                              spreadRadius: 0)
+                                        ],
+                                        color: appColor(context)
+                                            .appTheme
+                                            .whiteColor),
+                                    height: Sizes.s86,
+                                    child: Column(
+                                        mainAxisAlignment:
+                                            MainAxisAlignment.center,
+                                        crossAxisAlignment:
+                                            CrossAxisAlignment.start,
+                                        children: [
+                                          Row(
+                                              crossAxisAlignment:
+                                                  CrossAxisAlignment.center,
+                                              children: [
+                                                const HSpace(Insets.i8),
+                                                SvgPicture.asset(eSvgAssets
+                                                    .bookDistribution),
+                                                const HSpace(Insets.i8),
+                                                Text("1",
+                                                    style: appCss
+                                                        .dmDenseMedium16
+                                                        .textColor(
+                                                            appColor(context)
+                                                                .appTheme
+                                                                .primary))
+                                              ]),
+                                          Text("Large Books",
+                                                  style: appCss.dmDenseMedium12
                                                       .textColor(
                                                           appColor(context)
                                                               .appTheme
-                                                              .primary))
-                                            ]),
-                                        Text("Large Books",
-                                                style: appCss.dmDenseMedium12
-                                                    .textColor(appColor(context)
-                                                        .appTheme
-                                                        .lightText))
-                                            .paddingOnly(left: 8)
-                                      ]))
-                            ])
+                                                              .lightText))
+                                              .paddingOnly(left: 8)
+                                        ])))
                           ]),
                       const VSpace(Insets.i25),
                       Text(appFonts.notes, style: appCss.philosopherBold18),
                       const VSpace(Insets.i15),
                       Center(
                           child: Container(
-                              width: Sizes.s335,
                               height: Sizes.s119,
                               decoration: BoxDecoration(
                                   color:
@@ -706,8 +821,8 @@ class _HomeScreenState extends State<HomeScreen> {
                                         margin: const EdgeInsets.only(
                                             bottom: 6, right: 6),
                                         alignment: Alignment.center,
-                                        height: 32.42,
-                                        width: 35,
+                                        height: Sizes.s32,
+                                        width: Sizes.s35,
                                         decoration: BoxDecoration(
                                             color: appColor(context)
                                                 .appTheme
@@ -717,64 +832,12 @@ class _HomeScreenState extends State<HomeScreen> {
                                         child: SvgPicture.asset(
                                             "assets/svg/tick.svg")))
                               ]))),
-                      const VSpace(Insets.i25),
+                      const VSpace(Insets.i25)
                     ]).paddingOnly(
                         top: MediaQuery.of(context).size.height / 10,
                         left: Insets.i20,
                         right: Insets.i20))
-              ]),
-              bottomNavigationBar: Container(
-                  height: 70,
-                  decoration:
-                      BoxDecoration(color: appColor(context).appTheme.primary),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.center,
-                      children: [
-                        Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              const SizedBox(height: 14),
-                              SvgPicture.asset("assets/svg/home.svg"),
-                              Text("Home",
-                                  style: appCss.dmDenseMedium12.textColor(
-                                      appColor(context).appTheme.whiteColor)),
-                              const SizedBox(height: 0),
-                              SvgPicture.asset("assets/svg/activeLine.svg")
-                            ]),
-                        const HSpace(Insets.i40),
-                        Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              const SizedBox(height: 14),
-                              SvgPicture.asset("assets/svg/category.svg"),
-                              Text("Dashboard",
-                                  style: appCss.dmDenseMedium12.textColor(
-                                      appColor(context).appTheme.whiteColor)),
-                              const SizedBox(height: 5)
-                            ]),
-                        const HSpace(Insets.i40),
-                        Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              const SizedBox(height: 14),
-                              SvgPicture.asset("assets/svg/monitering.svg"),
-                              Text("Monitoring",
-                                  style: appCss.dmDenseMedium12.textColor(
-                                      appColor(context).appTheme.whiteColor)),
-                              const SizedBox(height: 5)
-                            ]),
-                        const HSpace(Insets.i40),
-                        Column(
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              const SizedBox(height: 14),
-                              SvgPicture.asset("assets/svg/setting.svg"),
-                              Text("Setting",
-                                  style: appCss.dmDenseMedium12.textColor(
-                                      appColor(context).appTheme.whiteColor)),
-                              const SizedBox(height: 5)
-                            ])
-                      ]))));
+              ])));
     });
   }
 }

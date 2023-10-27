@@ -44,7 +44,8 @@ dependencies:
   flutter_calendar_week: ^3.0.2
   intl:
   carousel_slider:
-
+  infinite_carousel: ^1.0.3
+#  ruler_picker_bn: ^0.0.6
 
 dev_dependencies:
   flutter_test:
