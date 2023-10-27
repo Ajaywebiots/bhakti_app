@@ -156,7 +156,7 @@ class RulerPickerState extends State<RulerPicker> {
                             shrinkWrap: true,
                             initialScrollIndex: 2501,
                             itemScrollController: controllerScroll,
-                            itemPositionsListener: itemPositionsListener,padding: EdgeInsets.zero,
+                            itemPositionsListener: itemPositionsListener,
                             itemBuilder: (context, index) {
                               return Row(
                                 mainAxisAlignment: MainAxisAlignment.center,
