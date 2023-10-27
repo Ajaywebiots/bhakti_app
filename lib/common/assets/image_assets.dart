@@ -6,6 +6,7 @@ class ImageAssets {
   final bhagvad = "assets/images/bhagvad.png";
   final selfRealization = "assets/images/selfRealization.png";
   final srila = "assets/images/srila.png";
+  final profile = "assets/images/profile.png";
 
 
 

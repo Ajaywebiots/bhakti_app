@@ -10,7 +10,7 @@ class CustomDraw extends CustomPainter {
   CustomDraw(Color color, this.textWidth, {this.radius = 0}) {
     painter = Paint()
       ..style = PaintingStyle.stroke
-      ..strokeWidth = 1
+      ..strokeWidth = 1.5
       ..color = color;
   }
 
@@ -109,7 +109,7 @@ class _CustomTitleWidgetState extends State<CustomTitleWidget> {
                   key: textKey,
                   padding: const EdgeInsets.symmetric(horizontal: 8.0),
                   child: Text(widget.title,
-                      style: appCss.dmDenseExtraBold16
+                      style: appCss.dmDenseRegular14
                           .textColor(const Color(0xff767676)))))
         ]);
   }

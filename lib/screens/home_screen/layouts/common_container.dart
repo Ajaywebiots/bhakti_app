@@ -3,12 +3,21 @@ import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:flutter_switch/flutter_switch.dart';
 
 class CommonContainer extends StatelessWidget {
   final String? text, timeText, svgImage;
   final bool isSwitch = false;
+  final ValueChanged<bool>? onToggle;
+  final bool? status;
 
-  const CommonContainer({super.key, this.text, this.timeText, this.svgImage});
+  const CommonContainer(
+      {super.key,
+      this.text,
+      this.timeText,
+      this.svgImage,
+      this.onToggle,
+      this.status = false});
 
   @override
   Widget build(BuildContext context) {
@@ -32,9 +41,20 @@ class CommonContainer extends StatelessWidget {
                 const HSpace(Insets.i10),
                 SvgPicture.asset(svgImage!),
                 const HSpace(Insets.i8),
-                Text(timeText!,
-                    style: appCss.dmDenseMedium16
-                        .textColor(appColor(context).appTheme.primary))
+                timeText != ''
+                    ? Text(timeText!,
+                        style: appCss.dmDenseMedium16
+                            .textColor(appColor(context).appTheme.primary))
+                    : FlutterSwitch(
+                        width: Sizes.s41,
+                        height: Sizes.s23,
+                        padding: 3,
+                        toggleSize: Sizes.s17,
+                        value: status!,
+                        activeColor: appColor(context).appTheme.primary,
+                        inactiveColor: appColor(context).appTheme.lightText,
+                        borderRadius: 40.0,
+                        onToggle: onToggle!),
               ]),
               Text(text!,
                       style: appCss.dmDenseMedium14

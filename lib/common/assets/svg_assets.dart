@@ -19,6 +19,18 @@ class SvgAssets {
   final lineRuler = 'assets/svg/lineRuler.svg';
   final add = 'assets/svg/add.svg';
   final hearing = 'assets/svg/hearing.svg';
+  final cake = 'assets/svg/cake.svg';
   final preaching = 'assets/svg/preaching.svg';
   final bookDistribution = 'assets/svg/bookDistribution.svg';
+  final camera = 'assets/svg/camera.svg';
+  final user = 'assets/svg/user.svg';
+  final userInitiated = 'assets/svg/userInitiated.svg';
+  final arrowDown = 'assets/svg/arrowDown.svg';
+  final arrowUp = 'assets/svg/arrow-up.svg';
+  final profileLine = 'assets/svg/profileLine.svg';
+  final gender = 'assets/svg/gender.svg';
+  final map = 'assets/svg/map.svg';
+  final location = 'assets/svg/location.svg';
+  final global = 'assets/svg/global.svg';
+  final call1 = 'assets/svg/call1.svg';
 }

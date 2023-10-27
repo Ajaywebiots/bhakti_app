@@ -18,8 +18,17 @@ class AppFonts {
   final mangalaArti = "Mangala Arti";
   final sandhyaArti = "Sandhya Arti";
   final regulations = "Regulations";
+  final enterDob = "Enter a Date Of Birth!";
+  final male = "Male";
+  final female = "Female";
   final association = "Association";
   final books = "Books";
   final bookDistribution = "Book Distribution";
   final notes = "Notes";
+  final enterCorrectName = "Enter Correct Name";
+  final save = "Save";
+  final camera = "Camera";
+  final gallery = "Gallery";
+  final setUp = "Set Up Profile..";
+  final enterYourDetails = "Enter your personal Details.";
 }

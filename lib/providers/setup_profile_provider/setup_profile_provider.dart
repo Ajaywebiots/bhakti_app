@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/screens/home_screen/home_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 
@@ -65,13 +66,15 @@ class SetUpProfileProvider extends ChangeNotifier {
   //   super.onInit();
   // }
 
-  Future<void> saveData() async {
-    final isValid = formKey.currentState!.validate();
-    if (!isValid) {
-      formKey.currentState!.save();
-    } else {
-      isLoading = true;
-      notifyListeners();
+   saveData(context) async {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return HomeScreen();    },));
+    // final isValid = formKey.currentState!.validate();
+    // if (!isValid) {
+    //   formKey.currentState!.save();
+    // } else {
+    //   isLoading = true;
+    //   notifyListeners();
       // await MyApiClient().postData().then((value) {
       //   final response = value;
       //   print("STATUS : ${response['StatusText']}");
@@ -103,6 +106,6 @@ class SetUpProfileProvider extends ChangeNotifier {
       //     log("SOMETHING WENT WRONG  :: $value");
       //   }
       // });
-    }
+    // }
   }
 }

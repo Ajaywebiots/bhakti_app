@@ -1,18 +1,17 @@
 import 'dart:developer';
-
+import 'package:bhakti_app/config.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
-import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/home_screen_provider/home_screen_provider.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/common_chanting_container.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/common_circle_design_layout.dart';
+import 'package:bhakti_app/common/extension/text_style_extensions.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/week_calendar.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_container.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_regulation.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/regulation_list_model.dart';
-import 'package:bhakti_app/screens/home_screen/set_up_profile/set_up_profile.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:bhakti_app/providers/home_screen_provider/home_screen_provider.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/common_chanting_container.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/common_circle_design_layout.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -61,15 +60,16 @@ class _HomeScreenState extends State<HomeScreen> {
                         mainAxisAlignment: MainAxisAlignment.start,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          const VSpace(Sizes.s5),
-                      const SetUpProfile(),
-                          const VSpace(Sizes.s15),
+                      const VSpace(Sizes.s5),
+                      const WeekCalendar(),
+                      const VSpace(Sizes.s15),
                       Text(appFonts.sleep, style: appCss.philosopherBold18),
                       const VSpace(Sizes.s15),
                       Row(children: [
                         Expanded(
                             child: Stack(children: [
-                          CommonContainer(
+                          CommonContainer(status: false,onToggle: (val){},
+
                               text: appFonts.sleptAt,
                               timeText: '10:30 PM',
                               svgImage: eSvgAssets.sleptTimeIcon),
@@ -108,6 +108,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                             child: Stack(children: [
                           CommonContainer(
+                              status: false,onToggle: (val){},
                               text: appFonts.wokeUpAt,
                               timeText: '04:30 AM',
                               svgImage: eSvgAssets.wokeTime),
@@ -153,7 +154,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 child: Stack(children: [
                               CommonContainer(
                                   text: appFonts.mangalaArti,
-                                  timeText: '10:30 AM',
+                                  timeText: '10:30 AM',status: false,onToggle: (val){},
                                   svgImage: eSvgAssets.mangalaAarti),
                               const Positioned(
                                   right: 58,
@@ -177,6 +178,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               CommonContainer(
                                   text: appFonts.sandhyaArti,
                                   timeText: '',
+                                  onToggle: (value) {},
+                                  status: true,
                                   svgImage: eSvgAssets.sandhyaArti),
                               const Positioned(
                                   right: 58,
@@ -552,6 +555,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
+                                              const HSpace(Insets.i8),
                                               SvgPicture.asset(
                                                   eSvgAssets.bookDistribution),
                                               const HSpace(Insets.i8),
@@ -563,10 +567,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               .primary)),
                                             ]),
                                         Text("Small Books",
-                                            style: appCss.dmDenseMedium14
-                                                .textColor(appColor(context)
-                                                    .appTheme
-                                                    .rulesClr))
+                                                style: appCss.dmDenseMedium12
+                                                    .textColor(appColor(context)
+                                                        .appTheme
+                                                        .lightText))
+                                            .paddingOnly(left: 8)
                                       ]))
                             ]),
                             const HSpace(Sizes.s10),
@@ -598,6 +603,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
+                                              const HSpace(Insets.i8),
                                               SvgPicture.asset(
                                                   eSvgAssets.bookDistribution),
                                               const HSpace(Insets.i8),
@@ -609,10 +615,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               .primary))
                                             ]),
                                         Text("Medium Books",
-                                            style: appCss.dmDenseMedium14
-                                                .textColor(appColor(context)
-                                                    .appTheme
-                                                    .rulesClr))
+                                                style: appCss.dmDenseMedium12
+                                                    .textColor(appColor(context)
+                                                        .appTheme
+                                                        .lightText))
+                                            .paddingOnly(left: 8)
                                       ]))
                             ]),
                             const HSpace(Insets.i10),
@@ -644,6 +651,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                             crossAxisAlignment:
                                                 CrossAxisAlignment.center,
                                             children: [
+                                              const HSpace(Insets.i8),
                                               SvgPicture.asset(
                                                   eSvgAssets.bookDistribution),
                                               const HSpace(Insets.i8),
@@ -655,10 +663,11 @@ class _HomeScreenState extends State<HomeScreen> {
                                                               .primary))
                                             ]),
                                         Text("Large Books",
-                                            style: appCss.dmDenseMedium14
-                                                .textColor(appColor(context)
-                                                    .appTheme
-                                                    .rulesClr))
+                                                style: appCss.dmDenseMedium12
+                                                    .textColor(appColor(context)
+                                                        .appTheme
+                                                        .lightText))
+                                            .paddingOnly(left: 8)
                                       ]))
                             ])
                           ]),

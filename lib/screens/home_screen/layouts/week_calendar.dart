@@ -1,15 +1,15 @@
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/screens/home_screen/set_up_profile/llllla.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/llllla.dart';
 
 
-class SetUpProfile extends StatefulWidget {
-  const SetUpProfile({super.key});
+class WeekCalendar extends StatefulWidget {
+  const WeekCalendar({super.key});
 
   @override
-  State<SetUpProfile> createState() => _SetUpProfileState();
+  State<WeekCalendar> createState() => _WeekCalendarState();
 }
 
-class _SetUpProfileState extends State<SetUpProfile> {
+class _WeekCalendarState extends State<WeekCalendar> {
   var selectedDate = DateTime.now();
 
   @override
@@ -21,12 +21,13 @@ class _SetUpProfileState extends State<SetUpProfile> {
               borderRadius: BorderRadius.circular(8),
               color: appColor(context).appTheme.whiteColor),
           child: HorizontalWeekCalendar(
+              inactiveWeekColor: appColor(context).appTheme.rulesClr,
               weekStartFrom: WeekStartFrom.Sunday,
               activeBackgroundColor: appColor(context).appTheme.primary,
               activeTextColor: Colors.white,
               inactiveBackgroundColor: appColor(context).appTheme.whiteColor,
-              inactiveTextColor: appColor(context).appTheme.black,
-              disabledTextColor: appColor(context).appTheme.black,
+              inactiveDateColor: appColor(context).appTheme.lightText,
+              disabledTextColor: appColor(context).appTheme.lightText,
               disabledBackgroundColor: appColor(context).appTheme.whiteColor,
               activeNavigatorColor: appColor(context).appTheme.whiteColor,
               inactiveNavigatorColor: appColor(context).appTheme.whiteColor,

@@ -5,7 +5,7 @@ import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/login_screen_provider/login_screen_provider.dart';
 import 'package:bhakti_app/screens/auth_screen/layouts/password_text_field.dart';
-import 'package:bhakti_app/screens/home_screen/home_screen.dart';
+import 'package:bhakti_app/screens/home_screen/setup_profile/setup_profile.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'layouts/email_text_field.dart';
 
@@ -70,7 +70,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       .inkWell(onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return HomeScreen();
+                      return SetUpProfile();
                     }));
                   }),
                   const VSpace(Insets.i28),
