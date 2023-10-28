@@ -12,14 +12,13 @@ class CommonContainer extends StatelessWidget {
   final bool? status;
   final GestureTapCallback? onTap;
 
-
   const CommonContainer(
       {super.key,
       this.text,
       this.timeText,
       this.svgImage,
       this.onToggle,
-      this.status = false,required this.onTap});
+      this.status = false,this.onTap});
 
   @override
   Widget build(BuildContext context) {

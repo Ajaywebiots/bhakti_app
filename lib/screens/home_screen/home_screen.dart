@@ -1,4 +1,8 @@
+import 'dart:developer';
+
 import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/common_ruler_picker.dart';
 import 'package:bhakti_app/screens/home_screen/ruler_picker/ruler_picker_bn.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bhakti_app/common/assets/index.dart';
@@ -22,8 +26,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-  int valueKG = 0;
-  int valueCM = 0;
+
 
   @override
   Widget build(BuildContext context) {
@@ -76,125 +79,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             child: Stack(children: [
                           CommonContainer(
                               status: false,
-                              onTap: () {
-                                showDialog(
-                                    context: context,
-                                    builder: (BuildContext context) {
-                                      return Dialog(
-                                          alignment: Alignment.center,
-                                          child: Container(
-                                              height: 367,
-                                              width: 335,
-                                              padding: const EdgeInsets.all(20),
-                                              child: Column(
-                                                  crossAxisAlignment:
-                                                      CrossAxisAlignment.start,
-                                                  children: [
-                                                    Center(
-                                                        child: Text(
-                                                            'Sleep Time',
-                                                            style: appCss
-                                                                .philosopherBold18
-                                                                .textColor(appColor(
-                                                                        context)
-                                                                    .appTheme
-                                                                    .primary))),
-                                                    const VSpace(Insets.i20),
-                                                    Text(
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        'Hour',
-                                                        style: appCss
-                                                            .dmDenseMedium14
-                                                            .textColor(appColor(
-                                                                    context)
-                                                                .appTheme
-                                                                .primary)),
-                                                    SizedBox(
-                                                      width: 305,
-                                                      height: 50,
-                                                      child: RulerPicker(
-                                                        onChange: (val) {
-                                                          setState(() {
-                                                            valueKG = val;
-                                                          });
-                                                        },
-                                                        background:
-                                                            Colors.white,
-                                                        lineColor: appColor(context).appTheme.primary,
-                                                        direction:
-                                                            Axis.horizontal,
-                                                        startValue: 70,
-                                                        maxValue: 200,
-                                                      ),
-                                                    ),
-                                                    const VSpace(Insets.i15),
-                                                    Text(
-                                                        textAlign:
-                                                            TextAlign.start,
-                                                        'Minutes',
-                                                        style: appCss
-                                                            .dmDenseMedium14
-                                                            .textColor(appColor(
-                                                                    context)
-                                                                .appTheme
-                                                                .primary)),
-                                                    const VSpace(Insets.i30),
-                                                    Row(
-                                                        mainAxisAlignment:
-                                                            MainAxisAlignment
-                                                                .spaceEvenly,
-                                                        children: [
-                                                          Container(
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
-                                                              decoration: BoxDecoration(
-                                                                  border: Border.all(
-                                                                      width: 1,
-                                                                      color: appColor(context)
-                                                                          .appTheme
-                                                                          .primary),
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8)),
-                                                              height: 44,
-                                                              width: 120,
-                                                              child: Text(
-                                                                  "Cancel",
-                                                                  style: appCss
-                                                                      .dmDenseMedium14
-                                                                      .textColor(appColor(context)
-                                                                          .appTheme
-                                                                          .primary))),
-                                                          Container(
-                                                              alignment:
-                                                                  Alignment
-                                                                      .center,
-                                                              decoration: BoxDecoration(
-                                                                  borderRadius:
-                                                                      BorderRadius
-                                                                          .circular(
-                                                                              8),
-                                                                  color: appColor(
-                                                                          context)
-                                                                      .appTheme
-                                                                      .primary),
-                                                              height: 44,
-                                                              width: 120,
-                                                              child: Text(
-                                                                  "Save",
-                                                                  style: appCss
-                                                                      .dmDenseMedium14
-                                                                      .textColor(appColor(
-                                                                              context)
-                                                                          .appTheme
-                                                                          .whiteColor)))
-                                                        ])
-                                                  ])));
-                                    });
-                              },
+                              onTap: ()=> homeScreenPvr.onSleepTimeSelect(context),
                               onToggle: (val) {},
                               text: appFonts.sleptAt,
                               timeText: '10:30 PM',
@@ -234,7 +119,7 @@ class _HomeScreenState extends State<HomeScreen> {
                         Expanded(
                             child: Stack(children: [
                           CommonContainer(
-                              onTap: () {},
+                              onTap:()=>  homeScreenPvr.onChantingCountSelect(context),
                               status: false,
                               onToggle: (val) {},
                               text: appFonts.wokeUpAt,
@@ -281,7 +166,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Expanded(
                                 child: Stack(children: [
                               CommonContainer(
-                                  onTap: () {},
+                                  onTap:()=>  homeScreenPvr.onManglaArtiSelect(context),
                                   text: appFonts.mangalaArti,
                                   timeText: '10:30 AM',
                                   status: false,
@@ -307,7 +192,7 @@ class _HomeScreenState extends State<HomeScreen> {
                             Expanded(
                                 child: Stack(children: [
                               CommonContainer(
-                                  onTap: () {},
+
                                   text: appFonts.sandhyaArti,
                                   timeText: '',
                                   onToggle: (value) {},

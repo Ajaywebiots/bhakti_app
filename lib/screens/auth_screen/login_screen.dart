@@ -154,7 +154,8 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: 46,
                         alignment: Alignment.center,
                         child: SvgPicture.asset(eSvgAssets.apple))
-                  ])
+                  ]),
+
                 ]).paddingSymmetric(horizontal: Insets.i20),
                 RichText(
                     text: TextSpan(
