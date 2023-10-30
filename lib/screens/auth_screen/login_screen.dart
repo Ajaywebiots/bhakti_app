@@ -20,17 +20,19 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<LoginScreenProvider>(
-        builder: (context, loginScreenPvr, child) {
+        builder: (context1, loginScreenPvr, child) {
       return Scaffold(
+        resizeToAvoidBottomInset: false,
           body: Container(
+            height: double.infinity,
               padding: EdgeInsets.only(
                   bottom: Insets.i27,
                   top: MediaQuery.of(context).size.height * 0.08),
               decoration: BoxDecoration(
                   image: DecorationImage(
-                      fit: BoxFit.fitHeight,
+                      fit: BoxFit.fill,
                       image: AssetImage(eImageAssets.splashBg))),
-              child: Stack(alignment: Alignment.bottomCenter, children: [
+              child: Stack( children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   const VSpace(Insets.i40),
                   Center(
@@ -70,7 +72,7 @@ class _LoginScreenState extends State<LoginScreen> {
                       .inkWell(onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
-                      return SetUpProfile();
+                      return const SetUpProfile();
                     }));
                   }),
                   const VSpace(Insets.i28),
@@ -154,8 +156,7 @@ class _LoginScreenState extends State<LoginScreen> {
                         width: 46,
                         alignment: Alignment.center,
                         child: SvgPicture.asset(eSvgAssets.apple))
-                  ]),
-
+                  ])
                 ]).paddingSymmetric(horizontal: Insets.i20),
                 RichText(
                     text: TextSpan(
@@ -167,7 +168,7 @@ class _LoginScreenState extends State<LoginScreen> {
                           text: appFonts.signUpHere,
                           style: appCss.dmDenseSemiBold14
                               .textColor(appColor(context).appTheme.primary))
-                    ])),
+                    ])).alignment(Alignment.bottomCenter)
               ])));
     });
   }

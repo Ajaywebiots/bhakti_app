@@ -41,7 +41,7 @@ class CommonContainer extends StatelessWidget {
               Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 const HSpace(Insets.i10),
                 SvgPicture.asset(svgImage!),
-                const HSpace(Insets.i8),
+                timeText != ''? const HSpace(Insets.i8) : const HSpace(Insets.i51),
                 timeText != ''
                     ? Text(timeText!,
                         style: appCss.dmDenseMedium16

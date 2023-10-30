@@ -3,7 +3,7 @@
 // import 'package:bhakti_app/common/extension/spacing.dart';
 // import 'package:bhakti_app/config.dart';
 // import 'package:bhakti_app/screens/home_screen/layouts/common_regulation.dart';
-// import 'package:bhakti_app/screens/home_screen/layouts/regulation_list_model.dart';
+// import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 // import 'package:flutter_svg/svg.dart';
 //
 // class RegulationCommonLayout extends StatelessWidget {
