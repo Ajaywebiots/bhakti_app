@@ -1,13 +1,19 @@
+import 'config.dart';
 import 'dart:developer';
-import 'package:bhakti_app/providers/home_screen_provider/home_screen_provider.dart';
-import 'package:bhakti_app/providers/login_screen_provider/login_screen_provider.dart';
-import 'package:bhakti_app/providers/setup_profile_provider/setup_profile_provider.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'common/assets/index.dart';
 import 'common/theme/app_theme.dart';
-import 'config.dart';
+import 'package:firebase_core/firebase_core.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'providers/phone_screen_provider/phone_login_provider.dart';
+import 'providers/email_login_screen_provider/email_login_screen_provider.dart';
+import 'package:bhakti_app/providers/login_auth_provider/login_auth_provider.dart';
+import 'package:bhakti_app/providers/otp_screen_provider/otp_screen_provider.dart';
+import 'package:bhakti_app/providers/home_screen_provider/home_screen_provider.dart';
+import 'package:bhakti_app/providers/setup_profile_provider/setup_profile_provider.dart';
 
 void main() async {
+  WidgetsFlutterBinding.ensureInitialized();
+  await Firebase.initializeApp();
   runApp(const MyApp());
 }
 
@@ -26,9 +32,13 @@ class MyApp extends StatelessWidget {
                   ChangeNotifierProvider(
                       create: (_) => ThemeService(snapData.data!)),
                   ChangeNotifierProvider(create: (_) => LoadingProvider()),
-                  ChangeNotifierProvider(create: (_) => LoginScreenProvider()),
+                  ChangeNotifierProvider(
+                      create: (_) => EmailLoginScreenProvider()),
                   ChangeNotifierProvider(create: (_) => HomeScreenProvider()),
                   ChangeNotifierProvider(create: (_) => SetUpProfileProvider()),
+                  ChangeNotifierProvider(create: (_) => LoginAuthProvider()),
+                  ChangeNotifierProvider(create: (_) => PhoneLoginProvider()),
+                  ChangeNotifierProvider(create: (_) => OtpScreenProvider())
                 ],
                 child: Consumer<ThemeService>(builder: (context, theme, child) {
                   log("THEME ${theme.isDarkMode}");
@@ -48,12 +58,11 @@ class MyApp extends StatelessWidget {
                 themeMode: ThemeMode.light,
                 debugShowCheckedModeBanner: false,
                 home: Container(
-                  padding: const EdgeInsets.only(bottom: Insets.i27),
-                  decoration: BoxDecoration(
-                      image: DecorationImage(
-                          fit: BoxFit.fitHeight,
-                          image: AssetImage(eImageAssets.splashBg))),
-                ));
+                    padding: const EdgeInsets.only(bottom: Insets.i27),
+                    decoration: BoxDecoration(
+                        image: DecorationImage(
+                            fit: BoxFit.fitHeight,
+                            image: AssetImage(eImageAssets.splashBg)))));
           }
         });
   }

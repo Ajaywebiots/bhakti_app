@@ -1,3 +1,4 @@
+import 'dart:developer';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/ruler_picker/ruler_picker_bn.dart';
 
@@ -11,8 +12,10 @@ class CommonRulerPicker extends StatelessWidget {
   Widget build(BuildContext context) {
     return SizedBox(
         height: 80,
-        child: RulerPicker(
-            onChange: onChange,
+        child: RulerPickerData(
+            onChange: (value) {
+              log("calyye :$value");
+            },
             background:
             Colors.white,
             lineColor:

@@ -1,10 +1,9 @@
 import 'dart:async';
-
+import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/screens/auth_screen/login_screen.dart';
+import 'package:bhakti_app/screens/auth_screen/login_auth_screen/login_auth_screen.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -20,7 +19,7 @@ class _SplashScreenState extends State<SplashScreen> {
     Timer(
         const Duration(seconds: 3),
         () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (_) => const LoginScreen())));
+            MaterialPageRoute(builder: (_) => const LoginAuthScreen())));
   }
 
   @override
@@ -37,9 +36,9 @@ class _SplashScreenState extends State<SplashScreen> {
                   child: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                    // Center(
-                    //     child: Image.asset(eImageAssets.bhaktiImg,
-                    //         fit: BoxFit.cover, height: 265)),
+                    Center(
+                        child: Image.asset(eImageAssets.bhaktiImg,
+                            fit: BoxFit.cover, height: 265)),
                     const VSpace(Insets.i55),
                     Image.asset(eImageAssets.bhaktiLogo, height: Sizes.s70),
                     const VSpace(Insets.i8),

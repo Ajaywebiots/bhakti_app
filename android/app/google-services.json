@@ -1,0 +1,54 @@
+{
+  "project_info": {
+    "project_number": "862611298508",
+    "project_id": "sadhana-sheet-e6ee0",
+    "storage_bucket": "sadhana-sheet-e6ee0.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:862611298508:android:e5a53aa5d7cce2c3284a69",
+        "android_client_info": {
+          "package_name": "com.bhaktisteps.sadhanarecord"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "862611298508-ee6vpa5lmq4p5fibjvl75ivt9nh0icsm.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.bhaktisteps.sadhanarecord",
+            "certificate_hash": "d8f9caa6a972598a6bfd368cbe65c57d43ad5612"
+          }
+        },
+        {
+          "client_id": "862611298508-03aredff60gegdbbarbuv3vtcci6e4pm.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDbu3AD1bGdSsRPBWn8T7-ig8Pa7tOi4_0"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "862611298508-03aredff60gegdbbarbuv3vtcci6e4pm.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "862611298508-26ms6kfmmoq9odjelnh6ljauroaijfq0.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.bhaktisteps.sadhanarecord"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

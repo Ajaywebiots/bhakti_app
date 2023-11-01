@@ -10,11 +10,11 @@ import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/book_layout.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/sleep_layout.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/week_calendar.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/wokship_layout.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/wok_ship_layout.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_bottom_bar.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/association_layout.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/chanting_common_layout.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/bookdistribution_layout.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/book_distribution_layout.dart';
 import 'package:bhakti_app/providers/home_screen_provider/home_screen_provider.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -75,8 +75,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               SvgPicture.asset(eSvgAssets.add),
                               Text('Add Book',
                                   style: appCss.dmDenseMedium14.textColor(
-                                      appColor(context).appTheme.primary))
-                            ])
+                                      appColor(context).appTheme.primary))])
                           ]),
                       const VSpace(Insets.i15),
                       const BookLayout(),
@@ -94,10 +93,9 @@ class _HomeScreenState extends State<HomeScreen> {
                       Text(appFonts.notes, style: appCss.philosopherBold18),
                       const VSpace(Insets.i15),
                       const NotesLayout(),
-                      const VSpace(Insets.i25)
                     ]).paddingOnly(
                         top: MediaQuery.of(context).size.height * 0.01,
-                        bottom: MediaQuery.of(context).size.height * 0.07,
+                        bottom: MediaQuery.of(context).size.height * 0.15,
                         left: Insets.i20,
                         right: Insets.i20))
               ])));

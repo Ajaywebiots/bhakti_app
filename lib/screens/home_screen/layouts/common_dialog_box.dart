@@ -9,19 +9,24 @@ import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/sandhya_alert_list_layout.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CommonDialog extends StatelessWidget {
-  final ValueSetter<int> onHourChange;
-  final ValueSetter<int> onMinChange;
+class CommonDialog extends StatefulWidget {
+  final ValueSetter<int>? onHourChange;
+  final ValueSetter<int>? onMinChange;
   final String? text, text1, text2;
 
   const CommonDialog(
       {super.key,
-      required this.onHourChange,
-      required this.onMinChange,
+       this.onHourChange,
+       this.onMinChange,
       this.text,
       this.text1,
       this.text2});
 
+  @override
+  State<CommonDialog> createState() => _CommonDialogState();
+}
+
+class _CommonDialogState extends State<CommonDialog> {
   @override
   Widget build(BuildContext context) {
     return Dialog(
@@ -31,48 +36,49 @@ class CommonDialog extends StatelessWidget {
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8), color: Colors.white),
             width: 335,
-            height: text == "Mangala Arti"
+            height: widget.text == "Mangala Arti"
                 ? 660
-                : text == "Sandhya Arti"
+                : widget.text == "Sandhya Arti"
                     ? 580
-                    : text == "Bhagavadgita"
+                    : widget.text == "Bhagavadgita"
                         ? 490
-                        : text == "Hearing"
+                        : widget.text == "Hearing"
                             ? 490
                             : 420,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Center(
-                      child: Text(text!,
+                      child: Text(widget.text!,
                           style: appCss.philosopherBold18
                               .textColor(appColor(context).appTheme.primary)))
                   .paddingSymmetric(vertical: 20),
               Text(
                   textAlign: TextAlign.start,
-                  text1!,
+                  widget.text1!,
                   style: appCss.dmDenseMedium14
                       .textColor(appColor(context).appTheme.primary)),
               const VSpace(Insets.i32),
               CommonRulerPicker(
-                  startValue: 1, maxValue: 12, onChange: onHourChange),
+                  startValue: 1, maxValue: 12, onChange: widget.onHourChange!),
               Text(
                   textAlign: TextAlign.start,
-                  text2!,
+                  widget.text2!,
                   style: appCss.dmDenseMedium14
                       .textColor(appColor(context).appTheme.primary)),
               const VSpace(Insets.i10),
               CommonRulerPicker(
-                  startValue: 1, maxValue: 60, onChange: onMinChange),
-              text == "Mangala Arti"
+                  startValue: 1, maxValue: 60, onChange: widget.onMinChange!),
+
+              widget.text == "Mangala Arti"
                   ? const VSpace(Insets.i25)
-                  : text == "Sandhya Arti"
+                  : widget.text == "Sandhya Arti"
                       ? const VSpace(Insets.i25)
-                      : text == "Bhagavadgita"
+                      : widget.text == "Bhagavadgita"
                           ? const VSpace(Insets.i25)
-                          : text == "Hearing"
+                          : widget.text == "Hearing"
                               ? const VSpace(Insets.i25)
                               : const VSpace(Insets.i20),
-              text == 'Mangala Arti'
+              widget.text == 'Mangala Arti'
                   ? Container(
                       padding: const EdgeInsets.all(15),
                       decoration: BoxDecoration(
@@ -86,6 +92,9 @@ class CommonDialog extends StatelessWidget {
                               text: e.value['artiType'],
                               onToggle: (val) {
                                 e.value['isOn'] = val;
+                                setState(() {
+
+                                });
                               }),
                           const VSpace(Sizes.s10),
                           e.key == 4
@@ -94,7 +103,7 @@ class CommonDialog extends StatelessWidget {
                           e.key == 4 ? Container() : const VSpace(Sizes.s10)
                         ]);
                       }).toList()))
-                  : text == "Sandhya Arti"
+                  : widget.text == "Sandhya Arti"
                       ? Container(
                           padding: const EdgeInsets.all(15),
                           decoration: BoxDecoration(
@@ -110,6 +119,9 @@ class CommonDialog extends StatelessWidget {
                                   text: e.value['artiType'],
                                   onToggle: (val) {
                                     e.value['isOn'] = val;
+                                    setState(() {
+
+                                    });
                                   }),
                               const VSpace(Sizes.s10),
                               e.key == 4
@@ -118,7 +130,7 @@ class CommonDialog extends StatelessWidget {
                               e.key == 4 ? Container() : const VSpace(Sizes.s10)
                             ]);
                           }).toList()))
-                      : text == "Bhagavadgita"
+                      : widget.text == "Bhagavadgita"
                           ? Container(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15),
@@ -143,7 +155,7 @@ class CommonDialog extends StatelessWidget {
                                     const Text("Chapter 1"),
                                     SvgPicture.asset("assets/svg/arrow-up1.svg")
                                   ]))
-                          : text == "Hearing"
+                          : widget.text == "Hearing"
                               ? Container(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15),
@@ -170,13 +182,13 @@ class CommonDialog extends StatelessWidget {
                                             "assets/svg/arrow-up1.svg")
                                       ]))
                               : Container(),
-              text == "Mangala Arti"
+              widget.text == "Mangala Arti"
                   ? const VSpace(Insets.i10)
-                  : text == "Sandhya Arti"
+                  : widget.text == "Sandhya Arti"
                       ? const VSpace(Insets.i10)
-                      : text == "Bhagavadgita"
+                      : widget.text == "Bhagavadgita"
                           ? const VSpace(Insets.i30)
-                          : text == "Hearing"
+                          : widget.text == "Hearing"
                               ? const VSpace(Insets.i30)
                               : const VSpace(Insets.i10),
               Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [

@@ -52,6 +52,7 @@ class WorshipLayout extends StatelessWidget {
                       if (homeScreenPvr.isSandhyaArti == true) {
                         homeScreenPvr.onSandhyaArtiSelect(context);
                       }
+                      homeScreenPvr.notifyListeners();
                     },
                     onToggle: (value) {
                       homeScreenPvr.isSandhyaArti =
@@ -59,6 +60,7 @@ class WorshipLayout extends StatelessWidget {
                       if (homeScreenPvr.isSandhyaArti == true) {
                         homeScreenPvr.onSandhyaArtiSelect(context);
                       }
+                      homeScreenPvr.notifyListeners();
                     },
                     status: homeScreenPvr.isSandhyaArti,
                     svgImage: eSvgAssets.sandhyaArti),

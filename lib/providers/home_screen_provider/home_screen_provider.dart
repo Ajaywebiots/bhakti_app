@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
 
@@ -28,18 +30,29 @@ class HomeScreenProvider extends ChangeNotifier {
     showDialog(
         context: context,
         builder: (BuildContext context1) {
-          return CommonDialog(
-              text: 'Sleep Time',
-              text1: 'Hour',
-              text2: 'Minutes',
-              onHourChange: (value) {
-                sleepTimeHour = value;
-                notifyListeners();
-              },
-              onMinChange: (value) {
-                sleepTimeMin = value;
-                notifyListeners();
-              });
+          return StatefulBuilder(
+            builder: (context,setState) {
+              return Consumer<HomeScreenProvider>(
+                  builder: (context,ctrl,child) {
+                  return CommonDialog(
+                      text: 'Sleep Time',
+                      text1: 'Hour',
+                      text2: 'Minutes',
+
+                      onHourChange: (value) {
+                        sleepTimeHour = value;
+                        ctrl.notifyListeners();
+                        log("sleepTimeHour :$sleepTimeHour");
+                        setState;
+                      },
+                      onMinChange: (value) {
+                        sleepTimeMin = value;
+                        notifyListeners();
+                      });
+                }
+              );
+            }
+          );
         });
   }
 
@@ -85,18 +98,26 @@ class HomeScreenProvider extends ChangeNotifier {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return CommonDialog(
-              text: 'Sandhya Arti',
-              text1: 'Hour',
-              text2: 'Minutes',
-              onHourChange: (value) {
-                sandhyaArtiHour = value;
-                notifyListeners();
-              },
-              onMinChange: (value) {
-                sandhyaArtiMin = value;
-                notifyListeners();
-              });
+          return  StatefulBuilder(
+              builder: (context2,setState) {
+              return Consumer<HomeScreenProvider>(
+                  builder: (context1,ctrl,child) {
+                  return CommonDialog(
+                      text: 'Sandhya Arti',
+                      text1: 'Hour',
+                      text2: 'Minutes',
+                      onHourChange: (value) {
+                        ctrl.sandhyaArtiHour = value;
+                        ctrl.notifyListeners();
+                      },
+                      onMinChange: (value) {
+                        ctrl.sandhyaArtiMin = value;
+                        ctrl.notifyListeners();
+                      });
+                }
+              );
+            }
+          );
         });
   }
 

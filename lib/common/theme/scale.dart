@@ -77,6 +77,7 @@ class Insets {
   static const double i90 = 90 * scale;
   static const double i92 = 92 * scale;
   static const double i95 = 95 * scale;
+  static const double i98 = 98 * scale;
   static const double i100 = 100 * scale;
   static const double i110 = 110 * scale;
   static const double i120 = 120 * scale;

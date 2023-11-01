@@ -29,6 +29,11 @@ class AppTheme {
   Color green;
   Color online;
   Color red;
+  Color phoneClr;
+  Color googleClr;
+  Color googleTxtClr;
+  Color fbClr;
+  Color emailClr;
   Color whiteColor;
 
   /// Default constructor
@@ -52,6 +57,11 @@ class AppTheme {
     required this.shadowClr,
     required this.online,
     required this.red,
+    required this.phoneClr,
+    required this.googleClr,
+    required this.googleTxtClr,
+    required this.fbClr,
+    required this.emailClr,
     required this.green,
     required this.whiteColor,
   });
@@ -81,7 +91,12 @@ class AppTheme {
             shadowClr: const Color(0x1E929292),
             green: Colors.green,
             online: Colors.green,
-            red: const Color(0xffFF4B4B));
+            red: const Color(0xffFF4B4B),
+            phoneClr: const Color(0xff43C4A5),
+            googleClr: const Color(0xffEBF2FA),
+            fbClr: const Color(0xff0084FF),
+            emailClr: const Color(0xffD0011B),
+            googleTxtClr: const Color(0xff707477));
 
       case ThemeType.dark:
         return AppTheme(
@@ -105,7 +120,12 @@ class AppTheme {
             shadowClr: const Color(0x1E929292),
             green: Colors.green,
             online: Colors.green,
-            red: const Color(0xffFF4B4B));
+            red: const Color(0xffFF4B4B),
+            phoneClr: const Color(0xff43C4A5),
+            googleClr: const Color(0xffEBF2FA),
+            fbClr: const Color(0xff0084FF),
+            emailClr: const Color(0xffD0011B),
+            googleTxtClr: const Color(0xff707477));
     }
   }
 

@@ -1,6 +1,7 @@
 library ruler_picker_bn;
 
-import 'package:bhakti_app/common/extension/widget_extension.dart';
+import 'dart:developer';
+
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/item_positions_listener.dart';
 import 'package:flutter/foundation.dart';
@@ -10,8 +11,8 @@ import 'package:flutter_svg/flutter_svg.dart';
 
 /// Flutter package for ruler type value picker.
 /// You can get horizontal and vertical ruler view with the package.
-class RulerPicker extends StatefulWidget {
-  const RulerPicker(
+class RulerPickerData extends StatefulWidget {
+  const RulerPickerData(
       {Key? key,
       this.minValue = 0,
       this.maxValue = 250,
@@ -48,10 +49,10 @@ class RulerPicker extends StatefulWidget {
   final int maxValue;
 
   @override
-  RulerPickerState createState() => RulerPickerState();
+  RulerPickerDataState createState() => RulerPickerDataState();
 }
 
-class RulerPickerState extends State<RulerPicker> {
+class RulerPickerDataState extends State<RulerPickerData> {
   final ItemScrollController controllerScroll = ItemScrollController();
   final ItemPositionsListener itemPositionsListener =
       ItemPositionsListener.create();
@@ -62,8 +63,6 @@ class RulerPickerState extends State<RulerPicker> {
         builder: (BuildContext context, BoxConstraints constraints) {
       return Stack(children: [
         Column(crossAxisAlignment: CrossAxisAlignment.center, children: [
-
-
           SizedBox(
               height: 50,
               child: ScrollablePositionedList.builder(
@@ -233,6 +232,8 @@ class RulerPickerState extends State<RulerPicker> {
             : position > widget.maxValue
                 ? widget.maxValue
                 : position;
+        log("PRES :$prevValue");
+        log("value :$value");
         if (prevValue != value) {
           widget.onChange(value);
           prevValue = value;

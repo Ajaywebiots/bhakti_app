@@ -1,6 +1,6 @@
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:flutter_svg/flutter_svg.dart';
+import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 
 class NotesLayout extends StatelessWidget {
   const NotesLayout({super.key});

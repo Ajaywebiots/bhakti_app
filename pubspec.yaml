@@ -46,6 +46,10 @@ dependencies:
   carousel_slider:
   infinite_carousel: ^1.0.3
 #  ruler_picker_bn: ^0.0.6
+  firebase_auth: ^4.12.0
+  firebase_core: ^2.20.0
+  google_sign_in: ^6.1.5
+  pinput: ^3.0.1
 
 dev_dependencies:
   flutter_test:

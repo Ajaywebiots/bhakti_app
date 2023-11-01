@@ -1,6 +1,7 @@
 library horizontal_week_calendar;
 
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
+import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
@@ -221,14 +222,8 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                                 onTap: () {
                                   onBackClick();
                                 },
-                                child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      SvgPicture.asset(
-                                          "assets/svg/liftarrow.svg"),
-                                      const SizedBox(width: 4)
-                                    ])),
+                                child: SvgPicture.asset(
+                                    "assets/svg/liftarrow.svg")),
                             for (int weekIndex = 0;
                                 weekIndex < listOfWeeks[ind].length;
                                 weekIndex++)
@@ -243,7 +238,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                                           : null,
                                       child: Container(
                                           height: Sizes.s52,
-                                          width: Sizes.s34,
+                                          width: Sizes.s38,
                                           margin: const EdgeInsets.symmetric(
                                               horizontal: 6),
                                           alignment: Alignment.center,
@@ -251,7 +246,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                                               boxShadow: const [
                                                 BoxShadow(
                                                     color: Color(0x19000000),
-                                                    blurRadius: 16,
+                                                    blurRadius: 2,
                                                     offset: Offset(0, 2),
                                                     spreadRadius: 0)
                                               ],
@@ -275,9 +270,9 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                                           child: Column(mainAxisAlignment: MainAxisAlignment.center, crossAxisAlignment: CrossAxisAlignment.center, children: [
                                             Text(
                                                 DateFormat(
-                                                  'EE',
+                                                  'E',
                                                 ).format(listOfWeeks[ind]
-                                                    [weekIndex]),
+                                                    [weekIndex]).substring(0,2),
                                                 textAlign: TextAlign.center,
                                                 style: theme1.copyWith(
                                                     color: DateFormat('dd-MM-yyyy')
@@ -331,15 +326,9 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                                         onNextClick();
                                       }
                                     : null,
-                                child: Row(
-                                    crossAxisAlignment:
-                                        CrossAxisAlignment.center,
-                                    children: [
-                                      const SizedBox(width: 4),
-                                      SvgPicture.asset(
-                                          "assets/svg/rightArrow.svg")
-                                    ]))
-                          ]))
+                                child: SvgPicture.asset(
+                                    "assets/svg/rightArrow.svg"))
+                          ]).paddingSymmetric(horizontal: 8))
                 ],
                 options: CarouselOptions(
                     scrollPhysics: const ClampingScrollPhysics(),

@@ -1,30 +1,31 @@
+import 'package:flutter/gestures.dart';
+import 'package:bhakti_app/config.dart';
+import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
-import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/login_screen_provider/login_screen_provider.dart';
-import 'package:bhakti_app/screens/auth_screen/layouts/password_text_field.dart';
+import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/screens/home_screen/setup_profile/setup_profile.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'layouts/email_text_field.dart';
+import 'package:bhakti_app/screens/auth_screen/splash_screen/layouts/email_text_field.dart';
+import 'package:bhakti_app/screens/auth_screen/splash_screen/layouts/password_text_field.dart';
+import 'package:bhakti_app/providers/email_login_screen_provider/email_login_screen_provider.dart';
 
-class LoginScreen extends StatefulWidget {
-  const LoginScreen({super.key});
+class EmailLoginScreen extends StatefulWidget {
+  const EmailLoginScreen({super.key});
 
   @override
-  State<LoginScreen> createState() => _LoginScreenState();
+  State<EmailLoginScreen> createState() => _EmailLoginScreenState();
 }
 
-class _LoginScreenState extends State<LoginScreen> {
+class _EmailLoginScreenState extends State<EmailLoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<LoginScreenProvider>(
-        builder: (context1, loginScreenPvr, child) {
+    return Consumer<EmailLoginScreenProvider>(
+        builder: (context1, emailLoginScreenPvr, child) {
       return Scaffold(
-        resizeToAvoidBottomInset: false,
+          resizeToAvoidBottomInset: false,
           body: Container(
-            height: double.infinity,
+              height: double.infinity,
               padding: EdgeInsets.only(
                   bottom: Insets.i27,
                   top: MediaQuery.of(context).size.height * 0.08),
@@ -32,7 +33,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   image: DecorationImage(
                       fit: BoxFit.fill,
                       image: AssetImage(eImageAssets.splashBg))),
-              child: Stack( children: [
+              child: Stack(children: [
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
                   const VSpace(Insets.i40),
                   Center(
@@ -46,9 +47,9 @@ class _LoginScreenState extends State<LoginScreen> {
                       style: appCss.dmDenseMedium14
                           .textColor(appColor(context).appTheme.threeText)),
                   const VSpace(Insets.i30),
-                  EmailTextField(loginScreenPvr),
+                  EmailTextField(emailLoginScreenPvr),
                   const VSpace(Insets.i20),
-                  PasswordTextField(loginScreenPvr),
+                  PasswordTextField(emailLoginScreenPvr),
                   const VSpace(Insets.i8),
                   TextButton(
                           onPressed: () {},
@@ -162,12 +163,19 @@ class _LoginScreenState extends State<LoginScreen> {
                     text: TextSpan(
                         style: appCss.dmDenseSemiBold14
                             .textColor(appColor(context).appTheme.oneText),
-                        children: <TextSpan>[
+                        children: [
                       TextSpan(text: appFonts.doNotHaveAccount),
                       TextSpan(
                           text: appFonts.signUpHere,
                           style: appCss.dmDenseSemiBold14
-                              .textColor(appColor(context).appTheme.primary))
+                              .textColor(appColor(context).appTheme.primary),
+                          recognizer: TapGestureRecognizer()
+                            ..onTap = () {
+                              Navigator.push(context,
+                                  MaterialPageRoute(builder: (context) {
+                                return Container();
+                              }));
+                            })
                     ])).alignment(Alignment.bottomCenter)
               ])));
     });
