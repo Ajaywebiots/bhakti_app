@@ -5,10 +5,13 @@ class AppFonts {
   final enterValidEmail = "Enter a valid email";
   final forgotPassword = "Forgot Password?";
   final login = "Login";
+  final signUp = "Sign Up";
   final email = "Email";
   final egPass = "Eg. Abc@2022";
   final doNotHaveAccount = "Don’t Have an account? ";
+  final alreadyHaveAccount = "Already Have an account? ";
   final signUpHere = "Sign Up here";
+  final loginHere = "Login here";
   final egMail = "Eg. Shreliyan@gmail.com";
   final sleptAt = "Slept at";
   final wokeUpAt = "Wokeup at";

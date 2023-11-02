@@ -7,6 +7,7 @@ import 'package:bhakti_app/screens/auth_screen/email_login_screen/email_login_sc
 import 'package:bhakti_app/screens/auth_screen/login_auth_screen/layouts/auth_button_common_layout.dart';
 import 'package:bhakti_app/screens/auth_screen/phone_login_screen/phone_login_screen.dart';
 import 'package:bhakti_app/screens/home_screen/home_screen.dart';
+import 'package:bhakti_app/screens/home_screen/setup_profile/setup_profile.dart';
 
 class LoginAuthScreen extends StatefulWidget {
   const LoginAuthScreen({super.key});
@@ -47,6 +48,7 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                         }));
                       }),
                   const VSpace(Insets.i25),
+
                   AuthButtonLayout(
                       label: 'Login via Google',
                       color: appColor(context).appTheme.googleClr,
@@ -55,8 +57,9 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                           (value) => Navigator.pushReplacement(
                               context,
                               MaterialPageRoute(
-                                  builder: (context) => const HomeScreen())))),
+                                  builder: (context) => const SetUpProfile())))),
                   const VSpace(Insets.i25),
+
                   AuthButtonLayout(
                       label: 'Login via Facebook',
                       color: appColor(context).appTheme.fbClr,
@@ -68,6 +71,7 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                         }));
                       }),
                   const VSpace(Insets.i25),
+
                   AuthButtonLayout(
                       label: 'Sign in with email',
                       color: appColor(context).appTheme.emailClr,

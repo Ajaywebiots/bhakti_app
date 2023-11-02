@@ -9,6 +9,7 @@ import 'providers/email_login_screen_provider/email_login_screen_provider.dart';
 import 'package:bhakti_app/providers/login_auth_provider/login_auth_provider.dart';
 import 'package:bhakti_app/providers/otp_screen_provider/otp_screen_provider.dart';
 import 'package:bhakti_app/providers/home_screen_provider/home_screen_provider.dart';
+import 'package:bhakti_app/providers/email_sign_up_provider/email_sign_up_provider.dart';
 import 'package:bhakti_app/providers/setup_profile_provider/setup_profile_provider.dart';
 
 void main() async {
@@ -32,8 +33,8 @@ class MyApp extends StatelessWidget {
                   ChangeNotifierProvider(
                       create: (_) => ThemeService(snapData.data!)),
                   ChangeNotifierProvider(create: (_) => LoadingProvider()),
-                  ChangeNotifierProvider(
-                      create: (_) => EmailLoginScreenProvider()),
+                  ChangeNotifierProvider(create: (_) => EmailLoginProvider()),
+                  ChangeNotifierProvider(create: (_) => EmailSignUpProvider()),
                   ChangeNotifierProvider(create: (_) => HomeScreenProvider()),
                   ChangeNotifierProvider(create: (_) => SetUpProfileProvider()),
                   ChangeNotifierProvider(create: (_) => LoginAuthProvider()),

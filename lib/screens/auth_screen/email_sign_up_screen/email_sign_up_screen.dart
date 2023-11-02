@@ -1,5 +1,7 @@
-import 'package:bhakti_app/screens/auth_screen/email_sign_up_screen/email_sign_up_screen.dart';
-import 'package:bhakti_app/screens/auth_screen/phone_login_screen/phone_login_screen.dart';
+import 'package:bhakti_app/providers/email_sign_up_provider/email_sign_up_provider.dart';
+import 'package:bhakti_app/providers/email_sign_up_provider/layouts/email_text_field.dart';
+import 'package:bhakti_app/providers/email_sign_up_provider/layouts/password_text_field.dart';
+import 'package:bhakti_app/screens/auth_screen/email_login_screen/email_login_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -10,20 +12,19 @@ import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/screens/home_screen/setup_profile/setup_profile.dart';
 import 'package:bhakti_app/providers/email_login_screen_provider/layouts/email_login_text_field.dart';
 import 'package:bhakti_app/providers/email_login_screen_provider/layouts/password_login_text_field.dart';
-import 'package:bhakti_app/providers/email_login_screen_provider/email_login_screen_provider.dart';
 
-class EmailLoginScreen extends StatefulWidget {
-  const EmailLoginScreen({super.key});
+class EmailSignUpScreen extends StatefulWidget {
+  const EmailSignUpScreen({super.key});
 
   @override
-  State<EmailLoginScreen> createState() => _EmailLoginScreenState();
+  State<EmailSignUpScreen> createState() => _EmailSignUpScreenState();
 }
 
-class _EmailLoginScreenState extends State<EmailLoginScreen> {
+class _EmailSignUpScreenState extends State<EmailSignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<EmailLoginProvider>(
-        builder: (context1, emailLoginPvr, child) {
+    return Consumer<EmailSignUpProvider>(
+        builder: (context1, emailSignUpPvr, child) {
       return Scaffold(
           resizeToAvoidBottomInset: false,
           body: Container(
@@ -42,24 +43,16 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                       child: Image.asset(eImageAssets.bhaktiLogo,
                           height: Sizes.s45)),
                   const VSpace(Insets.i50),
-                  Text("Login Here..",
+                  Text("Sign Up Here..",
                       style: appCss.philosopherBold28
                           .textColor(appColor(context).appTheme.oneText)),
                   Text("Enter your details below",
                       style: appCss.dmDenseMedium14
                           .textColor(appColor(context).appTheme.threeText)),
                   const VSpace(Insets.i30),
-                  EmailLoginTextField(dataPvr: emailLoginPvr),
+                  EmailSignUpTextField(dataPvr: emailSignUpPvr),
                   const VSpace(Insets.i20),
-                  PasswordLoginTextField(dataPvr: emailLoginPvr),
-                  const VSpace(Insets.i8),
-                  TextButton(
-                          onPressed: () {},
-                          child: Text(appFonts.forgotPassword,
-                              style: appCss.dmDenseMedium14.textColor(
-                                  appColor(context).appTheme.primary),
-                              textAlign: TextAlign.end))
-                      .alignment(Alignment.centerRight),
+                  PasswordSignUpTextField(dataPvr: emailSignUpPvr),
                   const VSpace(Insets.i25),
                   Center(
                           child: Container(
@@ -69,7 +62,7 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                               decoration: BoxDecoration(
                                   borderRadius: BorderRadius.circular(8),
                                   color: appColor(context).appTheme.primary),
-                              child: Text(appFonts.login,
+                              child: Text(appFonts.signUp,
                                   style: appCss.dmDenseMedium16.textColor(
                                       appColor(context).appTheme.whiteColor))))
                       .inkWell(onTap: () {
@@ -89,28 +82,22 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                   const VSpace(Insets.i20),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
                     Container(
-                            decoration: BoxDecoration(
-                                color: Colors.white,
-                                borderRadius: BorderRadius.circular(6),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color: appColor(context)
-                                          .appTheme
-                                          .black
-                                          .withOpacity(.2),
-                                      blurRadius: 12,
-                                      offset: const Offset(0, 4))
-                                ]),
-                            height: 46,
-                            width: 46,
-                            alignment: Alignment.center,
-                            child: SvgPicture.asset(eSvgAssets.call))
-                        .inkWell(onTap: () {
-                      Navigator.push(context,
-                          MaterialPageRoute(builder: (context) {
-                        return const PhoneLoginScreen();
-                      }));
-                    }),
+                        decoration: BoxDecoration(
+                            color: Colors.white,
+                            borderRadius: BorderRadius.circular(6),
+                            boxShadow: [
+                              BoxShadow(
+                                  color: appColor(context)
+                                      .appTheme
+                                      .black
+                                      .withOpacity(.2),
+                                  blurRadius: 12,
+                                  offset: const Offset(0, 4))
+                            ]),
+                        height: 46,
+                        width: 46,
+                        alignment: Alignment.center,
+                        child: SvgPicture.asset(eSvgAssets.call)),
                     const HSpace(Insets.i15),
                     Container(
                         decoration: BoxDecoration(
@@ -172,17 +159,14 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                         style: appCss.dmDenseSemiBold14
                             .textColor(appColor(context).appTheme.oneText),
                         children: [
-                      TextSpan(text: appFonts.doNotHaveAccount),
+                      TextSpan(text: appFonts.alreadyHaveAccount),
                       TextSpan(
-                          text: appFonts.signUpHere,
+                          text: appFonts.loginHere,
                           style: appCss.dmDenseSemiBold14
                               .textColor(appColor(context).appTheme.primary),
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
-                              Navigator.push(context,
-                                  MaterialPageRoute(builder: (context) {
-                                return const EmailSignUpScreen();
-                              }));
+                              Navigator.pop(context);
                             })
                     ])).alignment(Alignment.bottomCenter)
               ])));

@@ -8,6 +8,7 @@ import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/screens/auth_screen/phone_login_screen/phone_login_screen.dart';
 import 'package:bhakti_app/screens/home_screen/home_screen.dart';
+import 'package:bhakti_app/screens/home_screen/setup_profile/setup_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pinput/pinput.dart';
 
@@ -130,8 +131,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                   isLoading = true;
                                   setState(() {});
                                   try {
-                                    isLoading = false;
-                                    setState(() {});
+
                                     PhoneAuthCredential credential =
                                         PhoneAuthProvider.credential(
                                             verificationId:
@@ -140,11 +140,12 @@ class _OtpScreenState extends State<OtpScreen> {
                                     await auth.signInWithCredential(credential);
                                     log("credential::$credential");
                                     isValid = false;
+                                    isLoading = false;
                                     setState(() {});
                                     // ignore: use_build_context_synchronously
                                     Navigator.pushReplacement(context,
                                         MaterialPageRoute(builder: (context) {
-                                      return const HomeScreen();
+                                      return const SetUpProfile();
                                     }));
                                   } on FirebaseAuthException catch (e) {
                                     print(

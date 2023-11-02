@@ -13,6 +13,7 @@ import 'package:bhakti_app/screens/home_screen/setup_profile/layouts/initiated_n
 import 'package:bhakti_app/screens/home_screen/setup_profile/layouts/name_text_form_field.dart';
 import 'package:bhakti_app/screens/home_screen/setup_profile/layouts/phonenum_text_form_field.dart';
 import 'package:bhakti_app/screens/home_screen/setup_profile/layouts/state_text_form_field.dart';
+import 'package:bhakti_app/widgets/stateful_wrapper.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'layouts/profile_picture_layout.dart';
 
@@ -27,7 +28,7 @@ class _SetUpProfileState extends State<SetUpProfile> {
   @override
   Widget build(BuildContext context) {
     return Consumer<SetUpProfileProvider>(
-        builder: (context, profilePvr, child) {
+        builder: (context, setUpProfilePvr, child) {
       return Scaffold(
           extendBodyBehindAppBar: true,
           body: Stack(children: [
@@ -94,7 +95,7 @@ class _SetUpProfileState extends State<SetUpProfile> {
                     const VSpace(Insets.i18),
                     Center(
                       child: GestureDetector(
-                          onTap: () => profilePvr.saveData(context),
+                          onTap: () => setUpProfilePvr.saveData(context),
                           child: Container(
                               alignment: Alignment.center,
                               height: 44,
