@@ -25,11 +25,8 @@ class PhoneNumberTextBox extends StatelessWidget {
           child: TextFieldCommon(
               maxLength: 10,
               validator: (value) {
-                if (value!.isEmpty) {
-                  profilePvr.phoneNumberValid = 'Enter a Valid Phone Number!';
-                  profilePvr.notifyListeners();
-                  return 'Enter a Phone Number!';
-                } else {
+                if (value!.isNotEmpty) {
+
                   profilePvr.phoneNumberValid = null;
                   profilePvr.notifyListeners();
                   return null;

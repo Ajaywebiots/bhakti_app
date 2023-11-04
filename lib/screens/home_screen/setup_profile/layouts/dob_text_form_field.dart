@@ -27,11 +27,8 @@ class DateOfBirthBox extends StatelessWidget {
           child: TextFieldCommon(
               hintText: 'Date Of Birth',
               validator: (value) {
-                if (value!.isEmpty) {
-                  profilePvr.dateValid = appFonts.enterDob;
-                  profilePvr.notifyListeners();
-                  return appFonts.enterDob;
-                } else {
+                if (value!.isNotEmpty) {
+
                   profilePvr.dateValid = null;
                   profilePvr.notifyListeners();
                   return null;
@@ -48,7 +45,7 @@ class DateOfBirthBox extends StatelessWidget {
 
                 if (pickedDate != null) {
 
-                  String formattedDate = DateFormat('dd MMM yyyy')
+                  String formattedDate = DateFormat('yyyy-MM-dd')
                       .format(pickedDate);
 
                   profilePvr.dob.text = formattedDate;

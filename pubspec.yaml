@@ -53,6 +53,7 @@ dependencies:
   http: ^1.1.0
   dio:
   intl_phone_field:
+  connectivity_plus: ^5.0.1
 
 dev_dependencies:
   flutter_test:
@@ -80,6 +81,7 @@ flutter:
   assets:
     - assets/svg/
     - assets/images/
+    - assets/json/
   #   - images/a_dot_ham.jpeg
 
   # An image asset can refer to one or more resolution-specific "variants", see

@@ -24,14 +24,6 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
   final focusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   String countryCode = "91";
-
-  @override
-  void initState() {
-    // TODO: implement initState
-    setState(() {});
-    super.initState();
-  }
-
   @override
   Widget build(BuildContext context) {
     return Consumer<PhoneLoginProvider>(

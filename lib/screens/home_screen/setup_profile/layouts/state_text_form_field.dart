@@ -13,8 +13,8 @@ class StateTextFieldBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<SetUpProfileProvider>(
-      builder: (context, profilePvr, child) {
-        return CustomTitleWidget(
+        builder: (context, profilePvr, child) {
+      return CustomTitleWidget(
           height: 52,
           width: double.infinity,
           title: 'State',
@@ -23,12 +23,9 @@ class StateTextFieldBox extends StatelessWidget {
               ? const Color(0xff541F5C).withOpacity(.20)
               : appColor(context).appTheme.red,
           child: TextFieldCommon(
+              controller: profilePvr.state,
               validator: (value) {
-                if (value!.isEmpty) {
-                  profilePvr.stateValid = 'Enter a State Name!';
-                  profilePvr.notifyListeners();
-                  return 'Enter a State Name!';
-                } else {
+                if (value!.isNotEmpty) {
                   profilePvr.stateValid = null;
                   profilePvr.notifyListeners();
                   return null;
@@ -43,10 +40,8 @@ class StateTextFieldBox extends StatelessWidget {
                     SvgPicture.asset(eSvgAssets.map, height: 25),
                     const HSpace(Insets.i12),
                     SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
-                    const HSpace(Insets.i20),
-                  ])),
-        ).paddingSymmetric(vertical: 10);
-      },
-    );
+                    const HSpace(Insets.i20)
+                  ]))).paddingSymmetric(vertical: 10);
+    });
   }
 }

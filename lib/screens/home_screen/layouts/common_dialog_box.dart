@@ -153,7 +153,7 @@ class _CommonDialogState extends State<CommonDialog> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text("Chapter 1"),
-                                    SvgPicture.asset("assets/svg/arrow-up1.svg")
+                                    SvgPicture.asset("assets/svg/arrow-down1.svg")
                                   ]))
                           : widget.text == "Hearing"
                               ? Container(
@@ -179,7 +179,7 @@ class _CommonDialogState extends State<CommonDialog> {
                                       children: [
                                         const Text("Speaker 1"),
                                         SvgPicture.asset(
-                                            "assets/svg/arrow-up1.svg")
+                                            "assets/svg/arrow-down1.svg")
                                       ]))
                               : Container(),
               widget.text == "Mangala Arti"

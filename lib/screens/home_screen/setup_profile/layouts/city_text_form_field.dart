@@ -22,13 +22,10 @@ class CityTextFieldBox extends StatelessWidget {
               : appColor(context).appTheme.red,
           title: 'City',
           radius: 8,
-          child: TextFieldCommon(
+          child: TextFieldCommon(controller: profilePvr.city,
               validator: (value) {
-                if (value!.isEmpty) {
-                  profilePvr.cityValid = 'Enter A City Name!';
-                  profilePvr.notifyListeners();
-                  return 'Enter a City Name!';
-                } else {
+                if (value!.isNotEmpty) {
+
                   profilePvr.cityValid = null;
                   profilePvr.notifyListeners();
                   return null;

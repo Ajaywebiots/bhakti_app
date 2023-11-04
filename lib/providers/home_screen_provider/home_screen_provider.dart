@@ -2,8 +2,12 @@ import 'dart:developer';
 
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
+import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
+  int index = 0;
+
   int sleepTimeHour = 0;
   int sleepTimeMin = 0;
   int sandhyaArtiMin = 0;
@@ -25,35 +29,40 @@ class HomeScreenProvider extends ChangeNotifier {
   int wokeUpTimeHour = 0;
   int wokeUpTimeMin = 0;
   bool isSandhyaArti = false;
+  ScrollController scrollController = ScrollController();
+  final ItemScrollController itemScrollController = ItemScrollController();
+  final ItemScrollController itemScrollController1 = ItemScrollController();
 
   onSleepTimeSelect(context) {
     showDialog(
         context: context,
         builder: (BuildContext context1) {
-          return StatefulBuilder(
-            builder: (context,setState) {
-              return Consumer<HomeScreenProvider>(
-                  builder: (context,ctrl,child) {
-                  return CommonDialog(
-                      text: 'Sleep Time',
-                      text1: 'Hour',
-                      text2: 'Minutes',
-
-                      onHourChange: (value) {
-                        sleepTimeHour = value;
-                        ctrl.notifyListeners();
-                        log("sleepTimeHour :$sleepTimeHour");
-                        setState;
-                      },
-                      onMinChange: (value) {
-                        sleepTimeMin = value;
-                        notifyListeners();
-                      });
-                }
-              );
-            }
-          );
+          return StatefulBuilder(builder: (context, setState) {
+            return Consumer<HomeScreenProvider>(
+                builder: (context, ctrl, child) {
+              return CommonDialog(
+                  text: 'Sleep Time',
+                  text1: 'Hour',
+                  text2: 'Minutes',
+                  onHourChange: (value) {
+                    sleepTimeHour = value;
+                    ctrl.notifyListeners();
+                    log("sleepTimeHour :$sleepTimeHour");
+                    setState;
+                  },
+                  onMinChange: (value) {
+                    sleepTimeMin = value;
+                    notifyListeners();
+                  });
+            });
+          });
         });
+  }
+
+  void clearSharedPreferences() async {
+    final prefs = await SharedPreferences.getInstance();
+    await prefs.clear();
+    notifyListeners();
   }
 
   onWokeUpTimeSelect(context) {
@@ -98,26 +107,23 @@ class HomeScreenProvider extends ChangeNotifier {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return  StatefulBuilder(
-              builder: (context2,setState) {
-              return Consumer<HomeScreenProvider>(
-                  builder: (context1,ctrl,child) {
-                  return CommonDialog(
-                      text: 'Sandhya Arti',
-                      text1: 'Hour',
-                      text2: 'Minutes',
-                      onHourChange: (value) {
-                        ctrl.sandhyaArtiHour = value;
-                        ctrl.notifyListeners();
-                      },
-                      onMinChange: (value) {
-                        ctrl.sandhyaArtiMin = value;
-                        ctrl.notifyListeners();
-                      });
-                }
-              );
-            }
-          );
+          return StatefulBuilder(builder: (context2, setState) {
+            return Consumer<HomeScreenProvider>(
+                builder: (context1, ctrl, child) {
+              return CommonDialog(
+                  text: 'Sandhya Arti',
+                  text1: 'Hour',
+                  text2: 'Minutes',
+                  onHourChange: (value) {
+                    ctrl.sandhyaArtiHour = value;
+                    ctrl.notifyListeners();
+                  },
+                  onMinChange: (value) {
+                    ctrl.sandhyaArtiMin = value;
+                    ctrl.notifyListeners();
+                  });
+            });
+          });
         });
   }
 

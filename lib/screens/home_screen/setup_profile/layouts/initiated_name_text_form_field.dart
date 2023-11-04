@@ -24,11 +24,7 @@ class InitiatedNameTextBox extends StatelessWidget {
         radius: 8,
         child: TextFieldCommon(
             validator: (value) {
-              if (value!.isEmpty) {
-                profilePvr.initiatedNameValid = 'Enter a Initiated Name!';
-                profilePvr.notifyListeners();
-                return 'Enter a Initiated Name!';
-              } else {
+              if (value!.isNotEmpty) {
                 profilePvr.initiatedNameValid = null;
                 profilePvr.notifyListeners();
                 return null;

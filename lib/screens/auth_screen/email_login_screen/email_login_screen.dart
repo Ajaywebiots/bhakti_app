@@ -1,3 +1,4 @@
+import 'package:bhakti_app/providers/login_auth_provider/login_auth_provider.dart';
 import 'package:bhakti_app/screens/auth_screen/email_sign_up_screen/email_sign_up_screen.dart';
 import 'package:bhakti_app/screens/auth_screen/phone_login_screen/phone_login_screen.dart';
 import 'package:flutter/gestures.dart';
@@ -22,8 +23,8 @@ class EmailLoginScreen extends StatefulWidget {
 class _EmailLoginScreenState extends State<EmailLoginScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<EmailLoginProvider>(
-        builder: (context1, emailLoginPvr, child) {
+    return Consumer2<EmailLoginProvider, LoginAuthProvider>(
+        builder: (context1, emailLoginPvr, loginAuthPvr, child) {
       return Scaffold(
           resizeToAvoidBottomInset: false,
           body: Container(
@@ -131,22 +132,25 @@ class _EmailLoginScreenState extends State<EmailLoginScreen> {
                         child: SvgPicture.asset(eSvgAssets.fb)),
                     const HSpace(Insets.i15),
                     Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(6),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: appColor(context)
-                                      .appTheme
-                                      .black
-                                      .withOpacity(.2),
-                                  blurRadius: 12,
-                                  offset: const Offset(0, 4))
-                            ]),
-                        height: 46,
-                        width: 46,
-                        alignment: Alignment.center,
-                        child: SvgPicture.asset(eSvgAssets.google)),
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(6),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: appColor(context)
+                                          .appTheme
+                                          .black
+                                          .withOpacity(.2),
+                                      blurRadius: 12,
+                                      offset: const Offset(0, 4))
+                                ]),
+                            height: 46,
+                            width: 46,
+                            alignment: Alignment.center,
+                            child: SvgPicture.asset(eSvgAssets.google))
+                        .inkWell(onTap: () {
+                      loginAuthPvr.signInWithGoogle(context);
+                    }),
                     const HSpace(Insets.i15),
                     Container(
                         decoration: BoxDecoration(

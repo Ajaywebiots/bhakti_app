@@ -25,8 +25,9 @@ class SvgAssets {
   final camera = 'assets/svg/camera.svg';
   final user = 'assets/svg/user.svg';
   final userInitiated = 'assets/svg/userInitiated.svg';
-  final arrowDown = 'assets/svg/arrowDown.svg';
-  final arrowUp = 'assets/svg/arrow-up.svg';
+  final arrowDown = 'assets/svg/arrowUp.svg';
+  final arrowDown1 = 'assets/svg/arrow-down1.svg';
+  final arrowUp = 'assets/svg/arrow-down.svg';
   final profileLine = 'assets/svg/profileLine.svg';
   final gender = 'assets/svg/gender.svg';
   final map = 'assets/svg/map.svg';

@@ -19,7 +19,8 @@ class LoginAuthScreen extends StatefulWidget {
 class _LoginAuthScreenState extends State<LoginAuthScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<LoginAuthProvider>(builder: (context, loginAuthPvr, child) {
+    return Consumer<LoginAuthProvider>(
+        builder: (context1, loginAuthPvr, child) {
       return Scaffold(
           body: Container(
               height: double.infinity,
@@ -48,18 +49,12 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                         }));
                       }),
                   const VSpace(Insets.i25),
-
                   AuthButtonLayout(
                       label: 'Login via Google',
                       color: appColor(context).appTheme.googleClr,
                       iconPath: 'assets/svg/googleAuth.svg',
-                      onTap: () => loginAuthPvr.signInWithGoogle().then(
-                          (value) => Navigator.pushReplacement(
-                              context,
-                              MaterialPageRoute(
-                                  builder: (context) => const SetUpProfile())))),
+                      onTap: () => loginAuthPvr.signInWithGoogle(context)),
                   const VSpace(Insets.i25),
-
                   AuthButtonLayout(
                       label: 'Login via Facebook',
                       color: appColor(context).appTheme.fbClr,
@@ -71,7 +66,6 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                         }));
                       }),
                   const VSpace(Insets.i25),
-
                   AuthButtonLayout(
                       label: 'Sign in with email',
                       color: appColor(context).appTheme.emailClr,

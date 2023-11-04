@@ -27,3 +27,30 @@ List<Map<String, dynamic>> sandhyaTypeList = [
   {'artiType': 'Narasimha Arti', 'isOn': false},
   {'artiType': 'Bhoga Offering', 'isOn': false}
 ];
+
+List chantingList = [
+  {'time': "Before 6:30 am", 'chantingText': '8'},
+  {'time': "Before 8:30 am", 'chantingText': '4'},
+  {'time': "Before 10:10 am", 'chantingText': '8'},
+  {'time': "Before 10:00 am", 'chantingText': '4'}
+];
+
+List drawerList = [
+  {"icon": "assets/svg/home1.svg", "name": "Home"},
+  {"icon": "assets/svg/user1.svg", "name": "Profile"},
+  {"icon": "assets/svg/link.svg", "name": "Tutorials"},
+  {
+    "icon": "assets/svg/book.svg",
+    "name": "Online Tests",
+    "list": [
+      {"icon": "assets/svg/book.svg", "name": "test 1"},
+      {"icon": "assets/svg/book.svg", "name": "test 2"},
+      {"icon": "assets/svg/book.svg", "name": "test 3"}
+    ]
+  },
+  {"icon": "assets/svg/document.svg", "name": "My Documents"},
+  {"icon": "assets/svg/information.svg", "name": "About Bhakti Steps"},
+  {"icon": "assets/svg/autobrightness.svg", "name": "About CDM"},
+  {"icon": "assets/svg/call-calling.svg", "name": "Contact Us"},
+  // {"icon": "assets/svg/logOut.svg", "name": "Log Out"}
+];

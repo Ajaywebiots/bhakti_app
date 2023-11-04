@@ -1,9 +1,14 @@
 import 'dart:async';
+import 'dart:convert';
+import 'dart:developer';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
+import 'package:bhakti_app/models/user_model.dart';
 import 'package:bhakti_app/screens/auth_screen/login_auth_screen/login_auth_screen.dart';
+import 'package:bhakti_app/screens/home_screen/home_screen.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});
@@ -18,8 +23,25 @@ class _SplashScreenState extends State<SplashScreen> {
     super.initState();
     Timer(
         const Duration(seconds: 3),
-        () => Navigator.pushReplacement(context,
-            MaterialPageRoute(builder: (_) => const LoginAuthScreen())));
+        () {
+          checkLocalData();
+
+
+        });
+  }
+
+  checkLocalData()async{
+    SharedPreferences pref = await SharedPreferences.getInstance();
+    if(pref!.getString(session.user) != null) {
+      UserModel? userModel =
+      UserModel.fromJson(json.decode(pref!.getString(session.user)!));
+      log("MODE l:$userModel");
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (_) => const HomeScreen()));
+    }else{
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (_) => const LoginAuthScreen()));
+    }
   }
 
   @override

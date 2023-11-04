@@ -12,44 +12,44 @@ class EmailTextBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SetUpProfileProvider>(builder: (context, profilePvr, child) {
-        return CustomTitleWidget(
-          height: 52,
-          width: double.infinity,
-          title: 'Email',
-          color: profilePvr.emailValid == null
-              ? const Color(0xff541F5C).withOpacity(.20)
-              : appColor(context).appTheme.red,
-          radius: 8,
-          child: TextFieldCommon(
-              validator: (value) {
-                if (value!.isEmpty ||
-                    !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                        .hasMatch(value)) {
-                  profilePvr.emailValid = appFonts.enterValidEmail;
-                  profilePvr.notifyListeners();
-                  return 'Enter a valid email!';
-                } else {
+    return Consumer<SetUpProfileProvider>(
+        builder: (context, profilePvr, child) {
+      return CustomTitleWidget(
+        height: 52,
+        width: double.infinity,
+        title: 'Email',
+        color: profilePvr.emailValid == null
+            ? const Color(0xff541F5C).withOpacity(.20)
+            : appColor(context).appTheme.red,
+        radius: 8,
+        child: TextFieldCommon(
+            validator: (value) {
+              if (value!.isNotEmpty &&
+                  !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+                      .hasMatch(value)) {
+                profilePvr.emailValid = appFonts.enterValidEmail;
+                profilePvr.notifyListeners();
+                return 'Enter a valid email!';
+              } /*else {
                   profilePvr.emailValid = null;
                   profilePvr.notifyListeners();
                   return null;
-                }
-              },
-              keyboardType: TextInputType.emailAddress,
-              hintText: 'Email',
-              controller: profilePvr.emailId,
-              prefixIcon: Row(
-                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                  mainAxisSize: MainAxisSize.min,
-                  children: <Widget>[
-                    const HSpace(Insets.i20),
-                    SvgPicture.asset(eSvgAssets.emailId, height: 20),
-                    const HSpace(Insets.i10),
-                    SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
-                    const HSpace(Insets.i20),
-                  ])),
-        ).paddingSymmetric(vertical: 10);
-      },
-    );
+                }*/
+            },
+            keyboardType: TextInputType.emailAddress,
+            hintText: 'Email',
+            controller: profilePvr.emailId,
+            prefixIcon: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisSize: MainAxisSize.min,
+                children: <Widget>[
+                  const HSpace(Insets.i20),
+                  SvgPicture.asset(eSvgAssets.emailId, height: 20),
+                  const HSpace(Insets.i10),
+                  SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
+                  const HSpace(Insets.i20)
+                ])),
+      ).paddingSymmetric(vertical: 10);
+    });
   }
 }

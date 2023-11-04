@@ -1,6 +1,7 @@
 import 'package:bhakti_app/providers/email_sign_up_provider/email_sign_up_provider.dart';
 import 'package:bhakti_app/providers/email_sign_up_provider/layouts/email_text_field.dart';
 import 'package:bhakti_app/providers/email_sign_up_provider/layouts/password_text_field.dart';
+import 'package:bhakti_app/providers/login_auth_provider/login_auth_provider.dart';
 import 'package:bhakti_app/screens/auth_screen/email_login_screen/email_login_screen.dart';
 import 'package:flutter/gestures.dart';
 import 'package:bhakti_app/config.dart';
@@ -23,8 +24,8 @@ class EmailSignUpScreen extends StatefulWidget {
 class _EmailSignUpScreenState extends State<EmailSignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<EmailSignUpProvider>(
-        builder: (context1, emailSignUpPvr, child) {
+    return Consumer2<EmailSignUpProvider,LoginAuthProvider>(
+        builder: (context1, emailSignUpPvr,loginAuthPvr, child) {
       return Scaffold(
           resizeToAvoidBottomInset: false,
           body: Container(
@@ -66,7 +67,7 @@ class _EmailSignUpScreenState extends State<EmailSignUpScreen> {
                                   style: appCss.dmDenseMedium16.textColor(
                                       appColor(context).appTheme.whiteColor))))
                       .inkWell(onTap: () {
-                    Navigator.push(context,
+                    Navigator.pushReplacement(context,
                         MaterialPageRoute(builder: (context) {
                       return const SetUpProfile();
                     }));
@@ -133,7 +134,9 @@ class _EmailSignUpScreenState extends State<EmailSignUpScreen> {
                         height: 46,
                         width: 46,
                         alignment: Alignment.center,
-                        child: SvgPicture.asset(eSvgAssets.google)),
+                        child: SvgPicture.asset(eSvgAssets.google)).inkWell(onTap: () {
+                      loginAuthPvr.signInWithGoogle(context);
+                    }),
                     const HSpace(Insets.i15),
                     Container(
                         decoration: BoxDecoration(

@@ -1,3 +1,4 @@
+import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bhakti_app/common/assets/index.dart';
@@ -10,7 +11,7 @@ class CommonAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        leading: SvgPicture.asset(eSvgAssets.menu),
+        leading: SvgPicture.asset(eSvgAssets.menu).inkWell(onTap: () => Scaffold.of(context).openDrawer()),
         leadingWidth: 30,
         centerTitle: false,
         elevation: 0,

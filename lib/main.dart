@@ -1,3 +1,5 @@
+import 'package:bhakti_app/providers/common_api_provider/Common_api_provider.dart';
+
 import 'config.dart';
 import 'dart:developer';
 import 'common/assets/index.dart';
@@ -39,9 +41,11 @@ class MyApp extends StatelessWidget {
                   ChangeNotifierProvider(create: (_) => SetUpProfileProvider()),
                   ChangeNotifierProvider(create: (_) => LoginAuthProvider()),
                   ChangeNotifierProvider(create: (_) => PhoneLoginProvider()),
-                  ChangeNotifierProvider(create: (_) => OtpScreenProvider())
+                  ChangeNotifierProvider(create: (_) => OtpScreenProvider()),
+                  ChangeNotifierProvider(create: (_) => CommonApiProvider()),
                 ],
-                child: Consumer<ThemeService>(builder: (context, theme, child) {
+                child: Consumer2<ThemeService, CommonApiProvider>(
+                    builder: (context, theme, commonApi, child) {
                   log("THEME ${theme.isDarkMode}");
                   return MaterialApp(
                       title: 'Flutter Demo',
