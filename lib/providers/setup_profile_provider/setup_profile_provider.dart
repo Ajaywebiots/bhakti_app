@@ -141,6 +141,7 @@ class SetUpProfileProvider extends ChangeNotifier {
     await Future.delayed(Durations.s1);
     userModel =
         UserModel.fromJson(json.decode(preferences!.getString(session.user)!));
+    log("USER MODEL $userModel");
     log(" asdasd:${userModel!.email}");
     name.text = userModel!.name ?? "";
     initiatedName.text = userModel!.initiatedName ?? "";
@@ -152,14 +153,15 @@ class SetUpProfileProvider extends ChangeNotifier {
             : 2
         : 1;
     city.text = userModel!.mobileNumber ?? "";
-log("countryItems : $countryItems");
+
       int index= countryItems.indexWhere((element){
-        log("df : $element");
+
         return element['code'] == userModel!.country;
       });
     countrySelected = userModel!.country != null ? countryItems[index] : countryItems[0];
     state.text = userModel!.state ?? "";
     city.text = userModel!.city ?? "";
+    imagePath = userModel!.profilePictureUrl ?? "";
 
     notifyListeners();
   }

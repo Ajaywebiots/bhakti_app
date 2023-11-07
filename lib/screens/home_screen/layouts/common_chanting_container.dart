@@ -11,17 +11,17 @@ class CommonChantingContainer extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        margin: const EdgeInsets.all(3),
+    return Container(padding: const EdgeInsets.only(top: 10),
+        margin: const EdgeInsets.fromLTRB(0,0,10,10),
         decoration: BoxDecoration(
             color: appColor(context).appTheme.whiteColor,
             borderRadius: BorderRadius.circular(8),
             boxShadow: [
               BoxShadow(
                   color: appColor(context).appTheme.shadowClr,
-                  blurRadius: 16,
-                  offset: const Offset(0, 2),
-                  spreadRadius: 0)
+                  blurRadius: 8,
+                  offset: const Offset(0, 4),
+                  spreadRadius: 1)
             ]),
         height: Sizes.s86,
         width: Sizes.s106,

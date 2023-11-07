@@ -1,18 +1,22 @@
+import 'dart:convert';
 import 'dart:developer';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/common_api_provider/Common_api_provider.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:bhakti_app/models/user_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:http/http.dart' as http;
-
-import '../../screens/home_screen/setup_profile/setup_profile.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:bhakti_app/screens/home_screen/home_screen.dart';
+import 'package:bhakti_app/screens/home_screen/setup_profile/setup_profile.dart';
+import 'package:bhakti_app/providers/common_api_provider/Common_api_provider.dart';
 
 class LoginAuthProvider extends ChangeNotifier {
+
   FirebaseAuth auth = FirebaseAuth.instance;
   String userNameGoogle = "";
 
   signInWithGoogle(context) async {
     // Trigger the authentication flow
+    SharedPreferences? preferences;
     final GoogleSignInAccount? googleUser = await GoogleSignIn().signIn();
     log("googleUser :: $googleUser");
     // Obtain the auth details from the request
@@ -34,8 +38,24 @@ class LoginAuthProvider extends ChangeNotifier {
 
     await commonApi.socialLogin(context, token);
 
-    Navigator.pushReplacement(
-        context, MaterialPageRoute(builder: (context) => const SetUpProfile()));
+    preferences = await SharedPreferences.getInstance();
+    UserModel? userModel;
+
+//Map user = json.decode(preferences!.getString(session.user)!);
+    await Future.delayed(Durations.s2);
+    userModel =
+        UserModel.fromJson(json.decode(preferences.getString(session.user)!));
+    debugPrint("userModel ${userModel.name}");
+    if (userModel.name == null) {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return const SetUpProfile();
+      }));
+    } else {
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return const HomeScreen();
+      }));
+    }
+
     // var url = Uri.parse('https://api.sadhanasheet.com/v1/ExchangeToken');
     // var response = await http.post(url, body: {
     //   'FirebaseAccessToken': token,

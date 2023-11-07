@@ -26,96 +26,130 @@ class SetUpProfile extends StatefulWidget {
 }
 
 class _SetUpProfileState extends State<SetUpProfile> {
+  bool onChange = false;
+  bool onChange1 = false;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
   @override
   Widget build(BuildContext context) {
     return Consumer<SetUpProfileProvider>(
         builder: (context1, setUpProfilePvr, child) {
       return LoadingComponent(
           child: StatefulWrapper(
-            onInit: ()=>Future.delayed(Durations.ms50).then((value) => setUpProfilePvr.onReady(context)),
-            child: Scaffold(
-                extendBodyBehindAppBar: true,
-                body: Stack(children: [
-                  Container(
-                      decoration: BoxDecoration(
-                          image: DecorationImage(
-                              fit: BoxFit.fill,
-                              image: AssetImage(eImageAssets.splashBg)))),
-                  SingleChildScrollView(
-                      child: Form(
-                    key: setUpProfilePvr.formKey,
-                    child: Column(
-                        mainAxisAlignment: MainAxisAlignment.center,
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          const VSpace(Sizes.s15),
-                          Text(appFonts.setUp, style: appCss.philosopherBold28),
-                          const VSpace(Sizes.s10),
-                          Text(appFonts.enterYourDetails,
-                              style: appCss.dmDenseRegular14.textColor(
-                                  appColor(context).appTheme.lightText)),
-                          const VSpace(Insets.i20),
-                          const Center(child: ProfilePicture()),
-                          ExpansionTile(
-                              tilePadding: EdgeInsets.zero,
-                              trailing: SvgPicture.asset(eSvgAssets.arrowUp),
-                              leading: Text("Personal Info",
-                                  style: appCss.philosopherBold18.textColor(
-                                      appColor(context).appTheme.lightText)),
-                              title: SvgPicture.asset(eSvgAssets.profileLine,
-                                      width: 200, fit: BoxFit.fill)
-                                  .paddingOnly(top: Insets.i5),
-                              children: const <Widget>[
-                                NameTextBox(),
-                                VSpace(Insets.i18),
-                                InitiatedNameTextBox(),
-                                VSpace(Insets.i18),
-                                EmailTextBox(),
-                                VSpace(Insets.i18),
-                                DateOfBirthBox(),
-                                VSpace(Insets.i18),
-                                GenderRadioBox()
-                              ]),
-                          ExpansionTile(
-                              tilePadding: EdgeInsets.zero,
-                              trailing: SvgPicture.asset(eSvgAssets.arrowUp),
-                              leading: Text("Contact Info",
-                                  style: appCss.philosopherBold18.textColor(
-                                      appColor(context).appTheme.lightText)),
-                              title: SvgPicture.asset(
-                                eSvgAssets.profileLine,
-                                width: 200,
+              onInit: () => Future.delayed(
+                  Durations.ms150, () => setUpProfilePvr.onReady(context)),
+              child: Scaffold(
+                  key: scaffoldKey,
+                  extendBodyBehindAppBar: true,
+                  body: Stack(children: [
+                    Container(
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
                                 fit: BoxFit.fill,
-                              ).paddingOnly(top: Insets.i5),
-                              children: const <Widget>[
-                                PhoneNumberTextBox(),
-                                VSpace(Insets.i18),
-                                CountryDropDownBox(),
-                                VSpace(Insets.i18),
-                                StateTextFieldBox(),
-                                VSpace(Insets.i18),
-                                CityTextFieldBox()
-                              ]),
-                          const VSpace(Insets.i18),
-                          Center(
-                              child: GestureDetector(
-                                  onTap: () => setUpProfilePvr.saveData(context),
-                                  child: Container(
-                                      alignment: Alignment.center,
-                                      height: 44,
-                                      width: 141,
-                                      decoration: BoxDecoration(
-                                          color:
-                                              appColor(context).appTheme.primary,
-                                          borderRadius: const BorderRadius.all(
-                                              Radius.circular(10))),
-                                      child: Text(appFonts.save,
-                                          style: appCss.dmDenseMedium16
-                                              .textColor(Colors.white)))))
-                        ]).marginSymmetric(horizontal: 20, vertical: 60),
-                  ))
-                ])),
-          ));
+                                image: AssetImage(eImageAssets.splashBg)))),
+                    SingleChildScrollView(
+                        child: Form(
+                            key: setUpProfilePvr.formKey,
+                            child: Column(
+                                mainAxisAlignment: MainAxisAlignment.center,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  const VSpace(Sizes.s15),
+                                  Text(appFonts.setUp,
+                                      style: appCss.philosopherBold28),
+                                  const VSpace(Sizes.s10),
+                                  Text(appFonts.enterYourDetails,
+                                      style: appCss.dmDenseRegular14.textColor(
+                                          appColor(context)
+                                              .appTheme
+                                              .lightText)),
+                                  const VSpace(Insets.i20),
+                                  const Center(child: ProfilePicture()),
+                                  ExpansionTile(
+                                      onExpansionChanged: (value) {
+                                        setState(() {
+                                          onChange = !onChange;
+                                        });
+                                      },
+                                      tilePadding: EdgeInsets.zero,
+                                      trailing: SvgPicture.asset(
+                                          onChange == false
+                                              ? eSvgAssets.arrowDown1
+                                              : eSvgAssets.arrowUp),
+                                      leading: Text("Personal Info",
+                                          style: appCss.philosopherBold18
+                                              .textColor(appColor(context)
+                                                  .appTheme
+                                                  .lightText)),
+                                      title: SvgPicture.asset(
+                                              eSvgAssets.profileLine,
+                                              width: 200,
+                                              fit: BoxFit.fill)
+                                          .paddingOnly(top: Insets.i5),
+                                      children: const <Widget>[
+                                        NameTextBox(),
+                                        VSpace(Insets.i18),
+                                        InitiatedNameTextBox(),
+                                        VSpace(Insets.i18),
+                                        EmailTextBox(),
+                                        VSpace(Insets.i18),
+                                        DateOfBirthBox(),
+                                        VSpace(Insets.i18),
+                                        GenderRadioBox()
+                                      ]),
+                                  ExpansionTile(
+                                      onExpansionChanged: (value) {
+                                        setState(() {
+                                          onChange1 = !onChange1;
+                                        });
+                                      },
+                                      tilePadding: EdgeInsets.zero,
+                                      trailing: SvgPicture.asset(
+                                          onChange1 == false
+                                              ? eSvgAssets.arrowDown1
+                                              : eSvgAssets.arrowUp),
+                                      leading: Text("Contact Info",
+                                          style: appCss.philosopherBold18
+                                              .textColor(appColor(context)
+                                                  .appTheme
+                                                  .lightText)),
+                                      title: SvgPicture.asset(
+                                              eSvgAssets.profileLine,
+                                              width: 200,
+                                              fit: BoxFit.fill)
+                                          .paddingOnly(top: Insets.i5),
+                                      children: const <Widget>[
+                                        PhoneNumberTextBox(),
+                                        VSpace(Insets.i18),
+                                        CountryDropDownBox(),
+                                        VSpace(Insets.i18),
+                                        StateTextFieldBox(),
+                                        VSpace(Insets.i18),
+                                        CityTextFieldBox()
+                                      ]),
+                                  const VSpace(Insets.i18),
+                                  Center(
+                                      child: GestureDetector(
+                                          onTap: () =>
+                                              setUpProfilePvr.saveData(context),
+                                          child: Container(
+                                              alignment: Alignment.center,
+                                              height: 44,
+                                              width: 141,
+                                              decoration: BoxDecoration(
+                                                  color: appColor(context)
+                                                      .appTheme
+                                                      .primary,
+                                                  borderRadius:
+                                                      const BorderRadius.all(
+                                                          Radius.circular(10))),
+                                              child: Text(appFonts.save,
+                                                  style: appCss.dmDenseMedium16
+                                                      .textColor(
+                                                          Colors.white)))))
+                                ]).marginSymmetric(
+                                horizontal: 20, vertical: 60)))
+                  ]))));
     });
   }
 }

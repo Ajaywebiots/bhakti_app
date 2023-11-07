@@ -1,4 +1,3 @@
-import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/home_screen_provider/home_screen_provider.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_chanting_container.dart';
@@ -13,7 +12,7 @@ class ChantingCommon extends StatelessWidget {
     return Consumer<HomeScreenProvider>(
         builder: (BuildContext context, homeScreenPvr, child) {
       return SizedBox(
-          height: 86,
+          height: 90,
           child: ScrollablePositionedList.builder(
               scrollDirection: Axis.horizontal,
               itemCount: chantingList.length,

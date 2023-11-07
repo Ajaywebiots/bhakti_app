@@ -7,6 +7,7 @@ class AppFonts {
   final login = "Login";
   final signUp = "Sign Up";
   final email = "Email";
+  final password = "Password";
   final egPass = "Eg. Abc@2022";
   final doNotHaveAccount = "Don’t Have an account? ";
   final alreadyHaveAccount = "Already Have an account? ";

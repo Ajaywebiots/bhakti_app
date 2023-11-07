@@ -29,8 +29,8 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
   bool onLastPage = false;
-
   bool onChange = false;
+  bool onLength = false;
 
   @override
   Widget build(BuildContext context) {
@@ -39,23 +39,20 @@ class _HomeScreenState extends State<HomeScreen> {
       return SafeArea(
           child: Scaffold(
               drawer: Drawer(
-                  child: Stack(
-                alignment: Alignment.bottomCenter,
-                children: [
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                    const VSpace(Insets.i40),
-                    Image.asset(eImageAssets.bhaktiLogo,
-                        height: 30, width: 136),
-                    ...drawerList.asMap().entries.map((e) {
-                      List ff = [];
-                      if (e.value['name'] == "Online Tests") {
-                        ff = e.value['list'];
-                      }
-                      return ListTile(
+                  child: Stack(alignment: Alignment.bottomCenter, children: [
+                Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                  const VSpace(Insets.i40),
+                  Image.asset(eImageAssets.bhaktiLogo, height: 30, width: 136),
+                  ...drawerList.asMap().entries.map((e) {
+                    List testingList = [];
+                    if (e.value['name'] == "Online Tests") {
+                      testingList = e.value['list'];
+                    }
+                    return ListTile(
                         title: e.value['name'] == "Online Tests"
                             ? ExpansionTile(
                                 trailing: SvgPicture.asset(onChange == false
-                                    ? eSvgAssets.arrowDown
+                                    ? eSvgAssets.arrowDown1
                                     : eSvgAssets.arrowUp),
                                 onExpansionChanged: (value) {
                                   setState(() {
@@ -63,75 +60,61 @@ class _HomeScreenState extends State<HomeScreen> {
                                   });
                                 },
                                 tilePadding: EdgeInsets.zero,
-                                title: Row(
-                                  children: [
-                                    SvgPicture.asset(e.value['icon']),
-                                    HSpace(Insets.i10),
-                                    Text("Online Tests",
-                                        style: appCss.dmDenseRegular16
-                                            .textColor(appColor(context)
-                                                .appTheme
-                                                .lightText)),
-                                  ],
-                                ),
-                                children: ff
+                                title: Row(children: [
+                                  SvgPicture.asset(e.value['icon']),
+                                  const HSpace(Insets.i10),
+                                  Text("Online Tests",
+                                      style: appCss.dmDenseRegular16.textColor(
+                                          appColor(context).appTheme.lightText))
+                                ]),
+                                children: testingList
                                     .asMap()
                                     .entries
                                     .map((s) => ListTile(
-                                          leading:
-                                              SvgPicture.asset(s.value['icon']),
-                                          title: Text(s.value['name'],
-                                              style: appCss.dmDenseRegular16
-                                                  .textColor(appColor(context)
-                                                      .appTheme
-                                                      .lightText)),
-                                        ))
+                                        leading:
+                                            SvgPicture.asset(s.value['icon']),
+                                        title: Text(s.value['name'],
+                                            style: appCss.dmDenseRegular16
+                                                .textColor(appColor(context)
+                                                    .appTheme
+                                                    .lightText))))
                                     .toList())
-                            : Row(
-                                children: [
-                                  SvgPicture.asset(e.value['icon']),
-                                  HSpace(Insets.i10),
-                                  Text(e.value['name'],
-                                      style: appCss.dmDenseRegular16.textColor(
-                                          appColor(context)
-                                              .appTheme
-                                              .lightText)),
-                                ],
-                              ),
-                      );
-                    }).toList(),
-                    const VSpace(Insets.i83),
-                    const VSpace(Insets.i49)
-                  ]),
-                  Column(
-                    mainAxisAlignment: MainAxisAlignment.end,
-                    children: [
-                      Text("Version 1.0",
-                          style: appCss.dmDenseRegular14
-                              .textColor(appColor(context).appTheme.lightText)),
-                      const VSpace(Insets.i8),
-                      SvgPicture.asset("assets/svg/versionLine.svg"),
-                      const VSpace(Insets.i19),
-                      Row(children: [
-                        const HSpace(Insets.i20),
-                        SvgPicture.asset("assets/svg/logOut.svg"),
-                        const HSpace(Insets.i10),
-                        Text("Log Out",
-                            style: appCss.dmDenseRegular16.textColor(
-                                appColor(context).appTheme.lightText))
-                      ]).inkWell(onTap: () async {
-                        await FirebaseAuth.instance.signOut().then((value) {
-                          homeScreenPvr.clearSharedPreferences();
-                          Navigator.pushReplacement(context,
-                              MaterialPageRoute(builder: (context) {
-                            return const LoginAuthScreen();
-                          }));
-                        });
-                      }),
-                    ],
-                  ).paddingSymmetric(vertical: 50)
-                ],
-              )),
+                            : Row(children: [
+                                SvgPicture.asset(e.value['icon']),
+                                const HSpace(Insets.i10),
+                                Text(e.value['name'],
+                                    style: appCss.dmDenseRegular16.textColor(
+                                        appColor(context).appTheme.lightText))
+                              ]));
+                  }).toList(),
+                  const VSpace(Insets.i83),
+                  const VSpace(Insets.i49)
+                ]),
+                Column(mainAxisAlignment: MainAxisAlignment.end, children: [
+                  Text("Version 1.0",
+                      style: appCss.dmDenseRegular14
+                          .textColor(appColor(context).appTheme.lightText)),
+                  const VSpace(Insets.i8),
+                  SvgPicture.asset("assets/svg/versionLine.svg"),
+                  const VSpace(Insets.i19),
+                  Row(children: [
+                    const HSpace(Insets.i20),
+                    SvgPicture.asset("assets/svg/logOut.svg"),
+                    const HSpace(Insets.i10),
+                    Text("Log Out",
+                        style: appCss.dmDenseRegular16
+                            .textColor(appColor(context).appTheme.lightText))
+                  ]).inkWell(onTap: () async {
+                    await FirebaseAuth.instance.signOut().then((value) {
+                      homeScreenPvr.clearSharedPreferences();
+                      Navigator.pushReplacement(context,
+                          MaterialPageRoute(builder: (context) {
+                        return const LoginAuthScreen();
+                      }));
+                    });
+                  })
+                ]).paddingSymmetric(vertical: 50)
+              ])),
               extendBody: true,
               bottomNavigationBar: const CommonBottomBar(),
               body: Stack(alignment: Alignment.center, children: [
@@ -159,55 +142,44 @@ class _HomeScreenState extends State<HomeScreen> {
                       const VSpace(Insets.i25),
                       Text(appFonts.chanting, style: appCss.philosopherBold18),
                       const VSpace(Insets.i15),
-                      Stack(children: [
-                        const ChantingCommon(),
-                        Positioned(
-                            top: 20,
-                            right: 0,
-                            child: Container(
-                                    alignment: Alignment.center,
-                                    height: 30,
-                                    width: 30,
-                                    decoration: const BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.black,
-                                              blurRadius: 5)
-                                        ],
-                                        shape: BoxShape.circle,
-                                        color: Colors.white),
-                                    child: const Icon(
-                                        Icons.keyboard_arrow_right,
-                                        color: Colors.black))
-                                .inkWell(onTap: () {
-                              if (chantingList.length > 3) {
-                                homeScreenPvr.itemScrollController
-                                    .jumpTo(index: chantingList.length);
-                              }
-                            })),
-                        Positioned(
-                            top: 20,
-                            left: 0,
-                            child: Container(
-                                    alignment: Alignment.center,
-                                    height: 30,
-                                    width: 30,
-                                    decoration: const BoxDecoration(
-                                        boxShadow: [
-                                          BoxShadow(
-                                              color: Colors.black,
-                                              blurRadius: 5)
-                                        ],
-                                        shape: BoxShape.circle,
-                                        color: Colors.white),
-                                    child: const Icon(Icons.keyboard_arrow_left,
-                                        color: Colors.black))
-                                .inkWell(onTap: () {
-                              homeScreenPvr.itemScrollController
-                                  .jumpTo(index: 0);
-                            }))
-                      ]),
-                      const VSpace(Insets.i25),
+                      const Stack(alignment: Alignment.centerRight, children: [
+                        Align(
+                            alignment: Alignment.centerLeft,
+                            child: ChantingCommon()),
+                        // Container(
+                        //   decoration: BoxDecoration(
+                        //       color: appColor(context).appTheme.whiteColor,
+                        //       borderRadius: BorderRadius.circular(8),
+                        //       boxShadow: [
+                        //         BoxShadow(
+                        //             color: appColor(context).appTheme.shadowClr,
+                        //             blurRadius: 3,
+                        //             offset: const Offset(2, 2),
+                        //             spreadRadius: 2)
+                        //       ]),
+                        //   height: Sizes.s75,
+                        //   width: Sizes.s25,
+                        //   child: Icon(
+                        //       onLength == false
+                        //           ? Icons.keyboard_arrow_right
+                        //           : Icons.keyboard_arrow_left,
+                        //       color: appColor(context).appTheme.primary),
+                        // ).inkWell(onTap: () {
+                        //   if (chantingList.length > 3) {
+                        //     if (onLength) {
+                        //       homeScreenPvr.itemScrollController
+                        //           .jumpTo(index: 0);
+                        //     } else {
+                        //       homeScreenPvr.itemScrollController
+                        //           .jumpTo(index: chantingList.length);
+                        //     }
+                        //     setState(() {
+                        //       onLength = !onLength;
+                        //     });
+                        //   }
+                        // })
+                      ]).width(double.infinity),
+                      const VSpace(Insets.i15),
                       Text(appFonts.regulations,
                           style: appCss.philosopherBold18),
                       const VSpace(Insets.i15),

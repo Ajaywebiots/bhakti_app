@@ -1,7 +1,6 @@
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/config.dart';
 
-
 class CustomDraw extends CustomPainter {
   late Paint painter;
   late double radius;
@@ -90,18 +89,13 @@ class _CustomTitleWidgetState extends State<CustomTitleWidget> {
         alignment: Alignment.topLeft,
         children: [
           CustomPaint(
-            painter: CustomDraw(
-              widget.color!,
-              textWidth,
-              radius: widget.radius ?? 0,
-            ),
-            child: Container(
-              color: const Color.fromRGBO(195, 94, 210, 0.06),
-              height: widget.height,
-              width: widget.width,
-              child: widget.child,
-            ),
-          ),
+              painter: CustomDraw(widget.color!, textWidth,
+                  radius: widget.radius ?? 0),
+              child: Container(
+                  color: const Color.fromRGBO(195, 94, 210, 0.06),
+                  height: widget.height,
+                  width: widget.width,
+                  child: widget.child)),
           Positioned(
               top: -textHeight / 2,
               left: 20,

@@ -87,6 +87,7 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                                       }
                                       return null;
                                     },
+                                    focusNode: focusNode,
                                     controller: phoneNumber,
                                     keyboardType: TextInputType.number,
                                     style: appCss.dmDenseExtraBold16.textColor(appColor(context).appTheme.lightText),
@@ -98,7 +99,7 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                             Center(
                                 child: GestureDetector(
                                     onTap: () async {
-                                      focusNode.unfocus();
+                                      FocusScope.of(context).requestFocus(FocusNode());
                                       isLoading = true;
                                       setState(() {});
                                       log("number:::${"+${countryCode + phoneNumber.text}"}");

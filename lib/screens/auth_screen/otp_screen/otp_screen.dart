@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:bhakti_app/common/extension/widget_extension.dart';
@@ -8,9 +9,13 @@ import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/screens/auth_screen/phone_login_screen/phone_login_screen.dart';
+import 'package:bhakti_app/screens/home_screen/home_screen.dart';
 import 'package:bhakti_app/screens/home_screen/setup_profile/setup_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:pinput/pinput.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+
+import '../../../models/user_model.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -89,16 +94,18 @@ class _OtpScreenState extends State<OtpScreen> {
                                       return null;
                                     },
                                     controller: pinController,
-                                    focusNode: FocusNode(),
+                                    focusNode: focusNode,
                                     defaultPinTheme: defaultPinTheme,
                                     onCompleted: (pin) {
                                       debugPrint('onCompleted: $pin');
-                                      focusNode.unfocus();
+                                      FocusScope.of(context)
+                                          .requestFocus(FocusNode());
                                     },
                                     onChanged: (value) {
-                                      debugPrint('onChanged: $value');
+                                      debugPrint('onChanged: ${value.length}');
                                       if (value.length == 6) {
-                                        focusNode.unfocus();
+                                        FocusScope.of(context)
+                                            .requestFocus(FocusNode());
                                       }
                                     },
                                     focusedPinTheme: defaultPinTheme.copyWith(
@@ -126,6 +133,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                 child: GestureDetector(
                                     onTap: () async {
                                       if (formKey.currentState!.validate()) {
+                                        SharedPreferences? preferences;
                                         focusNode.unfocus();
                                         isLoading = true;
                                         setState(() {});
@@ -134,7 +142,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                               PhoneAuthProvider.credential(
                                                   verificationId:
                                                       PhoneLoginScreen.verify,
-                                                  smsCode: pinController.text!);
+                                                  smsCode: pinController.text);
                                           User? user =
                                               (await auth.signInWithCredential(
                                                       credential))
@@ -149,16 +157,49 @@ class _OtpScreenState extends State<OtpScreen> {
                                                   listen: false);
 
                                           // ignore: use_build_context_synchronously
-                                          commonApi.socialLogin(context, token);
+                                          await commonApi.socialLogin(
+                                              context, token);
                                           isValid = false;
-                                          isLoading = false;
                                           setState(() {});
                                           // ignore: use_build_context_synchronously
-                                          Navigator.pushReplacement(context,
-                                              MaterialPageRoute(
-                                                  builder: (context) {
-                                            return const SetUpProfile();
-                                          }));
+
+                                          preferences = await SharedPreferences
+                                              .getInstance();
+                                          UserModel? userModel;
+//Map user = json.decode(preferences!.getString(session.user)!);
+                                          await Future.delayed(Durations.s2);
+                                          if (preferences
+                                                  .getString(session.user) !=
+                                              null) {
+                                            userModel = UserModel.fromJson(
+                                                json.decode(preferences
+                                                    .getString(session.user)!));
+                                            log("userModel ${userModel.name}");
+                                            isLoading = false;
+                                            setState(() {});
+                                            if (userModel.name == null) {
+                                              // ignore: use_build_context_synchronously
+                                              Navigator.pushReplacement(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                return const SetUpProfile();
+                                              }));
+                                            } else {
+                                              // ignore: use_build_context_synchronously
+                                              Navigator.pushReplacement(context,
+                                                  MaterialPageRoute(
+                                                      builder: (context) {
+                                                return const HomeScreen();
+                                              }));
+                                            }
+                                          } else {
+                                            // ignore: use_build_context_synchronously
+                                            Navigator.pushReplacement(context,
+                                                MaterialPageRoute(
+                                                    builder: (context) {
+                                              return const SetUpProfile();
+                                            }));
+                                          }
                                         } on FirebaseAuthException catch (e) {
                                           print(
                                               'failed userOtp: ${e.message.toString()}');

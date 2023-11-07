@@ -1,8 +1,11 @@
+import 'dart:developer';
+
 import 'package:bhakti_app/providers/email_sign_up_provider/email_sign_up_provider.dart';
 import 'package:bhakti_app/providers/email_sign_up_provider/layouts/email_text_field.dart';
 import 'package:bhakti_app/providers/email_sign_up_provider/layouts/password_text_field.dart';
 import 'package:bhakti_app/providers/login_auth_provider/login_auth_provider.dart';
 import 'package:bhakti_app/screens/auth_screen/email_login_screen/email_login_screen.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -24,8 +27,8 @@ class EmailSignUpScreen extends StatefulWidget {
 class _EmailSignUpScreenState extends State<EmailSignUpScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer2<EmailSignUpProvider,LoginAuthProvider>(
-        builder: (context1, emailSignUpPvr,loginAuthPvr, child) {
+    return Consumer2<EmailSignUpProvider, LoginAuthProvider>(
+        builder: (context1, emailSignUpPvr, loginAuthPvr, child) {
       return Scaffold(
           resizeToAvoidBottomInset: false,
           body: Container(
@@ -66,11 +69,25 @@ class _EmailSignUpScreenState extends State<EmailSignUpScreen> {
                               child: Text(appFonts.signUp,
                                   style: appCss.dmDenseMedium16.textColor(
                                       appColor(context).appTheme.whiteColor))))
-                      .inkWell(onTap: () {
-                    Navigator.pushReplacement(context,
-                        MaterialPageRoute(builder: (context) {
-                      return const SetUpProfile();
-                    }));
+                      .inkWell(onTap: () async {
+                    try {
+                      final credential = await FirebaseAuth.instance
+                          .createUserWithEmailAndPassword(
+                        email: emailSignUpPvr.emailId.text,
+                        password: emailSignUpPvr.password.text,
+                      );
+                      log("credential $credential");
+                      // ignore: use_build_context_synchronously
+                      Navigator.pop(context);
+                    } on FirebaseAuthException catch (e) {
+                      if (e.code == 'weak-password') {
+                        log('The password provided is too weak.');
+                      } else if (e.code == 'email-already-in-use') {
+                        log('The account already exists for that email.');
+                      }
+                    } catch (e) {
+                      print(e);
+                    }
                   }),
                   const VSpace(Insets.i28),
                   Row(mainAxisAlignment: MainAxisAlignment.center, children: [
@@ -119,22 +136,23 @@ class _EmailSignUpScreenState extends State<EmailSignUpScreen> {
                         child: SvgPicture.asset(eSvgAssets.fb)),
                     const HSpace(Insets.i15),
                     Container(
-                        decoration: BoxDecoration(
-                            color: Colors.white,
-                            borderRadius: BorderRadius.circular(6),
-                            boxShadow: [
-                              BoxShadow(
-                                  color: appColor(context)
-                                      .appTheme
-                                      .black
-                                      .withOpacity(.2),
-                                  blurRadius: 12,
-                                  offset: const Offset(0, 4))
-                            ]),
-                        height: 46,
-                        width: 46,
-                        alignment: Alignment.center,
-                        child: SvgPicture.asset(eSvgAssets.google)).inkWell(onTap: () {
+                            decoration: BoxDecoration(
+                                color: Colors.white,
+                                borderRadius: BorderRadius.circular(6),
+                                boxShadow: [
+                                  BoxShadow(
+                                      color: appColor(context)
+                                          .appTheme
+                                          .black
+                                          .withOpacity(.2),
+                                      blurRadius: 12,
+                                      offset: const Offset(0, 4))
+                                ]),
+                            height: 46,
+                            width: 46,
+                            alignment: Alignment.center,
+                            child: SvgPicture.asset(eSvgAssets.google))
+                        .inkWell(onTap: () {
                       loginAuthPvr.signInWithGoogle(context);
                     }),
                     const HSpace(Insets.i15),
@@ -170,9 +188,31 @@ class _EmailSignUpScreenState extends State<EmailSignUpScreen> {
                           recognizer: TapGestureRecognizer()
                             ..onTap = () {
                               Navigator.pop(context);
+                              emailSignUpPvr.emailId.text = "";
+                              emailSignUpPvr.password.text = "";
                             })
                     ])).alignment(Alignment.bottomCenter)
               ])));
     });
   }
 }
+
+/*  EmailSignUpTextField(
+                      hintText: appFonts.egMail,
+                      text: appFonts.email,
+                      keyboardType: TextInputType.emailAddress,
+                      controller: emailSignUpPvr.emailId,
+                      dataPvr: emailSignUpPvr,
+                      color: emailSignUpPvr.emailValid == null
+                          ? const Color(0xff541F5C).withOpacity(.20)
+                          : appColor(context).appTheme.red),
+                  const VSpace(Insets.i20),
+                  EmailSignUpTextField(
+                      hintText: appFonts.egPass,
+                      text: appFonts.password,
+                      keyboardType: TextInputType.emailAddress,
+                      controller: emailSignUpPvr.password,
+                      dataPvr: emailSignUpPvr,
+                      color: emailSignUpPvr.passwordValid == null
+                          ? const Color(0xff541F5C).withOpacity(.20)
+                          : appColor(context).appTheme.red),*/
