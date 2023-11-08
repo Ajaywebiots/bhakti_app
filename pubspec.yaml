@@ -54,6 +54,7 @@ dependencies:
   dio:
   intl_phone_field:
   connectivity_plus: ^5.0.1
+  firebase_storage:
 
 dev_dependencies:
   flutter_test:

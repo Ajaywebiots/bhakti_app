@@ -1,14 +1,14 @@
 import 'dart:convert';
 import 'dart:developer';
-import 'package:bhakti_app/models/user_model.dart';
-import 'package:bhakti_app/screens/home_screen/home_screen.dart';
 import 'package:flutter/services.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:image_picker/image_picker.dart';
-
+import 'package:bhakti_app/models/user_model.dart';
+import 'package:firebase_storage/firebase_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:bhakti_app/screens/home_screen/home_screen.dart';
 
-class SetUpProfileProvider extends ChangeNotifier {
+class SetUpUpdateProfileProvider extends ChangeNotifier {
   bool imgStatus = false;
   TextEditingController name = TextEditingController();
   TextEditingController dob = TextEditingController();
@@ -19,13 +19,18 @@ class SetUpProfileProvider extends ChangeNotifier {
   TextEditingController initiatedName = TextEditingController();
   TextEditingController initiatedDate = TextEditingController();
   final ImagePicker picker = ImagePicker();
+  bool onChange = false;
+  bool onChange1 = false;
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
+
+  FirebaseStorage storage = FirebaseStorage.instance;
+  XFile? image;
   int? selectedGender;
   int? selectedMarital;
-  String imagePath = "";
+  String imagePath = "", downloadUrl = "";
   bool showError = false;
   bool validStatus = false;
   bool textError = false;
-
   bool value = false;
   bool valueFirst = true, isLoading = false;
 
@@ -65,7 +70,6 @@ class SetUpProfileProvider extends ChangeNotifier {
 
   onInit() {
     readJson();
-
     dob.text = "";
     notifyListeners();
   }
@@ -77,6 +81,8 @@ class SetUpProfileProvider extends ChangeNotifier {
       notifyListeners();
       log("dob.text L ${dob.text}");
       try {
+        List<int> listData = utf8.encode(downloadUrl);
+        String base64 = base64Encode(listData);
         Map<String, dynamic> body = {
           "name": name.text,
           "date_of_birth": dob.text,
@@ -100,7 +106,7 @@ class SetUpProfileProvider extends ChangeNotifier {
                   ? "married"
                   : "unmarried"
               : "",
-          "profile_picture_url": "https://firebase_file_upload_url"
+          "profile_picture_url": base64
         };
         log("dssf $body");
 
@@ -111,8 +117,8 @@ class SetUpProfileProvider extends ChangeNotifier {
 
           notifyListeners();
           if (value.isSuccess!) {
-            pref.setString(
-                session.user, json.encode(UserModel.fromJson(value.data['data'])));
+            pref.setString(session.user,
+                json.encode(UserModel.fromJson(value.data['data'])));
             Navigator.pushReplacement(context, MaterialPageRoute(
               builder: (context) {
                 return const HomeScreen();
@@ -123,7 +129,6 @@ class SetUpProfileProvider extends ChangeNotifier {
                 .showSnackBar(SnackBar(content: Text(value.message)));
           }
         });
-
       } catch (e) {
         hideLoading(context);
         notifyListeners();
@@ -154,15 +159,36 @@ class SetUpProfileProvider extends ChangeNotifier {
         : 1;
     city.text = userModel!.mobileNumber ?? "";
 
-      int index= countryItems.indexWhere((element){
-
-        return element['code'] == userModel!.country;
-      });
-    countrySelected = userModel!.country != null ? countryItems[index] : countryItems[0];
+    int index = countryItems.indexWhere((element) {
+      return element['code'] == userModel!.country;
+    });
+    countrySelected =
+        userModel!.country != null ? countryItems[index] : countryItems[0];
     state.text = userModel!.state ?? "";
     city.text = userModel!.city ?? "";
-    imagePath = userModel!.profilePictureUrl ?? "";
+    downloadUrl = userModel!.profilePictureUrl ?? "";
 
     notifyListeners();
   }
+//
+//   Future<String> uploadImageToStorage(String childName) async {
+//     Reference ref = storage.ref().child(childName);
+//     UploadTask uploadTask = ref.putFile(File(image!.path));
+//     TaskSnapshot snapshot = await uploadTask;
+//     String downloadUrl = await snapshot.ref.getDownloadURL();
+//     return downloadUrl;
+//   }
+//
+//   Future<String> saveImageData(context) async {
+//     String resp = "Some Error Occurred";
+//     try {
+//       String imageUrl = await uploadImageToStorage("ProfileImage");
+//       downloadUrl = imageUrl;
+//       notifyListeners();
+//       saveData(context);
+//     } catch (error) {
+//       resp = error.toString();
+//     }
+//     return resp;
+//   }
 }

@@ -1,16 +1,17 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/screens/auth_screen/email_login_screen/email_login_screen.dart';
+import 'package:bhakti_app/screens/auth_screen/phone_login_screen/phone_login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bhakti_app/models/user_model.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bhakti_app/screens/home_screen/home_screen.dart';
 import 'package:bhakti_app/screens/home_screen/setup_profile/setup_profile.dart';
-import 'package:bhakti_app/providers/common_api_provider/Common_api_provider.dart';
+import 'package:bhakti_app/providers/common_api_provider.dart';
 
 class LoginAuthProvider extends ChangeNotifier {
-
   FirebaseAuth auth = FirebaseAuth.instance;
   String userNameGoogle = "";
 
@@ -69,5 +70,24 @@ class LoginAuthProvider extends ChangeNotifier {
     // prefs.setString("accessToken", response.body[]);
 
     // Once signed in, return the UserCredential
+  }
+
+  loginPhoneNavigator(context) {
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+      return const PhoneLoginScreen();
+    }));
+  }
+
+  loginFacebookNavigator(context) {
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+      return Container();
+    }));
+  }
+
+  loginEmailNavigator(context){
+    Navigator.push(context,
+        MaterialPageRoute(builder: (BuildContext context) {
+          return const EmailLoginScreen();
+        }));
   }
 }

@@ -102,42 +102,126 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
 
   @override
   void initState() {
-    initCalender();
+    initCalendar();
     super.initState();
   }
 
   DateTime getDate(DateTime d) => DateTime(d.year, d.month, d.day);
 
-  initCalender() {
-    // List<DateTime> minus3Days = [];
-    // List<DateTime> add3Days = [];
-    // for (int index = 0; index < 3; index++) {
-    //   DateTime minusDate = today.add(Duration(days: -(index + 1)));
-    //   minus3Days.add(minusDate);
-    //   DateTime addDate = today.add(Duration(days: (index + 1)));
-    //   add3Days.add(addDate);
-    // }
-    // currentWeek.addAll(minus3Days.reversed.toList());
-    // currentWeek.add(today);
-    // currentWeek.addAll(add3Days);
-    // listOfWeeks.add(currentWeek);
+  // initCalender() {
+  //   // List<DateTime> minus3Days = [];
+  //   // List<DateTime> add3Days = [];
+  //   // for (int index = 0; index < 3; index++) {
+  //   //   DateTime minusDate = today.add(Duration(days: -(index + 1)));
+  //   //   minus3Days.add(minusDate);
+  //   //   DateTime addDate = today.add(Duration(days: (index + 1)));
+  //   //   add3Days.add(addDate);
+  //   // }
+  //   // currentWeek.addAll(minus3Days.reversed.toList());
+  //   // currentWeek.add(today);
+  //   // currentWeek.addAll(add3Days);
+  //   // listOfWeeks.add(currentWeek);
+  //
+  //   final date = DateTime.now();
+  //
+  //   DateTime startOfCurrentWeek = widget.weekStartFrom == WeekStartFrom.Monday
+  //       ? getDate(date.subtract(Duration(days: date.weekday - 1)))
+  //       : getDate(date.subtract(Duration(days: date.weekday % 7)));
+  //
+  //   currentWeek.add(startOfCurrentWeek);
+  //   for (int index = 0; index < 6; index++) {
+  //     DateTime addDate = startOfCurrentWeek.add(Duration(days: (index + 1)));
+  //     currentWeek.add(addDate);
+  //   }
+  //
+  //   listOfWeeks.add(currentWeek);
+  //
+  //   getMorePreviousWeeks();
+  // }
 
+
+  // initCalender() {
+  //   final date = DateTime.now();
+  //   DateTime startOfCurrentWeek = widget.weekStartFrom == WeekStartFrom.Monday
+  //       ? getDate(date.subtract(Duration(days: date.weekday - 1)))
+  //       : getDate(date.subtract(Duration(days: date.weekday % 7)));
+  //
+  //       // Add the current day first
+  //       currentWeek.add(getDate(date));
+  //
+  //   // Add days after the current day to the right
+  //   for (int index = 1; index <= 3; index++) {
+  //   DateTime addDate = startOfCurrentWeek.add(Duration(days: index));
+  //   currentWeek.add(addDate);
+  //   }
+  //
+  //   // Add days before the current day to the left
+  //   for (int index = 1; index <= 3; index++) {
+  //   DateTime minusDate = startOfCurrentWeek.subtract(Duration(days: index));
+  //   currentWeek.insert(0, minusDate);
+  //   }
+  //
+  //   listOfWeeks.add(currentWeek);
+  //
+  //   getMorePreviousWeeks();
+  // }
+
+
+  // initCalendar() {
+  //   final date = DateTime.now();
+  //   final DateTime startOfCurrentWeek = widget.weekStartFrom == WeekStartFrom.Monday
+  //       ? getDate(date.subtract(Duration(days: date.weekday - 1)))
+  //       : getDate(date.subtract(Duration(days: date.weekday % 7)));
+  //
+  //       // Create a list for the current week.
+  //       currentWeek.add(startOfCurrentWeek);
+  //
+  //   // Add days after the current day to the right.
+  //   for (int index = 1; index <= 3; index++) {
+  //     DateTime addDate = startOfCurrentWeek.add(Duration(days: index));
+  //     currentWeek.add(addDate);
+  //   }
+  //
+  //   // Add the current day as the selected date (right side).
+  //   selectedDate = getDate(date);
+  //
+  //   listOfWeeks.add(currentWeek);
+  //
+  //   getMorePreviousWeeks();
+  // }
+
+  initCalendar() {
     final date = DateTime.now();
-
-    DateTime startOfCurrentWeek = widget.weekStartFrom == WeekStartFrom.Monday
+    final DateTime startOfCurrentWeek = widget.weekStartFrom == WeekStartFrom.Monday
         ? getDate(date.subtract(Duration(days: date.weekday - 1)))
         : getDate(date.subtract(Duration(days: date.weekday % 7)));
 
-    currentWeek.add(startOfCurrentWeek);
-    for (int index = 0; index < 6; index++) {
-      DateTime addDate = startOfCurrentWeek.add(Duration(days: (index + 1)));
+        // Create a list for the current week.
+        currentWeek.add(startOfCurrentWeek);
+
+    // Add days after the current day to the right.
+    for (int index = 1; index <= 3; index++) {
+      DateTime addDate = startOfCurrentWeek.add(Duration(days: index));
       currentWeek.add(addDate);
     }
+
+    // Add days before the current day to the left.
+    for (int index = 1; index <= 3; index++) {
+      DateTime minusDate = startOfCurrentWeek.subtract(Duration(days: index));
+      currentWeek.insert(0, minusDate);
+    }
+
+    // Add the current day as the selected date (right side).
+    selectedDate = getDate(date);
 
     listOfWeeks.add(currentWeek);
 
     getMorePreviousWeeks();
   }
+
+
+
+
 
   getMorePreviousWeeks() {
     List<DateTime> minus7Days = [];

@@ -82,7 +82,7 @@ class TextFieldCommon extends StatelessWidget {
             contentPadding: EdgeInsets.symmetric(
                 vertical: vertical ?? 17.0, horizontal: 15.0),
             hintText: hintText,
-            hintStyle: appCss.dmDenseBold14.textColor(const Color(0xff767676)),
+            hintStyle: appCss.dmDenseMedium14.textColor(const Color(0xff767676)),
             labelStyle:
                 appCss.dmDenseRegular14.textColor(const Color(0xff767676))));
   }

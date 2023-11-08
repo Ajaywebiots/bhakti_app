@@ -1,2 +1,2 @@
 
-export '../providers/common_providers/loading_provider.dart';
+export 'loading_provider.dart';

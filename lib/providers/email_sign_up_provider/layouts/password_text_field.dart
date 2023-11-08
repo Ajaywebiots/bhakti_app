@@ -1,3 +1,4 @@
+import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/email_sign_up_provider/email_sign_up_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -8,8 +9,11 @@ import 'package:bhakti_app/widgets/custom_title_widget.dart';
 
 class PasswordSignUpTextField extends StatelessWidget {
   final EmailSignUpProvider? dataPvr;
+  final Widget? suffixIcon;
+  final bool? obscureText;
+  final FormFieldValidator<String>? validator;
 
-  const PasswordSignUpTextField( {super.key,this.dataPvr});
+  const PasswordSignUpTextField({super.key, this.dataPvr, this.suffixIcon, this.obscureText, this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -21,23 +25,11 @@ class PasswordSignUpTextField extends StatelessWidget {
             ? const Color(0xff541F5C).withOpacity(.20)
             : appColor(context).appTheme.red,
         radius: 8,
-        child: TextFieldCommon(
-            suffixIcon: Padding(
-                padding: const EdgeInsets.all(10),
-                child: SvgPicture.asset(eSvgAssets.hideEye)),
-            validator: (value) {
-              if (value!.isEmpty ||
-                  !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                      .hasMatch(value)) {
-                dataPvr!.passwordValid = appFonts.enterValidEmail;
-                return 'Enter a valid Password!';
-              } else {
-                dataPvr!.passwordValid = null;
-                return null;
-              }
-            },
+        child: TextFieldCommon(obscureText: obscureText!,
+            suffixIcon: suffixIcon,
+            validator: validator,
             keyboardType: TextInputType.emailAddress,
-            hintText: 'Eg. Abc@2022',
+            hintText: 'Eg. Abcd@2022',
             controller: dataPvr!.password,
             prefixIcon: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

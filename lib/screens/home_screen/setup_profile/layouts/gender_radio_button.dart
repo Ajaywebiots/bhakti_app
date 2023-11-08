@@ -3,7 +3,7 @@ import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/setup_profile_provider/setup_profile_provider.dart';
+import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/widgets/custom_title_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,7 +12,7 @@ class GenderRadioBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SetUpProfileProvider>(builder: (context, profilePvr, child) {
+    return Consumer<SetUpUpdateProfileProvider>(builder: (context, profilePvr, child) {
      return CustomTitleWidget(
         height: 52,
         radius: 8,

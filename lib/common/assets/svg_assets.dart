@@ -34,4 +34,22 @@ class SvgAssets {
   final location = 'assets/svg/location.svg';
   final global = 'assets/svg/global.svg';
   final call1 = 'assets/svg/call1.svg';
+
+
+
+
+
+  final String profile = 'images/svg/profile.svg';
+
+  final String phoneNum = 'images/svg/call.svg';
+  final String country = 'images/svg/global.svg';
+  final String state = 'images/svg/map.svg';
+  final String city = 'images/svg/location.svg';
+
+  final String wedding = 'images/svg/wedding.svg';
+
+  final String frame = 'images/svg/Frame.svg';
+  final String arrow = 'images/svg/Vector.svg';
+
+  final String arrowLeft = 'images/svg/arrowleft.svg';
 }

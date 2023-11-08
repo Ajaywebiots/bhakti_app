@@ -5,7 +5,7 @@ import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/setup_profile_provider/setup_profile_provider.dart';
+import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/widgets/custom_title_widget.dart';
 import 'package:bhakti_app/widgets/stateful_wrapper.dart';
 import 'package:flutter_svg/flutter_svg.dart';
@@ -15,7 +15,7 @@ class CountryDropDownBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SetUpProfileProvider>(
+    return Consumer<SetUpUpdateProfileProvider>(
         builder: (context1, profilePvr, child) {
       return CustomTitleWidget(
           radius: 8,
@@ -37,12 +37,12 @@ class CountryDropDownBox extends StatelessWidget {
                       child: DropdownButtonHideUnderline(
                           child: DropdownButton(
                               hint: const Align(
-                                  alignment: Alignment.centerRight,
+                                  alignment: Alignment.centerLeft,
                                   child: Text("Select Country",
                                       style: TextStyle(
                                           color: Color(0xff767676)))),
-                              style: appCss.dmDenseExtraBold16
-                                  .textColor(const Color(0xff767676)),
+                              style: appCss.dmDenseMedium14.textColor(
+                                  appColor(context).appTheme.lightText),
                               isExpanded: true,
                               icon: Container(),
                               value: profilePvr.countrySelected,
@@ -71,7 +71,7 @@ class CountryDropDownBox extends StatelessWidget {
                                 profilePvr.notifyListeners();
                               })))
                 ])),
-                SvgPicture.asset(eSvgAssets.arrowUp)
+                SvgPicture.asset(eSvgAssets.arrowDown)
                     .marginSymmetric(horizontal: Insets.i20)
               ])).paddingSymmetric(vertical: 10);
     });

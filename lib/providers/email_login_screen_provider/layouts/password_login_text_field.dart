@@ -8,8 +8,11 @@ import 'package:bhakti_app/providers/email_login_screen_provider/email_login_scr
 
 class PasswordLoginTextField extends StatelessWidget {
   final EmailLoginProvider? dataPvr;
+  final FormFieldValidator<String>? validator;
+  final bool? obscureText;
+  final Widget? suffixIcon;
 
-  const PasswordLoginTextField( {super.key,this.dataPvr});
+  const PasswordLoginTextField( {super.key,this.dataPvr, this.validator, this.obscureText, this.suffixIcon});
 
   @override
   Widget build(BuildContext context) {
@@ -21,21 +24,9 @@ class PasswordLoginTextField extends StatelessWidget {
             ? const Color(0xff541F5C).withOpacity(.20)
             : appColor(context).appTheme.red,
         radius: 8,
-        child: TextFieldCommon(
-            suffixIcon: Padding(
-                padding: const EdgeInsets.all(10),
-                child: SvgPicture.asset(eSvgAssets.hideEye)),
-            validator: (value) {
-              if (value!.isEmpty ||
-                  !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                      .hasMatch(value)) {
-                dataPvr!.passwordValid = appFonts.enterValidEmail;
-                return 'Enter a valid Password!';
-              } else {
-                dataPvr!.passwordValid = null;
-                return null;
-              }
-            },
+        child: TextFieldCommon(obscureText: obscureText!,
+            suffixIcon: suffixIcon,
+            validator: validator,
             keyboardType: TextInputType.emailAddress,
             hintText: 'Eg. Abc@2022',
             controller: dataPvr!.password,

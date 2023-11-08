@@ -1,4 +1,5 @@
-import 'package:bhakti_app/providers/common_api_provider/Common_api_provider.dart';
+import 'package:bhakti_app/providers/common_api_provider.dart';
+import 'package:bhakti_app/providers/update_profile_provider.dart';
 
 import 'config.dart';
 import 'dart:developer';
@@ -6,13 +7,13 @@ import 'common/assets/index.dart';
 import 'common/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'providers/phone_screen_provider/phone_login_provider.dart';
+import 'providers/phone_login_provider.dart';
 import 'providers/email_login_screen_provider/email_login_screen_provider.dart';
-import 'package:bhakti_app/providers/login_auth_provider/login_auth_provider.dart';
-import 'package:bhakti_app/providers/otp_screen_provider/otp_screen_provider.dart';
-import 'package:bhakti_app/providers/home_screen_provider/home_screen_provider.dart';
+import 'package:bhakti_app/providers/login_auth_provider.dart';
+import 'package:bhakti_app/providers/otp_screen_provider.dart';
+import 'package:bhakti_app/providers/home_screen_provider.dart';
 import 'package:bhakti_app/providers/email_sign_up_provider/email_sign_up_provider.dart';
-import 'package:bhakti_app/providers/setup_profile_provider/setup_profile_provider.dart';
+import 'package:bhakti_app/providers/setup_profile_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -38,11 +39,12 @@ class MyApp extends StatelessWidget {
                   ChangeNotifierProvider(create: (_) => EmailLoginProvider()),
                   ChangeNotifierProvider(create: (_) => EmailSignUpProvider()),
                   ChangeNotifierProvider(create: (_) => HomeScreenProvider()),
-                  ChangeNotifierProvider(create: (_) => SetUpProfileProvider()),
+                  ChangeNotifierProvider(create: (_) => SetUpUpdateProfileProvider()),
                   ChangeNotifierProvider(create: (_) => LoginAuthProvider()),
                   ChangeNotifierProvider(create: (_) => PhoneLoginProvider()),
                   ChangeNotifierProvider(create: (_) => OtpScreenProvider()),
                   ChangeNotifierProvider(create: (_) => CommonApiProvider()),
+                  ChangeNotifierProvider(create: (_) => UpdateProfileProvider()),
                 ],
                 child: Consumer2<ThemeService, CommonApiProvider>(
                     builder: (context, theme, commonApi, child) {

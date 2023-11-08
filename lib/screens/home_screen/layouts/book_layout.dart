@@ -5,7 +5,7 @@ import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
-import 'package:bhakti_app/providers/home_screen_provider/home_screen_provider.dart';
+import 'package:bhakti_app/providers/home_screen_provider.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
 
 class BookLayout extends StatelessWidget {
@@ -15,7 +15,7 @@ class BookLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(
         builder: (context, homeScreenPvr, child) {
-      return Container(height: 180,
+      return SizedBox(height: 180,
         child: ScrollablePositionedList.builder(scrollDirection: Axis.horizontal,
             itemCount: bookList.length,
             itemBuilder: (context, index) {

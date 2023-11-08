@@ -1,6 +1,6 @@
 import 'dart:developer';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/phone_screen_provider/phone_login_provider.dart';
+import 'package:bhakti_app/providers/phone_login_provider.dart';
 import 'package:bhakti_app/screens/auth_screen/otp_screen/otp_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bhakti_app/common/assets/index.dart';

@@ -3,8 +3,8 @@ import 'dart:developer';
 
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/common_api_provider/Common_api_provider.dart';
-import 'package:bhakti_app/providers/otp_screen_provider/otp_screen_provider.dart';
+import 'package:bhakti_app/providers/common_api_provider.dart';
+import 'package:bhakti_app/providers/otp_screen_provider.dart';
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';

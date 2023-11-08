@@ -2,7 +2,7 @@ import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
-import 'package:bhakti_app/providers/login_auth_provider/login_auth_provider.dart';
+import 'package:bhakti_app/providers/login_auth_provider.dart';
 import 'package:bhakti_app/screens/auth_screen/email_login_screen/email_login_screen.dart';
 import 'package:bhakti_app/screens/auth_screen/login_auth_screen/layouts/auth_button_common_layout.dart';
 import 'package:bhakti_app/screens/auth_screen/phone_login_screen/phone_login_screen.dart';
@@ -42,12 +42,7 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                       label: 'Login via Phone',
                       color: appColor(context).appTheme.phoneClr,
                       iconPath: 'assets/svg/phoneAuth.svg',
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return const PhoneLoginScreen();
-                        }));
-                      }),
+                      onTap: () => loginAuthPvr.loginPhoneNavigator(context)),
                   const VSpace(Insets.i25),
                   AuthButtonLayout(
                       label: 'Login via Google',
@@ -59,23 +54,14 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                       label: 'Login via Facebook',
                       color: appColor(context).appTheme.fbClr,
                       iconPath: 'assets/svg/fbAuth.svg',
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return Container();
-                        }));
-                      }),
+                      onTap: () =>
+                          loginAuthPvr.loginFacebookNavigator(context)),
                   const VSpace(Insets.i25),
                   AuthButtonLayout(
                       label: 'Sign in with email',
                       color: appColor(context).appTheme.emailClr,
                       iconPath: 'assets/svg/emailAuth.svg',
-                      onTap: () {
-                        Navigator.push(context,
-                            MaterialPageRoute(builder: (BuildContext context) {
-                          return const EmailLoginScreen();
-                        }));
-                      })
+                      onTap: () => loginAuthPvr.loginEmailNavigator(context))
                 ]).paddingSymmetric(horizontal: Insets.i20)),
                 const Text("A new account will be created on the first login")
                     .alignment(Alignment.bottomCenter)

@@ -1,13 +1,17 @@
 import 'dart:developer';
 
 import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/screens/auth_screen/login_auth_screen/login_auth_screen.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
   int index = 0;
-
+  bool onLastPage = false;
+  bool onChange = false;
+  bool onLength = false;
   int sleepTimeHour = 0;
   int sleepTimeMin = 0;
   int sandhyaArtiMin = 0;
@@ -220,5 +224,14 @@ class HomeScreenProvider extends ChangeNotifier {
                 notifyListeners();
               });
         });
+  }
+
+  onSignOutClick(context) async {
+    await FirebaseAuth.instance.signOut().then((value) {
+      clearSharedPreferences();
+      Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+        return const LoginAuthScreen();
+      }));
+    });
   }
 }

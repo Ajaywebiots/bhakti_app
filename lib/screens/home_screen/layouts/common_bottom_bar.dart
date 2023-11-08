@@ -21,9 +21,7 @@ class CommonBottomBar extends StatelessWidget {
                     .textColor(appColor(context).appTheme.whiteColor)),
             const SizedBox(height: 0),
             SvgPicture.asset("assets/svg/activeLine.svg")
-          ]).inkWell(
-            onTap: () {},
-          ),
+          ]).inkWell(onTap: () {}),
           const HSpace(Insets.i40),
           Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             const SizedBox(height: 14),
@@ -32,9 +30,7 @@ class CommonBottomBar extends StatelessWidget {
                 style: appCss.dmDenseMedium12
                     .textColor(appColor(context).appTheme.whiteColor)),
             const SizedBox(height: 5)
-          ]).inkWell(
-            onTap: () {},
-          ),
+          ]).inkWell(onTap: () {}),
           const HSpace(Insets.i40),
           Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             const SizedBox(height: 14),
@@ -43,9 +39,7 @@ class CommonBottomBar extends StatelessWidget {
                 style: appCss.dmDenseMedium12
                     .textColor(appColor(context).appTheme.whiteColor)),
             const SizedBox(height: 5)
-          ]).inkWell(
-            onTap: () {},
-          ),
+          ]).inkWell(onTap: () {}),
           const HSpace(Insets.i40),
           Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
             const SizedBox(height: 14),
@@ -54,9 +48,7 @@ class CommonBottomBar extends StatelessWidget {
                 style: appCss.dmDenseMedium12
                     .textColor(appColor(context).appTheme.whiteColor)),
             const SizedBox(height: 5)
-          ]).inkWell(
-            onTap: () {},
-          )
+          ]).inkWell(onTap: () {})
         ]));
   }
 }

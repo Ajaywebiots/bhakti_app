@@ -8,8 +8,9 @@ import 'package:flutter_svg/svg.dart';
 
 class EmailLoginTextField extends StatelessWidget {
   final EmailLoginProvider? dataPvr;
+  final FormFieldValidator<String>? validator;
 
-  const EmailLoginTextField({super.key,this.dataPvr});
+  const EmailLoginTextField({super.key,this.dataPvr, this.validator});
 
   @override
   Widget build(BuildContext context) {
@@ -22,17 +23,7 @@ class EmailLoginTextField extends StatelessWidget {
             : appColor(context).appTheme.red,
         radius: 8,
         child: TextFieldCommon(
-            validator: (value) {
-              if (value!.isEmpty ||
-                  !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                      .hasMatch(value)) {
-                dataPvr!.emailValid = appFonts.enterValidEmail;
-                return appFonts.enterValidEmail;
-              } else {
-                dataPvr!.emailValid = null;
-                return null;
-              }
-            },
+            validator: validator,
             keyboardType: TextInputType.emailAddress,
             hintText: appFonts.egMail,
             controller: dataPvr!.emailId,

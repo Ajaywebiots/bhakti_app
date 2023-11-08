@@ -1,7 +1,7 @@
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/home_screen_provider/home_screen_provider.dart';
+import 'package:bhakti_app/providers/home_screen_provider.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_circle_design_layout.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_container.dart';
 

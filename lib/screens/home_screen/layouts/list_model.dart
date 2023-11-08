@@ -54,3 +54,30 @@ List drawerList = [
   {"icon": "assets/svg/call-calling.svg", "name": "Contact Us"},
   // {"icon": "assets/svg/logOut.svg", "name": "Log Out"}
 ];
+
+List bookReadingList = [
+  {
+    'book': eImageAssets.bhagvad,
+    'bookName': "Srimad Bhagatam",
+    'author': "By : Satsvarupa Dasa Goswami",
+    'isAdded': false
+  },
+  {
+    'book': eImageAssets.srila,
+    'bookName': "Light of the Bhagawata",
+    'author': "By : Madhudvisa Dasa",
+    'isAdded': false
+  },
+  {
+    'book': eImageAssets.selfRealization,
+    'bookName': "Bhagavad Gita as it is",
+    'author': "By : A. C. Bhaktivedanta Swami",
+    'isAdded': true
+  },
+  {
+    'book': eImageAssets.sriBrahma,
+    'bookName': "Sri Brahma-samhita",
+    'author': "By : Sarasvati Goswami",
+    'isAdded': true
+  },
+];

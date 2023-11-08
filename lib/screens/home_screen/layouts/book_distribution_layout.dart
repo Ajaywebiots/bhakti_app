@@ -47,7 +47,7 @@ class BookDistributionLayout extends StatelessWidget {
                                 const HSpace(Insets.i8),
                                 Text("10",
                                     style: appCss
-                                        .dmDenseMedium16
+                                        .dmDenseBold24
                                         .textColor(
                                         appColor(context)
                                             .appTheme
@@ -95,7 +95,7 @@ class BookDistributionLayout extends StatelessWidget {
                                 const HSpace(Insets.i8),
                                 Text("5",
                                     style: appCss
-                                        .dmDenseMedium16
+                                        .dmDenseBold24
                                         .textColor(
                                         appColor(context)
                                             .appTheme
@@ -143,7 +143,7 @@ class BookDistributionLayout extends StatelessWidget {
                                 const HSpace(Insets.i8),
                                 Text("1",
                                     style: appCss
-                                        .dmDenseMedium16
+                                        .dmDenseBold24
                                         .textColor(
                                         appColor(context)
                                             .appTheme

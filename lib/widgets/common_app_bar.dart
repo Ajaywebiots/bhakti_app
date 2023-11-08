@@ -1,4 +1,5 @@
 import 'package:bhakti_app/common/extension/widget_extension.dart';
+import 'package:bhakti_app/screens/home_screen/update_profile/update_profile.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bhakti_app/common/assets/index.dart';
@@ -25,7 +26,12 @@ class CommonAppBar extends StatelessWidget {
           SvgPicture.asset(eSvgAssets.calendar,
               height: Sizes.s32),
           const HSpace(Insets.i10),
-          Image.asset(eImageAssets.img, height: Sizes.s32)
+          Image.asset(eImageAssets.img, height: Sizes.s32).inkWell(onTap: () {
+
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const ProfileEditScreen();
+            },));
+          },)
         ]);
   }
 }

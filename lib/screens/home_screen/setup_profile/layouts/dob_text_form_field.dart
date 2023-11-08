@@ -1,7 +1,7 @@
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/setup_profile_provider/setup_profile_provider.dart';
+import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/widgets/text_common_widget.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,7 +15,7 @@ class DateOfBirthBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SetUpProfileProvider>(builder: (context, profilePvr, child) {
+    return Consumer<SetUpUpdateProfileProvider>(builder: (context, profilePvr, child) {
         return   CustomTitleWidget(
           height: 52,
           color: profilePvr.dateValid == null

@@ -7,7 +7,7 @@ import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/providers/setup_profile_provider/setup_profile_provider.dart';
+import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/screens/home_screen/setup_profile/layouts/dob_text_form_field.dart';
 import 'package:bhakti_app/screens/home_screen/setup_profile/layouts/gender_radio_button.dart';
 import 'package:bhakti_app/screens/home_screen/setup_profile/layouts/name_text_form_field.dart';
@@ -26,20 +26,16 @@ class SetUpProfile extends StatefulWidget {
 }
 
 class _SetUpProfileState extends State<SetUpProfile> {
-  bool onChange = false;
-  bool onChange1 = false;
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
   @override
   Widget build(BuildContext context) {
-    return Consumer<SetUpProfileProvider>(
+    return Consumer<SetUpUpdateProfileProvider>(
         builder: (context1, setUpProfilePvr, child) {
       return LoadingComponent(
           child: StatefulWrapper(
               onInit: () => Future.delayed(
                   Durations.ms150, () => setUpProfilePvr.onReady(context)),
               child: Scaffold(
-                  key: scaffoldKey,
+                  key: setUpProfilePvr.scaffoldKey,
                   extendBodyBehindAppBar: true,
                   body: Stack(children: [
                     Container(
@@ -68,12 +64,13 @@ class _SetUpProfileState extends State<SetUpProfile> {
                                   ExpansionTile(
                                       onExpansionChanged: (value) {
                                         setState(() {
-                                          onChange = !onChange;
+                                          setUpProfilePvr.onChange =
+                                              !setUpProfilePvr.onChange;
                                         });
                                       },
                                       tilePadding: EdgeInsets.zero,
                                       trailing: SvgPicture.asset(
-                                          onChange == false
+                                          setUpProfilePvr.onChange == false
                                               ? eSvgAssets.arrowDown1
                                               : eSvgAssets.arrowUp),
                                       leading: Text("Personal Info",
@@ -100,12 +97,13 @@ class _SetUpProfileState extends State<SetUpProfile> {
                                   ExpansionTile(
                                       onExpansionChanged: (value) {
                                         setState(() {
-                                          onChange1 = !onChange1;
+                                          setUpProfilePvr.onChange1 =
+                                              !setUpProfilePvr.onChange1;
                                         });
                                       },
                                       tilePadding: EdgeInsets.zero,
                                       trailing: SvgPicture.asset(
-                                          onChange1 == false
+                                          setUpProfilePvr.onChange1 == false
                                               ? eSvgAssets.arrowDown1
                                               : eSvgAssets.arrowUp),
                                       leading: Text("Contact Info",
