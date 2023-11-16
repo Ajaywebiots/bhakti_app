@@ -89,7 +89,7 @@ class SetUpProfileProvider extends ChangeNotifier {
                   : "female"
               : "",
           "email": emailId.text,
-          "mobile_number": phoneNum.text,
+          "mobile_number": "+${phoneNum.text}",
           "country": countrySelected['code'],
           "state": state.text,
           "city": city.text,
@@ -105,7 +105,23 @@ class SetUpProfileProvider extends ChangeNotifier {
               : "",
           "profile_picture_url": downloadUrl
         };
-        log("dssf $body");
+        log("dssf ${image!.path}");
+
+        /*Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");*/
+        Reference reference = FirebaseStorage.instance.ref().child(image!.name);
+        var file = File(image!.path);
+        UploadTask uploadTask = reference.putFile(file);
+
+        uploadTask.then((res) {
+          log("res : $res");
+          res.ref.getDownloadURL().then((image) async {
+            downloadUrl = image;
+          }, onError: (err) {});
+        });
+
+
+
+        log("dssf $downloadUrl");
         await apiServices
             .postApi(api.profileUpdate, body, isToken: true)
             .then((value) async {
@@ -115,10 +131,8 @@ class SetUpProfileProvider extends ChangeNotifier {
           if (value.isSuccess!) {
             pref.setString(session.user,
                 json.encode(UserModel.fromJson(value.data['data'])));
-            Navigator.pushReplacement(context,
-                MaterialPageRoute(builder: (context) {
-              return const HomeScreen();
-            }));
+            userModel = UserModel.fromJson(value.data['data']);
+            Navigator.pop(context);
           } else {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(value.message)));
@@ -169,7 +183,6 @@ class SetUpProfileProvider extends ChangeNotifier {
         : 1;
     selectedItems = userModel!.spiritualMaster ?? "Gurunanak";
 
-
     log(" asdasd:${name.text}");
 
     notifyListeners();
@@ -183,9 +196,9 @@ class SetUpProfileProvider extends ChangeNotifier {
       imageQuality: 90,
     );
 
-    Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");
+    Reference ref = FirebaseStorage.instance.ref().child(image!.name);
 
-    await ref.putFile(File(image!.path));
+    await ref.putFile(File(image.path));
 
     ref.getDownloadURL().then((value) async {
       notifyListeners();
@@ -193,7 +206,7 @@ class SetUpProfileProvider extends ChangeNotifier {
     });
   }
 
-/*  Future<String> uploadImageToStorage(String childName) async {
+  Future<String> uploadImageToStorage(String childName) async {
     Reference ref = storage.ref().child(childName);
     UploadTask uploadTask = ref.putFile(File(image!.path));
     TaskSnapshot snapshot = await uploadTask;
@@ -212,5 +225,5 @@ class SetUpProfileProvider extends ChangeNotifier {
       resp = error.toString();
     }
     return resp;
-  }*/
+  }
 }

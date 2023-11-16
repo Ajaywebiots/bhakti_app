@@ -47,6 +47,7 @@ class CommonApiProvider extends ChangeNotifier {
           pref.setString(
               session.user, json.encode(UserModel.fromJson(value.data)));
           notifyListeners();
+          userModel = UserModel.fromJson(value.data);
           log("DDD1");
         }
       });

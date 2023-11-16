@@ -23,11 +23,11 @@ class UpdateInitiatedDateBox extends StatelessWidget {
           radius: 8,
           child: TextFieldCommon(
               validator: (value) {
-                if (value!.isNotEmpty) {
+                if (value!.isNotEmpty) /*{
                   profilePvr.initiatedDateValid = 'Enter a Initiated Date!';
                   profilePvr.notifyListeners();
                   return 'Enter a Initiated Date!';
-                } else {
+                } else*/ {
                   profilePvr.initiatedDateValid = null;
                   profilePvr.notifyListeners();
                   return null;

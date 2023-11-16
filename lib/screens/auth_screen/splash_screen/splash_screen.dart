@@ -29,7 +29,7 @@ class _SplashScreenState extends State<SplashScreen> {
   checkLocalData() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     if (pref!.getString(session.user) != null) {
-      UserModel? userModel =
+       userModel =
           UserModel.fromJson(json.decode(pref!.getString(session.user)!));
       log("MODE l:$userModel");
       Navigator.pushReplacement(

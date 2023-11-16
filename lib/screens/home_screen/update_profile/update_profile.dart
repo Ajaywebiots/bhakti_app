@@ -32,7 +32,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
   @override
   Widget build(BuildContext context) {
     return Consumer<UpdateProfileProvider>(
-        builder: (context, profilePvr, child) {
+        builder: (context1, profilePvr, child) {
       return StatefulWrapper(
           onInit: () => Future.delayed(
               Durations.ms150, () => profilePvr.onReady(context)),

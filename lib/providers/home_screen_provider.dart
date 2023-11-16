@@ -1,3 +1,4 @@
+import 'dart:convert';
 import 'dart:developer';
 
 import 'package:bhakti_app/config.dart';
@@ -6,6 +7,8 @@ import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+
+import '../models/user_model.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
   int index = 0;
@@ -29,6 +32,7 @@ class HomeScreenProvider extends ChangeNotifier {
   int preachingHour = 0;
   int preachingMin = 0;
   int countRounds = 0;
+  UserModel? userModel;
   int qualityRating = 0;
   int wokeUpTimeHour = 0;
   int wokeUpTimeMin = 0;
@@ -36,6 +40,7 @@ class HomeScreenProvider extends ChangeNotifier {
   ScrollController scrollController = ScrollController();
   final ItemScrollController itemScrollController = ItemScrollController();
   final ItemScrollController itemScrollController1 = ItemScrollController();
+  TextEditingController dob = TextEditingController();
 
   onSleepTimeSelect(context) {
     showDialog(
@@ -106,6 +111,15 @@ class HomeScreenProvider extends ChangeNotifier {
               });
         });
   }
+
+  var selectedDate = DateTime.now();
+  onCalendarDateChange(date) {
+    notifyListeners();
+    selectedDate = date;
+    notifyListeners();
+    log("selected date ::: $selectedDate");
+  }
+
 
   onSandhyaArtiSelect(context) {
     showDialog(
@@ -233,5 +247,17 @@ class HomeScreenProvider extends ChangeNotifier {
         return const LoginAuthScreen();
       }));
     });
+  }
+
+  onReady(context) async {
+   SharedPreferences
+    preferences = await SharedPreferences.getInstance();
+
+//Map user = json.decode(preferences!.getString(session.user)!);
+    await Future.delayed(Durations.s1);
+    userModel =
+        UserModel.fromJson(json.decode(preferences!.getString(session.user)!));
+
+    notifyListeners();
   }
 }

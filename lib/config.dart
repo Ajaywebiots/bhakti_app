@@ -1,6 +1,7 @@
 import 'dart:io';
 
 import 'package:bhakti_app/common/session.dart';
+import 'package:bhakti_app/models/user_model.dart';
 import 'package:bhakti_app/services/api_methods.dart';
 import 'package:bhakti_app/services/api_service.dart';
 import 'package:bhakti_app/utils/helper/navigation_class.dart';
@@ -19,6 +20,8 @@ Session session = Session();
 AppFonts appFonts = AppFonts();
 NavigationClass route = NavigationClass();
 ApiServices apiServices = ApiServices();
+
+UserModel? userModel;
 
 // Validation validation = Validation();
 AppCss appCss = AppCss();

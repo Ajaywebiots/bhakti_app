@@ -26,10 +26,10 @@ class UpdateYatraNameTextBox extends StatelessWidget {
               controller: profilePvr.yatraName,
               validator: (value) {
                 if (value!.isNotEmpty) {
-                  profilePvr.yatraNameValid = 'Enter a Yatra Name!';
+                /*  profilePvr.yatraNameValid = 'Enter a Yatra Name!';
                   profilePvr.notifyListeners();
                   return 'Enter a Yatra Name!';
-                } else {
+                } else {*/
                   profilePvr.yatraNameValid = null;
                   profilePvr.notifyListeners();
                   return null;

@@ -8,6 +8,8 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
+import '../screens/home_screen/home_screen.dart';
+
 class UpdateProfileProvider extends ChangeNotifier {
   bool imgStatus = false;
   TextEditingController name = TextEditingController();
@@ -46,7 +48,11 @@ class UpdateProfileProvider extends ChangeNotifier {
   UserModel? userModel;
 
   String spiritualSelectedItems = "Gurunanak";
-  List<String> items = ['Gurunanak', 'Demo 2', 'Demo 3'];
+  List<String> items = [
+    'Gurunanak',
+    'Demo 2',
+    'Demo 3',
+  ];
   final formKey = GlobalKey<FormState>();
 
   List countryItems = [];
@@ -58,28 +64,48 @@ class UpdateProfileProvider extends ChangeNotifier {
     final data = await json.decode(response);
 
     countryItems = data;
+    countrySelected = countryItems[0];
     notifyListeners();
   }
 
   Future<void> saveData(context) async {
-    // SharedPreferences pref = await SharedPreferences.getInstance();
+    SharedPreferences pref = await SharedPreferences.getInstance();
     if (formKey.currentState!.validate()) {
       showLoading(context);
       notifyListeners();
       try {
+
+
+String newUrl = "";
+        Reference reference = FirebaseStorage.instance.ref().child(image!.name);
+        var file = File(image!.path);
+        UploadTask uploadTask = reference.putFile(file);
+
+       await uploadTask.then((res)async {
+
+         await res.ref.getDownloadURL().then((images) async {
+            log("res : $images");
+            newUrl = images;
+            notifyListeners();
+          }, onError: (err) {});
+        });
+
         List<int> listData = utf8.encode(downloadUrl);
         String base64 = base64Encode(listData);
+
+        log("dssf4444 sss $downloadUrl");
+        log("dssf4444 $newUrl");
         Map<String, dynamic> body = {
           "name": name.text,
           "date_of_birth": dob.text,
           "gender": selectedGender != null
               ? selectedGender == 1
-                  ? "male"
-                  : "female"
+              ? "male"
+              : "female"
               : "",
           "email": emailId.text,
           "mobile_number": phoneNum.text,
-          // "country": countrySelected['code'],
+          "country": countrySelected['code'],
           "state": state.text,
           "city": city.text,
           "yatra_name": yatraName.text,
@@ -89,40 +115,30 @@ class UpdateProfileProvider extends ChangeNotifier {
           "intitiation_date": null,
           "marital_status": selectedMarital != null
               ? selectedMarital == 1
-                  ? "married"
-                  : "unmarried"
+              ? "married"
+              : "unmarried"
               : "",
-          "profile_picture_url": downloadUrl
+          "profile_picture_url": newUrl
         };
-        log("dssf ${image!.path}");
 
-        Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");
 
-        await ref.putFile(File(image!.path));
-        ref.getDownloadURL().then((value) async {
-          downloadUrl = value;
+        await apiServices
+            .postApi(api.profileUpdate, body, isToken: true)
+            .then((value) async {
+          hideLoading(context);
+
+          notifyListeners();
+          if (value.isSuccess!) {
+            pref.setString(session.user,
+                json.encode(UserModel.fromJson(value.data['data'])));
+            userModel = UserModel.fromJson(value.data['data']);
+            notifyListeners();
+            Navigator.pop(context);
+          } else {
+            ScaffoldMessenger.of(context)
+                .showSnackBar(SnackBar(content: Text(value.message)));
+          }
         });
-
-        log("dssf $downloadUrl");
-        // await apiServices
-        //     .postApi(api.profileUpdate, body, isToken: true)
-        //     .then((value) async {
-        //   hideLoading(context);
-
-        //   notifyListeners();
-        //   if (value.isSuccess!) {
-        //     pref.setString(session.user,
-        //         json.encode(UserModel.fromJson(value.data['data'])));
-        //     Navigator.pushReplacement(context, MaterialPageRoute(
-        //       builder: (context) {
-        //         return const HomeScreen();
-        //       },
-        //     ));
-        //   } else {
-        //     ScaffoldMessenger.of(context)
-        //         .showSnackBar(SnackBar(content: Text(value.message)));
-        //   }
-        // });
       } catch (e) {
         hideLoading(context);
         notifyListeners();
@@ -151,7 +167,7 @@ class UpdateProfileProvider extends ChangeNotifier {
     userModel =
         UserModel.fromJson(json.decode(preferences!.getString(session.user)!));
     log("USER MODEL ${userModel!.profilePictureUrl}");
-    log(" asdasd:${preferences!.getString(session.accessToken)}");
+    log(" asdasd:${userModel!.profilePictureUrl}");
     downloadUrl = userModel!.profilePictureUrl ?? "";
     name.text = userModel!.name ?? "";
     dob.text = userModel!.dateOfBirth ?? "";
@@ -172,7 +188,7 @@ class UpdateProfileProvider extends ChangeNotifier {
     yatraName.text = userModel!.yatraName ?? "";
     initiatedName.text = userModel!.initiatedName ?? "";
     value = userModel!.initiated ?? true;
-    spiritualSelectedItems = userModel!.spiritualMaster ?? "Gurunanak";
+    // spiritualSelectedItems = userModel!.spiritualMaster ?? "";
     initiationDate.text = userModel!.intitiationDate ?? "";
     selectedMarital = userModel!.maritalStatus != null
         ? userModel!.maritalStatus == "married"

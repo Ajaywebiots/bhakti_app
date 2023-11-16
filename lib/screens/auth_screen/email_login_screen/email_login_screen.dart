@@ -20,7 +20,6 @@ class EmailLoginScreen extends StatefulWidget {
 }
 
 class _EmailLoginScreenState extends State<EmailLoginScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Consumer2<EmailLoginProvider, LoginAuthProvider>(
