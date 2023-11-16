@@ -132,7 +132,9 @@ class SetUpProfileProvider extends ChangeNotifier {
             pref.setString(session.user,
                 json.encode(UserModel.fromJson(value.data['data'])));
             userModel = UserModel.fromJson(value.data['data']);
-            Navigator.pop(context);
+            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
+              return HomeScreen();
+            },));
           } else {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(value.message)));
