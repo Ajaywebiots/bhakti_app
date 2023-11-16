@@ -1,18 +1,10 @@
-import 'dart:convert';
-import 'dart:developer';
 import 'package:flutter/gestures.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:flutter_svg/flutter_svg.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:bhakti_app/models/user_model.dart';
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import 'package:bhakti_app/screens/home_screen/home_screen.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/screens/home_screen/setup_profile/setup_profile.dart';
-import 'package:bhakti_app/providers/common_api_provider.dart';
 import 'package:bhakti_app/providers/login_auth_provider.dart';
 import 'package:bhakti_app/screens/auth_screen/phone_login_screen/phone_login_screen.dart';
 import 'package:bhakti_app/screens/auth_screen/email_sign_up_screen/email_sign_up_screen.dart';
@@ -28,6 +20,7 @@ class EmailLoginScreen extends StatefulWidget {
 }
 
 class _EmailLoginScreenState extends State<EmailLoginScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Consumer2<EmailLoginProvider, LoginAuthProvider>(

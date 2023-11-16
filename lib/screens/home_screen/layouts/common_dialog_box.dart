@@ -16,8 +16,8 @@ class CommonDialog extends StatefulWidget {
 
   const CommonDialog(
       {super.key,
-       this.onHourChange,
-       this.onMinChange,
+      this.onHourChange,
+      this.onMinChange,
       this.text,
       this.text1,
       this.text2});
@@ -68,7 +68,6 @@ class _CommonDialogState extends State<CommonDialog> {
               const VSpace(Insets.i10),
               CommonRulerPicker(
                   startValue: 1, maxValue: 60, onChange: widget.onMinChange!),
-
               widget.text == "Mangala Arti"
                   ? const VSpace(Insets.i25)
                   : widget.text == "Sandhya Arti"
@@ -92,9 +91,7 @@ class _CommonDialogState extends State<CommonDialog> {
                               text: e.value['artiType'],
                               onToggle: (val) {
                                 e.value['isOn'] = val;
-                                setState(() {
-
-                                });
+                                setState(() {});
                               }),
                           const VSpace(Sizes.s10),
                           e.key == 4
@@ -119,9 +116,7 @@ class _CommonDialogState extends State<CommonDialog> {
                                   text: e.value['artiType'],
                                   onToggle: (val) {
                                     e.value['isOn'] = val;
-                                    setState(() {
-
-                                    });
+                                    setState(() {});
                                   }),
                               const VSpace(Sizes.s10),
                               e.key == 4
@@ -153,7 +148,8 @@ class _CommonDialogState extends State<CommonDialog> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     const Text("Chapter 1"),
-                                    SvgPicture.asset("assets/svg/arrow-down1.svg")
+                                    SvgPicture.asset(
+                                        "assets/svg/arrow-down1.svg")
                                   ]))
                           : widget.text == "Hearing"
                               ? Container(

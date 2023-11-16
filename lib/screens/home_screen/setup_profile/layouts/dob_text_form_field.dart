@@ -15,7 +15,7 @@ class DateOfBirthBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SetUpUpdateProfileProvider>(builder: (context, profilePvr, child) {
+    return Consumer<SetUpProfileProvider>(builder: (context, profilePvr, child) {
         return   CustomTitleWidget(
           height: 52,
           color: profilePvr.dateValid == null
@@ -41,7 +41,38 @@ class DateOfBirthBox extends StatelessWidget {
                     context: context,
                     initialDate: DateTime.now(),
                     firstDate: DateTime(1886),
-                    lastDate: DateTime.now());
+                    lastDate: DateTime.now(),
+                  builder: (context, child) {
+                    return Theme(
+                      data: Theme.of(context).copyWith(
+                        dialogTheme: DialogTheme(
+                          shape: RoundedRectangleBorder(
+                            borderRadius: BorderRadius.circular(
+                                20.0), // this is the border radius of the picker
+                          ),
+                        ),
+                        colorScheme: ColorScheme.light(
+                          primary: appColor(context).appTheme.primary,
+                          onSurface: Colors.black,
+                          error: Colors.red,
+                        ),
+                        textButtonTheme: TextButtonThemeData(
+                          style: TextButton.styleFrom(
+                            textStyle: const TextStyle(
+                                color: Colors.white,
+                                fontSize: 12,
+                                fontWeight: FontWeight.bold),
+                            primary: appColor(context).appTheme.whiteColor,
+                            backgroundColor: appColor(context).appTheme.primary,
+                            shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20),
+                            ),
+                          ),
+                        ),
+                      ),
+                      child: child!,
+                    );
+                  },);
 
                 if (pickedDate != null) {
 
@@ -54,6 +85,7 @@ class DateOfBirthBox extends StatelessWidget {
 
                 }
               },
+
               prefixIcon: Row(
                   mainAxisAlignment:
                   MainAxisAlignment.spaceBetween,

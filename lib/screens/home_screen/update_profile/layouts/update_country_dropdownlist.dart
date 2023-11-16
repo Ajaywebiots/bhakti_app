@@ -10,12 +10,12 @@ import 'package:bhakti_app/widgets/custom_title_widget.dart';
 import 'package:bhakti_app/widgets/stateful_wrapper.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-class CountryDropDownBox extends StatelessWidget {
-  const CountryDropDownBox({super.key});
+class UpdateCountryDropDownBox extends StatelessWidget {
+  const UpdateCountryDropDownBox({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SetUpProfileProvider>(
+    return Consumer<UpdateProfileProvider>(
         builder: (context1, profilePvr, child) {
       return CustomTitleWidget(
           radius: 8,

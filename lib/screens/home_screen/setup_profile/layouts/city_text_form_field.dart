@@ -1,10 +1,10 @@
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
+import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/widgets/text_common_widget.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/widgets/custom_title_widget.dart';
 
 class CityTextFieldBox extends StatelessWidget {
@@ -12,9 +12,9 @@ class CityTextFieldBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SetUpUpdateProfileProvider>(
-      builder: (context, profilePvr, child) {
-        return CustomTitleWidget(
+    return Consumer<SetUpProfileProvider>(
+        builder: (context, profilePvr, child) {
+      return CustomTitleWidget(
           height: 52,
           width: double.infinity,
           color: profilePvr.cityValid == null
@@ -22,10 +22,10 @@ class CityTextFieldBox extends StatelessWidget {
               : appColor(context).appTheme.red,
           title: 'City',
           radius: 8,
-          child: TextFieldCommon(controller: profilePvr.city,
+          child: TextFieldCommon(
+              controller: profilePvr.city,
               validator: (value) {
                 if (value!.isNotEmpty) {
-
                   profilePvr.cityValid = null;
                   profilePvr.notifyListeners();
                   return null;
@@ -40,10 +40,8 @@ class CityTextFieldBox extends StatelessWidget {
                     SvgPicture.asset(eSvgAssets.location, height: 25),
                     const HSpace(Insets.i12),
                     SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
-                    const HSpace(Insets.i20),
-                  ])),
-        ).paddingSymmetric(vertical: 10);
-      },
-    );
+                    const HSpace(Insets.i20)
+                  ]))).paddingSymmetric(vertical: 10);
+    });
   }
 }

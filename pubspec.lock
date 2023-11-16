@@ -696,6 +696,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
+  ruler_picker_bn:
+    dependency: "direct main"
+    description:
+      name: ruler_picker_bn
+      sha256: "0b4bfb1c6121a3e4396a7267f7f87d3f37edb448d29eab50bb2ea159d6b6e1ee"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.0.6"
+  scrollable_positioned_list:
+    dependency: transitive
+    description:
+      name: scrollable_positioned_list
+      sha256: "1b54d5f1329a1e263269abc9e2543d90806131aa14fe7c6062a8054d57249287"
+      url: "https://pub.dev"
+    source: hosted
+    version: "0.3.8"
   shared_preferences:
     dependency: "direct main"
     description:

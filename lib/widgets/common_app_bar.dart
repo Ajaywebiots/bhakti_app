@@ -12,26 +12,24 @@ class CommonAppBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return AppBar(
-        leading: SvgPicture.asset(eSvgAssets.menu).inkWell(onTap: () => Scaffold.of(context).openDrawer()),
+        leading: SvgPicture.asset(eSvgAssets.menu)
+            .inkWell(onTap: () => Scaffold.of(context).openDrawer()),
         leadingWidth: 30,
         centerTitle: false,
         elevation: 0,
         backgroundColor: Colors.transparent,
         titleSpacing: 10,
-        title:
-        Image.asset(eImageAssets.bhaktiLogo, height: 35),
+        title: Image.asset(eImageAssets.bhaktiLogo, height: 35),
         actions: [
           SvgPicture.asset(eSvgAssets.chat),
           const HSpace(Insets.i10),
-          SvgPicture.asset(eSvgAssets.calendar,
-              height: Sizes.s32),
+          SvgPicture.asset(eSvgAssets.calendar, height: Sizes.s32),
           const HSpace(Insets.i10),
           Image.asset(eImageAssets.img, height: Sizes.s32).inkWell(onTap: () {
-
             Navigator.push(context, MaterialPageRoute(builder: (context) {
               return const ProfileEditScreen();
-            },));
-          },)
+            }));
+          })
         ]);
   }
 }

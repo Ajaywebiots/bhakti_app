@@ -28,7 +28,7 @@ class SetUpProfile extends StatefulWidget {
 class _SetUpProfileState extends State<SetUpProfile> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<SetUpUpdateProfileProvider>(
+    return Consumer<SetUpProfileProvider>(
         builder: (context1, setUpProfilePvr, child) {
       return LoadingComponent(
           child: StatefulWrapper(

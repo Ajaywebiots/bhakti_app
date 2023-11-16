@@ -12,7 +12,7 @@ class GenderRadioBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SetUpUpdateProfileProvider>(builder: (context, profilePvr, child) {
+    return Consumer<SetUpProfileProvider>(builder: (context, profilePvr, child) {
      return CustomTitleWidget(
         height: 52,
         radius: 8,

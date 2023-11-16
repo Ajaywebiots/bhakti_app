@@ -75,7 +75,6 @@ class EmailLoginProvider extends ChangeNotifier {
         preferences = await SharedPreferences.getInstance();
         UserModel? userModel;
 
-//Map user = json.decode(preferences!.getString(session.user)!);
         await Future.delayed(Durations.s2);
         userModel = UserModel.fromJson(
             json.decode(preferences!.getString(session.user)!));

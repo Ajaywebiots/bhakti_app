@@ -84,10 +84,9 @@ class LoginAuthProvider extends ChangeNotifier {
     }));
   }
 
-  loginEmailNavigator(context){
-    Navigator.push(context,
-        MaterialPageRoute(builder: (BuildContext context) {
-          return const EmailLoginScreen();
-        }));
+  loginEmailNavigator(context) {
+    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
+      return const EmailLoginScreen();
+    }));
   }
 }

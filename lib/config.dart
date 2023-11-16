@@ -13,6 +13,7 @@ export '../routes/index.dart';
 export '../common/theme/theme_service.dart';
 export 'package:provider/provider.dart';
 export '../providers/index.dart';
+export '../providers/update_profile_provider.dart';
 
 Session session = Session();
 AppFonts appFonts = AppFonts();
@@ -23,8 +24,6 @@ ApiServices apiServices = ApiServices();
 AppCss appCss = AppCss();
 // ApiServices apiServices = ApiServices();
 ApiMethods api = ApiMethods();
-
-
 
 ThemeService appColor(context) {
   final themeServices = Provider.of<ThemeService>(context, listen: false);

@@ -2,16 +2,15 @@ import 'dart:io';
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 
-class ProfilePicture extends StatelessWidget {
-  const ProfilePicture({super.key});
+class UpdateProfilePicture extends StatelessWidget {
+  const UpdateProfilePicture({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SetUpProfileProvider>(builder: (child, profilePvr, ss) {
+    return Consumer<UpdateProfileProvider>(builder: (child, profilePvr, ss) {
       return Stack(children: [
         profilePvr.imagePath != ""
             ? CircleAvatar(

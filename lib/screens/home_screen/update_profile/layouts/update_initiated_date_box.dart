@@ -1,12 +1,11 @@
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
-import 'package:bhakti_app/providers/update_profile_provider.dart';
 import 'package:bhakti_app/widgets/text_common_widget.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import '../../../../config.dart';
-import '../../../../widgets/custom_title_widget.dart';
+import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/widgets/custom_title_widget.dart';
 
 class UpdateInitiatedDateBox extends StatelessWidget {
   const UpdateInitiatedDateBox({super.key});
@@ -24,7 +23,7 @@ class UpdateInitiatedDateBox extends StatelessWidget {
           radius: 8,
           child: TextFieldCommon(
               validator: (value) {
-                if (value!.isEmpty) {
+                if (value!.isNotEmpty) {
                   profilePvr.initiatedDateValid = 'Enter a Initiated Date!';
                   profilePvr.notifyListeners();
                   return 'Enter a Initiated Date!';
@@ -76,13 +75,13 @@ class UpdateInitiatedDateBox extends StatelessWidget {
                   String formatDate =
                       DateFormat('dd MMM yyyy').format(pickedDate);
 
-                  profilePvr.initiatedDate.text = formatDate;
+                  profilePvr.initiationDate.text = formatDate;
                   profilePvr.notifyListeners();
                 } else {}
               },
               readOnly: true,
               hintText: "Initiated Date",
-              controller: profilePvr.initiatedDate,
+              controller: profilePvr.initiationDate,
               prefixIcon: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.min,

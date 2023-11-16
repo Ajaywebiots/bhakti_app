@@ -1,5 +1,6 @@
 import 'dart:convert';
 import 'dart:developer';
+import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:image_picker/image_picker.dart';
@@ -8,7 +9,7 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bhakti_app/screens/home_screen/home_screen.dart';
 
-class SetUpUpdateProfileProvider extends ChangeNotifier {
+class SetUpProfileProvider extends ChangeNotifier {
   bool imgStatus = false;
   TextEditingController name = TextEditingController();
   TextEditingController dob = TextEditingController();
@@ -17,6 +18,7 @@ class SetUpUpdateProfileProvider extends ChangeNotifier {
   TextEditingController state = TextEditingController();
   TextEditingController city = TextEditingController();
   TextEditingController initiatedName = TextEditingController();
+  TextEditingController yatraName = TextEditingController();
   TextEditingController initiatedDate = TextEditingController();
   final ImagePicker picker = ImagePicker();
   bool onChange = false;
@@ -45,7 +47,7 @@ class SetUpUpdateProfileProvider extends ChangeNotifier {
       initiatedDateValid;
 
   String selectedItems = "Gurunanak";
-  List<String> items = [
+  List<String> masterItems = [
     'Gurunanak',
     'Demo 2',
     'Demo 3',
@@ -68,12 +70,6 @@ class SetUpUpdateProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  onInit() {
-    readJson();
-    dob.text = "";
-    notifyListeners();
-  }
-
   Future<void> saveData(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     if (formKey.currentState!.validate()) {
@@ -83,6 +79,7 @@ class SetUpUpdateProfileProvider extends ChangeNotifier {
       try {
         List<int> listData = utf8.encode(downloadUrl);
         String base64 = base64Encode(listData);
+
         Map<String, dynamic> body = {
           "name": name.text,
           "date_of_birth": dob.text,
@@ -96,7 +93,7 @@ class SetUpUpdateProfileProvider extends ChangeNotifier {
           "country": countrySelected['code'],
           "state": state.text,
           "city": city.text,
-          "yatra_name": "yatraName.text",
+          "yatra_name": "Mathuradesh",
           "initiated": value,
           "initiated_name": initiatedName.text,
           "spiritual_master": selectedItems,
@@ -106,10 +103,9 @@ class SetUpUpdateProfileProvider extends ChangeNotifier {
                   ? "married"
                   : "unmarried"
               : "",
-          "profile_picture_url": base64
+          "profile_picture_url": downloadUrl
         };
         log("dssf $body");
-
         await apiServices
             .postApi(api.profileUpdate, body, isToken: true)
             .then((value) async {
@@ -119,11 +115,10 @@ class SetUpUpdateProfileProvider extends ChangeNotifier {
           if (value.isSuccess!) {
             pref.setString(session.user,
                 json.encode(UserModel.fromJson(value.data['data'])));
-            Navigator.pushReplacement(context, MaterialPageRoute(
-              builder: (context) {
-                return const HomeScreen();
-              },
-            ));
+            Navigator.pushReplacement(context,
+                MaterialPageRoute(builder: (context) {
+              return const HomeScreen();
+            }));
           } else {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(value.message)));
@@ -146,8 +141,7 @@ class SetUpUpdateProfileProvider extends ChangeNotifier {
     await Future.delayed(Durations.s1);
     userModel =
         UserModel.fromJson(json.decode(preferences!.getString(session.user)!));
-    log("USER MODEL $userModel");
-    log(" asdasd:${userModel!.email}");
+
     name.text = userModel!.name ?? "";
     initiatedName.text = userModel!.initiatedName ?? "";
     emailId.text = userModel!.email ?? "";
@@ -157,7 +151,7 @@ class SetUpUpdateProfileProvider extends ChangeNotifier {
             ? 1
             : 2
         : 1;
-    city.text = userModel!.mobileNumber ?? "";
+    phoneNum.text = userModel!.mobileNumber ?? "";
 
     int index = countryItems.indexWhere((element) {
       return element['code'] == userModel!.country;
@@ -166,29 +160,57 @@ class SetUpUpdateProfileProvider extends ChangeNotifier {
         userModel!.country != null ? countryItems[index] : countryItems[0];
     state.text = userModel!.state ?? "";
     city.text = userModel!.city ?? "";
+    yatraName.text = userModel!.yatraName ?? "Mathura";
     downloadUrl = userModel!.profilePictureUrl ?? "";
+    selectedMarital = userModel!.maritalStatus != null
+        ? userModel!.maritalStatus == "married"
+            ? 1
+            : 2
+        : 1;
+    selectedItems = userModel!.spiritualMaster ?? "Gurunanak";
+
+
+    log(" asdasd:${name.text}");
 
     notifyListeners();
   }
-//
-//   Future<String> uploadImageToStorage(String childName) async {
-//     Reference ref = storage.ref().child(childName);
-//     UploadTask uploadTask = ref.putFile(File(image!.path));
-//     TaskSnapshot snapshot = await uploadTask;
-//     String downloadUrl = await snapshot.ref.getDownloadURL();
-//     return downloadUrl;
-//   }
-//
-//   Future<String> saveImageData(context) async {
-//     String resp = "Some Error Occurred";
-//     try {
-//       String imageUrl = await uploadImageToStorage("ProfileImage");
-//       downloadUrl = imageUrl;
-//       notifyListeners();
-//       saveData(context);
-//     } catch (error) {
-//       resp = error.toString();
-//     }
-//     return resp;
-//   }
+
+  void pickUploadProfilePic() async {
+    final image = await ImagePicker().pickImage(
+      source: ImageSource.gallery,
+      maxHeight: 512,
+      maxWidth: 512,
+      imageQuality: 90,
+    );
+
+    Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");
+
+    await ref.putFile(File(image!.path));
+
+    ref.getDownloadURL().then((value) async {
+      notifyListeners();
+      downloadUrl = value;
+    });
+  }
+
+/*  Future<String> uploadImageToStorage(String childName) async {
+    Reference ref = storage.ref().child(childName);
+    UploadTask uploadTask = ref.putFile(File(image!.path));
+    TaskSnapshot snapshot = await uploadTask;
+    String downloadUrl = await snapshot.ref.getDownloadURL();
+    return downloadUrl;
+  }
+
+  Future<String> saveImageData(context) async {
+    String resp = "Some Error Occurred";
+    try {
+      String imageUrl = await uploadImageToStorage("ProfileImage");
+      downloadUrl = imageUrl;
+      notifyListeners();
+      saveData(context);
+    } catch (error) {
+      resp = error.toString();
+    }
+    return resp;
+  }*/
 }

@@ -49,10 +49,10 @@ class HomeScreenProvider extends ChangeNotifier {
                   text1: 'Hour',
                   text2: 'Minutes',
                   onHourChange: (value) {
-                    sleepTimeHour = value;
-                    ctrl.notifyListeners();
+                    // sleepTimeHour = value;
+                    // ctrl.notifyListeners();
                     log("sleepTimeHour :$sleepTimeHour");
-                    setState;
+                    // setState;
                   },
                   onMinChange: (value) {
                     sleepTimeMin = value;

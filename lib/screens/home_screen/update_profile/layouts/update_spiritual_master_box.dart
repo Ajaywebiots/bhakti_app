@@ -34,7 +34,7 @@ class UpdateSpiritualMasterBox extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   elevation: 0,
                   borderRadius: BorderRadius.circular(5),
-                  value: profilePvr.selectedItems,
+                  value: profilePvr.spiritualSelectedItems,
                   icon: Container(),
                   items: profilePvr.items.map((String items) {
                     return DropdownMenuItem(
@@ -46,7 +46,7 @@ class UpdateSpiritualMasterBox extends StatelessWidget {
                         ));
                   }).toList(),
                   onChanged: (newValue) {
-                    profilePvr.selectedItems = newValue!;
+                    profilePvr.spiritualSelectedItems = newValue!;
                     profilePvr.notifyListeners();
                   },
                 ),

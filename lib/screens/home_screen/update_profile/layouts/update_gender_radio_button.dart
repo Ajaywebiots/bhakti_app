@@ -3,7 +3,7 @@ import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/update_profile_provider.dart';
+import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/widgets/custom_title_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -12,7 +12,7 @@ class UpdateGenderRadioBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UpdateProfileProvider>(builder: (context,profilePvr,child) {
+    return Consumer<UpdateProfileProvider>(builder: (context, profilePvr, child) {
      return CustomTitleWidget(
         height: 52,
         radius: 8,
@@ -35,9 +35,9 @@ class UpdateGenderRadioBox extends StatelessWidget {
               profilePvr.notifyListeners();
             },
           ),
-          Text("Male",
+          Text(appFonts.male,
               style:
-                  appCss.dmDenseExtraBold16.textColor(const Color(0xff767676))),
+                  appCss.dmDenseMedium14.textColor(appColor(context).appTheme.primary)),
           Radio(
             fillColor: MaterialStateColor.resolveWith(
                 (states) => const Color(0xFF541F5C)),
@@ -48,9 +48,9 @@ class UpdateGenderRadioBox extends StatelessWidget {
               profilePvr.notifyListeners();
             },
           ),
-          Text("Female",
+          Text(appFonts.female,
               style:
-                  appCss.dmDenseExtraBold16.textColor(const Color(0xff767676))),
+              appCss.dmDenseMedium14.textColor(appColor(context).appTheme.primary)),
         ]),
       ).paddingSymmetric(vertical: 10);
     });

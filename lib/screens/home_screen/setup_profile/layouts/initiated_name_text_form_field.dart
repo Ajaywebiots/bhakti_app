@@ -12,7 +12,7 @@ class InitiatedNameTextBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SetUpUpdateProfileProvider>(
+    return Consumer<SetUpProfileProvider>(
         builder: (context, profilePvr, child) {
       return CustomTitleWidget(
         height: 52,

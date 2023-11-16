@@ -7,12 +7,12 @@ import 'package:bhakti_app/widgets/custom_title_widget.dart';
 import 'package:bhakti_app/widgets/text_common_widget.dart';
 import 'package:flutter_svg/svg.dart';
 
-class EmailTextBox extends StatelessWidget {
-  const EmailTextBox({super.key});
+class UpdateEmailTextBox extends StatelessWidget {
+  const UpdateEmailTextBox({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<SetUpProfileProvider>(
+    return Consumer<UpdateProfileProvider>(
         builder: (context, profilePvr, child) {
       return CustomTitleWidget(
         height: 52,
