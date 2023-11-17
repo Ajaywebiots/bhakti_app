@@ -1,5 +1,7 @@
 library horizontal_week_calendar;
 
+import 'dart:developer';
+
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:carousel_slider/carousel_slider.dart';
@@ -69,6 +71,8 @@ class HorizontalWeekCalendar extends StatefulWidget {
   /// Default value [Theme.of(context).primaryColor.withOpacity(.2)]
   final Color? monthColor;
 
+  final DateTime? datePickChange, todayDate;
+
   const HorizontalWeekCalendar({
     super.key,
     this.onDateChange,
@@ -83,7 +87,8 @@ class HorizontalWeekCalendar extends StatefulWidget {
     this.activeNavigatorColor,
     this.inactiveNavigatorColor,
     this.monthColor,
-    this.weekStartFrom = WeekStartFrom.Monday,
+    this.weekStartFrom = WeekStartFrom
+        .Monday, this.datePickChange, this.todayDate
   });
 
   @override
@@ -92,12 +97,9 @@ class HorizontalWeekCalendar extends StatefulWidget {
 
 class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
   CarouselController carouselController = CarouselController();
-
-  DateTime today = DateTime.now();
-  DateTime selectedDate = DateTime.now();
+  DateTime? today, selectedDate;
   List<DateTime> currentWeek = [];
   int currentWeekIndex = 0;
-
   List<List<DateTime>> listOfWeeks = [];
 
   @override
@@ -109,64 +111,19 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
   DateTime getDate(DateTime d) => DateTime(d.year, d.month, d.day);
 
   initCalendar() {
-    // List<DateTime> minus3Days = [];
-    // List<DateTime> add3Days = [];
-    // for (int index = 0; index < 3; index++) {
-    //   DateTime minusDate = today.add(Duration(days: -(index + 1)));
-    //   minus3Days.add(minusDate);
-    //   DateTime addDate = today.add(Duration(days: (index + 1)));
-    //   add3Days.add(addDate);
-    // }
-    // currentWeek.addAll(minus3Days.reversed.toList());
-    // currentWeek.add(today);
-    // currentWeek.addAll(add3Days);
-    // listOfWeeks.add(currentWeek);
-
     final date = DateTime.now();
-
-    DateTime startOfCurrentWeek = getDate(date).subtract(
-        const Duration(days: 6));
+    log("SEEEE : ${selectedDate}");
+    DateTime startOfCurrentWeek =
+    getDate(date).subtract(const Duration(days: 6));
     print("CurrentDate $startOfCurrentWeek");
     currentWeek.add(startOfCurrentWeek);
     for (int index = 0; index < 6; index++) {
-      DateTime addDate =
-      startOfCurrentWeek.add(Duration(days: (index + 1)));
+      DateTime addDate = startOfCurrentWeek.add(Duration(days: (index + 1)));
       currentWeek.add(addDate);
     }
     listOfWeeks.add(currentWeek);
     getMorePreviousWeeks();
   }
-
-  // initCalendar() {
-  //   final date = DateTime.now();
-  //   final DateTime startOfCurrentWeek =
-  //       widget.weekStartFrom == WeekStartFrom.Monday
-  //           ? getDate(date.subtract(Duration(days: date.weekday - 2)))
-  //           : getDate(date.subtract(Duration(days: date.weekday % 7)));
-
-  //   // Create a list for the current week.
-  //   currentWeek.add(startOfCurrentWeek);
-  //   log("current week :: $currentWeek");
-  //   // Add days after the current day to the right.
-  //   for (int index = 1; index <= 4; index++) {
-  //     DateTime addDate = startOfCurrentWeek.add(Duration(days: index));
-  //     currentWeek.add(addDate);
-  //   }
-
-  //   log("current week :: $currentWeek");
-  //   // Add days before the current day to the left.
-  //   for (int index = 1; index <= 13; index++) {
-  //     DateTime minusDate = startOfCurrentWeek.subtract(Duration(days: index));
-  //     currentWeek.insert(0, minusDate);
-  //   }
-
-  //   // Add the current day as the selected date (right side).
-  //   selectedDate = getDate(date);
-
-  //   listOfWeeks.add(currentWeek);
-
-  //   getMorePreviousWeeks();
-  // }
 
   getMorePreviousWeeks() {
     List<DateTime> minus7Days = [];
@@ -188,7 +145,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
     setState(() {
       selectedDate = date;
     });
-    widget.onDateChange?.call(selectedDate);
+    widget.onDateChange?.call(selectedDate!);
   }
 
   onBackClick() {
@@ -207,6 +164,8 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
       getMorePreviousWeeks();
     }
 
+    log("currentWeekIndex : $currentWeekIndex");
+
     widget.onWeekChange?.call(currentWeek);
     setState(() {});
   }
@@ -219,11 +178,27 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
 
   isCurrentYear() {
     return DateFormat('yyyy').format(currentWeek[0]) ==
-        DateFormat('yyyy').format(today);
+        DateFormat('yyyy').format(today!);
   }
+
 
   @override
   Widget build(BuildContext context) {
+    today = widget.todayDate;
+    selectedDate = widget.datePickChange;
+    if (today != selectedDate) {
+      for (int ind = 0; ind < listOfWeeks.length; ind++) {
+        for (int weekIndex = 0;
+        weekIndex < listOfWeeks[ind].length;
+        weekIndex++) {
+          if (selectedDate == listOfWeeks[ind][weekIndex]) {
+            log("CHECK : ${ind}");
+           carouselController.jumpToPage(ind);
+          }
+        }
+      }
+      // carouselController.jumpToPage(page);
+    }
     var theme = Theme.of(context);
     var theme1 =
     appCss.dmDenseMedium12.textColor(appColor(context).appTheme.rulesClr);
@@ -233,7 +208,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
         .width;
 
     double boxHeight = withOfScreen / 7;
-
+    log("DATEE : $selectedDate");
     return currentWeek.isEmpty
         ? const SizedBox()
         : Column(children: [
@@ -288,7 +263,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                                             .format(listOfWeeks[ind]
                                         [weekIndex]) ==
                                             DateFormat('dd-MM-yyyy')
-                                                .format(selectedDate)
+                                                .format(selectedDate!)
                                             ? widget.activeBackgroundColor ??
                                             theme.primaryColor
                                             : listOfWeeks[ind][weekIndex]
@@ -321,7 +296,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                                                       [weekIndex]) ==
                                                       DateFormat('dd-MM-yyyy')
                                                           .format(
-                                                          selectedDate)
+                                                          selectedDate!)
                                                       ? widget
                                                       .activeTextColor ??
                                                       Colors.white
@@ -349,7 +324,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                                                           DateFormat(
                                                               'dd-MM-yyyy')
                                                               .format(
-                                                              selectedDate)
+                                                              selectedDate!)
                                                           ? widget
                                                           .activeTextColor ??
                                                           Colors.white
@@ -386,6 +361,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
               enableInfiniteScroll: false,
               reverse: true,
               onPageChanged: (index, reason) {
+                log("CCCC : $index");
                 onWeekChange(index);
               }))
     ]);

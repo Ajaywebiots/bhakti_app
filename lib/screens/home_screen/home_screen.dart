@@ -1,5 +1,4 @@
 import 'package:bhakti_app/widgets/stateful_wrapper.dart';
-
 import 'layouts/notes_layout.dart';
 import 'layouts/regulation_layout.dart';
 import 'package:bhakti_app/config.dart';
@@ -74,38 +73,6 @@ class _HomeScreenState extends State<HomeScreen> {
                                 Align(
                                     alignment: Alignment.centerLeft,
                                     child: ChantingCommon()),
-                                // Container(
-                                //   decoration: BoxDecoration(
-                                //       color: appColor(context).appTheme.whiteColor,
-                                //       borderRadius: BorderRadius.circular(8),
-                                //       boxShadow: [
-                                //         BoxShadow(
-                                //             color: appColor(context).appTheme.shadowClr,
-                                //             blurRadius: 3,
-                                //             offset: const Offset(2, 2),
-                                //             spreadRadius: 2)
-                                //       ]),
-                                //   height: Sizes.s75,
-                                //   width: Sizes.s25,
-                                //   child: Icon(
-                                //       onLength == false
-                                //           ? Icons.keyboard_arrow_right
-                                //           : Icons.keyboard_arrow_left,
-                                //       color: appColor(context).appTheme.primary),
-                                // ).inkWell(onTap: () {
-                                //   if (chantingList.length > 3) {
-                                //     if (onLength) {
-                                //       homeScreenPvr.itemScrollController
-                                //           .jumpTo(index: 0);
-                                //     } else {
-                                //       homeScreenPvr.itemScrollController
-                                //           .jumpTo(index: chantingList.length);
-                                //     }
-                                //     setState(() {
-                                //       onLength = !onLength;
-                                //     });
-                                //   }
-                                // })
                               ]).width(double.infinity),
                           const VSpace(Insets.i15),
                           Text(appFonts.regulations,

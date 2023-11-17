@@ -26,11 +26,11 @@ class PhoneNumberTextBox extends StatelessWidget {
               maxLength: 10,
               validator: (value) {
                 if (value!.isNotEmpty) {
-
                   profilePvr.phoneNumberValid = null;
                   profilePvr.notifyListeners();
                   return null;
                 }
+                return null;
               },
               keyboardType: TextInputType.number,
               hintText: "Phone Number",

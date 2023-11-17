@@ -5,6 +5,7 @@ import 'package:bhakti_app/screens/auth_screen/email_login_screen/email_login_sc
 import 'package:bhakti_app/screens/auth_screen/phone_login_screen/phone_login_screen.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bhakti_app/models/user_model.dart';
+import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
 import 'package:google_sign_in/google_sign_in.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bhakti_app/screens/home_screen/home_screen.dart';
@@ -78,10 +79,57 @@ class LoginAuthProvider extends ChangeNotifier {
     }));
   }
 
-  loginFacebookNavigator(context) {
-    Navigator.push(context, MaterialPageRoute(builder: (BuildContext context) {
-      return Container();
-    }));
+  Future<Resource?> signInWithFacebook(context) async {
+    // SharedPreferences? preferences;
+    // try {
+    //   final LoginResult result = await FacebookAuth.instance.login();
+    //   switch (result.status) {
+    //     case LoginStatus.success:
+    //       final AuthCredential facebookCredential =
+    //           FacebookAuthProvider.credential(result.accessToken!.token);
+    //       final userCredential =
+    //           await auth.signInWithCredential(facebookCredential);
+    //       User? user =
+    //           (await auth.signInWithCredential(facebookCredential)).user;
+    //       notifyListeners();
+    //       userNameGoogle = user!.email!;
+    //
+    //       String? token = await user.getIdToken();
+    //
+    //       final commonApi =
+    //           Provider.of<CommonApiProvider>(context, listen: false);
+    //
+    //       await commonApi.socialLogin(context, token);
+    //
+    //       preferences = await SharedPreferences.getInstance();
+    //       UserModel? userModel;
+    //       await Future.delayed(Durations.s2);
+    //       userModel = UserModel.fromJson(
+    //           json.decode(preferences.getString(session.user)!));
+    //       debugPrint("userModel ${userModel.name}");
+    //       if (userModel.name == null) {
+    //         Navigator.pushReplacement(context,
+    //             MaterialPageRoute(builder: (context) {
+    //           return const SetUpProfile();
+    //         }));
+    //       } else {
+    //         Navigator.pushReplacement(context,
+    //             MaterialPageRoute(builder: (context) {
+    //           return const HomeScreen();
+    //         }));
+    //       }
+    //
+    //       return Resource(status: Status.Success);
+    //     case LoginStatus.cancelled:
+    //       return Resource(status: Status.Cancelled);
+    //     case LoginStatus.failed:
+    //       return Resource(status: Status.Error);
+    //     default:
+    //       return null;
+    //   }
+    // } on FirebaseAuthException catch (e) {
+    //   throw e;
+    // }
   }
 
   loginEmailNavigator(context) {
@@ -90,3 +138,11 @@ class LoginAuthProvider extends ChangeNotifier {
     }));
   }
 }
+
+class Resource {
+  final Status status;
+
+  Resource({required this.status});
+}
+
+enum Status { Success, Error, Cancelled }

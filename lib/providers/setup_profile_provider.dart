@@ -10,22 +10,22 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bhakti_app/screens/home_screen/home_screen.dart';
 
 class SetUpProfileProvider extends ChangeNotifier {
-  bool imgStatus = false;
-  TextEditingController name = TextEditingController();
-  TextEditingController dob = TextEditingController();
-  TextEditingController emailId = TextEditingController();
-  TextEditingController phoneNum = TextEditingController();
-  TextEditingController state = TextEditingController();
-  TextEditingController city = TextEditingController();
-  TextEditingController initiatedName = TextEditingController();
-  TextEditingController yatraName = TextEditingController();
-  TextEditingController initiatedDate = TextEditingController();
+  final TextEditingController name = TextEditingController();
+  final TextEditingController dob = TextEditingController();
+  final TextEditingController emailId = TextEditingController();
+  final TextEditingController phoneNum = TextEditingController();
+  final TextEditingController state = TextEditingController();
+  final TextEditingController city = TextEditingController();
+  final TextEditingController initiatedName = TextEditingController();
+  final TextEditingController yatraName = TextEditingController();
+  final TextEditingController initiatedDate = TextEditingController();
   final ImagePicker picker = ImagePicker();
+
   bool onChange = false;
   bool onChange1 = false;
-  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
-
+  bool imgStatus = false;
   FirebaseStorage storage = FirebaseStorage.instance;
+
   XFile? image;
   int? selectedGender;
   int? selectedMarital;
@@ -35,7 +35,6 @@ class SetUpProfileProvider extends ChangeNotifier {
   bool textError = false;
   bool value = false;
   bool valueFirst = true, isLoading = false;
-
   String? nameValid,
       dateValid,
       emailValid,
@@ -47,13 +46,10 @@ class SetUpProfileProvider extends ChangeNotifier {
       initiatedDateValid;
 
   String selectedItems = "Gurunanak";
-  List<String> masterItems = [
-    'Gurunanak',
-    'Demo 2',
-    'Demo 3',
-  ];
-  final formKey = GlobalKey<FormState>();
 
+  List<String> masterItems = ['Gurunanak', 'Demo 2', 'Demo 3'];
+  final formKey = GlobalKey<FormState>();
+  final GlobalKey<ScaffoldState> scaffoldKey = GlobalKey<ScaffoldState>();
   List countryItems = [];
   dynamic countrySelected;
   SharedPreferences? preferences;
@@ -77,19 +73,35 @@ class SetUpProfileProvider extends ChangeNotifier {
       notifyListeners();
       log("dob.text L ${dob.text}");
       try {
-        List<int> listData = utf8.encode(downloadUrl);
-        String base64 = base64Encode(listData);
+        String newUrl = "";
 
+        if(image != null) {
+          Reference reference = FirebaseStorage.instance.ref().child(
+              image!.name);
+          var file = File(image!.path);
+          UploadTask uploadTask = reference.putFile(file);
+
+          await uploadTask.then((res) async {
+            await res.ref.getDownloadURL().then((images) async {
+              log("res : $images");
+              newUrl = images;
+              notifyListeners();
+            }, onError: (err) {});
+          });
+        }
+
+        log("dssf4444 sss $downloadUrl");
+        log("dssf4444 $newUrl");
         Map<String, dynamic> body = {
           "name": name.text,
           "date_of_birth": dob.text,
           "gender": selectedGender != null
               ? selectedGender == 1
-                  ? "male"
-                  : "female"
+              ? "male"
+              : "female"
               : "",
           "email": emailId.text,
-          "mobile_number": "+${phoneNum.text}",
+          "mobile_number": phoneNum.text,
           "country": countrySelected['code'],
           "state": state.text,
           "city": city.text,
@@ -100,24 +112,13 @@ class SetUpProfileProvider extends ChangeNotifier {
           "intitiation_date": null,
           "marital_status": selectedMarital != null
               ? selectedMarital == 1
-                  ? "married"
-                  : "unmarried"
+              ? "married"
+              : "unmarried"
               : "",
-          "profile_picture_url": downloadUrl
+          "profile_picture_url": newUrl == "" ? downloadUrl : newUrl
         };
-        log("dssf ${image!.path}");
 
-        /*Reference ref = FirebaseStorage.instance.ref().child("profilepic.jpg");*/
-        Reference reference = FirebaseStorage.instance.ref().child(image!.name);
-        var file = File(image!.path);
-        UploadTask uploadTask = reference.putFile(file);
 
-        uploadTask.then((res) {
-          log("res : $res");
-          res.ref.getDownloadURL().then((image) async {
-            downloadUrl = image;
-          }, onError: (err) {});
-        });
 
 
 
@@ -132,9 +133,13 @@ class SetUpProfileProvider extends ChangeNotifier {
             pref.setString(session.user,
                 json.encode(UserModel.fromJson(value.data['data'])));
             userModel = UserModel.fromJson(value.data['data']);
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-              return HomeScreen();
-            },));
+            newUrl = "";
+            image = null;
+            Navigator.pushReplacement(context, MaterialPageRoute(
+              builder: (context) {
+                return HomeScreen();
+              },
+            ));
           } else {
             ScaffoldMessenger.of(context)
                 .showSnackBar(SnackBar(content: Text(value.message)));

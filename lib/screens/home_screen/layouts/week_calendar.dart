@@ -16,6 +16,7 @@ class _WeekCalendarState extends State<WeekCalendar> {
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(
         builder: (context1, homeScreenPvr, child) {
+          log("HOME SEL : ${homeScreenPvr.selectedDate}");
       return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Container(
             height: 72,
@@ -23,6 +24,8 @@ class _WeekCalendarState extends State<WeekCalendar> {
                 borderRadius: BorderRadius.circular(8),
                 color: appColor(context).appTheme.whiteColor),
             child: HorizontalWeekCalendar(
+               datePickChange: homeScreenPvr.selectedDate,
+                todayDate: DateTime.now(),
                 inactiveWeekColor: appColor(context).appTheme.rulesClr,
                 weekStartFrom: WeekStartFrom.Sunday,
                 activeBackgroundColor: appColor(context).appTheme.primary,

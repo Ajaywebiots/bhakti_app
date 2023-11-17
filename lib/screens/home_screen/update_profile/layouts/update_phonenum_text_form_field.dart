@@ -1,7 +1,6 @@
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
-import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/widgets/text_common_widget.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:bhakti_app/config.dart';
@@ -26,11 +25,11 @@ class UpdatePhoneNumberTextBox extends StatelessWidget {
               maxLength: 10,
               validator: (value) {
                 if (value!.isNotEmpty) {
-
                   profilePvr.phoneNumberValid = null;
                   profilePvr.notifyListeners();
                   return null;
                 }
+                return null;
               },
               keyboardType: TextInputType.number,
               hintText: "Phone Number",
@@ -43,7 +42,7 @@ class UpdatePhoneNumberTextBox extends StatelessWidget {
                     SvgPicture.asset(eSvgAssets.call1, height: 20),
                     const HSpace(Insets.i10),
                     SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
-                    const HSpace(Insets.i20)
+                    const HSpace(Insets.i20),
                   ]))).paddingSymmetric(vertical: 10);
     });
   }

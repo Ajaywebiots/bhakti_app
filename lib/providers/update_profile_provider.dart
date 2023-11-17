@@ -8,8 +8,6 @@ import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import '../screens/home_screen/home_screen.dart';
-
 class UpdateProfileProvider extends ChangeNotifier {
   bool imgStatus = false;
   TextEditingController name = TextEditingController();
@@ -30,6 +28,9 @@ class UpdateProfileProvider extends ChangeNotifier {
   bool textError = false;
   XFile? image;
 
+  final focusNode = FocusNode();
+  String countryCode = "91";
+
   bool value = false;
   bool valueFirst = true, isLoading = false;
 
@@ -48,11 +49,7 @@ class UpdateProfileProvider extends ChangeNotifier {
   UserModel? userModel;
 
   String spiritualSelectedItems = "Gurunanak";
-  List<String> items = [
-    'Gurunanak',
-    'Demo 2',
-    'Demo 3',
-  ];
+  List<String> items = ['Gurunanak', 'Demo 2', 'Demo 3'];
   final formKey = GlobalKey<FormState>();
 
   List countryItems = [];
@@ -74,24 +71,19 @@ class UpdateProfileProvider extends ChangeNotifier {
       showLoading(context);
       notifyListeners();
       try {
-
-
-String newUrl = "";
+        String newUrl = "";
         Reference reference = FirebaseStorage.instance.ref().child(image!.name);
         var file = File(image!.path);
         UploadTask uploadTask = reference.putFile(file);
 
-       await uploadTask.then((res)async {
-
-         await res.ref.getDownloadURL().then((images) async {
+        await uploadTask.then((res) async {
+          await res.ref.getDownloadURL().then((images) async {
             log("res : $images");
             newUrl = images;
             notifyListeners();
           }, onError: (err) {});
         });
 
-        List<int> listData = utf8.encode(downloadUrl);
-        String base64 = base64Encode(listData);
 
         log("dssf4444 sss $downloadUrl");
         log("dssf4444 $newUrl");
@@ -100,11 +92,11 @@ String newUrl = "";
           "date_of_birth": dob.text,
           "gender": selectedGender != null
               ? selectedGender == 1
-              ? "male"
-              : "female"
+                  ? "male"
+                  : "female"
               : "",
           "email": emailId.text,
-          "mobile_number": phoneNum.text,
+          "mobile_number": "+${phoneNum.text}",
           "country": countrySelected['code'],
           "state": state.text,
           "city": city.text,
@@ -115,12 +107,11 @@ String newUrl = "";
           "intitiation_date": null,
           "marital_status": selectedMarital != null
               ? selectedMarital == 1
-              ? "married"
-              : "unmarried"
+                  ? "married"
+                  : "unmarried"
               : "",
-          "profile_picture_url": newUrl
+          "profile_picture_url": newUrl == "" ? downloadUrl : newUrl
         };
-
 
         await apiServices
             .postApi(api.profileUpdate, body, isToken: true)
@@ -133,6 +124,8 @@ String newUrl = "";
                 json.encode(UserModel.fromJson(value.data['data'])));
             userModel = UserModel.fromJson(value.data['data']);
             notifyListeners();
+            newUrl = "";
+            image = null;
             Navigator.pop(context);
           } else {
             ScaffoldMessenger.of(context)

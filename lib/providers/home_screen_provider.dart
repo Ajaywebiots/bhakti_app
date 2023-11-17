@@ -1,13 +1,12 @@
 import 'dart:convert';
 import 'dart:developer';
-
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/auth_screen/login_auth_screen/login_auth_screen.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 import '../models/user_model.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
@@ -54,10 +53,10 @@ class HomeScreenProvider extends ChangeNotifier {
                   text1: 'Hour',
                   text2: 'Minutes',
                   onHourChange: (value) {
-                    // sleepTimeHour = value;
-                    // ctrl.notifyListeners();
+                    sleepTimeHour = value;
+                    ctrl.notifyListeners();
                     log("sleepTimeHour :$sleepTimeHour");
-                    // setState;
+                    setState;
                   },
                   onMinChange: (value) {
                     sleepTimeMin = value;
@@ -112,14 +111,52 @@ class HomeScreenProvider extends ChangeNotifier {
         });
   }
 
-  var selectedDate = DateTime.now();
-  onCalendarDateChange(date) {
-    notifyListeners();
-    selectedDate = date;
-    notifyListeners();
-    log("selected date ::: $selectedDate");
+  DateTime selectedDate = DateTime.now();
+
+  onCalendarChange(context) async {
+    var results = await showCalendarDatePicker2Dialog(
+        context: context,
+        config: CalendarDatePicker2WithActionButtonsConfig(
+            lastDate: DateTime.now(), firstDate: DateTime(1886)),
+        dialogSize: const Size(325, 400),
+        dialogBackgroundColor: Colors.white,
+        builder: (context, child) {
+          return Theme(
+              data: Theme.of(context).copyWith(
+                  dialogTheme: DialogTheme(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0))),
+                  colorScheme: ColorScheme.light(
+                      primary: appColor(context).appTheme.primary,
+                      onSurface: Colors.black,
+                      error: Colors.red),
+                  textButtonTheme: TextButtonThemeData(
+                      style: TextButton.styleFrom(
+                          textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold),
+                          primary: appColor(context).appTheme.whiteColor,
+                          backgroundColor: appColor(context).appTheme.primary,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20))))),
+              child: child!);
+        },
+        borderRadius: BorderRadius.circular(15));
+    log("result :: $results");
+    if (results != null && results.isNotEmpty) {
+      selectedDate = results[0]!;
+      onCalendarDateChange(selectedDate);
+      notifyListeners();
+      log("Selected date: $selectedDate");
+    }
   }
 
+  onCalendarDateChange(date) {
+    selectedDate = date;
+    //notifyListeners();
+    log("onCalendarDateChange ::: $selectedDate");
+  }
 
   onSandhyaArtiSelect(context) {
     showDialog(
@@ -250,13 +287,10 @@ class HomeScreenProvider extends ChangeNotifier {
   }
 
   onReady(context) async {
-   SharedPreferences
-    preferences = await SharedPreferences.getInstance();
-
-//Map user = json.decode(preferences!.getString(session.user)!);
+    SharedPreferences preferences = await SharedPreferences.getInstance();
     await Future.delayed(Durations.s1);
     userModel =
-        UserModel.fromJson(json.decode(preferences!.getString(session.user)!));
+        UserModel.fromJson(json.decode(preferences.getString(session.user)!));
 
     notifyListeners();
   }
