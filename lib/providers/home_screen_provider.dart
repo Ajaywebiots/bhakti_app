@@ -152,9 +152,9 @@ class HomeScreenProvider extends ChangeNotifier {
     }
   }
 
-  onCalendarDateChange(date) {
+    onCalendarDateChange(date) {
     selectedDate = date;
-    //notifyListeners();
+    notifyListeners();
     log("onCalendarDateChange ::: $selectedDate");
   }
 
@@ -279,6 +279,7 @@ class HomeScreenProvider extends ChangeNotifier {
 
   onSignOutClick(context) async {
     await FirebaseAuth.instance.signOut().then((value) {
+      notifyListeners();
       clearSharedPreferences();
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
         return const LoginAuthScreen();

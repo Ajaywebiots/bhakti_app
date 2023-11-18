@@ -12,7 +12,7 @@ class UpdateProfilePicture extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<UpdateProfileProvider>(builder: (child, profilePvr, ss) {
       return Stack(children: [
-        profilePvr.imagePath != ""
+        profilePvr.imagePath != "" && profilePvr.image != null
             ? CircleAvatar(
                 backgroundImage: FileImage(File(profilePvr.imagePath)),
                 maxRadius: 55)

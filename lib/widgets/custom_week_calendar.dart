@@ -112,7 +112,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
 
   initCalendar() {
     final date = DateTime.now();
-    log("SEEEE : ${selectedDate}");
+    log("SEEEE : $selectedDate");
     DateTime startOfCurrentWeek =
     getDate(date).subtract(const Duration(days: 6));
     print("CurrentDate $startOfCurrentWeek");

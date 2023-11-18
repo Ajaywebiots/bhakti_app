@@ -6,7 +6,9 @@ import 'package:bhakti_app/models/user_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image/image.dart' as img;
 import 'package:shared_preferences/shared_preferences.dart';
+
 
 class UpdateProfileProvider extends ChangeNotifier {
   bool imgStatus = false;
@@ -64,6 +66,13 @@ class UpdateProfileProvider extends ChangeNotifier {
     countrySelected = countryItems[0];
     notifyListeners();
   }
+  Future<String> resizeAndEncodeImage(File imageFile) async {
+    List<int> imageBytes = await imageFile.readAsBytes();
+    img.Image image = img.decodeImage(Uint8List.fromList(imageBytes))!;
+    img.Image resizedImage = img.copyResize(image, width: 512, height: 512);
+    List<int> resizedImageBytes = img.encodePng(resizedImage)!;
+    return base64Encode(resizedImageBytes);
+  }
 
   Future<void> saveData(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
@@ -72,6 +81,8 @@ class UpdateProfileProvider extends ChangeNotifier {
       notifyListeners();
       try {
         String newUrl = "";
+        String base64Image = await resizeAndEncodeImage(File(image!.path));
+        newUrl = base64Image;
         Reference reference = FirebaseStorage.instance.ref().child(image!.name);
         var file = File(image!.path);
         UploadTask uploadTask = reference.putFile(file);
@@ -96,7 +107,7 @@ class UpdateProfileProvider extends ChangeNotifier {
                   : "female"
               : "",
           "email": emailId.text,
-          "mobile_number": "+${phoneNum.text}",
+          "mobile_number": phoneNum.text,
           "country": countrySelected['code'],
           "state": state.text,
           "city": city.text,

@@ -4,10 +4,13 @@ import 'dart:io';
 import 'package:flutter/services.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:image_picker/image_picker.dart';
+import 'package:image/image.dart' as img;
 import 'package:bhakti_app/models/user_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bhakti_app/screens/home_screen/home_screen.dart';
+import 'dart:ui' as ui;
+import 'dart:io';
 
 class SetUpProfileProvider extends ChangeNotifier {
   final TextEditingController name = TextEditingController();
@@ -66,19 +69,44 @@ class SetUpProfileProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  Future<String> resizeAndEncodeImage(File imageFile) async {
+    List<int> imageBytes = await imageFile.readAsBytes();
+    img.Image image = img.decodeImage(Uint8List.fromList(imageBytes))!;
+    img.Image resizedImage = img.copyResize(image, width: 512, height: 512);
+    List<int> resizedImageBytes = img.encodePng(resizedImage);
+    return base64Encode(resizedImageBytes);
+  }
+
+  // Future<void> getImageDimensions(File imageFile) async {
+  //   Uint8List bytes = await imageFile.readAsBytes();
+  //   ui.Codec codec = await ui.instantiateImageCodec(bytes);
+  //
+  //   ui.FrameInfo frameInfo = await codec.getNextFrame();
+  //   int width = frameInfo.image.width;
+  //   int height = frameInfo.image.height;
+  //
+  //   print("Image Width: $width");
+  //   print("Image Height: $height");
+  // }
+
   Future<void> saveData(context) async {
     SharedPreferences pref = await SharedPreferences.getInstance();
     if (formKey.currentState!.validate()) {
       showLoading(context);
       notifyListeners();
-      log("dob.text L ${dob.text}");
+
       try {
         String newUrl = "";
+        if (image != null) {
+          // await getImageDimensions(File(image!.path));
 
-        if(image != null) {
-          Reference reference = FirebaseStorage.instance.ref().child(
-              image!.name);
+          String base64Image = await resizeAndEncodeImage(File(image!.path));
+          newUrl = base64Image;
+
+          Reference reference =
+              FirebaseStorage.instance.ref().child(image!.name);
           var file = File(image!.path);
+
           UploadTask uploadTask = reference.putFile(file);
 
           await uploadTask.then((res) async {
@@ -97,37 +125,33 @@ class SetUpProfileProvider extends ChangeNotifier {
           "date_of_birth": dob.text,
           "gender": selectedGender != null
               ? selectedGender == 1
-              ? "male"
-              : "female"
+                  ? "male"
+                  : "female"
               : "",
           "email": emailId.text,
-          "mobile_number": phoneNum.text,
+          "mobile_number": "+${phoneNum.text}",
           "country": countrySelected['code'],
           "state": state.text,
           "city": city.text,
-          "yatra_name": "Mathuradesh",
+          "yatra_name": yatraName.text,
           "initiated": value,
           "initiated_name": initiatedName.text,
           "spiritual_master": selectedItems,
-          "intitiation_date": null,
+          "intitiation_date": initiatedDate.text,
           "marital_status": selectedMarital != null
               ? selectedMarital == 1
-              ? "married"
-              : "unmarried"
+                  ? "married"
+                  : "unmarried"
               : "",
           "profile_picture_url": newUrl == "" ? downloadUrl : newUrl
         };
 
-
-
-
-
+        log("bodybody $body");
         log("dssf $downloadUrl");
         await apiServices
             .postApi(api.profileUpdate, body, isToken: true)
             .then((value) async {
           hideLoading(context);
-
           notifyListeners();
           if (value.isSuccess!) {
             pref.setString(session.user,
