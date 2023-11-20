@@ -21,7 +21,7 @@ class ChantingCommon extends StatelessWidget {
               itemBuilder: (context, index) {
                 return CommonChantingContainer(
                     text: chantingList[index]['time'],
-                    chantingText: homeScreenPvr.chantingRounds[index][0],
+                    chantingText: chantingList[index]['chantingText'],
                     onTap: () {
                       homeScreenPvr.onChantingCountSelect(context);
                     });

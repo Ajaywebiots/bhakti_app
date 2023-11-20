@@ -9,6 +9,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
+import '../services/sadhana_api_data.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
   int index = 0;
@@ -302,8 +303,6 @@ class HomeScreenProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  var chantingRounds = "";
-
   getData(context) async {
     try {
       Map<String, String> body = {
@@ -318,36 +317,29 @@ class HomeScreenProvider extends ChangeNotifier {
         log('From Date: ${value.isSuccess!}');
         if (value.isSuccess!) {
           log('From Date: ${value.data['sadhana']}');
-          Sadhana sadhana = Sadhana.fromJson(value.data);
-          var sleepData = sadhana.sadhanaData[0]['data']['sleep'];
-          var mangalaData = sadhana.sadhanaData[0]['data']['mangala_arti'];
-          var sandhyaData = sadhana.sadhanaData[0]['data']['sandhya_arti'];
-          var chantingData = sadhana.sadhanaData[0]['data']['chanting'];
+          SadhanaData sadhana = SadhanaData.fromJson(value.data);
+          var sleepData = sadhana.data!.sleep;
+          var mangalaData = sadhana.data!.mangalaArti!;
+          var sandhyaData = sadhana.data!.sandhyaArti;
 
-
-          log("homeScreenPvr.chantingRounds[index]  :: ${chantingData['slot_1']['rounds']}");
-          log("homeScreenPvr.chantingRounds[index]  :: ${chantingData['slot_2']['rounds']}");
-          log("homeScreenPvr.chantingRounds[index]  :: ${chantingData['slot_3']['rounds']}");
-          log("homeScreenPvr.chantingRounds[index]  :: ${chantingData['slot_4']['rounds']}");
 
 
           var dateFormat = DateFormat("h:mm a");
           DateTime slept_time =
-              DateFormat("hh:mm").parse(sleepData['slept_time']);
+              DateFormat("hh:mm").parse(sleepData!.sleptTime!);
           DateTime wakeup_timeData =
-              DateFormat("hh:mm").parse(sleepData['wakeup_time']);
+              DateFormat("hh:mm").parse(sleepData.wakeupTime!);
           DateTime mangalaArtiData =
-              DateFormat("hh:mm").parse(mangalaData['time']);
-          bool sandhyaArtiData = sandhyaData['sandhya_arti'];
+              DateFormat("hh:mm").parse(mangalaData.time!);
+          bool sandhyaArtiData = sandhyaData!.sandhyaArti!;
 
-          chantingRounds = chantingData;
 
           sleepAt = dateFormat.format(slept_time);
           wakeupTime = dateFormat.format(wakeup_timeData);
           mangalaArtiTime = dateFormat.format(mangalaArtiData);
           isSandhyaArti = sandhyaArtiData;
-          log('From Date: ${sadhana.fromDate}');
-          log('To Date: ${sadhana.toDate}');
+          // log('From Date: ${sadhana.fromDate}');
+          // log('To Date: ${sadhana.toDate}');
 
 
           // for (var sadhanaEntry in sadhana.sadhanaData) {
@@ -367,21 +359,21 @@ class HomeScreenProvider extends ChangeNotifier {
   }
 }
 
-class Sadhana {
-  String fromDate;
-  String toDate;
-  List<Map<String, dynamic>> sadhanaData;
-
-  Sadhana(
-      {required this.fromDate,
-      required this.toDate,
-      required this.sadhanaData});
-
-  factory Sadhana.fromJson(Map<String, dynamic> json) {
-    return Sadhana(
-      fromDate: json['from_date'],
-      toDate: json['to_date'],
-      sadhanaData: List<Map<String, dynamic>>.from(json['sadhana']),
-    );
-  }
-}
+// class Sadhana {
+//   String fromDate;
+//   String toDate;
+//   List<Map<String, dynamic>> sadhanaData;
+//
+//   Sadhana(
+//       {required this.fromDate,
+//       required this.toDate,
+//       required this.sadhanaData});
+//
+//   factory Sadhana.fromJson(Map<String, dynamic> json) {
+//     return Sadhana(
+//       fromDate: json['from_date'],
+//       toDate: json['to_date'],
+//       sadhanaData: List<Map<String, dynamic>>.from(json['sadhana']),
+//     );
+//   }
+// }
