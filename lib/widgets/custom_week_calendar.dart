@@ -70,10 +70,13 @@ class HorizontalWeekCalendar extends StatefulWidget {
   ///
   /// Default value [Theme.of(context).primaryColor.withOpacity(.2)]
   final Color? monthColor;
+  String? selectDate;
 
   final DateTime? datePickChange, todayDate;
 
-  const HorizontalWeekCalendar({
+
+
+  HorizontalWeekCalendar({
     super.key,
     this.onDateChange,
     this.onWeekChange,
@@ -88,7 +91,7 @@ class HorizontalWeekCalendar extends StatefulWidget {
     this.inactiveNavigatorColor,
     this.monthColor,
     this.weekStartFrom = WeekStartFrom
-        .Monday, this.datePickChange, this.todayDate
+        .Monday, this.datePickChange, this.todayDate, this.selectDate
   });
 
   @override
@@ -121,8 +124,53 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
       DateTime addDate = startOfCurrentWeek.add(Duration(days: (index + 1)));
       currentWeek.add(addDate);
     }
+
+    listOfWeeks.add(currentWeek);
+    widget.selectDate =" ${currentWeek.first.year}-${currentWeek.first.month}-${currentWeek.first.day}";
+    log("currentWeek :: ${currentWeek.first.year}-${currentWeek.first.month}-${currentWeek.first.day}");
+    log("currentWeek :: ${currentWeek.last}");
+
+
+
+
+
+    getMorePreviousWeeks();
+  }
+  void didUpdateWidget(covariant HorizontalWeekCalendar oldWidget) {
+    if (widget.datePickChange != null) {
+      // Update the calendar to the selected date from the date picker
+      updateCalendarToSelectedDate(widget.datePickChange!);
+    }
+    super.didUpdateWidget(oldWidget);
+  }
+
+  void updateCalendarToSelectedDate(DateTime selectedDate) {
+    // Clear existing data
+    currentWeek = [];
+    listOfWeeks = [];
+
+    // Calculate new weeks starting from the selected date
+    DateTime startOfSelectedWeek = getDate(selectedDate).subtract(
+        const Duration(days: 6));
+    currentWeek.add(startOfSelectedWeek);
+
+    for (int index = 0; index < 6; index++) {
+      DateTime addDate = startOfSelectedWeek.add(Duration(days: (index + 1)));
+      currentWeek.add(addDate);
+    }
+
     listOfWeeks.add(currentWeek);
     getMorePreviousWeeks();
+
+    // Find the index of the selected week
+    int selectedWeekIndex = listOfWeeks.indexWhere((week) =>
+        week.contains(selectedDate));
+
+    // Scroll to the selected week
+    if (selectedWeekIndex != -1) {
+      carouselController.jumpToPage(selectedWeekIndex);
+      onWeekChange(selectedWeekIndex);
+    }
   }
 
   getMorePreviousWeeks() {
@@ -150,14 +198,19 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
 
   onBackClick() {
     carouselController.nextPage();
+
   }
+
+
+
 
   onNextClick() {
     carouselController.previousPage();
   }
 
   onWeekChange(index) {
-    currentWeekIndex = index;
+    // currentWeekIndex = index;
+   /* log("currentWeekIndexcurrentWeekIndexcurrentWeekIndex :: $currentWeekIndex");
     currentWeek = listOfWeeks[currentWeekIndex];
 
     if (currentWeekIndex + 1 == listOfWeeks.length) {
@@ -166,8 +219,8 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
 
     log("currentWeekIndex : $currentWeekIndex");
 
-    widget.onWeekChange?.call(currentWeek);
-    setState(() {});
+    widget.onWeekChange?.call(currentWeek);*/
+    // setState(() {});
   }
 
   // =================
@@ -193,7 +246,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
         weekIndex++) {
           if (selectedDate == listOfWeeks[ind][weekIndex]) {
             log("CHECK : ${ind}");
-           carouselController.jumpToPage(ind);
+            carouselController.jumpToPage(ind);
           }
         }
       }

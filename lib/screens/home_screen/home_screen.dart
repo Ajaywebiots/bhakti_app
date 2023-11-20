@@ -1,4 +1,3 @@
-import 'package:bhakti_app/widgets/stateful_wrapper.dart';
 import 'layouts/notes_layout.dart';
 import 'layouts/regulation_layout.dart';
 import 'package:bhakti_app/config.dart';
@@ -6,6 +5,7 @@ import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/widgets/common_app_bar.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
+import 'package:bhakti_app/widgets/stateful_wrapper.dart';
 import 'package:bhakti_app/providers/home_screen_provider.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'book_read_presently_screen/book_read_presently_screen.dart';

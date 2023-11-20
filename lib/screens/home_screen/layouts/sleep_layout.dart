@@ -7,7 +7,6 @@ import 'package:bhakti_app/screens/home_screen/layouts/common_container.dart';
 
 class SleepLayout extends StatelessWidget {
   const SleepLayout({super.key});
-
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(
@@ -20,7 +19,7 @@ class SleepLayout extends StatelessWidget {
                 onTap: () => homeScreenPvr.onSleepTimeSelect(context),
                 onToggle: (val) {},
                 text: appFonts.sleptAt,
-                timeText: '10:30 PM',
+                timeText: homeScreenPvr.sleepAt,
                 svgImage: eSvgAssets.sleptTimeIcon),
             const Positioned(
                 left: 64,
@@ -56,7 +55,7 @@ class SleepLayout extends StatelessWidget {
                 status: false,
                 onToggle: (val) {},
                 text: appFonts.wokeUpAt,
-                timeText: '04:00 AM',
+                timeText: homeScreenPvr.wakeupTime,
                 svgImage: eSvgAssets.wokeTime),
             const Positioned(
                 right: 58,

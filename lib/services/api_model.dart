@@ -3,7 +3,7 @@ class APIDataClass {
   bool? isSuccess;
   dynamic data;
 
-  APIDataClass({this.message = "", this.isSuccess, this.data});
+  APIDataClass({this.message  = "", this.isSuccess, this.data});
 
   factory APIDataClass.fromJson(Map<String, dynamic> json) {
     return APIDataClass(

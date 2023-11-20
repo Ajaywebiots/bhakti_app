@@ -11,6 +11,7 @@ class ChantingCommon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(
         builder: (BuildContext context, homeScreenPvr, child) {
+
       return SizedBox(
           height: 90,
           child: ScrollablePositionedList.builder(
@@ -20,7 +21,7 @@ class ChantingCommon extends StatelessWidget {
               itemBuilder: (context, index) {
                 return CommonChantingContainer(
                     text: chantingList[index]['time'],
-                    chantingText: chantingList[index]['chantingText'],
+                    chantingText: homeScreenPvr.chantingRounds[index][0],
                     onTap: () {
                       homeScreenPvr.onChantingCountSelect(context);
                     });

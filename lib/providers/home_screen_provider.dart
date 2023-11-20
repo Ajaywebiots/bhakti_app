@@ -6,6 +6,7 @@ import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
 
@@ -14,6 +15,9 @@ class HomeScreenProvider extends ChangeNotifier {
   bool onLastPage = false;
   bool onChange = false;
   bool onLength = false;
+  String sleepAt = "";
+  String wakeupTime = "";
+  String mangalaArtiTime = "";
   int sleepTimeHour = 0;
   int sleepTimeMin = 0;
   int sandhyaArtiMin = 0;
@@ -152,8 +156,9 @@ class HomeScreenProvider extends ChangeNotifier {
     }
   }
 
-    onCalendarDateChange(date) {
+  onCalendarDateChange(date) {
     selectedDate = date;
+
     notifyListeners();
     log("onCalendarDateChange ::: $selectedDate");
   }
@@ -288,11 +293,95 @@ class HomeScreenProvider extends ChangeNotifier {
   }
 
   onReady(context) async {
+    getData(context);
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await Future.delayed(Durations.s1);
     userModel =
         UserModel.fromJson(json.decode(preferences.getString(session.user)!));
 
     notifyListeners();
+  }
+
+  var chantingRounds = "";
+
+  getData(context) async {
+    try {
+      Map<String, String> body = {
+        "from_date": "2023-11-14",
+        "to_date": "2023-11-20"
+      };
+      await apiServices
+          .postApi(api.getSadhana, body, isToken: true)
+          .then((value) async {
+        hideLoading(context);
+        notifyListeners();
+        log('From Date: ${value.isSuccess!}');
+        if (value.isSuccess!) {
+          log('From Date: ${value.data['sadhana']}');
+          Sadhana sadhana = Sadhana.fromJson(value.data);
+          var sleepData = sadhana.sadhanaData[0]['data']['sleep'];
+          var mangalaData = sadhana.sadhanaData[0]['data']['mangala_arti'];
+          var sandhyaData = sadhana.sadhanaData[0]['data']['sandhya_arti'];
+          var chantingData = sadhana.sadhanaData[0]['data']['chanting'];
+
+
+          log("homeScreenPvr.chantingRounds[index]  :: ${chantingData['slot_1']['rounds']}");
+          log("homeScreenPvr.chantingRounds[index]  :: ${chantingData['slot_2']['rounds']}");
+          log("homeScreenPvr.chantingRounds[index]  :: ${chantingData['slot_3']['rounds']}");
+          log("homeScreenPvr.chantingRounds[index]  :: ${chantingData['slot_4']['rounds']}");
+
+
+          var dateFormat = DateFormat("h:mm a");
+          DateTime slept_time =
+              DateFormat("hh:mm").parse(sleepData['slept_time']);
+          DateTime wakeup_timeData =
+              DateFormat("hh:mm").parse(sleepData['wakeup_time']);
+          DateTime mangalaArtiData =
+              DateFormat("hh:mm").parse(mangalaData['time']);
+          bool sandhyaArtiData = sandhyaData['sandhya_arti'];
+
+          chantingRounds = chantingData;
+
+          sleepAt = dateFormat.format(slept_time);
+          wakeupTime = dateFormat.format(wakeup_timeData);
+          mangalaArtiTime = dateFormat.format(mangalaArtiData);
+          isSandhyaArti = sandhyaArtiData;
+          log('From Date: ${sadhana.fromDate}');
+          log('To Date: ${sadhana.toDate}');
+
+
+          // for (var sadhanaEntry in sadhana.sadhanaData) {
+          //   log('UID: ${sadhanaEntry['uid']}');
+          //   log('Date: ${sadhanaEntry['date']}');
+          // }
+        } else {
+          ScaffoldMessenger.of(context)
+              .showSnackBar(SnackBar(content: Text(value.message)));
+        }
+      });
+    } catch (e) {
+      hideLoading(context);
+      notifyListeners();
+      log("CATCH : $e");
+    }
+  }
+}
+
+class Sadhana {
+  String fromDate;
+  String toDate;
+  List<Map<String, dynamic>> sadhanaData;
+
+  Sadhana(
+      {required this.fromDate,
+      required this.toDate,
+      required this.sadhanaData});
+
+  factory Sadhana.fromJson(Map<String, dynamic> json) {
+    return Sadhana(
+      fromDate: json['from_date'],
+      toDate: json['to_date'],
+      sadhanaData: List<Map<String, dynamic>>.from(json['sadhana']),
+    );
   }
 }

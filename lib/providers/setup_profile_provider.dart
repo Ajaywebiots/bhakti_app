@@ -94,21 +94,16 @@ class SetUpProfileProvider extends ChangeNotifier {
     if (formKey.currentState!.validate()) {
       showLoading(context);
       notifyListeners();
-
       try {
         String newUrl = "";
         if (image != null) {
           // await getImageDimensions(File(image!.path));
-
           String base64Image = await resizeAndEncodeImage(File(image!.path));
           newUrl = base64Image;
-
           Reference reference =
               FirebaseStorage.instance.ref().child(image!.name);
           var file = File(image!.path);
-
           UploadTask uploadTask = reference.putFile(file);
-
           await uploadTask.then((res) async {
             await res.ref.getDownloadURL().then((images) async {
               log("res : $images");

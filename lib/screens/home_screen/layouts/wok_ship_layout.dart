@@ -20,7 +20,7 @@ class WorshipLayout extends StatelessWidget {
                 CommonContainer(
                     onTap: () => homeScreenPvr.onManglaArtiSelect(context),
                     text: appFonts.mangalaArti,
-                    timeText: '10:30 AM',
+                    timeText: homeScreenPvr.mangalaArtiTime,
                     status: false,
                     onToggle: (val) {},
                     svgImage: eSvgAssets.mangalaAarti),

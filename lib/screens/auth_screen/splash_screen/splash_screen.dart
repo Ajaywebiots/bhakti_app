@@ -28,9 +28,9 @@ class _SplashScreenState extends State<SplashScreen> {
 
   checkLocalData() async {
     SharedPreferences pref = await SharedPreferences.getInstance();
-    if (pref!.getString(session.user) != null) {
+    if (pref.getString(session.user) != null) {
        userModel =
-          UserModel.fromJson(json.decode(pref!.getString(session.user)!));
+          UserModel.fromJson(json.decode(pref.getString(session.user)!));
       log("MODE l:$userModel");
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => const HomeScreen()));
