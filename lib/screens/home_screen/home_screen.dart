@@ -13,7 +13,7 @@ import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/book_layout.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/sleep_layout.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/week_calendar.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/wok_ship_layout.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/worship_layout.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_bottom_bar.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/association_layout.dart';
 import 'package:bhakti_app/screens/home_screen/drawer_screen/drawer_screen.dart';

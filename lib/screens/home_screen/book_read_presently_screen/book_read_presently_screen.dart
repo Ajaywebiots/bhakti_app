@@ -16,13 +16,14 @@ class BookReadPresentlyScreen extends StatelessWidget {
     return Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
-        appBar: AppBar(
+        appBar: AppBar(leading: Container(),
             backgroundColor: Colors.transparent,
             titleSpacing: 0,
             leadingWidth: 0,
             title: Row(children: [
               const HSpace(Insets.i20),
-              SvgPicture.asset("assets/svg/arrowLeft.svg"),
+              SvgPicture.asset("assets/svg/arrowLeft.svg").inkWell(
+                  onTap: () => Navigator.pop(context)),
               const HSpace(Insets.i12),
               Text("Books Reading Presently",
                   style: appCss.philosopherBold28

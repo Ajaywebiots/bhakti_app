@@ -1,4 +1,12 @@
 import 'package:bhakti_app/common/assets/index.dart';
+import 'package:bhakti_app/screens/home_screen/book_read_presently_screen/book_read_presently_screen.dart';
+import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/bhakti_steps_Access_key.dart';
+import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/homepage_section_priorities.dart';
+import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/setting_parameters.dart';
+
+import '../setting_screen/layouts/notification.dart';
+import '../setting_screen/layouts/share_my_sadhana.dart';
+import '../setting_screen/layouts/share_with_me.dart';
 
 List<Map<String, dynamic>> rulesList = [
   {'rule': 'No meat eating', 'isOn': false},
@@ -8,6 +16,112 @@ List<Map<String, dynamic>> rulesList = [
   {'rule': 'Only prasadam', 'isOn': false}
 ];
 
+List<Map<String, dynamic>> settingList = [
+  {
+    'image': "assets/svg/setting-5.svg",
+    'rule': 'Parameters',
+    'navigate': const SettingParameters()
+  },
+  {
+    'image': "assets/svg/book1.svg",
+    'rule': 'Books Reading Presently',
+    'navigate': const BookReadPresentlyScreen()
+  },
+  {
+    'image': "assets/svg/SharemySadhana.svg",
+    'rule': 'Share my Sadhana',
+    'navigate': const ShareMySadhana()
+  },
+  {
+    'image': "assets/svg/profile-2user.svg",
+    'rule': 'Sharing with me',
+    'navigate': const SharingWithMe()
+  },
+  {
+    'image': "assets/svg/key.svg",
+    'rule': 'Bhakti Steps Access Key ',
+    'navigate': const BhaktiStepsAccessKey()
+  },
+  {
+    'image': "assets/svg/notification.svg",
+    'rule': 'Notification',
+    'navigate': const NotificationLayouts()
+  },
+  {
+    'image': "assets/svg/setting-2.svg",
+    'rule': 'Home page Section Priorities',
+    'navigate': const HomePageSection()
+  },
+];
+
+List<Map<String, dynamic>> shareMySadhanaList = [
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Shreliyan Khanna',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Jane Cooper',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Cody Fisher',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Wade Warren',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Eleanor Pena',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Guy Hawkins',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Cody Fisher',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Courtney Henry',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Brooklyn Simmons',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Cody Fisher',
+  },
+];
+List<Map<String, dynamic>> sharingWithMeList = [
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Shreliyan Khanna',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Jane Cooper',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Cody Fisher',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Wade Warren',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Eleanor Pena',
+  },
+  {
+    'image': "assets/images/profile.png",
+    'name': 'Guy Hawkins',
+  },
+];
 
 List bookList = [];
 
@@ -31,9 +145,6 @@ List chantingList = [
   {'time': "Before 10:10 am", 'chantingText': '8'},
   {'time': "Before 10:00 am", 'chantingText': '4'}
 ];
-
-
-
 
 List drawerList = [
   {"icon": "assets/svg/home1.svg", "name": "Home"},

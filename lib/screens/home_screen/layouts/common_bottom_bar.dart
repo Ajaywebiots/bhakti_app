@@ -2,6 +2,7 @@ import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/screens/home_screen/setting_screen/setting_screen.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CommonBottomBar extends StatelessWidget {
@@ -48,7 +49,11 @@ class CommonBottomBar extends StatelessWidget {
                 style: appCss.dmDenseMedium12
                     .textColor(appColor(context).appTheme.whiteColor)),
             const SizedBox(height: 5)
-          ]).inkWell(onTap: () {})
+          ]).inkWell(onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const SettingScreen();
+            }));
+          })
         ]));
   }
 }
