@@ -3,7 +3,9 @@ import 'dart:developer';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/auth_screen/login_auth_screen/login_auth_screen.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:bhakti_app/services/sadhana_api_data.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
@@ -18,6 +20,10 @@ class HomeScreenProvider extends ChangeNotifier {
   String sleepAt = "";
   String wakeupTime = "";
   String mangalaArtiTime = "";
+  int smallBooks = 0;
+  int mediumBooks = 0;
+  int largeBooks = 0;
+  dynamic slot1,slot2,slot3,slot4;
   int sleepTimeHour = 0;
   int sleepTimeMin = 0;
   int sandhyaArtiMin = 0;
@@ -293,6 +299,9 @@ class HomeScreenProvider extends ChangeNotifier {
   }
 
   onReady(context) async {
+
+
+
     getData(context);
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await Future.delayed(Durations.s1);
@@ -301,6 +310,14 @@ class HomeScreenProvider extends ChangeNotifier {
 
     notifyListeners();
   }
+
+  String chantingRounds = "";
+  String chantingRounds1 = "";
+  String chantingRounds2 = "";
+  String chantingRounds3 = "";
+
+  List chantinglist = [];
+  List regulations = [];
 
   getData(context) async {
     try {
@@ -315,36 +332,46 @@ class HomeScreenProvider extends ChangeNotifier {
         notifyListeners();
         log('From Date: ${value.isSuccess!}');
         if (value.isSuccess!) {
-          log('From Date: ${value.data['sadhana']}');
-          Sadhana sadhana = Sadhana.fromJson(value.data);
+         Sadhana sadhana = Sadhana.fromJson(value.data);
           var sleepData = sadhana.sadhanaData[0]['data']['sleep'];
           var mangalaData = sadhana.sadhanaData[0]['data']['mangala_arti'];
           var sandhyaData = sadhana.sadhanaData[0]['data']['sandhya_arti'];
-
-
-
           var dateFormat = DateFormat("h:mm a");
-          DateTime slept_time =
-              DateFormat("hh:mm").parse(sleepData['slept_time']);
-          DateTime wakeup_timeData =
-              DateFormat("hh:mm").parse(sleepData['wakeup_time']);
-          DateTime mangalaArtiData =
-              DateFormat("hh:mm").parse(mangalaData['time']);
-          bool sandhyaArtiData = sandhyaData['sandhya_arti'];
+          var regulations = sadhana.sadhanaData[0]['data']['regulations'];
+          List book_data = sadhana.sadhanaData[0]['data']['book_reading'];
+         var book_distribution = sadhana.sadhanaData[0]['data']['book_distribution'];
 
+          DateTime slept_time = DateFormat("hh:mm").parse(sleepData['slept_time']);
+          DateTime wakeup_timeData = DateFormat("hh:mm").parse(sleepData['wakeup_time']);
+          DateTime mangalaArtiData = DateFormat("hh:mm").parse(mangalaData['time']);
+          bool sandhyaArtiData = sandhyaData['sandhya_arti'];
 
           sleepAt = dateFormat.format(slept_time);
           wakeupTime = dateFormat.format(wakeup_timeData);
           mangalaArtiTime = dateFormat.format(mangalaArtiData);
           isSandhyaArti = sandhyaArtiData;
-          log('From Date: ${sadhana.fromDate}');
-          log('To Date: ${sadhana.toDate}');
 
+          for(int i = 1 ;i<=4 ;i++){
+            chantinglist.add(sadhana.sadhanaData[0]['data']['chanting']['slot_$i']['rounds']);
+          }
+            rulesList = [
+              {'rule': 'No meat eating', 'isOn': regulations['no_meat_eating']},
+              {'rule': 'No intoxication', 'isOn': regulations['no_intoxication']},
+              {'rule': 'No illicit sex', 'isOn': regulations['no_illicit_sex']},
+              {'rule': 'No gambling', 'isOn': regulations['no_gambling']},
+              {'rule': 'Only prasadam', 'isOn': regulations['only_prasadam']}
+            ];
 
-          // for (var sadhanaEntry in sadhana.sadhanaData) {
-          //   log('UID: ${sadhanaEntry['uid']}');
-          //   log('Date: ${sadhanaEntry['date']}');
-          // }
+         for(int i = 0 ; i<book_data.length ; i++){
+           bookList.add(book_data[i]);
+         }
+
+         smallBooks = book_distribution['small_books'];
+         mediumBooks = book_distribution['medium_books'];
+         largeBooks = book_distribution['big_books'];
+
+         log('Book Read: ${bookList}');
+
         } else {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(value.message)));
@@ -355,24 +382,5 @@ class HomeScreenProvider extends ChangeNotifier {
       notifyListeners();
       log("CATCH : $e");
     }
-  }
-}
-
-class Sadhana {
-  String fromDate;
-  String toDate;
-  List<Map<String, dynamic>> sadhanaData;
-
-  Sadhana(
-      {required this.fromDate,
-      required this.toDate,
-      required this.sadhanaData});
-
-  factory Sadhana.fromJson(Map<String, dynamic> json) {
-    return Sadhana(
-      fromDate: json['from_date'],
-      toDate: json['to_date'],
-      sadhanaData: List<Map<String, dynamic>>.from(json['sadhana']),
-    );
   }
 }

@@ -3,6 +3,7 @@ import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/providers/home_screen_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class BookDistributionLayout extends StatelessWidget {
@@ -10,7 +11,7 @@ class BookDistributionLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer(builder: (context, homeProviderPvr, child) {
+    return Consumer<HomeScreenProvider>(builder: (context, homeProviderPvr, child) {
       return Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -45,7 +46,7 @@ class BookDistributionLayout extends StatelessWidget {
                                 SvgPicture.asset(eSvgAssets
                                     .bookDistribution),
                                 const HSpace(Insets.i8),
-                                Text("10",
+                                Text(homeProviderPvr.smallBooks.toString(),
                                     style: appCss
                                         .dmDenseBold24
                                         .textColor(
@@ -93,7 +94,7 @@ class BookDistributionLayout extends StatelessWidget {
                                 SvgPicture.asset(eSvgAssets
                                     .bookDistribution),
                                 const HSpace(Insets.i8),
-                                Text("5",
+                                Text(homeProviderPvr.mediumBooks.toString(),
                                     style: appCss
                                         .dmDenseBold24
                                         .textColor(
@@ -141,7 +142,7 @@ class BookDistributionLayout extends StatelessWidget {
                                 SvgPicture.asset(eSvgAssets
                                     .bookDistribution),
                                 const HSpace(Insets.i8),
-                                Text("1",
+                                Text(homeProviderPvr.largeBooks.toString(),
                                     style: appCss
                                         .dmDenseBold24
                                         .textColor(

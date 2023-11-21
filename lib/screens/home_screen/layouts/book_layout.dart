@@ -8,6 +8,8 @@ import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
 import 'package:bhakti_app/providers/home_screen_provider.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
 
+import '../../../common/assets/index.dart';
+
 class BookLayout extends StatelessWidget {
   const BookLayout({super.key});
 
@@ -38,10 +40,10 @@ class BookLayout extends StatelessWidget {
                       children: [
                         ClipRRect(
                             borderRadius: BorderRadius.circular(2),
-                            child: Image.asset(bookList[index]['book'],
+                            child: Image.asset(eImageAssets.bhagvad,
                                 height: Sizes.s132)),
                         const VSpace(Insets.i6),
-                        Text(bookList[index]['time'],
+                        Text(bookList[index]['reading_time'].toString(),
                             style: appCss.dmDenseMedium16.textColor(
                                 appColor(context).appTheme.primary))
                       ])).inkWell(onTap: () {
@@ -49,11 +51,7 @@ class BookLayout extends StatelessWidget {
                     context: context,
                     builder: (BuildContext context) {
                       return CommonDialog(
-                          text: bookList[index] == 0
-                              ? 'Bhagavadgita'
-                              : bookList[index] == 1
-                                  ? "Srila Prabhupada Lilamrta"
-                                  : "Self Realization",
+                          text: bookList[index]['book_title'],
                           text1: 'Hour',
                           text2: 'Minutes',
                           onHourChange: (value) {

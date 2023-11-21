@@ -129,11 +129,6 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
     widget.selectDate =" ${currentWeek.first.year}-${currentWeek.first.month}-${currentWeek.first.day}";
     log("currentWeek :: ${currentWeek.first.year}-${currentWeek.first.month}-${currentWeek.first.day}");
     log("currentWeek :: ${currentWeek.last}");
-
-
-
-
-
     getMorePreviousWeeks();
   }
   void didUpdateWidget(covariant HorizontalWeekCalendar oldWidget) {

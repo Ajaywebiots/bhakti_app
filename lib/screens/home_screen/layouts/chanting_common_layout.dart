@@ -3,6 +3,7 @@ import 'package:bhakti_app/providers/home_screen_provider.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_chanting_container.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:intl/intl.dart';
 
 class ChantingCommon extends StatelessWidget {
   const ChantingCommon({super.key});
@@ -16,12 +17,12 @@ class ChantingCommon extends StatelessWidget {
           height: 90,
           child: ScrollablePositionedList.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: chantingList.length,
+              itemCount: homeScreenPvr.chantinglist.length,
               itemScrollController: homeScreenPvr.itemScrollController,
               itemBuilder: (context, index) {
                 return CommonChantingContainer(
-                    text: chantingList[index]['time'],
-                    chantingText: chantingList[index]['chantingText'],
+                    text: DateFormat('hh:mm').format(DateTime.now()),
+                    chantingText: homeScreenPvr.chantinglist[index].toString(),
                     onTap: () {
                       homeScreenPvr.onChantingCountSelect(context);
                     });

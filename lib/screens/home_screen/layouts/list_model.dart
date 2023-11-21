@@ -8,11 +8,8 @@ List<Map<String, dynamic>> rulesList = [
   {'rule': 'Only prasadam', 'isOn': false}
 ];
 
-List bookList = [
-  {'book': eImageAssets.bhagvad, 'time': "1:00"},
-  {'book': eImageAssets.srila, 'time': "1:30"},
-  {'book': eImageAssets.selfRealization, 'time': "0:30"}
-];
+
+List bookList = [];
 
 List<Map<String, dynamic>> manglaArtiTypeList = [
   {'artiType': 'Guru Astaka', 'isOn': false},
@@ -34,6 +31,9 @@ List chantingList = [
   {'time': "Before 10:10 am", 'chantingText': '8'},
   {'time': "Before 10:00 am", 'chantingText': '4'}
 ];
+
+
+
 
 List drawerList = [
   {"icon": "assets/svg/home1.svg", "name": "Home"},
