@@ -1,4 +1,5 @@
 import 'package:bhakti_app/common/assets/index.dart';
+import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/book_read_presently_screen/book_read_presently_screen.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/bhakti_steps_Access_key.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/homepage_section_priorities.dart';
@@ -40,7 +41,7 @@ List<Map<String, dynamic>> settingList = [
   {
     'image': "assets/svg/key.svg",
     'rule': 'Bhakti Steps Access Key ',
-    'navigate': const BhaktiStepsAccessKey()
+    'navigate': ""
   },
   {
     'image': "assets/svg/notification.svg",
@@ -124,7 +125,11 @@ List<Map<String, dynamic>> sharingWithMeList = [
 ];
 
 List bookList = [];
-
+List<Map<String, dynamic>> notificationSettingList = [
+  {'name': 'Mail Notifications', 'isOn': false},
+  {'name': 'App Notifications', 'isOn': false},
+  {'name': 'SMS Notifications', 'isOn': false},
+];
 List<Map<String, dynamic>> manglaArtiTypeList = [
   {'artiType': 'Guru Astaka', 'isOn': false},
   {'artiType': 'Narasimha Arti', 'isOn': false},

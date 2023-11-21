@@ -3,6 +3,8 @@ import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/common_regulation.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NotificationLayouts extends StatelessWidget {
@@ -23,7 +25,7 @@ class NotificationLayouts extends StatelessWidget {
               SvgPicture.asset("assets/svg/arrowLeft.svg").inkWell(
                 onTap: () => Navigator.pop(context),
               ),
-              const HSpace(Insets.i70),
+              const HSpace(Insets.i90),
               Text("Notification",
                   style: appCss.philosopherBold28
                       .textColor(appColor(context).appTheme.oneText))
@@ -36,9 +38,40 @@ class NotificationLayouts extends StatelessWidget {
                       image: AssetImage(eImageAssets.splashBg)))),
           SingleChildScrollView(
               child:
-              Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-                VSpace(Insets.i120),
-              ]).paddingSymmetric(horizontal: 20))
+                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+            VSpace(Insets.i100),
+            Row(children: [
+              Text("Notification Setting",
+                  style: appCss.dmDenseExtraBold18
+                      .textColor(appColor(context).appTheme.rulesClr))
+            ]),
+            VSpace(Insets.i15),
+            Container(
+                padding: const EdgeInsets.all(15),
+                decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(8),
+                    color: appColor(context).appTheme.whiteColor,
+                    boxShadow: [
+                      BoxShadow(
+                          color: appColor(context).appTheme.shadowClr,
+                          blurRadius: 8,
+                          offset: const Offset(0, 4),
+                          spreadRadius: 0)
+                    ]),
+                child: Column(
+                    children: notificationSettingList.asMap().entries.map((e) {
+                  return Column(children: [
+                    CommonRegulation(
+                        list: notificationSettingList,
+                        index: e.key,
+                        status: e.value['isOn'],
+                        text: e.value['name'],
+                        onToggle: (val) {
+                          e.value['isOn'] = val;
+                        })
+                  ]);
+                }).toList()))
+          ]).paddingSymmetric(horizontal: 20))
         ]));
   }
 }

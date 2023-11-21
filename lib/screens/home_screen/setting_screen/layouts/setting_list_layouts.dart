@@ -47,7 +47,7 @@ class SettingListLayouts extends StatelessWidget {
       ]).inkWell(onTap: onTap),
       if (index != list!.length - 1)
         SvgPicture.asset(eSvgAssets.lineRuler)
-            .paddingSymmetric(vertical: Insets.i10)
+            .paddingSymmetric(vertical: isShare == true ?  Insets.i10 : Insets.i15)
     ]);
   }
 }
