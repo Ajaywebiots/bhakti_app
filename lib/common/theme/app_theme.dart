@@ -35,6 +35,9 @@ class AppTheme {
   Color fbClr;
   Color emailClr;
   Color whiteColor;
+  Color bottomText;
+
+  Color containColor;
 
   /// Default constructor
   AppTheme({
@@ -63,7 +66,7 @@ class AppTheme {
     required this.fbClr,
     required this.emailClr,
     required this.green,
-    required this.whiteColor,
+    required this.whiteColor, required this.bottomText, required this.containColor,
   });
 
   /// fromType factory constructor
@@ -72,8 +75,12 @@ class AppTheme {
       case ThemeType.light:
         return AppTheme(
             isDark: false,
+
+
             primary: const Color(0xff541F5C),
+            containColor: const Color(0xff929292),
             darkText: const Color(0xff00162E),
+            bottomText: const Color(0xffA48AA9),
             lightText: const Color(0xff767676),
             oneText: const Color(0xff2D2D2D),
             twoText: const Color(0xff3d3d3d),
@@ -125,7 +132,7 @@ class AppTheme {
             googleClr: const Color(0xffEBF2FA),
             fbClr: const Color(0xff0084FF),
             emailClr: const Color(0xffD0011B),
-            googleTxtClr: const Color(0xff707477));
+            googleTxtClr: const Color(0xff707477), bottomText: Color(0xffA48AA9), containColor: Color(0xff929292));
     }
   }
 

@@ -4,15 +4,23 @@ import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/auth_screen/login_auth_screen/login_auth_screen.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
+import 'package:bhakti_app/screens/home_screen/monitoring_screen/monitoring_screen.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
+import 'package:bhakti_app/screens/home_screen/setting_screen/setting_screen.dart';
 import 'package:bhakti_app/services/sadhana_api_data.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
+import '../screens/home_screen/dashboard_screen/dashboard_screen.dart';
+import '../screens/home_screen/home_screen.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
+
+
+
+
   int index = 0;
   bool onLastPage = false;
   bool onChange = false;

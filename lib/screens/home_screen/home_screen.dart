@@ -14,7 +14,6 @@ import 'package:bhakti_app/screens/home_screen/layouts/book_layout.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/sleep_layout.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/week_calendar.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/worship_layout.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/common_bottom_bar.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/association_layout.dart';
 import 'package:bhakti_app/screens/home_screen/drawer_screen/drawer_screen.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/chanting_common_layout.dart';
@@ -28,6 +27,7 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
+
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(
@@ -39,7 +39,7 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Scaffold(
                   drawer: const DrawerScreen(),
                   extendBody: true,
-                  bottomNavigationBar: const CommonBottomBar(),
+
                   body: Stack(alignment: Alignment.center, children: [
                     Container(
                         decoration: BoxDecoration(

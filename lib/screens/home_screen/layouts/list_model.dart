@@ -1,10 +1,7 @@
 import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/book_read_presently_screen/book_read_presently_screen.dart';
-import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/bhakti_steps_Access_key.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/homepage_section_priorities.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/setting_parameters.dart';
-
 import '../setting_screen/layouts/notification.dart';
 import '../setting_screen/layouts/share_my_sadhana.dart';
 import '../setting_screen/layouts/share_with_me.dart';
@@ -53,6 +50,21 @@ List<Map<String, dynamic>> settingList = [
     'rule': 'Home page Section Priorities',
     'navigate': const HomePageSection()
   },
+];
+
+List<Map<String, dynamic>> homePageSectionList = [
+  {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Sleep', 'isOn': false},
+  {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Worship', 'isOn': false},
+  {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Chanting', 'isOn': false},
+  {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Prasadam', 'isOn': false},
+  {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Accociation', 'isOn': false},
+  {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Books', 'isOn': false},
+  {
+    'svgImage': "assets/svg/dragIcon.svg",
+    'name': 'Book distribution',
+    'isOn': false
+  },
+  {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Notes', 'isOn': false},
 ];
 
 List<Map<String, dynamic>> shareMySadhanaList = [
@@ -195,5 +207,28 @@ List bookReadingList = [
     'bookName': "Sri Brahma-samhita",
     'author': "By : Sarasvati Goswami",
     'isAdded': true
+  },
+];
+
+var bottomNavyList = [
+  {
+    "icon": "assets/svg/unselecthome.svg",
+    "title": 'Home',
+    "icon2": "assets/svg/home.svg",
+  },
+  {
+    "icon": "assets/svg/monitering.svg",
+    "title": "Dashboard",
+    "icon2": "assets/svg/selectmonitor.svg"
+  },
+  {
+    "icon": "assets/svg/category.svg",
+    "title": "Monitoring",
+    "icon2": "assets/svg/selectcategory.svg"
+  },
+  {
+    "icon": "assets/svg/setting.svg",
+    "title": "Setting",
+    "icon2": "assets/svg/selectsetting.svg"
   },
 ];

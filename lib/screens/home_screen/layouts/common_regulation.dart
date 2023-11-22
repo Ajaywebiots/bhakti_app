@@ -14,7 +14,13 @@ class CommonRegulation extends StatelessWidget {
   final bool? isRegulation;
 
   const CommonRegulation(
-      {super.key, this.status, this.text, required this.onToggle, this.index, this.list, this.isRegulation= false});
+      {super.key,
+      this.status,
+      this.text,
+      required this.onToggle,
+      this.index,
+      this.list,
+      this.isRegulation = false});
 
   @override
   Widget build(BuildContext context) {
@@ -35,12 +41,11 @@ class CommonRegulation extends StatelessWidget {
                 activeColor: appColor(context).appTheme.primary,
                 inactiveColor: appColor(context).appTheme.lightText,
                 borderRadius: 40.0,
-                onToggle: onToggle),
+                onToggle: onToggle)
           ]),
       if (index != list!.length - 1)
-        SvgPicture.asset(eSvgAssets.lineRuler)
-            .paddingSymmetric(vertical: isRegulation == true ? Insets.i10 :Insets.i15)
-
+        SvgPicture.asset(eSvgAssets.lineRuler).paddingSymmetric(
+            vertical: isRegulation == true ? Insets.i10 : Insets.i15)
     ]);
   }
 }

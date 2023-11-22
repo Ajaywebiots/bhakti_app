@@ -1,59 +1,51 @@
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/providers/bottom_nav_provider.dart';
+import 'package:bhakti_app/screens/home_screen/monitoring_screen/monitoring_screen.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/setting_screen.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-class CommonBottomBar extends StatelessWidget {
-  const CommonBottomBar({super.key});
+import '../dashboard_screen/dashboard_screen.dart';
+import '../home_screen.dart';
+import 'bottom_nav_bar.dart';
+
+class CommonBottomNavigationBar extends StatefulWidget {
+  const CommonBottomNavigationBar({super.key});
+
+  @override
+  State<CommonBottomNavigationBar> createState() =>
+      _CommonBottomNavigationBarState();
+}
+
+class _CommonBottomNavigationBarState extends State<CommonBottomNavigationBar> {
+  int currentTab = 0;
+
+  final List<Widget> screens = [
+    const HomeScreen(),
+    const DashBoardScreen(),
+    const MonitoringScreen(),
+    const SettingScreen()
+  ];
+
+  void onItemTapped(int index) {
+    setState(() {
+      currentTab = index;
+    });
+  }
 
   @override
   Widget build(BuildContext context) {
-    return Container(
-        height: 70,
-        decoration: BoxDecoration(color: appColor(context).appTheme.primary),
-        child: Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            const SizedBox(height: 14),
-            SvgPicture.asset("assets/svg/home.svg"),
-            Text("Home",
-                style: appCss.dmDenseMedium12
-                    .textColor(appColor(context).appTheme.whiteColor)),
-            const SizedBox(height: 0),
-            SvgPicture.asset("assets/svg/activeLine.svg")
-          ]).inkWell(onTap: () {}),
-          const HSpace(Insets.i40),
-          Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            const SizedBox(height: 14),
-            SvgPicture.asset("assets/svg/category.svg"),
-            Text("Dashboard",
-                style: appCss.dmDenseMedium12
-                    .textColor(appColor(context).appTheme.whiteColor)),
-            const SizedBox(height: 5)
-          ]).inkWell(onTap: () {}),
-          const HSpace(Insets.i40),
-          Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            const SizedBox(height: 14),
-            SvgPicture.asset("assets/svg/monitering.svg"),
-            Text("Monitoring",
-                style: appCss.dmDenseMedium12
-                    .textColor(appColor(context).appTheme.whiteColor)),
-            const SizedBox(height: 5)
-          ]).inkWell(onTap: () {}),
-          const HSpace(Insets.i40),
-          Column(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-            const SizedBox(height: 14),
-            SvgPicture.asset("assets/svg/setting.svg"),
-            Text("Setting",
-                style: appCss.dmDenseMedium12
-                    .textColor(appColor(context).appTheme.whiteColor)),
-            const SizedBox(height: 5)
-          ]).inkWell(onTap: () {
-            Navigator.push(context, MaterialPageRoute(builder: (context) {
-              return const SettingScreen();
-            }));
-          })
-        ]));
+    return Consumer<BottomNavProvider>(builder: (context, bottomNavPrv, child) {
+      return Scaffold(
+          body: DefaultTabController(
+              length: bottomNavPrv.dashList.length,
+              child: Scaffold(
+                  // Tab bar view
+                  body: TabBarView(
+                      physics: const NeverScrollableScrollPhysics(),
+                      controller: bottomNavPrv.tabController,
+                      children: screens),
+                  // All tabs
+                  bottomNavigationBar: const BottomNavBar(),
+                  backgroundColor: appColor(context).appTheme.primary)));
+    });
   }
 }

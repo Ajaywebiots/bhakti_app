@@ -57,6 +57,7 @@ dependencies:
   ruler_picker_bn: ^0.0.6
   calendar_date_picker2: ^0.5.3
   flutter_facebook_auth: ^6.0.2
+  drag_and_drop_lists: ^0.3.3
 
 dev_dependencies:
   flutter_test:

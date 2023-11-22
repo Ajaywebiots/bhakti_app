@@ -8,6 +8,7 @@ import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/models/user_model.dart';
 import 'package:bhakti_app/screens/auth_screen/login_auth_screen/login_auth_screen.dart';
 import 'package:bhakti_app/screens/home_screen/home_screen.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/common_bottom_bar.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 class SplashScreen extends StatefulWidget {
@@ -33,7 +34,7 @@ class _SplashScreenState extends State<SplashScreen> {
           UserModel.fromJson(json.decode(pref.getString(session.user)!));
       log("MODE l:$userModel");
       Navigator.pushReplacement(
-          context, MaterialPageRoute(builder: (_) => const HomeScreen()));
+          context, MaterialPageRoute(builder: (_) => const CommonBottomNavigationBar()));
     } else {
       Navigator.pushReplacement(
           context, MaterialPageRoute(builder: (_) => const LoginAuthScreen()));

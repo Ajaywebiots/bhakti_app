@@ -41,7 +41,7 @@ class ShareMySadhana extends StatelessWidget {
           SingleChildScrollView(
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            VSpace(Insets.i120),
+            const VSpace(Insets.i120),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
               Text("User List",
@@ -54,7 +54,7 @@ class ShareMySadhana extends StatelessWidget {
                         .textColor(appColor(context).appTheme.primary)),
               ],)
             ]),
-            VSpace(Insets.i15),
+            const VSpace(Insets.i15),
             Container(
                 height: 50,
                 decoration: BoxDecoration(
@@ -114,7 +114,7 @@ class ShareMySadhana extends StatelessWidget {
                         image: e.value['image'],
                         index: e.key,
                         isShare: true,
-                        widget: CommonTrailingLayout(svg: "assets/svg/delete.svg"),
+                        widget: const CommonTrailingLayout(svg: "assets/svg/delete.svg"),
                         list: shareMySadhanaList,
                         text: e.value['name'])
                   ]);

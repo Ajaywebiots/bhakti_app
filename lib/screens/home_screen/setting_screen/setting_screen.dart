@@ -3,7 +3,9 @@ import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/providers/bottom_nav_provider.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
+import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/homepage_section_priorities.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/setting_list_layouts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -17,6 +19,7 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
+    final dashPvr = Provider.of<BottomNavProvider>(context,listen: true);
     return Scaffold(
         extendBodyBehindAppBar: true,
         extendBody: true,
@@ -28,7 +31,10 @@ class _SettingScreenState extends State<SettingScreen> {
             title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               const HSpace(Insets.i20),
               SvgPicture.asset("assets/svg/arrowLeft.svg")
-                  .inkWell(onTap: () => Navigator.pop(context)),
+                  .inkWell(onTap: () {
+                dashPvr.tabController!.index = 0;
+                dashPvr.notifyListeners();
+              }),
               const HSpace(Insets.i120),
               Text("Setting",
                   style: appCss.philosopherBold28
@@ -64,7 +70,7 @@ class _SettingScreenState extends State<SettingScreen> {
                         isShare: false,
                         onTap: () => Navigator.push(context, MaterialPageRoute(
                               builder: (context) {
-                                return e.value['navigate'];
+                                return HomePageSection()/*e.value['navigate']*/;
                               },
                             )),
                         index: e.key,

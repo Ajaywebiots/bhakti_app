@@ -1,4 +1,6 @@
+import 'package:bhakti_app/providers/bottom_nav_provider.dart';
 import 'package:bhakti_app/providers/common_api_provider.dart';
+import 'package:bhakti_app/providers/setting_provider.dart';
 import 'config.dart';
 import 'dart:developer';
 import 'common/assets/index.dart';
@@ -37,14 +39,15 @@ class MyApp extends StatelessWidget {
                   ChangeNotifierProvider(create: (_) => EmailLoginProvider()),
                   ChangeNotifierProvider(create: (_) => EmailSignUpProvider()),
                   ChangeNotifierProvider(create: (_) => HomeScreenProvider()),
-                  ChangeNotifierProvider(
-                      create: (_) => SetUpProfileProvider()),
+                  ChangeNotifierProvider(create: (_) => SetUpProfileProvider()),
                   ChangeNotifierProvider(create: (_) => LoginAuthProvider()),
                   ChangeNotifierProvider(create: (_) => PhoneLoginProvider()),
                   ChangeNotifierProvider(create: (_) => OtpScreenProvider()),
                   ChangeNotifierProvider(create: (_) => CommonApiProvider()),
                   ChangeNotifierProvider(
                       create: (_) => UpdateProfileProvider()),
+                  ChangeNotifierProvider(create: (_) => BottomNavProvider()),
+                  ChangeNotifierProvider(create: (_) => SettingProvider())
                 ],
                 child: Consumer2<ThemeService, CommonApiProvider>(
                     builder: (context, theme, commonApi, child) {
@@ -74,4 +77,3 @@ class MyApp extends StatelessWidget {
         });
   }
 }
-
