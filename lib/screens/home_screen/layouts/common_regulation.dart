@@ -11,9 +11,10 @@ class CommonRegulation extends StatelessWidget {
   final ValueChanged<bool> onToggle;
   final int? index;
   final List? list;
+  final bool? isRegulation;
 
   const CommonRegulation(
-      {super.key, this.status, this.text, required this.onToggle, this.index, this.list});
+      {super.key, this.status, this.text, required this.onToggle, this.index, this.list, this.isRegulation= false});
 
   @override
   Widget build(BuildContext context) {
@@ -38,7 +39,7 @@ class CommonRegulation extends StatelessWidget {
           ]),
       if (index != list!.length - 1)
         SvgPicture.asset(eSvgAssets.lineRuler)
-            .paddingSymmetric(vertical: Insets.i15)
+            .paddingSymmetric(vertical: isRegulation == true ? Insets.i10 :Insets.i15)
 
     ]);
   }

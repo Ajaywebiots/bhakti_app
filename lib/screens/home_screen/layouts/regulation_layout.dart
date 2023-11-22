@@ -11,34 +11,36 @@ class RegulationLayout extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeScreenProvider>(builder: (context, homeScreenPvr, child) {
-      return Container(
-          padding: const EdgeInsets.all(15),
-          decoration: BoxDecoration(
-              borderRadius: BorderRadius.circular(8),
-              color: appColor(context).appTheme.whiteColor,
-              boxShadow: [
-                BoxShadow(
-                    color: appColor(context).appTheme.shadowClr,
-                    blurRadius: 8,
-                    offset: const Offset(0, 4),
-                    spreadRadius: 0)
-              ]),
-          child: Column(
-              children: rulesList.asMap().entries.map((e) {
-                return Column(children: [
-                  CommonRegulation(
-                      status: e.value['isOn'],
-                      text: e.value['rule'],
-                      onToggle: (val) {
-                        homeScreenPvr.notifyListeners();
-                        e.value['isOn'] = val;
-                      }),
-                  const VSpace(Insets.i10),
-                  e.key == 4 ? Container() : SvgPicture.asset(eSvgAssets.lineRuler),
-                  e.key == 4 ? Container() : const VSpace(Insets.i10)
-                ]);
-              }).toList()));
-    },);
+    return Consumer<HomeScreenProvider>(
+      builder: (context, homeScreenPvr, child) {
+        return Container(
+            padding: const EdgeInsets.all(15),
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                color: appColor(context).appTheme.whiteColor,
+                boxShadow: [
+                  BoxShadow(
+                      color: appColor(context).appTheme.shadowClr,
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                      spreadRadius: 0)
+                ]),
+            child: Column(
+                children: rulesList.asMap().entries.map((e) {
+              return Column(children: [
+                CommonRegulation(
+                    index: e.key,
+                    list: rulesList,
+                    isRegulation: true,
+                    status: e.value['isOn'],
+                    text: e.value['rule'],
+                    onToggle: (val) {
+                      homeScreenPvr.notifyListeners();
+                      e.value['isOn'] = val;
+                    })
+              ]);
+            }).toList()));
+      },
+    );
   }
 }
