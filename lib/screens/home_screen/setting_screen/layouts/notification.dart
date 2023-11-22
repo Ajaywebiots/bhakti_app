@@ -39,7 +39,7 @@ class NotificationLayouts extends StatelessWidget {
           SingleChildScrollView(
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            VSpace(Insets.i100),
+            const VSpace(Insets.i100),
             Row(children: [
               Text("Notification Setting",
                   style: appCss.dmDenseExtraBold18

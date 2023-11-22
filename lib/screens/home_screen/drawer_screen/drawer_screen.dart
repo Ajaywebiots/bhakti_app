@@ -30,6 +30,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               testingList = e.value['list'];
             }
             return ListTile(
+                onTap: () {},
                 title: e.value['name'] == "Online Tests"
                     ? ExpansionTile(
                         trailing: SvgPicture.asset(

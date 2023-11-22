@@ -57,7 +57,7 @@ class HomePageSection extends StatelessWidget {
                                             .appTheme
                                             .whiteColor,
                                         borderRadius: BorderRadius.circular(8),
-                                        boxShadow: [
+                                        boxShadow: const [
                                           BoxShadow(
                                               color: Color(0x1E929292),
                                               blurRadius: 8,
@@ -66,10 +66,25 @@ class HomePageSection extends StatelessWidget {
                                         ]),
                                     child: ListTile(
                                         contentPadding: EdgeInsets.zero,
-                                        title: Text(tile['name']),
-                                        leading: Container(decoration: BoxDecoration(color: appColor(context).appTheme.containColor),
-                                            child: SvgPicture.asset(
-                                                tile['svgImage'])),
+                                        title: Text(tile['name'],
+                                            style: appCss.philosopherBold18
+                                                .textColor(appColor(context)
+                                                    .appTheme
+                                                    .rulesClr)),
+                                        leading: Container(
+                                            width: 20,
+                                            height: double.infinity,
+                                            decoration: BoxDecoration(
+                                                borderRadius: const BorderRadius.only(
+                                                    bottomLeft:
+                                                        Radius.circular(8),
+                                                    topLeft:
+                                                        Radius.circular(8)),
+                                                color: appColor(context)
+                                                    .appTheme
+                                                    .containColor),
+                                            child: SvgPicture.asset(tile['svgImage'])
+                                                .paddingSymmetric(vertical: 18, horizontal: 4)),
                                         trailing: SizedBox(
                                             height: 22,
                                             width: 41,
@@ -78,17 +93,14 @@ class HomePageSection extends StatelessWidget {
                                                 height: Sizes.s23,
                                                 padding: 3,
                                                 toggleSize: Sizes.s17,
-                                                value: true,
-                                                activeColor: appColor(context)
-                                                    .appTheme
-                                                    .primary,
-                                                inactiveColor: appColor(context)
-                                                    .appTheme
-                                                    .lightText,
+                                                value: tile['isOn'],
+                                                activeColor: appColor(context).appTheme.primary,
+                                                inactiveColor: appColor(context).appTheme.lightText,
                                                 borderRadius: 40.0,
                                                 onToggle: (val) {
+                                                  settingPvr.notifyListeners();
                                                   tile['isOn'] = val;
-                                                })))))
+                                                })).paddingSymmetric(horizontal: 12))))
                         ],
                         onReorder: (oldIndex, newIndex) {
                           settingPvr.updateMyTiles(oldIndex, newIndex);

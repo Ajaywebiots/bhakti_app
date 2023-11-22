@@ -1,5 +1,7 @@
 import 'package:bhakti_app/providers/bottom_nav_provider.dart';
 import 'package:bhakti_app/providers/common_api_provider.dart';
+import 'package:bhakti_app/providers/dashboard_provider.dart';
+import 'package:bhakti_app/providers/monitoring_provider.dart';
 import 'package:bhakti_app/providers/setting_provider.dart';
 import 'config.dart';
 import 'dart:developer';
@@ -47,7 +49,9 @@ class MyApp extends StatelessWidget {
                   ChangeNotifierProvider(
                       create: (_) => UpdateProfileProvider()),
                   ChangeNotifierProvider(create: (_) => BottomNavProvider()),
-                  ChangeNotifierProvider(create: (_) => SettingProvider())
+                  ChangeNotifierProvider(create: (_) => SettingProvider()),
+                  ChangeNotifierProvider(create: (_) => DashboardProvider()),
+                  ChangeNotifierProvider(create: (_) => MonitoringProvider()),
                 ],
                 child: Consumer2<ThemeService, CommonApiProvider>(
                     builder: (context, theme, commonApi, child) {

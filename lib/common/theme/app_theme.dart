@@ -78,7 +78,7 @@ class AppTheme {
 
 
             primary: const Color(0xff541F5C),
-            containColor: const Color(0xff929292),
+            containColor: const Color(0xffC9B7CB),
             darkText: const Color(0xff00162E),
             bottomText: const Color(0xffA48AA9),
             lightText: const Color(0xff767676),

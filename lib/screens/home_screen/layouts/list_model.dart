@@ -14,6 +14,9 @@ List<Map<String, dynamic>> rulesList = [
   {'rule': 'Only prasadam', 'isOn': false}
 ];
 
+
+
+
 List<Map<String, dynamic>> settingList = [
   {
     'image': "assets/svg/setting-5.svg",
@@ -49,7 +52,7 @@ List<Map<String, dynamic>> settingList = [
     'image': "assets/svg/setting-2.svg",
     'rule': 'Home page Section Priorities',
     'navigate': const HomePageSection()
-  },
+  }
 ];
 
 List<Map<String, dynamic>> homePageSectionList = [

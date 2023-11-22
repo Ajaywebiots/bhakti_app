@@ -39,7 +39,6 @@ class _HomeScreenState extends State<HomeScreen> {
               child: Scaffold(
                   drawer: const DrawerScreen(),
                   extendBody: true,
-
                   body: Stack(alignment: Alignment.center, children: [
                     Container(
                         decoration: BoxDecoration(

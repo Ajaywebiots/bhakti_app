@@ -38,6 +38,7 @@ class SettingListLayouts extends StatelessWidget {
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(image: AssetImage(image!)))),
+
           const HSpace(Insets.i10),
           Text(text!,
               style: appCss.dmDenseMedium16

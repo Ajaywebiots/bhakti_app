@@ -17,6 +17,7 @@ class CommonAppBar extends StatelessWidget {
     return Consumer<HomeScreenProvider>(
         builder: (context, homeScreenPvr, child) {
       return AppBar(
+          automaticallyImplyLeading: false,
           leading: SvgPicture.asset(eSvgAssets.menu)
               .inkWell(onTap: () => Scaffold.of(context).openDrawer()),
           leadingWidth: 30,

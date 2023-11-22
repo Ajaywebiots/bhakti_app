@@ -14,4 +14,5 @@ class SettingProvider extends ChangeNotifier {
     // place the tile in new position
     homePageSectionList.insert(newIndex, tile);
   }
+
 }
