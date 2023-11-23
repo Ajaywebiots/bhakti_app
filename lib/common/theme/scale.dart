@@ -39,6 +39,7 @@ class Insets {
   static const double i18 = 18 * scale;
   static const double i19 = 19 * scale;
   static const double i20 = 20 * scale;
+  static const double i21 = 21 * scale;
   static const double i22 = 22 * scale;
   static const double i23 = 23 * scale;
   static const double i24 = 24 * scale;

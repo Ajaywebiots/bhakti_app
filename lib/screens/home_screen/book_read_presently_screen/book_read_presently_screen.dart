@@ -40,7 +40,8 @@ class BookReadPresentlyScreen extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.start, children: [
                 const VSpace(Insets.i120),
 
-                Container(height: 50,
+                Container(
+                    height: 50,
                     decoration: BoxDecoration(color: const Color(0x0FC35DD2),
                         border: Border.all(
                             color: appColor(context).appTheme.primary
@@ -50,13 +51,14 @@ class BookReadPresentlyScreen extends StatelessWidget {
                     child: TextField(
                         decoration: InputDecoration(
                             hintText: 'Search Here',
+                            hintStyle: appCss.dmDenseMedium12,
                             prefixIcon: Row(
-                              children: [
-                                SvgPicture.asset(
-                                    "assets/svg/search-normal.svg"),
-                                const HSpace(Insets.i10),
-                                SvgPicture.asset(eSvgAssets.line)
-                              ],
+                                children: [
+                                  SvgPicture.asset(
+                                      "assets/svg/search-normal.svg"),
+                                  const HSpace(Insets.i10),
+                                  SvgPicture.asset(eSvgAssets.line)
+                                ]
                             ).paddingAll(10),
                             disabledBorder: const OutlineInputBorder(
                                 borderRadius: BorderRadius.all(Radius.circular(
