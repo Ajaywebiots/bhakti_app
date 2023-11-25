@@ -5,7 +5,6 @@ import 'package:bhakti_app/screens/auth_screen/login_auth_screen/login_auth_scre
 import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
-
 import 'package:bhakti_app/services/sadhana_api_data.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -14,19 +13,25 @@ import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
+
+
+
  //
  // getValue() async {
  //    var serverJsonList = (await FirebaseRemoteConfigClass().initializeConfig());
+ //    log("serverJsonList$serverJsonList");
  //  }
  //
- // var mapDataToWidget = MapDataToWidget();
  // var bookData = FirebaseRemoteConfigClass().initializeConfig();
+ //
+ //
  //
  // List bookingLis = [];
  //
- //
+ // //call this function in init
  // onReadyHome() {
  //   bookingLis = [];
+ //   log("bookingLis$bookingLis");
  //   notifyListeners();
  //   bookData
  //       .asMap()
@@ -39,7 +44,7 @@ class HomeScreenProvider extends ChangeNotifier {
  //   });
  //   notifyListeners();
  // }
-
+ //
 
 
 
@@ -334,13 +339,13 @@ class HomeScreenProvider extends ChangeNotifier {
 
   onReady(context) async {
     // getValue();
-    // dataConvert();
+    // onReadyHome();
     getData(context);
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await Future.delayed(Durations.s1);
     userModel =
         UserModel.fromJson(json.decode(preferences.getString(session.user)!));
-    // onReadyHome();
+
     notifyListeners();
   }
 
