@@ -59,6 +59,8 @@ dependencies:
   flutter_facebook_auth: ^6.0.2
   drag_and_drop_lists: ^0.3.3
   data_table_2: ^2.5.9
+  firebase_remote_config: ^4.3.5
+  firebase_analytics: ^10.7.1
 
 dev_dependencies:
   flutter_test:

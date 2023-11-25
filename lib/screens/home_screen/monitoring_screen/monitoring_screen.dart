@@ -24,6 +24,8 @@ class MonitoringScreen extends StatefulWidget {
 }
 
 class _MonitoringScreenState extends State<MonitoringScreen> {
+  bool isAllSelected = false;
+
   @override
   Widget build(BuildContext context) {
     return Consumer<MonitoringProvider>(
@@ -55,9 +57,8 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                             fit: BoxFit.fill,
                             image: AssetImage(eImageAssets.splashBg)))),
                 SingleChildScrollView(
-                    child: Column(
-                        children: [
-                          const VSpace(Insets.i80),
+                    child: Column(children: [
+                  const VSpace(Insets.i80),
                   const WeekCalendar(),
                   const VSpace(Insets.i25),
                   Row(children: [
@@ -74,61 +75,77 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                           itemBuilder: (context, index) {
                             if (index == 0) {
                               return Container(
-                                  width: 43,
-                                  height: 43,
-                                  decoration: BoxDecoration(
-                                      shape: BoxShape.circle,
-                                      color:
-                                          appColor(context).appTheme.primary),
-                                  alignment: Alignment.center,
-                                  margin: const EdgeInsets.only(right: 15),
-                                  child: Text("All",
-                                      style: appCss.dmDenseMedium12.textColor(
-                                          appColor(context)
+                                      width: 43,
+                                      height: 43,
+                                      decoration: BoxDecoration(
+                                          shape: BoxShape.circle,
+                                          color: appColor(context)
                                               .appTheme
-                                              .whiteColor)));
+                                              .primary),
+                                      alignment: Alignment.center,
+                                      margin: const EdgeInsets.only(right: 15),
+                                      child: Text("All",
+                                          style: appCss.dmDenseMedium12
+                                              .textColor(appColor(context)
+                                                  .appTheme
+                                                  .whiteColor)))
+                                  .inkWell(onTap: () {
+                                isAllSelected = true;
+                                setState(() {});
+                              });
                             } else {
                               return Container(
-                                margin: const EdgeInsets.only(right: 15),
-                                child: Image.asset(height: 43,width: 43,
-                                    "assets/images/userSection.png"),
-                              );
+                                      margin: const EdgeInsets.only(right: 15),
+                                      child: Image.asset(
+                                          height: 43,
+                                          width: 43,
+                                          "assets/images/userSection.png"))
+                                  .inkWell(onTap: () {
+                                isAllSelected = false;
+                                setState(() {});
+                              });
                             }
                           })),
                   const VSpace(Insets.i25),
-                  Container(
-                      height: 50,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          boxShadow: const [
-                            BoxShadow(
-                              color: Color(0x0F000000),
-                              blurRadius: 16,
-                              offset: Offset(0, 2),
-                            )
-                          ]),
-                      child: ListView.builder(
-                          scrollDirection: Axis.horizontal,
-                          itemCount: monitoringPvr.userToDo.length,
-                          itemBuilder: (context, index) {
-                            return CommonPopInkwell(
-                                text: monitoringPvr.userToDo[index],
-                                onTap: () =>
-                                    monitoringPvr.selectedCategory(index),
-                                index: index,
-                                selectedIndex: monitoringPvr.isSelected);
-                          })),
-                  const VSpace(Insets.i15),
-                  Container(
-                      child: monitoringPvr.isSelected == 0
-                          ? const SleepLayouts()
-                          : monitoringPvr.isSelected == 1
-                              ? const ChantingLayouts()
-                              : monitoringPvr.isSelected == 2
-                                  ? const WorshipGroupLayout()
-                                  : monitoringPvr.isSelected == 3
-                                      ? const PrasadamGroupLayout()
-                                      : const KnowledgeGroupLayout())
+                  isAllSelected == true
+                      ? Column(
+                          children: [
+                            Container(
+                                height: 50,
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    boxShadow: const [
+                                      BoxShadow(
+                                          color: Color(0x0F000000),
+                                          blurRadius: 16,
+                                          offset: Offset(0, 2))
+                                    ]),
+                                child: ListView.builder(
+                                    scrollDirection: Axis.horizontal,
+                                    itemCount: monitoringPvr.userToDo.length,
+                                    itemBuilder: (context, index) {
+                                      return CommonPopInkwell(
+                                          text: monitoringPvr.userToDo[index],
+                                          onTap: () => monitoringPvr
+                                              .selectedCategory(index),
+                                          index: index,
+                                          selectedIndex:
+                                              monitoringPvr.isSelected);
+                                    })),
+                            const VSpace(Insets.i15),
+                            Container(
+                                child: monitoringPvr.isSelected == 0
+                                    ? const SleepLayouts()
+                                    : monitoringPvr.isSelected == 1
+                                        ? const ChantingLayouts()
+                                        : monitoringPvr.isSelected == 2
+                                            ? const WorshipGroupLayout()
+                                            : monitoringPvr.isSelected == 3
+                                                ? const PrasadamGroupLayout()
+                                                : const KnowledgeGroupLayout()),
+                          ],
+                        )
+                      : Container()
                 ]).paddingSymmetric(horizontal: Insets.i20))
               ])));
     });

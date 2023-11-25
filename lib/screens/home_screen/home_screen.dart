@@ -27,7 +27,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(
@@ -58,8 +57,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           const VSpace(Insets.i15),
                           const SleepLayout(),
                           const VSpace(Insets.i25),
-                          Text(appFonts.worship,
-                              style: appCss.philosopherBold18),
+                          Text(appFonts.worship, style: appCss.philosopherBold18),
                           const VSpace(Insets.i15),
                           const WorshipLayout(),
                           const VSpace(Insets.i25),
@@ -71,7 +69,7 @@ class _HomeScreenState extends State<HomeScreen> {
                               children: [
                                 Align(
                                     alignment: Alignment.centerLeft,
-                                    child: ChantingCommon()),
+                                    child: ChantingCommon())
                               ]).width(double.infinity),
                           const VSpace(Insets.i15),
                           Text(appFonts.regulations,

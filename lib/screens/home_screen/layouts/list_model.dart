@@ -2,6 +2,7 @@ import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/screens/home_screen/book_read_presently_screen/book_read_presently_screen.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/homepage_section_priorities.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/setting_parameters.dart';
+import '../../../config.dart';
 import '../setting_screen/layouts/notification.dart';
 import '../setting_screen/layouts/share_my_sadhana.dart';
 import '../setting_screen/layouts/share_with_me.dart';
@@ -140,6 +141,7 @@ List<Map<String, dynamic>> sharingWithMeList = [
 ];
 
 List bookList = [];
+List serverWidgets =[];
 List<Map<String, dynamic>> notificationSettingList = [
   {'name': 'Mail Notifications', 'isOn': false},
   {'name': 'App Notifications', 'isOn': false},
@@ -183,7 +185,7 @@ List drawerList = [
   {"icon": "assets/svg/information.svg", "name": "About Bhakti Steps"},
   {"icon": "assets/svg/autobrightness.svg", "name": "About CDM"},
   {"icon": "assets/svg/call-calling.svg", "name": "Contact Us"},
-  // {"icon": "assets/svg/logOut.svg", "name": "Log Out"}
+  {"icon": "assets/svg/logOut.svg", "name": "Log Out"}
 ];
 
 List bookReadingList = [

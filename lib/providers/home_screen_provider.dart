@@ -4,19 +4,45 @@ import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/auth_screen/login_auth_screen/login_auth_screen.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
-import 'package:bhakti_app/screens/home_screen/monitoring_screen/monitoring_screen.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
-import 'package:bhakti_app/screens/home_screen/setting_screen/setting_screen.dart';
+
 import 'package:bhakti_app/services/sadhana_api_data.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
-import '../screens/home_screen/dashboard_screen/dashboard_screen.dart';
-import '../screens/home_screen/home_screen.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
+ //
+ // getValue() async {
+ //    var serverJsonList = (await FirebaseRemoteConfigClass().initializeConfig());
+ //  }
+ //
+ // var mapDataToWidget = MapDataToWidget();
+ // var bookData = FirebaseRemoteConfigClass().initializeConfig();
+ //
+ // List bookingLis = [];
+ //
+ //
+ // onReadyHome() {
+ //   bookingLis = [];
+ //   notifyListeners();
+ //   bookData
+ //       .asMap()
+ //       .entries
+ //       .forEach((element) {
+ //     if (!bookingLis.contains(
+ //         BookModel.fromJson(element.value))) {
+ //       bookingLis.add(BookModel.fromJson(element.value));
+ //     }
+ //   });
+ //   notifyListeners();
+ // }
+
+
+
+
 
 
 
@@ -31,7 +57,7 @@ class HomeScreenProvider extends ChangeNotifier {
   int smallBooks = 0;
   int mediumBooks = 0;
   int largeBooks = 0;
-  dynamic slot1,slot2,slot3,slot4;
+  dynamic slot1, slot2, slot3, slot4;
   int sleepTimeHour = 0;
   int sleepTimeMin = 0;
   int sandhyaArtiMin = 0;
@@ -307,15 +333,14 @@ class HomeScreenProvider extends ChangeNotifier {
   }
 
   onReady(context) async {
-
-
-
+    // getValue();
+    // dataConvert();
     getData(context);
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await Future.delayed(Durations.s1);
     userModel =
         UserModel.fromJson(json.decode(preferences.getString(session.user)!));
-
+    // onReadyHome();
     notifyListeners();
   }
 
@@ -340,18 +365,22 @@ class HomeScreenProvider extends ChangeNotifier {
         notifyListeners();
         log('From Date: ${value.isSuccess!}');
         if (value.isSuccess!) {
-         Sadhana sadhana = Sadhana.fromJson(value.data);
+          Sadhana sadhana = Sadhana.fromJson(value.data);
           var sleepData = sadhana.sadhanaData[0]['data']['sleep'];
           var mangalaData = sadhana.sadhanaData[0]['data']['mangala_arti'];
           var sandhyaData = sadhana.sadhanaData[0]['data']['sandhya_arti'];
           var dateFormat = DateFormat("h:mm a");
           var regulations = sadhana.sadhanaData[0]['data']['regulations'];
           List book_data = sadhana.sadhanaData[0]['data']['book_reading'];
-         var book_distribution = sadhana.sadhanaData[0]['data']['book_distribution'];
+          var book_distribution =
+              sadhana.sadhanaData[0]['data']['book_distribution'];
 
-          DateTime slept_time = DateFormat("hh:mm").parse(sleepData['slept_time']);
-          DateTime wakeup_timeData = DateFormat("hh:mm").parse(sleepData['wakeup_time']);
-          DateTime mangalaArtiData = DateFormat("hh:mm").parse(mangalaData['time']);
+          DateTime slept_time =
+              DateFormat("hh:mm").parse(sleepData['slept_time']);
+          DateTime wakeup_timeData =
+              DateFormat("hh:mm").parse(sleepData['wakeup_time']);
+          DateTime mangalaArtiData =
+              DateFormat("hh:mm").parse(mangalaData['time']);
           bool sandhyaArtiData = sandhyaData['sandhya_arti'];
 
           sleepAt = dateFormat.format(slept_time);
@@ -359,27 +388,27 @@ class HomeScreenProvider extends ChangeNotifier {
           mangalaArtiTime = dateFormat.format(mangalaArtiData);
           isSandhyaArti = sandhyaArtiData;
 
-          for(int i = 1 ;i<=4 ;i++){
-            chantinglist.add(sadhana.sadhanaData[0]['data']['chanting']['slot_$i']['rounds']);
+          for (int i = 1; i <= 4; i++) {
+            chantinglist.add(sadhana.sadhanaData[0]['data']['chanting']
+                ['slot_$i']['rounds']);
           }
-            rulesList = [
-              {'rule': 'No meat eating', 'isOn': regulations['no_meat_eating']},
-              {'rule': 'No intoxication', 'isOn': regulations['no_intoxication']},
-              {'rule': 'No illicit sex', 'isOn': regulations['no_illicit_sex']},
-              {'rule': 'No gambling', 'isOn': regulations['no_gambling']},
-              {'rule': 'Only prasadam', 'isOn': regulations['only_prasadam']}
-            ];
+          rulesList = [
+            {'rule': 'No meat eating', 'isOn': regulations['no_meat_eating']},
+            {'rule': 'No intoxication', 'isOn': regulations['no_intoxication']},
+            {'rule': 'No illicit sex', 'isOn': regulations['no_illicit_sex']},
+            {'rule': 'No gambling', 'isOn': regulations['no_gambling']},
+            {'rule': 'Only prasadam', 'isOn': regulations['only_prasadam']}
+          ];
 
-         for(int i = 0 ; i<book_data.length ; i++){
-           bookList.add(book_data[i]);
-         }
+          for (int i = 0; i < book_data.length; i++) {
+            bookList.add(book_data[i]);
+          }
 
-         smallBooks = book_distribution['small_books'];
-         mediumBooks = book_distribution['medium_books'];
-         largeBooks = book_distribution['big_books'];
+          smallBooks = book_distribution['small_books'];
+          mediumBooks = book_distribution['medium_books'];
+          largeBooks = book_distribution['big_books'];
 
-         log('Book Read: ${bookList}');
-
+          log('Book Read: ${bookList}');
         } else {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(value.message)));

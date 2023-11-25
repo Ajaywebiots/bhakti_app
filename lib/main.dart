@@ -51,7 +51,7 @@ class MyApp extends StatelessWidget {
                   ChangeNotifierProvider(create: (_) => BottomNavProvider()),
                   ChangeNotifierProvider(create: (_) => SettingProvider()),
                   ChangeNotifierProvider(create: (_) => DashboardProvider()),
-                  ChangeNotifierProvider(create: (_) => MonitoringProvider()),
+                  ChangeNotifierProvider(create: (_) => MonitoringProvider())
                 ],
                 child: Consumer2<ThemeService, CommonApiProvider>(
                     builder: (context, theme, commonApi, child) {
