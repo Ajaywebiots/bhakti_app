@@ -91,7 +91,7 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ]).inkWell(onTap: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return const BookReadPresentlyScreen();
+                                    return  BookReadPresentlyScreen(bookReadingList: homeScreenPvr.bookingLis,);
                                   }));
                                 })
                               ]),

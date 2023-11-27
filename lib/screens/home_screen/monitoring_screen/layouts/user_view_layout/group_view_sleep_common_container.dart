@@ -5,10 +5,10 @@ import 'package:bhakti_app/config.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
-class GroupViewCommonContainer extends StatelessWidget {
+class GroupViewSleepCommonContainer extends StatelessWidget {
   final String? text, timeText, svgImage;
 
-  const   GroupViewCommonContainer(
+  const GroupViewSleepCommonContainer(
       {super.key, this.text, this.timeText, this.svgImage});
 
   @override
@@ -24,7 +24,6 @@ class GroupViewCommonContainer extends StatelessWidget {
             children: [
               Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 SvgPicture.asset(svgImage!),
-
                 const HSpace(Insets.i8),
                 Text(timeText!,
                     style: appCss.dmDenseMedium16
@@ -33,7 +32,7 @@ class GroupViewCommonContainer extends StatelessWidget {
               Text(text!,
                       style: appCss.dmDenseMedium14
                           .textColor(appColor(context).appTheme.lightText))
-                  .paddingOnly(left: 10, top: 4)
+                  .paddingOnly(top: 4)
             ]));
   }
 }

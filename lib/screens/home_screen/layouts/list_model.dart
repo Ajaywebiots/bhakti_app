@@ -15,8 +15,24 @@ List<Map<String, dynamic>> rulesList = [
   {'rule': 'Only prasadam', 'isOn': false}
 ];
 
-
-
+List worshipUserList = [
+  {
+    'svgImage': 'assets/svg/Didmangla.svg',
+    'title': 'Did Mangala Arti :',
+    'data': 'Yes 7:00 AM'
+  },
+  {
+    'svgImage': 'assets/svg/TulsiImg.svg',
+    'title': 'Tulasi parikrama :',
+    'data': 'No'
+  },
+  {'svgImage': 'assets/svg/bhog.svg', 'title': 'Offered Bhoga :', 'data': 'No'},
+  {
+    'svgImage': 'assets/svg/sandhyaImg.svg',
+    'title': 'Sandhya Aarti :',
+    'data': 'No'
+  },
+];
 
 List<Map<String, dynamic>> settingList = [
   {
@@ -140,8 +156,7 @@ List<Map<String, dynamic>> sharingWithMeList = [
   },
 ];
 
-List bookList = [];
-List serverWidgets =[];
+List serverWidgets = [];
 List<Map<String, dynamic>> notificationSettingList = [
   {'name': 'Mail Notifications', 'isOn': false},
   {'name': 'App Notifications', 'isOn': false},

@@ -8,6 +8,7 @@ import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scroll
 import 'package:bhakti_app/services/sadhana_api_data.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:firebase_auth/firebase_auth.dart';
+import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import '../models/user_model.dart';
@@ -15,43 +16,24 @@ import '../models/user_model.dart';
 class HomeScreenProvider extends ChangeNotifier {
 
 
+ List bookingLis = [];
+ //call this function in init
+ onReadyHome() async {
+   final remoteConfig = FirebaseRemoteConfig.instance;
+   await remoteConfig.setConfigSettings(RemoteConfigSettings(
+     fetchTimeout: const Duration(minutes: 1),
+     minimumFetchInterval: const Duration(minutes: 5),
+   ));
+   await remoteConfig.fetchAndActivate();
+   // String technicalIssueStatus = remoteConfig.getString('books');
+  List mapValues = json.decode(remoteConfig.getValue("books").asString());
 
- //
- // getValue() async {
- //    var serverJsonList = (await FirebaseRemoteConfigClass().initializeConfig());
- //    log("serverJsonList$serverJsonList");
- //  }
- //
- // var bookData = FirebaseRemoteConfigClass().initializeConfig();
- //
- //
- //
- // List bookingLis = [];
- //
- // //call this function in init
- // onReadyHome() {
- //   bookingLis = [];
- //   log("bookingLis$bookingLis");
- //   notifyListeners();
- //   bookData
- //       .asMap()
- //       .entries
- //       .forEach((element) {
- //     if (!bookingLis.contains(
- //         BookModel.fromJson(element.value))) {
- //       bookingLis.add(BookModel.fromJson(element.value));
- //     }
- //   });
- //   notifyListeners();
- // }
- //
+   bookingLis = mapValues;
+   print("mapValues $bookingLis");
+   notifyListeners();
+ }
 
-
-
-
-
-
-
+ List bookList = [];
   int index = 0;
   bool onLastPage = false;
   bool onChange = false;
@@ -339,7 +321,7 @@ class HomeScreenProvider extends ChangeNotifier {
 
   onReady(context) async {
     // getValue();
-    // onReadyHome();
+    onReadyHome();
     getData(context);
     SharedPreferences preferences = await SharedPreferences.getInstance();
     await Future.delayed(Durations.s1);
@@ -406,6 +388,7 @@ class HomeScreenProvider extends ChangeNotifier {
           ];
 
           for (int i = 0; i < book_data.length; i++) {
+            log("book_data[i] : ${book_data[i]}");
             bookList.add(book_data[i]);
           }
 
