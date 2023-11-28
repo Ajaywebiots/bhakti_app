@@ -33,7 +33,6 @@ class HomeScreenProvider extends ChangeNotifier {
    notifyListeners();
  }
 
- List bookList = [];
   int index = 0;
   bool onLastPage = false;
   bool onChange = false;
@@ -361,7 +360,6 @@ class HomeScreenProvider extends ChangeNotifier {
           List book_data = sadhana.sadhanaData[0]['data']['book_reading'];
           var book_distribution =
               sadhana.sadhanaData[0]['data']['book_distribution'];
-
           DateTime slept_time =
               DateFormat("hh:mm").parse(sleepData['slept_time']);
           DateTime wakeup_timeData =

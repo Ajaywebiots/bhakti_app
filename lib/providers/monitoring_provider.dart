@@ -7,7 +7,7 @@ class MonitoringProvider extends ChangeNotifier {
 
   List userToDo = ["Sleep", "Chanting", "Worship", "Prasadam", "Knowledge"];
   List sleepList = ["", "Sleep at", "Woke up at", "Duration"];
-  List chantingList = ["", "Round 1", "Round 2", "Round 3"];
+  List chantingList = ["", "Total", "Slot 1", "Slot 2", "Slot 3"];
   List worshipList = [
     "",
     "Mangala Aarti",
@@ -53,33 +53,38 @@ class MonitoringProvider extends ChangeNotifier {
   List chantingDataList = [
     {
       "image": "assets/images/userSection.png",
-      "Round 1": "6:30 AM",
-      "Round 2": "07:30 AM",
-      "Round 3": "08:30 AM"
+      "Total": "16+2",
+      "Slot 1": "10",
+      "Slot 2": "5",
+      "Slot 3": "4"
     },
     {
       "image": "assets/images/userSection.png",
-      "Round 1": "6:30 AM",
-      "Round 2": "07:30 AM",
-      "Round 3": "08:30 AM"
+      "Total": "16",
+      "Slot 1": "4",
+      "Slot 2": "6",
+      "Slot 3": "8"
     },
     {
       "image": "assets/images/userSection.png",
-      "Round 1": "6:30 AM",
-      "Round 2": "07:30 AM",
-      "Round 3": "08:30 AM"
+      "Total": "16+3",
+      "Slot 1": "2",
+      "Slot 2": "0",
+      "Slot 3": "9"
     },
     {
       "image": "assets/images/userSection.png",
-      "Round 1": "6:30 AM",
-      "Round 2": "07:30 AM",
-      "Round 3": "08:30 AM"
+      "Total": "8",
+      "Slot 1": "4",
+      "Slot 2": "10",
+      "Slot 3": "5"
     },
     {
       "image": "assets/images/userSection.png",
-      "Round 1": "6:30 AM",
-      "Round 2": "07:30 AM",
-      "Round 3": "08:30 AM"
+      "Total": "16",
+      "Slot 1": "6",
+      "Slot 2": "2",
+      "Slot 3": "2"
     },
   ];
   List worshipDataList = [
@@ -125,29 +130,31 @@ class MonitoringProvider extends ChangeNotifier {
       "Breakfast": "assets/svg/right.svg",
       "Lunch": "assets/svg/right.svg",
       "Dinner": "assets/svg/right.svg"
-    }, {
+    },
+    {
       "image": "assets/images/userSection.png",
       "Breakfast": "assets/svg/wrong.svg",
       "Lunch": "assets/svg/block.svg",
       "Dinner": "assets/svg/block.svg"
-    }, {
+    },
+    {
       "image": "assets/images/userSection.png",
       "Breakfast": "assets/svg/right.svg",
       "Lunch": "assets/svg/wrong.svg",
       "Dinner": "assets/svg/right.svg"
-    }, {
+    },
+    {
       "image": "assets/images/userSection.png",
       "Breakfast": "assets/svg/wrong.svg",
       "Lunch": "assets/svg/right.svg",
       "Dinner": "assets/svg/right.svg"
-    }, {
+    },
+    {
       "image": "assets/images/userSection.png",
       "Breakfast": "assets/svg/block.svg",
       "Lunch": "assets/svg/block.svg",
       "Dinner": "assets/svg/block.svg"
     },
-
-
   ];
   List knowledgeDataList = [
     {
@@ -155,28 +162,31 @@ class MonitoringProvider extends ChangeNotifier {
       "Preaching": "00:30",
       "Audio Lectures": "-",
       "KC Services": "01:30"
-    }, {
+    },
+    {
       "image": "assets/images/userSection.png",
       "Preaching": "01:30",
       "Audio Lectures": "00:30",
       "KC Services": "02:30"
-    }, {
+    },
+    {
       "image": "assets/images/userSection.png",
       "Preaching": "00:30",
       "Audio Lectures": "00:30",
       "KC Services": "01:30"
-    }, {
+    },
+    {
       "image": "assets/images/userSection.png",
       "Preaching": "01:30",
       "Audio Lectures": "01:30",
       "KC Services": "00:30"
-    }, {
+    },
+    {
       "image": "assets/images/userSection.png",
       "Preaching": "01:00",
       "Audio Lectures": "00:30",
       "KC Services": "00:30"
     },
-
   ];
 
   List<DataColumn> sleepDataColumn() {
@@ -223,11 +233,11 @@ class MonitoringProvider extends ChangeNotifier {
           cells: worshipList.map((task) {
         if (task == '') {
           return DataCell(Center(child: Image.asset(data['image'], width: 40)));
-        } else if(task == "Mangala Aarti") {
+        } else if (task == "Mangala Aarti") {
           return DataCell(Center(child: Text(data[task])));
-        }
-        else {
-          return DataCell(Center(child: SvgPicture.asset(data[task].toString())));
+        } else {
+          return DataCell(
+              Center(child: SvgPicture.asset(data[task].toString())));
         }
       }).toList());
     }).toList();
@@ -244,7 +254,8 @@ class MonitoringProvider extends ChangeNotifier {
         if (task == '') {
           return DataCell(Center(child: Image.asset(data['image'], width: 40)));
         } else {
-          return DataCell(Center(child: SvgPicture.asset(data[task].toString())));
+          return DataCell(
+              Center(child: SvgPicture.asset(data[task].toString())));
         }
       }).toList());
     }).toList();

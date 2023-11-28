@@ -195,8 +195,7 @@ class BookReadPresentlyScreen extends StatelessWidget {
                                                             .whiteColor),
                                                     width: 34,
                                                     height: 35,
-                                                    child: homeScreenPvr
-                                                        .bookList
+                                                    child: bookList
                                                         .where((element) =>
                                                     element['book_id'] ==
                                                         bookReadingList![index]['book_id'])
@@ -311,10 +310,8 @@ class BookReadPresentlyScreen extends StatelessWidget {
                                                                                             context)
                                                                                             .appTheme
                                                                                             .primary),
-                                                                                    height:
-                                                                                    44,
-                                                                                    width:
-                                                                                    120,
+                                                                                    height: 44,
+                                                                                    width: 120,
                                                                                     child: Text(
                                                                                         "Save",
                                                                                         style: appCss
@@ -340,10 +337,10 @@ class BookReadPresentlyScreen extends StatelessWidget {
                                                         : SvgPicture.asset(
                                                         eSvgAssets.add))
                                                     .inkWell(onTap: () {
-                                                  if (!homeScreenPvr.bookList
+                                                  if (!bookList
                                                       .contains(
                                                       bookReadingList![index])) {
-                                                    homeScreenPvr.bookList
+                                                    bookList
                                                         .add(
                                                         bookReadingList![index]);
                                                   }

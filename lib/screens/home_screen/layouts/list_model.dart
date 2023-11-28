@@ -87,6 +87,7 @@ List<Map<String, dynamic>> homePageSectionList = [
   {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Notes', 'isOn': false},
 ];
 
+List bookList = [];
 List<Map<String, dynamic>> shareMySadhanaList = [
   {
     'image': "assets/images/profile.png",

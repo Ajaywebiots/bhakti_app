@@ -41,48 +41,46 @@ class SettingParameters extends StatelessWidget {
                   Column(mainAxisAlignment: MainAxisAlignment.start, children: [
             VSpace(Insets.i120),
             CustomTitleWidget(
-              height: 52,
-              width: double.infinity,
-              title: 'Number of Rounds Chanting',
-              color: const Color(0xff541F5C).withOpacity(.20),
-              radius: 8,
-              child: TextFieldCommon(
-                  keyboardType: TextInputType.emailAddress,
-                  // controller: emailId,
-                  prefixIcon: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        const HSpace(Insets.i20),
-                        SvgPicture.asset("assets/svg/calculator.svg",
-                            height: 20),
-                        const HSpace(Insets.i10),
-                        SvgPicture.asset(eSvgAssets.line,
-                            height: 24, width: 24),
-                        const HSpace(Insets.i20)
-                      ]))
-            ).paddingSymmetric(vertical: 10),
+                height: 52,
+                width: double.infinity,
+                title: 'Number of Rounds Chanting',
+                color: const Color(0xff541F5C).withOpacity(.20),
+                radius: 8,
+                child: TextFieldCommon(
+                    keyboardType: TextInputType.emailAddress,
+                    // controller: emailId,
+                    prefixIcon: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          const HSpace(Insets.i20),
+                          SvgPicture.asset("assets/svg/calculator.svg",
+                              height: 20),
+                          const HSpace(Insets.i10),
+                          SvgPicture.asset(eSvgAssets.line,
+                              height: 24, width: 24),
+                          const HSpace(Insets.i20)
+                        ]))).paddingSymmetric(vertical: 10),
             CustomTitleWidget(
-              height: 52,
-              width: double.infinity,
-              title: 'Average Time for Each Round',
-              color: const Color(0xff541F5C).withOpacity(.20),
-              radius: 8,
-              child: TextFieldCommon(
-                  keyboardType: TextInputType.emailAddress,
-                  // controller: emailId,
-                  prefixIcon: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      mainAxisSize: MainAxisSize.min,
-                      children: <Widget>[
-                        const HSpace(Insets.i20),
-                        SvgPicture.asset("assets/svg/clock.svg", height: 20),
-                        const HSpace(Insets.i10),
-                        SvgPicture.asset(eSvgAssets.line,
-                            height: 24, width: 24),
-                        const HSpace(Insets.i20)
-                      ]))
-            ).paddingSymmetric(vertical: 10),
+                height: 52,
+                width: double.infinity,
+                title: 'Average Time for Each Round',
+                color: const Color(0xff541F5C).withOpacity(.20),
+                radius: 8,
+                child: TextFieldCommon(
+                    keyboardType: TextInputType.emailAddress,
+                    // controller: emailId,
+                    prefixIcon: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        mainAxisSize: MainAxisSize.min,
+                        children: <Widget>[
+                          const HSpace(Insets.i20),
+                          SvgPicture.asset("assets/svg/clock.svg", height: 20),
+                          const HSpace(Insets.i10),
+                          SvgPicture.asset(eSvgAssets.line,
+                              height: 24, width: 24),
+                          const HSpace(Insets.i20)
+                        ]))).paddingSymmetric(vertical: 10),
             Row(mainAxisAlignment: MainAxisAlignment.center, children: [
               Container(
                       alignment: Alignment.center,

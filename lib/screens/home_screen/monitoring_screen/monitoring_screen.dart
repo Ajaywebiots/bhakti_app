@@ -26,6 +26,17 @@ class MonitoringScreen extends StatefulWidget {
 
 class _MonitoringScreenState extends State<MonitoringScreen> {
   bool isAllSelected = false;
+  int selectedIndex = -1;
+  List<String> names = [
+    "John",
+    "Jane",
+    "Alice",
+    "Bob",
+    "Charlie",
+    "David",
+    "Eva",
+    "Frank"
+  ];
 
   @override
   Widget build(BuildContext context) {
@@ -36,25 +47,6 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
           child: Scaffold(
               extendBodyBehindAppBar: true,
               extendBody: true,
-              // appBar: AppBar(
-              //     leading: Container(),
-              //     backgroundColor: Colors.transparent,
-              //     titleSpacing: 0,
-              //     leadingWidth: 0,
-              //     title: Row(
-              //         mainAxisAlignment: MainAxisAlignment.start,
-              //         children: [
-              //           const HSpace(Insets.i20),
-              //           SvgPicture.asset("assets/svg/arrowLeft.svg").inkWell(
-              //               onTap: () {
-              //             dashPvr.tabController!.index = 0;
-              //             dashPvr.notifyListeners();
-              //           }),
-              //           const HSpace(Insets.i90),
-              //           Text("Group View",
-              //               style: appCss.philosopherBold28
-              //                   .textColor(appColor(context).appTheme.oneText))
-              //         ])),
               body: Stack(alignment: Alignment.topCenter, children: [
                 Container(
                     decoration: BoxDecoration(
@@ -63,26 +55,25 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                             image: AssetImage(eImageAssets.splashBg)))),
                 SingleChildScrollView(
                     child: Column(children: [
-                      AppBar(
-                          leading: Container(),
-                          backgroundColor: Colors.transparent,
-                          titleSpacing: 0,
-                          leadingWidth: 0,
-                          title: Row(
-                              mainAxisAlignment: MainAxisAlignment.start,
-                              children: [
-                                const HSpace(Insets.i20),
-                                SvgPicture.asset("assets/svg/arrowLeft.svg").inkWell(
-                                    onTap: () {
-                                      dashPvr.tabController!.index = 0;
-                                      dashPvr.notifyListeners();
-                                    }),
-                                const HSpace(Insets.i90),
-                                Text("Group View",
-                                    style: appCss.philosopherBold28
-                                        .textColor(appColor(context).appTheme.oneText))
-                              ])),
-                  const VSpace(Insets.i80),
+                  AppBar(
+                      leading: Container(),
+                      backgroundColor: Colors.transparent,
+                      titleSpacing: 0,
+                      leadingWidth: 0,
+                      title: Row(
+                          mainAxisAlignment: MainAxisAlignment.start,
+                          children: [
+                            SvgPicture.asset("assets/svg/arrowLeft.svg")
+                                .inkWell(onTap: () {
+                              dashPvr.tabController!.index = 0;
+                              dashPvr.notifyListeners();
+                            }),
+                            const HSpace(Insets.i90),
+                            Text("Group View",
+                                style: appCss.philosopherBold28.textColor(
+                                    appColor(context).appTheme.oneText))
+                          ])),
+                  const VSpace(Insets.i25),
                   const WeekCalendar(),
                   const VSpace(Insets.i25),
                   Row(children: [
@@ -97,6 +88,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                           scrollDirection: Axis.horizontal,
                           itemCount: 8,
                           itemBuilder: (context, index) {
+                            bool isSelected = index == selectedIndex;
                             if (index == 0) {
                               return Container(
                                       width: 43,
@@ -240,7 +232,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                                           GroupViewChantingCommonContainer(
                                               text: 'Before 8:30 am',
                                               countText: '2',
-                                              svgImage: eSvgAssets.chanting),
+                                              svgImage: eSvgAssets.chanting)
                                         ]),
                                     const VSpace(Insets.i10),
                                     SvgPicture.asset(eSvgAssets.lineRuler),
@@ -265,7 +257,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                           Row(children: [
                             Text("Worship",
                                 style: appCss.philosopherBold18.textColor(
-                                    appColor(context).appTheme.rulesClr)),
+                                    appColor(context).appTheme.rulesClr))
                           ]),
                           const VSpace(Insets.i15),
                           Container(
@@ -300,59 +292,82 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                                             appColor(context)
                                                 .appTheme
                                                 .lightText))
-                                  ])
+                                  ]),
+                                  if (e.key != e.value!.length)
+
+                                    SvgPicture.asset(eSvgAssets.lineRuler).paddingOnly(top: 10,bottom: 10),
+
                                 ]);
                               }).toList())),
-                          const VSpace(Insets.i25),
-                          Row(children: [
-                            Text("Presadam",
-                                style: appCss.philosopherBold18.textColor(
-                                    appColor(context).appTheme.rulesClr))
-                          ]),
-                          const VSpace(Insets.i15),
-                          Container(
-                            padding: const EdgeInsets.all(15),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(8),
-                                color: appColor(context).appTheme.whiteColor,
-                                boxShadow: [
-                                  BoxShadow(
-                                      color:
-                                          appColor(context).appTheme.shadowClr,
-                                      blurRadius: 8,
-                                      offset: const Offset(0, 4),
-                                      spreadRadius: 0)
-                                ]),
-                            child: Row(mainAxisAlignment: MainAxisAlignment.center,
-                                children: [
-                              Text("Breakfast : ",
-                                  style: appCss.dmDenseMedium14.textColor(
-                                      appColor(context).appTheme.rulesClr)),
-                              Text("Yes",
-                                  style: appCss.dmDenseMedium14.textColor(
-                                      appColor(context).appTheme.lightText)),
-                              HSpace(Insets.i30),
-                              Text("Lunch : ",
-                                  style: appCss.dmDenseMedium14.textColor(
-                                      appColor(context).appTheme.rulesClr)),
-                              Text("No",
-                                  style: appCss.dmDenseMedium14.textColor(
-                                      appColor(context).appTheme.lightText)),
-                              HSpace(Insets.i30),
-                              Text("Dinner : ",
-                                  style: appCss.dmDenseMedium14.textColor(
-                                      appColor(context).appTheme.rulesClr)),
-                              Text("No",
-                                  style: appCss.dmDenseMedium14.textColor(
-                                      appColor(context).appTheme.lightText)),
-                            ]),
-                          ),
                           const VSpace(Insets.i25),
                           Row(children: [
                             Text("Knowledge",
                                 style: appCss.philosopherBold18.textColor(
                                     appColor(context).appTheme.rulesClr))
                           ]),
+                          const VSpace(Insets.i15),
+                          Container(
+                              padding: const EdgeInsets.all(15),
+                              decoration: BoxDecoration(
+                                  borderRadius: BorderRadius.circular(8),
+                                  color: appColor(context).appTheme.whiteColor,
+                                  boxShadow: [
+                                    BoxShadow(
+                                        color: appColor(context)
+                                            .appTheme
+                                            .shadowClr,
+                                        blurRadius: 8,
+                                        offset: const Offset(0, 4),
+                                        spreadRadius: 0)
+                                  ]),
+                              child: Column(children: [
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("Preaching : ",
+                                          style: appCss.dmDenseMedium14
+                                              .textColor(appColor(context)
+                                                  .appTheme
+                                                  .rulesClr)),
+                                      Text("1:30",
+                                          style: appCss.dmDenseMedium14
+                                              .textColor(appColor(context)
+                                                  .appTheme
+                                                  .lightText)),
+                                      const HSpace(Insets.i20),
+                                      SvgPicture.asset(
+                                          "assets/svg/verticalLine.svg",
+                                          height: 30),
+                                      const HSpace(Insets.i20),
+                                      Text("Class : ",
+                                          style: appCss.dmDenseMedium14
+                                              .textColor(appColor(context)
+                                                  .appTheme
+                                                  .rulesClr)),
+                                      Text("00:45",
+                                          style: appCss.dmDenseMedium14
+                                              .textColor(appColor(context)
+                                                  .appTheme
+                                                  .lightText))
+                                    ]),
+                                const VSpace(Insets.i10),
+                                SvgPicture.asset(eSvgAssets.lineRuler),
+                                const VSpace(Insets.i10),
+                                Row(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    children: [
+                                      Text("Other KC Services : ",
+                                          style: appCss.dmDenseMedium14
+                                              .textColor(appColor(context)
+                                                  .appTheme
+                                                  .rulesClr)),
+                                      Text("2:00",
+                                          style: appCss.dmDenseMedium14
+                                              .textColor(appColor(context)
+                                                  .appTheme
+                                                  .lightText))
+                                    ])
+                              ])),
                           const VSpace(Insets.i15),
                         ]))
                 ]).paddingSymmetric(horizontal: Insets.i20))

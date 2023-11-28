@@ -17,12 +17,12 @@ class BookLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(
         builder: (context, homeScreenPvr, child) {
-          log("homeScreenPvr.bookList :${homeScreenPvr.bookList}");
+          log("bookList :${bookList}");
       return SizedBox(
           height: 180,
           child: ScrollablePositionedList.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: homeScreenPvr.bookList.length,
+              itemCount: bookList.length,
               itemBuilder: (context, index) {
                 return Container(
                     margin: const EdgeInsets.only(right: 15),
@@ -43,10 +43,10 @@ class BookLayout extends StatelessWidget {
                         children: [
                           ClipRRect(
                               borderRadius: BorderRadius.circular(2),
-                              child: Image.network(homeScreenPvr.bookList[index]['image_src'],
+                              child: Image.asset(bookReadingList[index]['book'],
                                   height: Sizes.s132)),
                           const VSpace(Insets.i6),
-                          Text(homeScreenPvr.bookList[index]['reading_time'].toString(),
+                          Text(bookList[index]['reading_time'].toString(),
                               style: appCss.dmDenseMedium16.textColor(
                                   appColor(context).appTheme.primary))
                         ])).inkWell(onTap: () {
@@ -54,22 +54,22 @@ class BookLayout extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return CommonDialog(
-                            text: homeScreenPvr.bookList[index]['book_title'],
+                            text: bookReadingList[index]['book_title'],
                             text1: 'Hour',
                             text2: 'Minutes',
                             onHourChange: (value) {
                               log("value :: $value");
-                              homeScreenPvr. bookList[index] == 0
+                              bookList[index] == 0
                                   ? homeScreenPvr.bhagavadGitaHour = value
-                                  : homeScreenPvr.bookList[index] == 1
+                                  : bookList[index] == 1
                                       ? homeScreenPvr.srilaHour = value
                                       : homeScreenPvr.selfRealizationHour =
                                           value;
                             },
                             onMinChange: (value) {
-                              homeScreenPvr. bookList[index] == 0
+                              bookList[index] == 0
                                   ? homeScreenPvr.bhagavadGitaMin = value
-                                  :homeScreenPvr. bookList[index] == 1
+                                  :bookList[index] == 1
                                       ? homeScreenPvr.srilaMin = value
                                       : homeScreenPvr.selfRealizationMin =
                                           value;

@@ -60,6 +60,10 @@ dependencies:
   drag_and_drop_lists: ^0.3.3
   data_table_2: ^2.5.9
   firebase_remote_config: ^4.3.5
+  wheel_slider: ^1.1.1
+  table_calendar: ^3.0.9
+
+
 
 dev_dependencies:
   flutter_test:
