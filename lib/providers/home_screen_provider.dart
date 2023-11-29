@@ -339,7 +339,10 @@ class HomeScreenProvider extends ChangeNotifier {
   List regulations = [];
 
   getData(context) async {
+    showLoading(context);
+    notifyListeners();
     try {
+
       Map<String, String> body = {
         "from_date": "2023-11-14",
         "to_date": "2023-11-20"
@@ -347,7 +350,7 @@ class HomeScreenProvider extends ChangeNotifier {
       await apiServices
           .postApi(api.getSadhana, body, isToken: true)
           .then((value) async {
-        hideLoading(context);
+      hideLoading(context);
         notifyListeners();
         log('From Date: ${value.isSuccess!}');
         if (value.isSuccess!) {

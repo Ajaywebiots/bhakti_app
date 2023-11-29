@@ -4,6 +4,7 @@ import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/home_screen_provider.dart';
+import 'package:bhakti_app/screens/home_screen/drawer_screen/layouts/my_documents_screen.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -30,7 +31,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
               testingList = e.value['list'];
             }
             return ListTile(
-                onTap: () {},
+                onTap: () {
+                  Navigator.push(context, MaterialPageRoute(builder: (context) {
+                    return MyDocumentScreen();
+                  },));
+                },
                 title: e.value['name'] == "Online Tests"
                     ? ExpansionTile(
                         trailing: SvgPicture.asset(

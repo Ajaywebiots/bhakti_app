@@ -47,7 +47,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     SingleChildScrollView(
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
-                            crossAxisAlignment: CrossAxisAlignment.start,
+
                             children: [
                           const CommonAppBar(),
                           const VSpace(Insets.i23),

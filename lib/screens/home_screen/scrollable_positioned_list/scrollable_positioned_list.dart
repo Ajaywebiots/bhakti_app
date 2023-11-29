@@ -543,7 +543,8 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
   }) async {
     final direction = index > primary.target ? 1 : -1;
     final itemPosition = primary.itemPositionsNotifier.itemPositions.value
-        .firstWhereOrNull((ItemPosition itemPosition) => itemPosition.index == index);
+        .firstWhereOrNull(
+            (itemPosition) => itemPosition.index == index);
     if (itemPosition != null) {
       // Scroll directly.
       final localScrollAmount = itemPosition.itemLeadingEdge *
@@ -640,7 +641,7 @@ class _ScrollablePositionedListState extends State<ScrollablePositionedList>
 
   void _updatePositions() {
     final itemPositions = primary.itemPositionsNotifier.itemPositions.value
-        .where((ItemPosition position) =>
+        .where((position) =>
             position.itemLeadingEdge < 1 && position.itemTrailingEdge > 0);
     if (itemPositions.isNotEmpty) {
       PageStorage.of(context).writeState(

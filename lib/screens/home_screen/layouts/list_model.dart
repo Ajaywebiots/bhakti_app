@@ -2,7 +2,6 @@ import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/screens/home_screen/book_read_presently_screen/book_read_presently_screen.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/homepage_section_priorities.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/setting_parameters.dart';
-import '../../../config.dart';
 import '../setting_screen/layouts/notification.dart';
 import '../setting_screen/layouts/share_my_sadhana.dart';
 import '../setting_screen/layouts/share_with_me.dart';

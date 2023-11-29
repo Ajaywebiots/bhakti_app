@@ -54,14 +54,17 @@ dependencies:
   intl_phone_field:
   connectivity_plus: ^5.0.1
   firebase_storage: ^11.5.1
-  ruler_picker_bn: ^0.0.6
+
   calendar_date_picker2: ^0.5.3
   flutter_facebook_auth: ^6.0.2
   drag_and_drop_lists: ^0.3.3
   data_table_2: ^2.5.9
   firebase_remote_config: ^4.3.5
-  wheel_slider: ^1.1.1
   table_calendar: ^3.0.9
+  wheel_chooser: ^1.1.2
+  jiffy: ^6.2.1
+  syncfusion_flutter_charts: ^21.2.8
+  dotted_border: ^2.1.0
 
 
 

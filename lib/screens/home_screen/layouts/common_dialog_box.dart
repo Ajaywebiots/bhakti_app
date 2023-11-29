@@ -3,7 +3,6 @@ import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/common_ruler_picker.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/mangla_Alert_List_layout.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/sandhya_alert_list_layout.dart';
@@ -58,16 +57,17 @@ class _CommonDialogState extends State<CommonDialog> {
                   style: appCss.dmDenseMedium14
                       .textColor(appColor(context).appTheme.primary)),
               const VSpace(Insets.i32),
-              CommonRulerPicker(
-                  startValue: 1, maxValue: 12, onChange: widget.onHourChange!),
+
+              // CommonRulerPicker(
+              //     startValue: 1, maxValue: 12, onChange: widget.onHourChange!),
               Text(
                   textAlign: TextAlign.start,
                   widget.text2!,
                   style: appCss.dmDenseMedium14
                       .textColor(appColor(context).appTheme.primary)),
               const VSpace(Insets.i10),
-              CommonRulerPicker(
-                  startValue: 1, maxValue: 60, onChange: widget.onMinChange!),
+              // CommonRulerPicker(
+              //     startValue: 1, maxValue: 60, onChange: widget.onMinChange!),
               widget.text == "Mangala Arti"
                   ? const VSpace(Insets.i25)
                   : widget.text == "Sandhya Arti"

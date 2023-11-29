@@ -169,6 +169,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "5.3.3"
+  dotted_border:
+    dependency: "direct main"
+    description:
+      name: dotted_border
+      sha256: "108837e11848ca776c53b30bc870086f84b62ed6e01c503ed976e8f8c7df9c04"
+      url: "https://pub.dev"
+    source: hosted
+    version: "2.1.0"
   drag_and_drop_lists:
     dependency: "direct main"
     description:
@@ -640,6 +648,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.0"
+  jiffy:
+    dependency: "direct main"
+    description:
+      name: jiffy
+      sha256: cc1d4b75016a9156c29b5d61f0c9176c3e0fb0580cc5a0e0422b5d2cab3fbfff
+      url: "https://pub.dev"
+    source: hosted
+    version: "6.2.1"
   js:
     dependency: transitive
     description:
@@ -720,6 +736,14 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.8.3"
+  path_drawing:
+    dependency: transitive
+    description:
+      name: path_drawing
+      sha256: bbb1934c0cbb03091af082a6389ca2080345291ef07a5fa6d6e078ba8682f977
+      url: "https://pub.dev"
+    source: hosted
+    version: "1.0.1"
   path_parsing:
     dependency: transitive
     description:
@@ -848,22 +872,6 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "3.2.1"
-  ruler_picker_bn:
-    dependency: "direct main"
-    description:
-      name: ruler_picker_bn
-      sha256: "0b4bfb1c6121a3e4396a7267f7f87d3f37edb448d29eab50bb2ea159d6b6e1ee"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.0.6"
-  scrollable_positioned_list:
-    dependency: transitive
-    description:
-      name: scrollable_positioned_list
-      sha256: "1b54d5f1329a1e263269abc9e2543d90806131aa14fe7c6062a8054d57249287"
-      url: "https://pub.dev"
-    source: hosted
-    version: "0.3.8"
   shared_preferences:
     dependency: "direct main"
     description:
@@ -973,6 +981,22 @@ packages:
       url: "https://pub.dev"
     source: hosted
     version: "1.2.0"
+  syncfusion_flutter_charts:
+    dependency: "direct main"
+    description:
+      name: syncfusion_flutter_charts
+      sha256: "5f868f5a82380ef1b3de416b7812e1ac7acce6a629f9281618adee81d90716cc"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.10"
+  syncfusion_flutter_core:
+    dependency: transitive
+    description:
+      name: syncfusion_flutter_core
+      sha256: "8db8f55c77f56968681447d3837c10f27a9e861e238a898fda116c7531def979"
+      url: "https://pub.dev"
+    source: hosted
+    version: "21.2.10"
   table_calendar:
     dependency: "direct main"
     description:
@@ -1054,21 +1078,13 @@ packages:
     source: hosted
     version: "1.1.0"
   wheel_chooser:
-    dependency: transitive
+    dependency: "direct main"
     description:
       name: wheel_chooser
       sha256: "3fee36f081f321c58a0b7b4afcdd92599f2ca520b3a1420084774e6b19cca1d8"
       url: "https://pub.dev"
     source: hosted
     version: "1.1.2"
-  wheel_slider:
-    dependency: "direct main"
-    description:
-      name: wheel_slider
-      sha256: "34eb90d17de39bfc99950ccdc82c1ae4d219f606f2bb7320aa462b9682d97a2e"
-      url: "https://pub.dev"
-    source: hosted
-    version: "1.1.1"
   win32:
     dependency: transitive
     description:
