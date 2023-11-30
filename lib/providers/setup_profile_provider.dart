@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:image_picker/image_picker.dart';
@@ -9,8 +10,6 @@ import 'package:bhakti_app/models/user_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 import 'package:bhakti_app/screens/home_screen/home_screen.dart';
-import 'dart:ui' as ui;
-import 'dart:io';
 
 class SetUpProfileProvider extends ChangeNotifier {
   final TextEditingController name = TextEditingController();
@@ -32,6 +31,7 @@ class SetUpProfileProvider extends ChangeNotifier {
   XFile? image;
   int? selectedGender;
   int? selectedMarital;
+  CountryCode? countryCode;
   String imagePath = "", downloadUrl = "";
   bool showError = false;
   bool validStatus = false;
@@ -124,7 +124,7 @@ class SetUpProfileProvider extends ChangeNotifier {
                   : "female"
               : "",
           "email": emailId.text,
-          "mobile_number": "+${phoneNum.text}",
+          "mobile_number": "$countryCode-${phoneNum.text}",
           "country": countrySelected['code'],
           "state": state.text,
           "city": city.text,

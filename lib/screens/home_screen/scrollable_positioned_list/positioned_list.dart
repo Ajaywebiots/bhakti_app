@@ -166,8 +166,8 @@ class _PositionedListState extends State<PositionedList> {
 
   @override
   Widget build(BuildContext context) => RegistryWidget(
-        elementNotifier: registeredElements,
-        child: UnboundedCustomScrollView(
+      elementNotifier: registeredElements,
+      child: UnboundedCustomScrollView(
           anchor: widget.alignment,
           center: _centerKey,
           controller: scrollController,
@@ -215,25 +215,24 @@ class _PositionedListState extends State<PositionedList> {
             if (widget.positionedIndex >= 0 &&
                 widget.positionedIndex < widget.itemCount - 1)
               SliverPadding(
-                padding: _trailingSliverPadding,
-                sliver: SliverList(
-                  delegate: SliverChildBuilderDelegate(
-                    (context, index) => widget.separatorBuilder == null
-                        ? _buildItem(index + widget.positionedIndex + 1)
-                        : _buildSeparatedListElement(
-                            index + 2 * widget.positionedIndex + 1),
-                    childCount: widget.separatorBuilder == null
-                        ? widget.itemCount - widget.positionedIndex - 1
-                        : 2 * (widget.itemCount - widget.positionedIndex - 1),
-                    addSemanticIndexes: false,
-                    addRepaintBoundaries: widget.addRepaintBoundaries,
-                    addAutomaticKeepAlives: widget.addAutomaticKeepAlives,
-                  ),
-                ),
-              ),
-          ],
-        ),
-      );
+                  padding: _trailingSliverPadding,
+                  sliver: SliverList(
+                      delegate: SliverChildBuilderDelegate(
+                          (context, index) => widget.separatorBuilder == null
+                              ? _buildItem(index + widget.positionedIndex + 1)
+                              : _buildSeparatedListElement(
+                                  index + 2 * widget.positionedIndex + 1),
+                          childCount: widget.separatorBuilder == null
+                              ? widget.itemCount - widget.positionedIndex - 1
+                              : 2 *
+                                  (widget.itemCount -
+                                      widget.positionedIndex -
+                                      1),
+                          addSemanticIndexes: false,
+                          addRepaintBoundaries: widget.addRepaintBoundaries,
+                          addAutomaticKeepAlives:
+                              widget.addAutomaticKeepAlives)))
+          ]));
 
   Widget _buildSeparatedListElement(int index) {
     if (index.isEven) {

@@ -65,6 +65,10 @@ dependencies:
   jiffy: ^6.2.1
   syncfusion_flutter_charts: ^21.2.8
   dotted_border: ^2.1.0
+  percent_indicator: ^4.2.3
+  file_picker: ^6.1.1
+  country_code_picker: ^3.0.0
+
 
 
 

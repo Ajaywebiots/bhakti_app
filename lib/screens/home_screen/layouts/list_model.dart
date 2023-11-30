@@ -177,10 +177,10 @@ List<Map<String, dynamic>> sandhyaTypeList = [
 ];
 
 List chantingList = [
-  {'time': "Before 6:30 am", 'chantingText': '8'},
-  {'time': "Before 8:30 am", 'chantingText': '4'},
-  {'time': "Before 10:10 am", 'chantingText': '8'},
-  {'time': "Before 10:00 am", 'chantingText': '4'}
+'0',
+'0',
+'0',
+'0'
 ];
 
 List drawerList = [

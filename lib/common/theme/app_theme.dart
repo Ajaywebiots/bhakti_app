@@ -36,6 +36,8 @@ class AppTheme {
   Color emailClr;
   Color whiteColor;
   Color bottomText;
+  Color myDocumentColor;
+  Color processColor;
 
   Color containColor;
 
@@ -65,6 +67,8 @@ class AppTheme {
     required this.googleTxtClr,
     required this.fbClr,
     required this.emailClr,
+    required this.myDocumentColor,
+    required this.processColor,
     required this.green,
     required this.whiteColor, required this.bottomText, required this.containColor,
   });
@@ -75,11 +79,10 @@ class AppTheme {
       case ThemeType.light:
         return AppTheme(
             isDark: false,
-
-
             primary: const Color(0xff541F5C),
-
             containColor: const Color(0xffC9B7CB),
+            myDocumentColor: const Color(0xff9E9E9E),
+            processColor: const Color(0xffEDEDED),
             darkText: const Color(0xff00162E),
             bottomText: const Color(0xffA48AA9),
             lightText: const Color(0xff767676),
@@ -109,6 +112,8 @@ class AppTheme {
       case ThemeType.dark:
         return AppTheme(
             isDark: true,
+            processColor: const Color(0xffEDEDED),
+            myDocumentColor: const Color(0xff9E9E9E),
             primary: const Color(0xff5465FF),
             darkText: const Color(0xffF1F1F1),
             lightText: const Color(0xff767676),

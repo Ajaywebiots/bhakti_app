@@ -60,14 +60,11 @@ class SharingWithMe extends StatelessWidget {
                     child: TextField(
                         decoration: InputDecoration(
                             hintText: 'Search Here',
-                            prefixIcon: Row(
-                              children: [
-                                SvgPicture.asset(
-                                    "assets/svg/search-normal.svg"),
-                                const HSpace(Insets.i10),
-                                SvgPicture.asset(eSvgAssets.line)
-                              ],
-                            ).paddingAll(10),
+                            prefixIcon: Row(children: [
+                              SvgPicture.asset("assets/svg/search-normal.svg"),
+                              const HSpace(Insets.i10),
+                              SvgPicture.asset(eSvgAssets.line)
+                            ]).paddingAll(10),
                             disabledBorder: const OutlineInputBorder(
                                 borderRadius:
                                 BorderRadius.all(Radius.circular(AppRadius.r8)),
@@ -110,155 +107,171 @@ class SharingWithMe extends StatelessWidget {
                                 image: e.value['image'],
                                 index: e.key,
                                 isShare: true,
-                                widget: PopupMenuButton(onSelected: (value) {
-                                  if (value == 1) {
-                                    Navigator.pop(context);
-                                    // if value 2 show dialog
-                                  } else if (value == 2) {
-                                    showDialog(
-                                        context: context,
-                                        builder: (context) {
-                                          return Dialog(
-                                              shape: RoundedRectangleBorder(
-                                                  borderRadius:
-                                                  BorderRadius.circular(8)),
-                                              child: SizedBox(
-                                                  height: 175,
-                                                  child: Column(
-                                                      mainAxisAlignment:
-                                                      MainAxisAlignment
-                                                          .center,
-                                                      children: [
-                                                        const VSpace(
-                                                            Insets.i10),
-                                                        Center(
-                                                            child: Text(
-                                                                "Delete user",
-                                                                style: appCss
-                                                                    .philosopherBold18
-                                                                    .textColor(
-                                                                    appColor(
-                                                                        context)
-                                                                        .appTheme
-                                                                        .primary))),
-                                                        const VSpace(
-                                                            Insets.i10),
-                                                        Center(
-                                                            child: Text(
-                                                                "Are You Sure You Want to Delete This user? ",
-                                                                style: appCss
-                                                                    .dmDenseRegular14
-                                                                    .textColor(
-                                                                    appColor(
-                                                                        context)
-                                                                        .appTheme
-                                                                        .rulesClr))),
-                                                        Center(
-                                                            child: Text(
-                                                                style: appCss
-                                                                    .dmDenseRegular14
-                                                                    .textColor(
-                                                                    appColor(
-                                                                        context)
-                                                                        .appTheme
-                                                                        .rulesClr),
-                                                                "This Action Can’t Be Undone.")),
-                                                        const VSpace(
-                                                            Insets.i25),
-                                                        Row(mainAxisAlignment: MainAxisAlignment
-                                                            .center,
-                                                            children: [
-                                                              Container(
-                                                                  alignment: Alignment
-                                                                      .center,
-                                                                  decoration: BoxDecoration(
-                                                                      border: Border
-                                                                          .all(
-                                                                          width: 1,
+                                widget: PopupMenuButton(
+                                    padding: EdgeInsets.zero,
+                                    offset: const Offset(0, 50),
+                                    onSelected: (value) {
+                                      if (value == 1) {
+                                        Navigator.pop(context);
+                                        // if value 2 show dialog
+                                      } else if (value == 2) {
+                                        showDialog(
+                                            context: context,
+                                            builder: (context) {
+                                              return Dialog(
+                                                  shape: RoundedRectangleBorder(
+                                                      borderRadius:
+                                                      BorderRadius.circular(8)),
+                                                  child: SizedBox(
+                                                      height: 175,
+                                                      child: Column(
+                                                          mainAxisAlignment:
+                                                          MainAxisAlignment
+                                                              .center,
+                                                          children: [
+                                                            const VSpace(
+                                                                Insets.i10),
+                                                            Center(
+                                                                child: Text(
+                                                                    "Delete user",
+                                                                    style: appCss
+                                                                        .philosopherBold18
+                                                                        .textColor(
+                                                                        appColor(
+                                                                            context)
+                                                                            .appTheme
+                                                                            .primary))),
+                                                            const VSpace(
+                                                                Insets.i10),
+                                                            Center(
+                                                                child: Text(
+                                                                    "Are You Sure You Want to Delete This user? ",
+                                                                    style: appCss
+                                                                        .dmDenseRegular14
+                                                                        .textColor(
+                                                                        appColor(
+                                                                            context)
+                                                                            .appTheme
+                                                                            .rulesClr))),
+                                                            Center(
+                                                                child: Text(
+                                                                    style: appCss
+                                                                        .dmDenseRegular14
+                                                                        .textColor(
+                                                                        appColor(
+                                                                            context)
+                                                                            .appTheme
+                                                                            .rulesClr),
+                                                                    "This Action Can’t Be Undone.")),
+                                                            const VSpace(
+                                                                Insets.i25),
+                                                            Row(
+                                                                mainAxisAlignment:
+                                                                MainAxisAlignment
+                                                                    .center,
+                                                                children: [
+                                                                  Container(
+                                                                      alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                      decoration: BoxDecoration(
+                                                                          border: Border
+                                                                              .all(
+                                                                              width:
+                                                                              1,
+                                                                              color: appColor(
+                                                                                  context)
+                                                                                  .appTheme
+                                                                                  .primary),
+                                                                          borderRadius:
+                                                                          BorderRadius
+                                                                              .circular(
+                                                                              8)),
+                                                                      height: 44,
+                                                                      width: 120,
+                                                                      child: Text(
+                                                                          "Cancel",
+                                                                          style: appCss
+                                                                              .dmDenseMedium16
+                                                                              .textColor(
+                                                                              appColor(
+                                                                                  context)
+                                                                                  .appTheme
+                                                                                  .primary)))
+                                                                      .inkWell(
+                                                                      onTap: () {
+                                                                        Navigator
+                                                                            .pop(
+                                                                            context);
+                                                                      }),
+                                                                  const HSpace(
+                                                                      Insets
+                                                                          .i15),
+                                                                  Container(
+                                                                      alignment:
+                                                                      Alignment
+                                                                          .center,
+                                                                      decoration: BoxDecoration(
+                                                                          borderRadius:
+                                                                          BorderRadius
+                                                                              .circular(
+                                                                              8),
                                                                           color: appColor(
                                                                               context)
                                                                               .appTheme
                                                                               .primary),
-                                                                      borderRadius: BorderRadius
-                                                                          .circular(
-                                                                          8)),
-                                                                  height: 44,
-                                                                  width: 120,
-                                                                  child: Text(
-                                                                      "Cancel",
-                                                                      style: appCss
-                                                                          .dmDenseMedium16
-                                                                          .textColor(
-                                                                          appColor(
-                                                                              context)
-                                                                              .appTheme
-                                                                              .primary)))
-                                                                  .inkWell(
-                                                                  onTap: () {
-                                                                    Navigator
-                                                                        .pop(
-                                                                        context);
-                                                                  }),
-                                                              const HSpace(
-                                                                  Insets.i15),
-                                                              Container(
-                                                                  alignment: Alignment
-                                                                      .center,
-                                                                  decoration: BoxDecoration(
-                                                                      borderRadius: BorderRadius
-                                                                          .circular(
-                                                                          8),
-                                                                      color: appColor(
-                                                                          context)
-                                                                          .appTheme
-                                                                          .primary),
-                                                                  height: 44,
-                                                                  width: 120,
-                                                                  child: Text(
-                                                                      "Delete",
-                                                                      style: appCss
-                                                                          .dmDenseMedium16
-                                                                          .textColor(
-                                                                          appColor(
-                                                                              context)
-                                                                              .appTheme
-                                                                              .whiteColor)))
-                                                                  .inkWell(
-                                                                  onTap: () {
-                                                                    Navigator
-                                                                        .pop(
-                                                                        context);
-                                                                  })
-                                                            ])
+                                                                      height: 44,
+                                                                      width: 120,
+                                                                      child: Text(
+                                                                          "Delete",
+                                                                          style: appCss
+                                                                              .dmDenseMedium16
+                                                                              .textColor(
+                                                                              appColor(
+                                                                                  context)
+                                                                                  .appTheme
+                                                                                  .whiteColor)))
+                                                                      .inkWell(
+                                                                      onTap: () {
+                                                                        Navigator
+                                                                            .pop(
+                                                                            context);
+                                                                      })
+                                                                ])
+                                                          ])));
+                                            });
+                                      }
+                                    },
+                                    elevation: 2,
+                                    shape: TooltipShape(),
+                                    child: SvgPicture.asset(
+                                        "assets/svg/option.svg"),
+                                    itemBuilder: (context) =>
+                                    [
+                                      PopupMenuItem(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              20, 0, 0, 0),
+                                          value: 1,
+                                          child: Text('Check Sadhana',
+                                              style: appCss.dmDenseRegular14
+                                                  .textColor(
+                                                  appColor(context).appTheme
+                                                      .rulesClr))),
+                                      PopupMenuItem(
+                                          height: 0, padding: EdgeInsets.zero,
+                                          child: SvgPicture.asset(
+                                              eSvgAssets.lineRuler)),
 
-                                                      ])));
-                                        });
-                                  }
-
-                                },
-                                  elevation: 2,
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(8),
-                                  ),
-                                  child: SvgPicture.asset(
-                                      "assets/svg/option.svg"),
-                                  itemBuilder: (context) =>
-                                  [
-                                    PopupMenuItem(
-                                        value: 1,
-                                        child: Text('Check Sadhana',
-                                            style: appCss.dmDenseRegular14
-                                                .textColor(
-                                                appColor(context).appTheme
-                                                    .rulesClr))),
-                                    PopupMenuItem(
-                                        value: 2,
-                                        child: Text('Delete User',
-                                            style: appCss.dmDenseRegular14
-                                                .textColor(
-                                                appColor(context).appTheme
-                                                    .rulesClr))),
-                                  ],
+                                      PopupMenuItem(
+                                          padding: const EdgeInsets.fromLTRB(
+                                              20, 0, 0, 0),
+                                          value: 2,
+                                          child: Text('Delete User',
+                                              style: appCss.dmDenseRegular14
+                                                  .textColor(
+                                                  appColor(context).appTheme
+                                                      .rulesClr)))
+                                    ]
                                 ),
                                 list: sharingWithMeList,
                                 text: e.value['name'])
@@ -268,4 +281,58 @@ class SharingWithMe extends StatelessWidget {
               ]).paddingSymmetric(horizontal: 20))
         ]));
   }
+}
+
+
+class TooltipShape extends ShapeBorder {
+  TooltipShape();
+
+  final BorderSide _side = const BorderSide(color: Color(0xff541F5C), width: 1);
+  final BorderRadiusGeometry _borderRadius = BorderRadius.circular(8);
+
+  @override
+  EdgeInsetsGeometry get dimensions => EdgeInsets.all(_side.width);
+
+  @override
+  Path getInnerPath(Rect rect, {
+    TextDirection? textDirection,
+  }) {
+    final Path path = Path();
+
+    path.addRRect(
+      _borderRadius.resolve(textDirection).toRRect(rect).deflate(_side.width),
+    );
+
+    return path;
+  }
+
+  @override
+  Path getOuterPath(Rect rect, {TextDirection? textDirection}) {
+    final Path path = Path();
+    final RRect rrect = _borderRadius.resolve(textDirection).toRRect(rect);
+
+    path.moveTo(0, 10);
+    path.quadraticBezierTo(0, 0, 10, 0);
+    path.lineTo(rrect.width - 30, 0);
+    path.lineTo(rrect.width - 20, -10);
+    path.lineTo(rrect.width - 10, 0);
+    path.quadraticBezierTo(rrect.width, 0, rrect.width, 10);
+    path.lineTo(rrect.width, rrect.height - 10);
+    path.quadraticBezierTo(
+        rrect.width, rrect.height, rrect.width - 10, rrect.height);
+    path.lineTo(10, rrect.height);
+    path.quadraticBezierTo(0, rrect.height, 0, rrect.height - 10);
+
+    return path;
+  }
+
+  @override
+  void paint(Canvas canvas, Rect rect, {TextDirection? textDirection}) {}
+
+  @override
+  ShapeBorder scale(double t) =>
+      RoundedRectangleBorder(
+        side: _side.scale(t),
+        borderRadius: _borderRadius * t,
+      );
 }

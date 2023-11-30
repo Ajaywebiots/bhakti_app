@@ -21,20 +21,6 @@ class BookReadPresentlyScreen extends StatelessWidget {
           return Scaffold(
               extendBodyBehindAppBar: true,
               extendBody: true,
-              appBar: AppBar(
-                  leading: Container(),
-                  backgroundColor: Colors.transparent,
-                  titleSpacing: 0,
-                  leadingWidth: 0,
-                  title: Row(children: [
-                    const HSpace(Insets.i20),
-                    SvgPicture.asset("assets/svg/arrowLeft.svg")
-                        .inkWell(onTap: () => Navigator.pop(context)),
-                    const HSpace(Insets.i12),
-                    Text("Books Reading Presently",
-                        style: appCss.philosopherBold28
-                            .textColor(appColor(context).appTheme.oneText))
-                  ])),
               body: Stack(alignment: Alignment.topLeft, children: [
                 Container(
                     decoration: BoxDecoration(
@@ -45,7 +31,20 @@ class BookReadPresentlyScreen extends StatelessWidget {
                     child: Column(
                         mainAxisAlignment: MainAxisAlignment.start,
                         children: [
-                          const VSpace(Insets.i120),
+                          AppBar(
+                              leading: Container(),
+                              backgroundColor: Colors.transparent,
+                              titleSpacing: 0,
+                              leadingWidth: 0,
+                              title: Row(children: [
+                                SvgPicture.asset("assets/svg/arrowLeft.svg")
+                                    .inkWell(onTap: () => Navigator.pop(context)),
+                                const HSpace(Insets.i12),
+                                Text("Books Reading Presently",
+                                    style: appCss.philosopherBold28
+                                        .textColor(appColor(context).appTheme.oneText))
+                              ])),
+                          const VSpace(Insets.i25),
                           Container(
                               height: 50,
                               decoration: BoxDecoration(
@@ -107,7 +106,7 @@ class BookReadPresentlyScreen extends StatelessWidget {
                                         spreadRadius: 0)
                                   ]),
                               child: ListView.builder(
-                                  itemCount: bookReadingList!.length,
+                                  itemCount:  homeScreenPvr.bookingLis.length,
                                   shrinkWrap: true,
                                   padding: const EdgeInsets.all(15),
                                   physics: const NeverScrollableScrollPhysics(),
@@ -127,7 +126,7 @@ class BookReadPresentlyScreen extends StatelessWidget {
                                                           4),
                                                       child: Image.network(
 
-                                                          bookReadingList![index]['image_src'],
+                                                          homeScreenPvr.bookingLis[index]['image_src'],
                                                           fit: BoxFit.cover,
                                                           height: 70,
                                                           width: 50)),
@@ -142,7 +141,7 @@ class BookReadPresentlyScreen extends StatelessWidget {
                                                                 .size
                                                                 .width / 2,
                                                             child: Text(
-                                                                bookReadingList![index]['book_name'],
+                                                                homeScreenPvr.bookingLis[index]['book_name'],
                                                                 overflow: TextOverflow
                                                                     .ellipsis,
                                                                 style: appCss
@@ -159,7 +158,7 @@ class BookReadPresentlyScreen extends StatelessWidget {
                                                                 .size
                                                                 .width / 2,
                                                             child: Text(
-                                                                bookReadingList![index]['book_name'],
+                                                                homeScreenPvr.bookingLis[index]['book_name'],
                                                                 overflow: TextOverflow
                                                                     .fade,
                                                                 style: appCss
@@ -198,7 +197,7 @@ class BookReadPresentlyScreen extends StatelessWidget {
                                                     child: bookList
                                                         .where((element) =>
                                                     element['book_id'] ==
-                                                        bookReadingList![index]['book_id'])
+                                                        homeScreenPvr.bookingLis[index]['book_id'])
                                                         .isNotEmpty
 
                                                         ? SvgPicture.asset(
@@ -339,23 +338,23 @@ class BookReadPresentlyScreen extends StatelessWidget {
                                                     .inkWell(onTap: () {
                                                   if (!bookList
                                                       .contains(
-                                                      bookReadingList![index])) {
+                                                      homeScreenPvr.bookingLis[index])) {
                                                     bookList
                                                         .add(
-                                                        bookReadingList![index]);
+                                                        homeScreenPvr.bookingLis[index]);
                                                   }
                                                   homeScreenPvr
                                                       .notifyListeners();
                                                 })
                                               ]),
-                                          index == bookReadingList!.length - 1
+                                          index == homeScreenPvr.bookingLis.length - 1
                                               ? Container()
                                               : const VSpace(Insets.i10),
-                                          index == bookReadingList!.length - 1
+                                          index == homeScreenPvr.bookingLis.length - 1
                                               ? Container()
                                               : SvgPicture.asset(
                                               eSvgAssets.lineRuler),
-                                          index == bookReadingList!.length - 1
+                                          index == homeScreenPvr.bookingLis.length - 1
                                               ? Container()
                                               : const VSpace(Insets.i10)
                                         ]);

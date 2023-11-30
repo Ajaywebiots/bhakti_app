@@ -7,6 +7,7 @@ import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:bhakti_app/services/sadhana_api_data.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:file_picker/file_picker.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:intl/intl.dart';
@@ -33,7 +34,41 @@ class HomeScreenProvider extends ChangeNotifier {
    notifyListeners();
  }
 
-  int index = 0;
+
+ filePick() async {
+   FilePickerResult? result = await FilePicker.platform.pickFiles(
+     type: FileType.custom,
+     allowedExtensions: ['pdf', 'jpg', 'png'],
+   );
+
+   if (result != null) {
+     PlatformFile file = result.files.first;
+
+     print('File name: ${file.name}');
+     print('File size: ${formatBytes(file.size)}');
+     print('File extension: ${file.extension}');
+     print('File path: ${file.path}');
+   } else {
+   }
+ }
+
+ String formatBytes(int bytes) {
+   int KB = 1024;
+   int MB = 1024 * KB;
+
+   if (bytes >= MB) {
+     double sizeInMB = bytes / MB;
+     return '${sizeInMB.toStringAsFixed(2)} MB';
+   } else if (bytes >= KB) {
+     double sizeInKB = bytes / KB;
+     return '${sizeInKB.toStringAsFixed(2)} KB';
+   } else {
+     return '$bytes bytes';
+   }
+ }
+
+
+ int index = 0;
   bool onLastPage = false;
   bool onChange = false;
   bool onLength = false;

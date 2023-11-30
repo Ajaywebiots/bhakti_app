@@ -4,6 +4,18 @@ import 'package:flutter_svg/flutter_svg.dart';
 class MonitoringProvider extends ChangeNotifier {
   int isSelected = 0;
   bool isSelect = false;
+  bool isAllSelected = false;
+  int selectedIndex = -1;
+  List<String> names = [
+    "John",
+    "Jane",
+    "Alice",
+    "Bob",
+    "Charlie",
+    "David",
+    "Eva",
+    "Frank"
+  ];
 
   List userToDo = ["Sleep", "Chanting", "Worship", "Prasadam", "Knowledge"];
   List sleepList = ["", "Sleep at", "Woke up at", "Duration"];
@@ -15,6 +27,7 @@ class MonitoringProvider extends ChangeNotifier {
     "Offered Bhoga",
     "Sandhya Aarti"
   ];
+
   List prasadamList = ["", "Breakfast", "Lunch", "Dinner"];
   List knowledgeList = ["", "Preaching", "Audio Lectures", "KC Services"];
 

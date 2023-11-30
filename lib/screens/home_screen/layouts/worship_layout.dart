@@ -17,7 +17,7 @@ class WorshipLayout extends StatelessWidget {
             children: [
               Expanded(
                   child: Stack(children: [
-                CommonContainer(
+                CommonContainer(isToggle: true,
                     onTap: () => homeScreenPvr.onManglaArtiSelect(context),
                     text: appFonts.mangalaArti,
                     timeText: homeScreenPvr.mangalaArtiTime,

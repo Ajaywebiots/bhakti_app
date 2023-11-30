@@ -1,3 +1,5 @@
+import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
+
 import 'layouts/notes_layout.dart';
 import 'layouts/regulation_layout.dart';
 import 'package:bhakti_app/config.dart';
@@ -47,7 +49,7 @@ class _HomeScreenState extends State<HomeScreen> {
                     SingleChildScrollView(
                         child: Column(
                             mainAxisAlignment: MainAxisAlignment.start,
-
+                            crossAxisAlignment: CrossAxisAlignment.start,
                             children: [
                           const CommonAppBar(),
                           const VSpace(Insets.i23),
@@ -57,7 +59,8 @@ class _HomeScreenState extends State<HomeScreen> {
                           const VSpace(Insets.i15),
                           const SleepLayout(),
                           const VSpace(Insets.i25),
-                          Text(appFonts.worship, style: appCss.philosopherBold18),
+                          Text(appFonts.worship,
+                              style: appCss.philosopherBold18),
                           const VSpace(Insets.i15),
                           const WorshipLayout(),
                           const VSpace(Insets.i25),
@@ -91,12 +94,14 @@ class _HomeScreenState extends State<HomeScreen> {
                                 ]).inkWell(onTap: () {
                                   Navigator.push(context,
                                       MaterialPageRoute(builder: (context) {
-                                    return  BookReadPresentlyScreen(bookReadingList: homeScreenPvr.bookingLis,);
+                                    return BookReadPresentlyScreen(
+                                      bookReadingList: homeScreenPvr.bookingLis,
+                                    );
                                   }));
                                 })
                               ]),
-                          const VSpace(Insets.i15),
-                          const BookLayout(),
+                              bookReadingList == [] ? VSpace(Insets.i15) : Container(),
+                          bookReadingList == [] ? BookLayout() : Container(),
                           const VSpace(Insets.i25),
                           Text(appFonts.association,
                               style: appCss.philosopherBold18),
@@ -113,7 +118,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           const NotesLayout()
                         ]).paddingOnly(
                             top: MediaQuery.of(context).size.height * 0.01,
-                            bottom: MediaQuery.of(context).size.height * 0.15,
+                            bottom: MediaQuery.of(context).size.height * 0.05,
                             left: Insets.i20,
                             right: Insets.i20))
                   ]))));

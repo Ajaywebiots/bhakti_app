@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/config.dart';
@@ -11,10 +13,11 @@ class SleepLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(
       builder: (context, homeScreenPvr, child) {
+        log("fhffj${homeScreenPvr.wakeupTime}");
         return Row(children: [
           Expanded(
               child: Stack(children: [
-            CommonContainer(
+            CommonContainer(isToggle: true,
                 status: false,
                 onTap: () => homeScreenPvr.onSleepTimeSelect(context),
                 onToggle: (val) {},
@@ -50,12 +53,12 @@ class SleepLayout extends StatelessWidget {
           Expanded(
               child: Stack(children: [
             // wokeup time select
-            CommonContainer(
+            CommonContainer(isToggle: true,
                 onTap: () => homeScreenPvr.onWokeUpTimeSelect(context),
                 status: false,
                 onToggle: (val) {},
                 text: appFonts.wokeUpAt,
-                timeText: homeScreenPvr.wakeupTime,
+                timeText:  homeScreenPvr.wakeupTime,
                 svgImage: eSvgAssets.wokeTime),
             const Positioned(
                 right: 58,

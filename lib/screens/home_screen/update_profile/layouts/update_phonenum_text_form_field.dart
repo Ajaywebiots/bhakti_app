@@ -1,7 +1,11 @@
+import 'dart:developer';
+
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
+import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/widgets/text_common_widget.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/widgets/custom_title_widget.dart';
@@ -39,10 +43,26 @@ class UpdatePhoneNumberTextBox extends StatelessWidget {
                   mainAxisSize: MainAxisSize.min,
                   children: <Widget>[
                     const HSpace(Insets.i20),
-                    SvgPicture.asset(eSvgAssets.call1, height: 20),
+                    CountryCodePicker(
+                        showFlag: false,
+                        searchDecoration:
+                            const InputDecoration(hintText: "Search Country Code"),
+                        padding: EdgeInsets.zero,
+                        onChanged: (value) {
+                          profilePvr.countryCode = value;
+                          profilePvr.notifyListeners();
+                        },
+                        textStyle: appCss.dmDenseMedium14
+                            .textColor(appColor(context).appTheme.lightText),
+                        dialogTextStyle: appCss.dmDenseMedium16,
+                        initialSelection: 'IT',
+                        favorite: const ['+91', 'भारत'],
+                        showCountryOnly: false,
+                        showOnlyCountryWhenClosed: false,
+                        alignLeft: false),
                     const HSpace(Insets.i10),
                     SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
-                    const HSpace(Insets.i20),
+                    const HSpace(Insets.i20)
                   ]))).paddingSymmetric(vertical: 10);
     });
   }

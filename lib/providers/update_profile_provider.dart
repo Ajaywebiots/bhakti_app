@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'dart:io';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/models/user_model.dart';
+import 'package:country_code_picker/country_code_picker.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
@@ -31,7 +32,7 @@ class UpdateProfileProvider extends ChangeNotifier {
   XFile? image;
 
   final focusNode = FocusNode();
-  String countryCode = "91";
+  CountryCode? countryCode;
 
   bool value = false;
   bool valueFirst = true, isLoading = false;
@@ -107,7 +108,7 @@ class UpdateProfileProvider extends ChangeNotifier {
                   : "female"
               : "",
           "email": emailId.text,
-          "mobile_number": phoneNum.text,
+          "mobile_number": "$countryCode-${phoneNum.text}",
           "country": countrySelected['code'],
           "state": state.text,
           "city": city.text,
@@ -123,6 +124,7 @@ class UpdateProfileProvider extends ChangeNotifier {
               : "",
           "profile_picture_url": newUrl == "" ? downloadUrl : newUrl
         };
+        log("country code in map${countryCode!}");
 
         await apiServices
             .postApi(api.profileUpdate, body, isToken: true)

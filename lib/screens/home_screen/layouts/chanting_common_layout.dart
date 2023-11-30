@@ -12,17 +12,16 @@ class ChantingCommon extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(
         builder: (BuildContext context, homeScreenPvr, child) {
-
       return SizedBox(
           height: 90,
           child: ScrollablePositionedList.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: homeScreenPvr.chantinglist.length,
+              itemCount: homeScreenPvr.chantinglist.isEmpty ? chantingList.length :  homeScreenPvr.chantinglist.length,
               itemScrollController: homeScreenPvr.itemScrollController,
               itemBuilder: (context, index) {
                 return CommonChantingContainer(
                     text: DateFormat('hh:mm').format(DateTime.now()),
-                    chantingText: homeScreenPvr.chantinglist[index].toString(),
+                    chantingText:  homeScreenPvr.chantinglist.isEmpty ? chantingList[index].toString() : homeScreenPvr.chantinglist[index].toString(),
                     onTap: () {
                       homeScreenPvr.onChantingCountSelect(context);
                     });

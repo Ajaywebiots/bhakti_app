@@ -7,7 +7,6 @@ import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/widgets/custom_title_widget.dart';
-import 'package:bhakti_app/widgets/stateful_wrapper.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class CountryDropDownBox extends StatelessWidget {
@@ -53,11 +52,11 @@ class CountryDropDownBox extends StatelessWidget {
                                         mainAxisAlignment:
                                             MainAxisAlignment.spaceBetween,
                                         children: [
-                                          Text(e["name"],
+                                          Text(e["name"],overflow: TextOverflow.clip,
                                               style: appCss
                                                   .dmDenseExtraBold16
                                                   .textColor(const Color(
-                                                      0xff767676))),
+                                                      0xff767676))).width(Insets.i120),
                                           Text(e["code"],
                                               style: appCss
                                                   .dmDenseExtraBold16

@@ -11,6 +11,7 @@ class CommonContainer extends StatelessWidget {
   final ValueChanged<bool>? onToggle;
   final bool? status;
   final GestureTapCallback? onTap;
+  final bool? isToggle;
 
   const CommonContainer(
       {super.key,
@@ -18,7 +19,9 @@ class CommonContainer extends StatelessWidget {
       this.timeText,
       this.svgImage,
       this.onToggle,
-      this.status = false,this.onTap});
+      this.status = false,
+      this.onTap,
+      this.isToggle = false});
 
   @override
   Widget build(BuildContext context) {
@@ -41,9 +44,11 @@ class CommonContainer extends StatelessWidget {
               Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
                 const HSpace(Insets.i10),
                 SvgPicture.asset(svgImage!),
-                timeText != ''? const HSpace(Insets.i8) : const HSpace(Insets.i51),
-                timeText != ''
-                    ? Text(timeText!,
+                isToggle == true
+                    ? const HSpace(Insets.i8)
+                    : const HSpace(Insets.i51),
+                isToggle == true
+                    ? Text( timeText == "" ? "N/A" : timeText!,
                         style: appCss.dmDenseMedium16
                             .textColor(appColor(context).appTheme.primary))
                     : FlutterSwitch(

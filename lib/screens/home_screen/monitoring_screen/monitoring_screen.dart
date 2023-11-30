@@ -25,18 +25,6 @@ class MonitoringScreen extends StatefulWidget {
 }
 
 class _MonitoringScreenState extends State<MonitoringScreen> {
-  bool isAllSelected = false;
-  int selectedIndex = -1;
-  List<String> names = [
-    "John",
-    "Jane",
-    "Alice",
-    "Bob",
-    "Charlie",
-    "David",
-    "Eva",
-    "Frank"
-  ];
 
   @override
   Widget build(BuildContext context) {
@@ -88,7 +76,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                           scrollDirection: Axis.horizontal,
                           itemCount: 8,
                           itemBuilder: (context, index) {
-                            bool isSelected = index == selectedIndex;
+                            bool isSelected = index == monitoringPvr.selectedIndex;
                             if (index == 0) {
                               return Container(
                                       width: 43,
@@ -106,7 +94,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                                                   .appTheme
                                                   .whiteColor)))
                                   .inkWell(onTap: () {
-                                isAllSelected = true;
+                                monitoringPvr.isAllSelected = true;
                                 setState(() {});
                               });
                             } else {
@@ -117,13 +105,13 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                                           width: 43,
                                           "assets/images/userSection.png"))
                                   .inkWell(onTap: () {
-                                isAllSelected = false;
+                                monitoringPvr.isAllSelected = false;
                                 setState(() {});
                               });
                             }
                           })),
                   const VSpace(Insets.i25),
-                  isAllSelected == true
+                      monitoringPvr.isAllSelected == true
                       ? Column(children: [
                           Container(
                               height: 50,
