@@ -44,7 +44,7 @@ class LoginAuthProvider extends ChangeNotifier {
     UserModel? userModel;
 
 //Map user = json.decode(preferences!.getString(session.user)!);
-    await Future.delayed(Durations.s2);
+    await Future.delayed(DurationsClass.s2);
     userModel =
         UserModel.fromJson(json.decode(preferences.getString(session.user)!));
     debugPrint("userModel ${userModel.name}");
@@ -103,7 +103,7 @@ class LoginAuthProvider extends ChangeNotifier {
     //
     //       preferences = await SharedPreferences.getInstance();
     //       UserModel? userModel;
-    //       await Future.delayed(Durations.s2);
+    //       await Future.delayed(DurationsClass.s2);
     //       userModel = UserModel.fromJson(
     //           json.decode(preferences.getString(session.user)!));
     //       debugPrint("userModel ${userModel.name}");

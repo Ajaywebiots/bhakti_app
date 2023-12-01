@@ -358,7 +358,7 @@ class HomeScreenProvider extends ChangeNotifier {
     onReadyHome();
     getData(context);
     SharedPreferences preferences = await SharedPreferences.getInstance();
-    await Future.delayed(Durations.s1);
+    await Future.delayed(DurationsClass.s1);
     userModel =
         UserModel.fromJson(json.decode(preferences.getString(session.user)!));
 

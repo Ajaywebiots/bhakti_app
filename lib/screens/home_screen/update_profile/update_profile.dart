@@ -35,7 +35,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
         builder: (context1, profilePvr, child) {
       return StatefulWrapper(
           onInit: () => Future.delayed(
-              Durations.ms150, () => profilePvr.onReady(context)),
+              DurationsClass.ms150, () => profilePvr.onReady(context)),
           child: Scaffold(
               backgroundColor: Colors.white,
               body: Stack(children: [

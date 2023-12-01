@@ -178,7 +178,7 @@ class SetUpProfileProvider extends ChangeNotifier {
     preferences = await SharedPreferences.getInstance();
 
 //Map user = json.decode(preferences!.getString(session.user)!);
-    await Future.delayed(Durations.s1);
+    await Future.delayed(DurationsClass.s1);
     userModel =
         UserModel.fromJson(json.decode(preferences!.getString(session.user)!));
 

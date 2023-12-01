@@ -34,7 +34,7 @@ class _HomeScreenState extends State<HomeScreen> {
     return Consumer<HomeScreenProvider>(
         builder: (context1, homeScreenPvr, child) {
       return StatefulWrapper(
-          onInit: () => Future.delayed(Durations.ms150)
+          onInit: () => Future.delayed(DurationsClass.ms150)
               .then((value) => homeScreenPvr.onReady(context)),
           child: SafeArea(
               child: Scaffold(

@@ -169,7 +169,7 @@ class UpdateProfileProvider extends ChangeNotifier {
     // saveData(context);
     notifyListeners();
     preferences = await SharedPreferences.getInstance();
-    await Future.delayed(Durations.s1);
+    await Future.delayed(DurationsClass.s1);
     userModel =
         UserModel.fromJson(json.decode(preferences!.getString(session.user)!));
     log("USER MODEL ${userModel!.profilePictureUrl}");

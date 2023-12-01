@@ -25,7 +25,6 @@ class MonitoringScreen extends StatefulWidget {
 }
 
 class _MonitoringScreenState extends State<MonitoringScreen> {
-
   @override
   Widget build(BuildContext context) {
     return Consumer<MonitoringProvider>(
@@ -76,7 +75,8 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                           scrollDirection: Axis.horizontal,
                           itemCount: 8,
                           itemBuilder: (context, index) {
-                            bool isSelected = index == monitoringPvr.selectedIndex;
+                            bool isSelected =
+                                index == monitoringPvr.selectedIndex;
                             if (index == 0) {
                               return Container(
                                       width: 43,
@@ -111,7 +111,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                             }
                           })),
                   const VSpace(Insets.i25),
-                      monitoringPvr.isAllSelected == true
+                  monitoringPvr.isAllSelected == true
                       ? Column(children: [
                           Container(
                               height: 50,
@@ -282,9 +282,8 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                                                 .lightText))
                                   ]),
                                   if (e.key != e.value!.length)
-
-                                    SvgPicture.asset(eSvgAssets.lineRuler).paddingOnly(top: 10,bottom: 10),
-
+                                    SvgPicture.asset(eSvgAssets.lineRuler)
+                                        .paddingOnly(top: 10, bottom: 10)
                                 ]);
                               }).toList())),
                           const VSpace(Insets.i25),

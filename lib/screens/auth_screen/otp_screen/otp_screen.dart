@@ -167,7 +167,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                               .getInstance();
                                           UserModel? userModel;
 //Map user = json.decode(preferences!.getString(session.user)!);
-                                          await Future.delayed(Durations.s2);
+                                          await Future.delayed(DurationsClass.s2);
                                           if (preferences
                                                   .getString(session.user) !=
                                               null) {

@@ -33,7 +33,7 @@ class _SetUpProfileState extends State<SetUpProfile> {
       return LoadingComponent(
           child: StatefulWrapper(
               onInit: () => Future.delayed(
-                  Durations.ms150, () => setUpProfilePvr.onReady(context)),
+                  DurationsClass.ms150, () => setUpProfilePvr.onReady(context)),
               child: Scaffold(
                   key: setUpProfilePvr.scaffoldKey,
                   extendBodyBehindAppBar: true,
