@@ -4,6 +4,7 @@ import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
+import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/widgets/text_common_widget.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter_svg/svg.dart';
@@ -15,8 +16,8 @@ class UpdatePhoneNumberTextBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UpdateProfileProvider>(
-        builder: (context, profilePvr, child) {
+    return Consumer2<UpdateProfileProvider,SetUpProfileProvider>(
+        builder: (context, profilePvr,updatePvr, child) {
       return CustomTitleWidget(
           height: 52,
           width: double.infinity,
@@ -49,7 +50,7 @@ class UpdatePhoneNumberTextBox extends StatelessWidget {
                             const InputDecoration(hintText: "Search Country Code"),
                         padding: EdgeInsets.zero,
                         onChanged: (value) {
-                          profilePvr.countryCode = value;
+                          updatePvr.countryCode = value;
                           profilePvr.notifyListeners();
                         },
                         textStyle: appCss.dmDenseMedium14

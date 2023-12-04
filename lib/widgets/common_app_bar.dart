@@ -1,4 +1,5 @@
 import 'dart:convert';
+import 'dart:developer';
 import 'package:bhakti_app/common/assets/index.dart';
 import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
@@ -6,6 +7,7 @@ import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/models/user_model.dart';
 import 'package:bhakti_app/providers/home_screen_provider.dart';
 import 'package:bhakti_app/screens/home_screen/update_profile/update_profile.dart';
+import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -34,7 +36,7 @@ class CommonAppBar extends StatelessWidget {
             const HSpace(Insets.i10),
             homeScreenPvr.userModel != null &&
                     homeScreenPvr.userModel?.profilePictureUrl != null
-                ? Container(
+                /*  ? Container(
                         height: 32,
                         width: 32,
                         decoration: BoxDecoration(
@@ -45,8 +47,31 @@ class CommonAppBar extends StatelessWidget {
                                   homeScreenPvr.userModel!.profilePictureUrl!,
                                 )),
                             borderRadius: BorderRadius.circular(4),
-                            color: appColor(context).appTheme.whiteColor))
-                    .inkWell(onTap: () {
+                            color: appColor(context).appTheme.whiteColor))*/
+                ? CachedNetworkImage(
+                    imageUrl: homeScreenPvr.userModel!.profilePictureUrl!,
+                    errorWidget: (context, url, error) => Container(
+                        height: 32,
+                        width: 32,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                alignment: Alignment.center,
+                                image: AssetImage(eImageAssets.img)),
+                            borderRadius: BorderRadius.circular(4),
+                            color: appColor(context).appTheme.whiteColor)),
+                    placeholder: (context, url) => const CircularProgressIndicator(),
+                    imageBuilder: (context, imageProvider) => Container(
+                        height: 32,
+                        width: 32,
+                        decoration: BoxDecoration(
+                            image: DecorationImage(
+                                fit: BoxFit.cover,
+                                alignment: Alignment.center,
+                                image: imageProvider),
+                            borderRadius: BorderRadius.circular(4),
+                            color: appColor(context).appTheme.whiteColor)),
+                  ).inkWell(onTap: () {
                     Navigator.push(context,
                         MaterialPageRoute(builder: (context) {
                       return const ProfileEditScreen();

@@ -108,7 +108,8 @@ class UpdateProfileProvider extends ChangeNotifier {
                   : "female"
               : "",
           "email": emailId.text,
-          "mobile_number": "$countryCode-${phoneNum.text}",
+          "mobile_number":
+          phoneNum.text.isNotEmpty ? "$countryCode-${phoneNum.text}" : "",
           "country": countrySelected['code'],
           "state": state.text,
           "city": city.text,

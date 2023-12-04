@@ -200,7 +200,6 @@ List drawerList = [
   {"icon": "assets/svg/information.svg", "name": "About Bhakti Steps"},
   {"icon": "assets/svg/autobrightness.svg", "name": "About CDM"},
   {"icon": "assets/svg/call-calling.svg", "name": "Contact Us"},
-  {"icon": "assets/svg/logOut.svg", "name": "Log Out"}
 ];
 
 List bookReadingList = [

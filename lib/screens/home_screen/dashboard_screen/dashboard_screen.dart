@@ -86,22 +86,18 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
     tooltipBehavior = TooltipBehavior(enable: true);
   }
 
-  final List<FlSpot> dummyData1 = List.generate(8, (index) {
-    return FlSpot(index.toDouble(), index * Random().nextDouble());
-  });
-
-  // This will be used to draw the orange line
-  final List<FlSpot> dummyData2 = List.generate(8, (index) {
-    return FlSpot(index.toDouble(), index * Random().nextDouble());
-  });
-
-  // This will be used to draw the blue line
-  final List<FlSpot> dummyData3 = List.generate(8, (index) {
-    return FlSpot(index.toDouble(), index * Random().nextDouble());
-  });
-
   @override
   Widget build(BuildContext context) {
+    final LinearGradient linearGradient = LinearGradient(
+      colors: <Color>[
+        appColor(context).appTheme.primary.withOpacity(0.2),
+        appColor(context).appTheme.primary.withOpacity(0.08),
+        appColor(context).appTheme.primary.withOpacity(0.01),
+      ],
+      begin: Alignment.topCenter,
+      end: Alignment.bottomCenter,
+    );
+
     return Consumer<DashboardProvider>(
         builder: (context1, dashboardPvr, child) {
       final dashPvr = Provider.of<BottomNavProvider>(context, listen: true);
@@ -333,7 +329,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                               })),
                       const VSpace(Insets.i5),
                       Row(children: [
-                        Text("Sleep Chart",
+                        Text("Sleep Pattern Chart",
                             style: appCss.philosopherBold18
                                 .textColor(appColor(context).appTheme.rulesClr))
                       ]),
@@ -350,38 +346,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                             ]),
                       ),
                       Row(children: [
-                        Text("Chanting Rounds Chart",
-                            style: appCss.philosopherBold18
-                                .textColor(appColor(context).appTheme.rulesClr))
-                      ]),
-                      Container(
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: appColor(context).appTheme.whiteColor,
-                            boxShadow: [
-                              BoxShadow(
-                                  color: appColor(context).appTheme.shadowClr,
-                                  blurRadius: 8,
-                                  offset: const Offset(0, 4),
-                                  spreadRadius: 0)
-                            ]),
-                      ),
-                      SfCartesianChart(series: <ChartSeries>[
-                        StackedLine100Series<SalesData1, double>(
-                            dataSource: chartData,
-                            xValueMapper: (SalesData1 sales, _) => sales.year,
-                            yValueMapper: (SalesData1 sales, _) => sales.sales),
-                        StackedLine100Series<SalesData1, double>(
-                            dataSource: chartData,
-                            xValueMapper: (SalesData1 sales, _) => sales.year,
-                            yValueMapper: (SalesData1 sales, _) => sales.sales),
-                        StackedLine100Series<SalesData1, double>(
-                            dataSource: chartData,
-                            xValueMapper: (SalesData1 sales, _) => sales.year,
-                            yValueMapper: (SalesData1 sales, _) => sales.sales)
-                      ]),
-                      Row(children: [
-                        Text("Knowledge Chart",
+                        Text("Chanting Chart",
                             style: appCss.philosopherBold18
                                 .textColor(appColor(context).appTheme.rulesClr))
                       ]),
@@ -397,16 +362,115 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                     spreadRadius: 0)
                               ]),
                           child: SfCartesianChart(
+                              legend: const Legend(
+                                  isVisible: true,
+                                  padding: 2,
+                                  itemPadding: 10,
+                                  position: LegendPosition.bottom,
+                                  iconWidth: 10,
+                                  iconHeight: 10),
+                              palette: const [Colors.black],
                               plotAreaBorderColor: Colors.transparent,
                               plotAreaBorderWidth: 0,
                               enableAxisAnimation: true,
                               primaryXAxis: CategoryAxis(
-                                majorGridLines: const MajorGridLines(width: 0),
-                                minorGridLines: const MinorGridLines(width: 0),
-
-                              ),
+                                  majorTickLines: const MajorTickLines(size: 0),
+                                  minorTickLines: const MinorTickLines(size: 0),
+                                  majorGridLines:
+                                      const MajorGridLines(width: 0),
+                                  minorGridLines:
+                                      const MinorGridLines(width: 0)),
                               primaryYAxis: DateTimeAxis(
-                                  axisLine: AxisLine(width: 0),
+                                majorTickLines: const MajorTickLines(size: 0),
+                                minorTickLines: const MinorTickLines(size: 0),
+                                axisLine: const AxisLine(width: 0),
+                                majorGridLines: const MajorGridLines(
+                                    dashArray: <double>[4, 2]),
+                                minorGridLines: const MinorGridLines(
+                                    dashArray: <double>[4, 2]),
+                              ),
+                              series: <ChartSeries>[
+                                StackedColumnSeries<ChartData, String>(
+                                    width: 0.3,
+                                    legendIconType: LegendIconType.circle,
+                                    legendItemText: '10 Rounds',
+                                    color: appColor(context).appTheme.primary,
+                                    dataSource: chartData,
+                                    borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(2),
+                                        topLeft: Radius.circular(2)),
+                                    xValueMapper: (ChartData data, _) => data.x,
+                                    yValueMapper: (ChartData data, _) =>
+                                        data.y1),
+                                StackedColumnSeries<ChartData, String>(
+                                    width: 0.3,
+                                    legendIconType: LegendIconType.circle,
+                                    legendItemText: '20 Rounds',
+                                    color: const Color(0xff794F7F),
+                                    borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(2),
+                                        topLeft: Radius.circular(2)),
+                                    dataSource: chartData,
+                                    xValueMapper: (ChartData data, _) => data.x,
+                                    yValueMapper: (ChartData data, _) =>
+                                        data.y2),
+                                StackedColumnSeries<ChartData, String>(
+                                    color: const Color(0xffA081A4),
+                                    legendIconType: LegendIconType.circle,
+                                    width: 0.3,
+                                    legendItemText: '30 Rounds',
+                                    dataSource: chartData,
+                                    borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(2),
+                                        topLeft: Radius.circular(2)),
+                                    xValueMapper: (ChartData data, _) => data.x,
+                                    yValueMapper: (ChartData data, _) =>
+                                        data.y3),
+                                StackedColumnSeries<ChartData, String>(
+                                    color: const Color(0xffDAC4D8),
+                                    legendIconType: LegendIconType.circle,
+                                    width: 0.3,
+                                    legendItemText: '40 Rounds',
+                                    borderRadius: const BorderRadius.only(
+                                        topRight: Radius.circular(2),
+                                        topLeft: Radius.circular(2)),
+                                    dataSource: chartData,
+                                    xValueMapper: (ChartData data, _) => data.x,
+                                    yValueMapper: (ChartData data, _) =>
+                                        data.y4)
+                              ])),
+                      Row(children: [
+                        Text("Association Chart",
+                            style: appCss.philosopherBold18
+                                .textColor(appColor(context).appTheme.rulesClr))
+                      ]),
+                      Container(
+                          decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(8),
+                              color: appColor(context).appTheme.whiteColor,
+                              boxShadow: [
+                                BoxShadow(
+                                    color: appColor(context).appTheme.shadowClr,
+                                    blurRadius: 8,
+                                    offset: const Offset(0, 4),
+                                    spreadRadius: 0)
+                              ]),
+                          child: SfCartesianChart(
+                              palette: const [Colors.black],
+                              plotAreaBorderColor: Colors.transparent,
+                              plotAreaBorderWidth: 0,
+                              enableAxisAnimation: true,
+                              primaryXAxis: CategoryAxis(
+                                  majorTickLines: const MajorTickLines(size: 0),
+                                  minorTickLines: const MinorTickLines(size: 0),
+                                  majorGridLines:
+                                      const MajorGridLines(width: 0),
+                                  minorGridLines:
+                                      const MinorGridLines(width: 0)),
+                              primaryYAxis: DateTimeAxis(
+                                  majorTickLines: const MajorTickLines(size: 0),
+                                  minorTickLines: const MinorTickLines(size: 0),
+                                  axisLine: const AxisLine(width: 0),
                                   majorGridLines: const MajorGridLines(
                                       dashArray: <double>[4, 2]),
                                   minorGridLines: const MinorGridLines(
@@ -425,8 +489,13 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                       DateTime.now().day,
                                       DateTime.now().hour + 12,
                                       DateTime.now().minute)),
-                              series: <LineSeries<SalesData, dynamic>>[
-                                LineSeries<SalesData, dynamic>(
+                              series: <CartesianSeries>[
+                                AreaSeries<SalesData, dynamic>(
+                                    color: appColor(context).appTheme.primary,
+                                    borderColor:
+                                        appColor(context).appTheme.primary,
+                                    borderWidth: 2,
+                                    gradient: linearGradient,
                                     dataSource: <SalesData>[
                                       SalesData(
                                           "Bhawadgita",
@@ -455,40 +524,77 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                                               DateTime.now().year,
                                               DateTime.now().month,
                                               DateTime.now().day,
-                                              DateTime.now().hour + 8)),
+                                              DateTime.now().hour + 8))
                                     ],
                                     xValueMapper: (SalesData time, _) => time.x,
-                                    /*yValueMapper: (SalesData sales, _) =>
-                                        sales.y.hour*/
                                     yValueMapper: (SalesData data, _) {
                                       return data.y.millisecondsSinceEpoch;
                                     })
+                              ],
+                              annotations: <CartesianChartAnnotation>[
+                                CartesianChartAnnotation(
+                                    widget: SvgPicture.asset(
+                                        "assets/svg/chartIcon.svg",
+                                        height: 12),
+                                    coordinateUnit: CoordinateUnit.point,
+                                    x: "Bhawadgita",
+                                    y: DateTime(
+                                            DateTime.now().year,
+                                            DateTime.now().month,
+                                            DateTime.now().day,
+                                            DateTime.now().hour + 6)
+                                        .millisecondsSinceEpoch),
+                                CartesianChartAnnotation(
+                                    widget: SvgPicture.asset(
+                                        "assets/svg/chartIcon.svg",
+                                        height: 12),
+                                    coordinateUnit: CoordinateUnit.point,
+                                    x: "Bhagwatam",
+                                    y: DateTime(
+                                            DateTime.now().year,
+                                            DateTime.now().month,
+                                            DateTime.now().day,
+                                            DateTime.now().hour + 4)
+                                        .millisecondsSinceEpoch),
+                                CartesianChartAnnotation(
+                                    widget: SvgPicture.asset(
+                                        "assets/svg/chartIcon.svg",
+                                        height: 12),
+                                    coordinateUnit: CoordinateUnit.point,
+                                    x: "Ramayan",
+                                    y: DateTime(
+                                            DateTime.now().year,
+                                            DateTime.now().month,
+                                            DateTime.now().day,
+                                            DateTime.now().hour + 10)
+                                        .millisecondsSinceEpoch),
+                                CartesianChartAnnotation(
+                                    widget: SvgPicture.asset(
+                                        "assets/svg/chartIcon.svg",
+                                        height: 12),
+                                    coordinateUnit: CoordinateUnit.point,
+                                    x: "Mahabharat",
+                                    y: DateTime(
+                                            DateTime.now().year,
+                                            DateTime.now().month,
+                                            DateTime.now().day,
+                                            DateTime.now().hour + 8)
+                                        .millisecondsSinceEpoch)
                               ]))
                     ]).paddingSymmetric(horizontal: Insets.i20))
               ])));
     });
   }
 
-  final List<SalesData1> chartData = [
-    SalesData1(2010, 35),
-    SalesData1(2011, 28),
-    SalesData1(2012, 34),
-    SalesData1(2013, 32),
-    SalesData1(2014, 40)
+  final List<ChartData> chartData = [
+    ChartData('01 Dec', 12, 10, 14, 20),
+    ChartData('02 Dec', 14, 11, 18, 23),
+    ChartData('03 Dec', 16, 10, 15, 20),
+    ChartData('04 Dec', 18, 16, 18, 24),
+    ChartData('05 Dec', 20, 11, 16, 22),
+    ChartData('06 Dec', 18, 16, 18, 23),
+    ChartData('07 Dec', 03, 05, 31, 21),
   ];
-
-  covert(date) {
-    String y = DateFormat('hh a').format(date);
-
-    print("yAsDouble:::::${y}");
-  }
-}
-
-class SalesData1 {
-  SalesData1(this.year, this.sales);
-
-  final double year;
-  final double sales;
 }
 
 class SalesData {
@@ -497,3 +603,20 @@ class SalesData {
   final String x;
   final DateTime y;
 }
+
+class ChartData {
+  ChartData(this.x, this.y1, this.y2, this.y3, this.y4);
+
+  final dynamic x;
+  final dynamic y1;
+  final dynamic y2;
+  final dynamic y3;
+  final dynamic y4;
+}
+/*
+class SalesData1 {
+  SalesData1(this.x, this.y);
+
+  final DateTime x;
+  final DateTime y;
+}*/

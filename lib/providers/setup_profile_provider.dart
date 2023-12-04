@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:developer';
 import 'dart:io';
+import 'package:bhakti_app/screens/home_screen/layouts/common_bottom_bar.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:flutter/services.dart';
 import 'package:bhakti_app/config.dart';
@@ -9,7 +10,6 @@ import 'package:image/image.dart' as img;
 import 'package:bhakti_app/models/user_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:bhakti_app/screens/home_screen/home_screen.dart';
 
 class SetUpProfileProvider extends ChangeNotifier {
   final TextEditingController name = TextEditingController();
@@ -124,7 +124,8 @@ class SetUpProfileProvider extends ChangeNotifier {
                   : "female"
               : "",
           "email": emailId.text,
-          "mobile_number": "$countryCode-${phoneNum.text}",
+          "mobile_number":
+              phoneNum.text.isNotEmpty ? "$countryCode-${phoneNum.text}" : "",
           "country": countrySelected['code'],
           "state": state.text,
           "city": city.text,
@@ -156,7 +157,7 @@ class SetUpProfileProvider extends ChangeNotifier {
             image = null;
             Navigator.pushReplacement(context, MaterialPageRoute(
               builder: (context) {
-                return HomeScreen();
+                return CommonBottomNavigationBar();
               },
             ));
           } else {
