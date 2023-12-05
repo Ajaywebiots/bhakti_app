@@ -12,7 +12,7 @@
 //   Widget build(BuildContext context) {
 //     return Consumer<HomeScreenProvider>(
 //         builder: (BuildContext context, homeScreenPvr, child) {
-//         return Container(height: 180,width: 115,
+//         return Container(height: 180,width: Sizes.s115,
 //           child: ScrollablePositionedList.builder(
 //             itemBuilder: (context, index) {
 //               return Container(

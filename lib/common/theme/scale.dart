@@ -175,6 +175,8 @@ class FontSizes {
 class Sizes {
   static const double scale = 1;
 
+  static const double s0 = 0 * scale;
+  static const double s1 = 1 * scale;
   static const double s2 = 2 * scale;
   static const double s3 = 3 * scale;
   static const double s4 = 4 * scale;
@@ -258,6 +260,7 @@ class Sizes {
   static const double s130 = 130 * scale;
   static const double s132 = 132 * scale;
   static const double s135 = 135 * scale;
+  static const double s136 = 136 * scale;
   static const double s138 = 138 * scale;
   static const double s140 = 140 * scale;
   static const double s141 = 141 * scale;
@@ -297,7 +300,9 @@ class Sizes {
   static const double s257 = 257 * scale;
   static const double s260 = 260 * scale;
   static const double s262 = 262 * scale;
+  static const double s265 = 265 * scale;
   static const double s266 = 266 * scale;
+  static const double s267 = 267 * scale;
   static const double s270 = 270 * scale;
   static const double s280 = 280 * scale;
   static const double s287 = 287 * scale;
@@ -305,6 +310,7 @@ class Sizes {
   static const double s295 = 295 * scale;
   static const double s292 = 292 * scale;
   static const double s300 = 300 * scale;
+  static const double s305 = 305 * scale;
   static const double s315 = 315 * scale;
   static const double s335 = 335 * scale;
   static const double s330 = 330 * scale;
@@ -315,8 +321,12 @@ class Sizes {
   static const double s370 = 370 * scale;
   static const double s380 = 380 * scale;
   static const double s400 = 400 * scale;
+  static const double s420 = 420 * scale;
   static const double s450 = 450 * scale;
   static const double s485 = 485 * scale;
+  static const double s490 = 490 * scale;
   static const double s500 = 500 * scale;
+  static const double s580 = 580 * scale;
   static const double s600 = 600 * scale;
+  static const double s660 = 660 * scale;
 }

@@ -73,14 +73,14 @@ class _SetUpProfileState extends State<SetUpProfile> {
                                           setUpProfilePvr.onChange == false
                                               ? eSvgAssets.arrowDown1
                                               : eSvgAssets.arrowUp),
-                                      leading: Text("Personal Info",
+                                      leading: Text(appFonts.personalInfo,
                                           style: appCss.philosopherBold18
                                               .textColor(appColor(context)
                                                   .appTheme
                                                   .lightText)),
                                       title: SvgPicture.asset(
                                               eSvgAssets.profileLine,
-                                              width: 200,
+                                              width: Sizes.s200,
                                               fit: BoxFit.fill)
                                           .paddingOnly(top: Insets.i5),
                                       children: const <Widget>[
@@ -106,14 +106,14 @@ class _SetUpProfileState extends State<SetUpProfile> {
                                           setUpProfilePvr.onChange1 == false
                                               ? eSvgAssets.arrowDown1
                                               : eSvgAssets.arrowUp),
-                                      leading: Text("Contact Info",
+                                      leading: Text(appFonts.contactInfo,
                                           style: appCss.philosopherBold18
                                               .textColor(appColor(context)
                                                   .appTheme
                                                   .lightText)),
                                       title: SvgPicture.asset(
                                               eSvgAssets.profileLine,
-                                              width: 200,
+                                              width: Sizes.s200,
                                               fit: BoxFit.fill)
                                           .paddingOnly(top: Insets.i5),
                                       children: const <Widget>[
@@ -132,8 +132,8 @@ class _SetUpProfileState extends State<SetUpProfile> {
                                               setUpProfilePvr.saveData(context),
                                           child: Container(
                                               alignment: Alignment.center,
-                                              height: 44,
-                                              width: 141,
+                                              height: Sizes.s44,
+                                              width: Sizes.s141,
                                               decoration: BoxDecoration(
                                                   color: appColor(context)
                                                       .appTheme

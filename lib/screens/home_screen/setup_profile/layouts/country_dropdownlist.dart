@@ -30,15 +30,15 @@ class CountryDropDownBox extends StatelessWidget {
                   const HSpace(Insets.i16),
                   SvgPicture.asset(eSvgAssets.global),
                   const HSpace(Insets.i10),
-                  SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
+                  SvgPicture.asset(eSvgAssets.line, height: Sizes.s24, width: Sizes.s24),
                   const HSpace(Insets.i20),
                   Expanded(
                       child: DropdownButtonHideUnderline(
                           child: DropdownButton(
-                              hint: const Align(
+                              hint:  Align(
                                   alignment: Alignment.centerLeft,
-                                  child: Text("Select Country",
-                                      style: TextStyle(
+                                  child: Text(appFonts.selectCountry,
+                                      style: const TextStyle(
                                           color: Color(0xff767676)))),
                               style: appCss.dmDenseMedium14.textColor(
                                   appColor(context).appTheme.lightText),

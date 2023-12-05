@@ -24,7 +24,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           child: Stack(alignment: Alignment.bottomCenter, children: [
         Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           const VSpace(Insets.i40),
-          Image.asset(eImageAssets.bhaktiLogo, height: 30, width: 136),
+          Image.asset(eImageAssets.bhaktiLogo, height: Sizes.s30, width: Sizes.s136),
           ...drawerList.asMap().entries.map((e) {
             List testingList = [];
             if (e.value['name'] == "Online Tests") {
@@ -51,7 +51,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
                         title: Row(children: [
                           SvgPicture.asset(e.value['icon']),
                           const HSpace(Insets.i10),
-                          Text("Online Tests",
+                          Text(appFonts.onlineTest,
                               style: appCss.dmDenseRegular16.textColor(
                                   appColor(context).appTheme.lightText))
                         ]),
@@ -76,7 +76,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           const VSpace(Insets.i49)
         ]),
         Column(mainAxisAlignment: MainAxisAlignment.end, children: [
-          Text("Version 1.0",
+          Text(appFonts.version,
               style: appCss.dmDenseRegular14
                   .textColor(appColor(context).appTheme.lightText)),
           const VSpace(Insets.i8),
@@ -86,7 +86,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
             const HSpace(Insets.i20),
             SvgPicture.asset("assets/svg/logOut.svg"),
             const HSpace(Insets.i10),
-            Text("Log Out",
+            Text(appFonts.logOut,
                 style: appCss.dmDenseRegular16
                     .textColor(appColor(context).appTheme.lightText))
           ]).inkWell(onTap: () => homeScreenPvr.onSignOutClick(context))

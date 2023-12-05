@@ -57,7 +57,7 @@ class _SplashScreenState extends State<SplashScreen> {
                       children: [
                     Center(
                         child: Image.asset(eImageAssets.bhaktiImg,
-                            fit: BoxFit.cover, height: 265)),
+                            fit: BoxFit.cover, height: Sizes.s265)),
                     const VSpace(Insets.i55),
                     Image.asset(eImageAssets.bhaktiLogo, height: Sizes.s70),
                     const VSpace(Insets.i8),

@@ -18,7 +18,7 @@ class NotesLayout extends StatelessWidget {
                   border: Border.all(
                       color: const Color(0xff541F5C)
                           .withOpacity(0.2),
-                      width: 1)),
+                      width: Sizes.s1)),
               child: Stack(children: [
                 TextField(
                     decoration: InputDecoration(

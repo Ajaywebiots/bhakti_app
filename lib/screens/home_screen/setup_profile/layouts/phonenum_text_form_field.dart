@@ -63,7 +63,7 @@ class PhoneNumberTextBox extends StatelessWidget {
                         showOnlyCountryWhenClosed: false,
                         alignLeft: false),
                     const HSpace(Insets.i10),
-                    SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
+                    SvgPicture.asset(eSvgAssets.line, height: Sizes.s24, width: Sizes.s24),
                     const HSpace(Insets.i20)
                   ]))).paddingSymmetric(vertical: 10);
     });

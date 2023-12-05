@@ -16,6 +16,7 @@ import 'package:pinput/pinput.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 import '../../../models/user_model.dart';
+import '../../home_screen/layouts/common_bottom_bar.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -47,8 +48,8 @@ class _OtpScreenState extends State<OtpScreen> {
     final borderColor = appColor(context).appTheme.primary;
 
     final defaultPinTheme = PinTheme(
-        width: 56,
-        height: 56,
+        width: Sizes.s56,
+        height: Sizes.s56,
         textStyle: appCss.dmDenseMedium22
             .textColor(appColor(context).appTheme.lightText),
         decoration: BoxDecoration(
@@ -72,9 +73,9 @@ class _OtpScreenState extends State<OtpScreen> {
                       child: Form(
                           key: formKey,
                           child: Column(children: [
-                            Image.asset("assets/images/bhakti_logo.png",
-                                height: 63, width: 267),
-                            Text("Sadhana Record",
+                            Image.asset(eImageAssets.bhaktiLogo,
+                                height: Sizes.s63, width: Sizes.s267),
+                            Text(appFonts.sadhanaRecord,
                                 style: appCss.philosopherBold25),
                             VSpace(MediaQuery.of(context).size.height * 0.2),
                             const VSpace(Insets.i25),
@@ -125,7 +126,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                         border:
                                             Border.all(color: Colors.redAccent)))),
                             if (isValid)
-                              Text("Enter valid OTP",
+                              Text(appFonts.enterValidOTP,
                                   style: appCss.dmDenseMedium16.textColor(
                                       appColor(context).appTheme.red)),
                             const VSpace(Insets.i100),
@@ -189,7 +190,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                               Navigator.pushReplacement(context,
                                                   MaterialPageRoute(
                                                       builder: (context) {
-                                                return const HomeScreen();
+                                                return const CommonBottomNavigationBar();
                                               }));
                                             }
                                           } else {
@@ -201,12 +202,12 @@ class _OtpScreenState extends State<OtpScreen> {
                                             }));
                                           }
                                         } on FirebaseAuthException catch (e) {
-                                          print(
+                                          log(
                                               'failed userOtp: ${e.message.toString()}');
                                           ScaffoldMessenger.of(context)
-                                              .showSnackBar(const SnackBar(
+                                              .showSnackBar(SnackBar(
                                                   content:
-                                                      Text("Enter ValidOTP")));
+                                                      Text(appFonts.enterValidOTP)));
                                           isValid = true;
                                           setState(() {});
                                           isLoading = false;
@@ -216,8 +217,8 @@ class _OtpScreenState extends State<OtpScreen> {
                                     },
                                     child: Container(
                                         alignment: Alignment.center,
-                                        height: 44,
-                                        width: 141,
+                                        height: Sizes.s44,
+                                        width: Sizes.s141,
                                         decoration: BoxDecoration(
                                             color: appColor(context)
                                                 .appTheme
@@ -225,7 +226,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                             borderRadius:
                                                 const BorderRadius.all(
                                                     Radius.circular(10))),
-                                        child: Text("Verify",
+                                        child: Text(appFonts.verify,
                                             style: appCss.dmDenseMedium16
                                                 .textColor(Colors.white)))))
                           ])))

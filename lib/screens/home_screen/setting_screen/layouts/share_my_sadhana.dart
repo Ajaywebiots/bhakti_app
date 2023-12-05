@@ -28,7 +28,7 @@ class ShareMySadhana extends StatelessWidget {
                 onTap: () => Navigator.pop(context),
               ),
               const HSpace(Insets.i50),
-              Text("Share My Sadhana",
+              Text(appFonts.shareMyShadhana,
                   style: appCss.philosopherBold28
                       .textColor(appColor(context).appTheme.oneText))
             ])),
@@ -44,12 +44,12 @@ class ShareMySadhana extends StatelessWidget {
             const VSpace(Insets.i120),
             Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-              Text("User List",
+              Text(appFonts.userList,
                   style: appCss.philosopherBold18
                       .textColor(appColor(context).appTheme.oneText)),
               Row(children: [
                 SvgPicture.asset(eSvgAssets.add),
-                Text("Add User",
+                Text(appFonts.addUser,
                     style: appCss.dmDenseMedium14
                         .textColor(appColor(context).appTheme.primary)),
               ],)

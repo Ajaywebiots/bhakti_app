@@ -27,7 +27,7 @@ class HomePageSection extends StatelessWidget {
                 SvgPicture.asset("assets/svg/arrowLeft.svg")
                     .inkWell(onTap: () => Navigator.pop(context)),
                 const HSpace(Insets.i40),
-                Text("Home Page Section...",
+                Text(appFonts.homePageSection,
                     style: appCss.philosopherBold28
                         .textColor(appColor(context).appTheme.oneText))
               ])),

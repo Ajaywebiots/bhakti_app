@@ -15,7 +15,7 @@ class EmailTextBox extends StatelessWidget {
     return Consumer<SetUpProfileProvider>(
         builder: (context, profilePvr, child) {
       return CustomTitleWidget(
-        height: 52,
+        height: Sizes.s52,
         width: double.infinity,
         title: 'Email',
         color: profilePvr.emailValid == null
@@ -44,9 +44,9 @@ class EmailTextBox extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   const HSpace(Insets.i20),
-                  SvgPicture.asset(eSvgAssets.emailId, height: 20),
+                  SvgPicture.asset(eSvgAssets.emailId, height: Sizes.s20),
                   const HSpace(Insets.i10),
-                  SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
+                  SvgPicture.asset(eSvgAssets.line, height: Sizes.s24, width: Sizes.s24),
                   const HSpace(Insets.i20)
                 ])),
       ).paddingSymmetric(vertical: 10);

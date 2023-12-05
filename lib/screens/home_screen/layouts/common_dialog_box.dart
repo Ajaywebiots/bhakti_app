@@ -34,16 +34,16 @@ class _CommonDialogState extends State<CommonDialog> {
         child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8), color: Colors.white),
-            width: 335,
+            width: Sizes.s335,
             height: widget.text == "Mangala Arti"
-                ? 660
+                ? Sizes.s660
                 : widget.text == "Sandhya Arti"
-                    ? 580
+                    ? Sizes.s580
                     : widget.text == "Bhagavadgita"
-                        ? 490
+                        ? Sizes.s490
                         : widget.text == "Hearing"
-                            ? 490
-                            : 420,
+                            ? Sizes.s490
+                            : Sizes.s420,
             child:
                 Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
               Center(
@@ -129,8 +129,8 @@ class _CommonDialogState extends State<CommonDialog> {
                           ? Container(
                               padding:
                                   const EdgeInsets.symmetric(horizontal: 15),
-                              width: 305,
-                              height: 44,
+                              width: Sizes.s305,
+                              height: Sizes.s44,
                               decoration: BoxDecoration(
                                   color: Colors.white,
                                   borderRadius: BorderRadius.circular(6),
@@ -147,7 +147,7 @@ class _CommonDialogState extends State<CommonDialog> {
                                   mainAxisAlignment:
                                       MainAxisAlignment.spaceBetween,
                                   children: [
-                                    const Text("Chapter 1"),
+                                    Text(appFonts.chapter1),
                                     SvgPicture.asset(
                                         "assets/svg/arrow-down1.svg")
                                   ]))
@@ -155,8 +155,8 @@ class _CommonDialogState extends State<CommonDialog> {
                               ? Container(
                                   padding: const EdgeInsets.symmetric(
                                       horizontal: 15),
-                                  width: 305,
-                                  height: 44,
+                                  width: Sizes.s305,
+                                  height: Sizes.s44,
                                   decoration: BoxDecoration(
                                       color: Colors.white,
                                       borderRadius: BorderRadius.circular(6),
@@ -173,7 +173,7 @@ class _CommonDialogState extends State<CommonDialog> {
                                       mainAxisAlignment:
                                           MainAxisAlignment.spaceBetween,
                                       children: [
-                                        const Text("Speaker 1"),
+                                        Text(appFonts.speaker1),
                                         SvgPicture.asset(
                                             "assets/svg/arrow-down1.svg")
                                       ]))
@@ -192,12 +192,12 @@ class _CommonDialogState extends State<CommonDialog> {
                         alignment: Alignment.center,
                         decoration: BoxDecoration(
                             border: Border.all(
-                                width: 1,
+                                width: Sizes.s1,
                                 color: appColor(context).appTheme.primary),
                             borderRadius: BorderRadius.circular(8)),
-                        height: 44,
-                        width: 120,
-                        child: Text("Cancel",
+                        height: Sizes.s44,
+                        width: Sizes.s120,
+                        child: Text(appFonts.cancel,
                             style: appCss.dmDenseMedium14
                                 .textColor(appColor(context).appTheme.primary)))
                     .inkWell(onTap: () {
@@ -208,9 +208,9 @@ class _CommonDialogState extends State<CommonDialog> {
                         decoration: BoxDecoration(
                             borderRadius: BorderRadius.circular(8),
                             color: appColor(context).appTheme.primary),
-                        height: 44,
-                        width: 120,
-                        child: Text("Save",
+                        height: Sizes.s44,
+                        width: Sizes.s120,
+                        child: Text(appFonts.save,
                             style: appCss.dmDenseMedium14.textColor(
                                 appColor(context).appTheme.whiteColor)))
                     .inkWell(onTap: () {

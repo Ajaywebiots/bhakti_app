@@ -26,7 +26,7 @@ class NotificationLayouts extends StatelessWidget {
                 onTap: () => Navigator.pop(context),
               ),
               const HSpace(Insets.i90),
-              Text("Notification",
+              Text(appFonts.notification,
                   style: appCss.philosopherBold28
                       .textColor(appColor(context).appTheme.oneText))
             ])),

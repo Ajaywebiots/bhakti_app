@@ -13,7 +13,7 @@ class ChantingCommon extends StatelessWidget {
     return Consumer<HomeScreenProvider>(
         builder: (BuildContext context, homeScreenPvr, child) {
       return SizedBox(
-          height: 90,
+          height: Sizes.s90,
           child: ScrollablePositionedList.builder(
               scrollDirection: Axis.horizontal,
               itemCount: homeScreenPvr.chantinglist.isEmpty ? chantingList.length :  homeScreenPvr.chantinglist.length,

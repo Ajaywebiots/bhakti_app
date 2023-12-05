@@ -35,14 +35,14 @@ class _MyDocumentScreenState extends State<MyDocumentScreen> {
               leading: Container(),
               backgroundColor: Colors.transparent,
               titleSpacing: 0,
-              leadingWidth: 0,
+              leadingWidth: Sizes.s0,
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 SvgPicture.asset("assets/svg/arrowLeft.svg").inkWell(onTap: () {
                   Navigator.pop(context);
 
                 }),
                 const HSpace(Insets.i80),
-                Text("My Document",
+                Text(appFonts.myDocument,
                     style: appCss.philosopherBold28
                         .textColor(appColor(context).appTheme.oneText))
               ])),
@@ -54,7 +54,7 @@ class _MyDocumentScreenState extends State<MyDocumentScreen> {
               borderType: BorderType.RRect,
               color: appColor(context).appTheme.primary,
               child: Container(
-                  height: 132,
+                  height: Sizes.s132,
                   decoration: BoxDecoration(
                       borderRadius: BorderRadius.circular(8),
                       color: appColor(context).appTheme.whiteColor),
@@ -64,13 +64,13 @@ class _MyDocumentScreenState extends State<MyDocumentScreen> {
                       children: [
                         SvgPicture.asset("assets/svg/documentUpload.svg"),
                         const VSpace(Insets.i10),
-                        Text("Only pdf, jpg and png can be upload.",
+                        Text(appFonts.onlyPdf,
                             style: appCss.dmDenseRegular14.textColor(
                                 appColor(context).appTheme.myDocumentColor)),
                         const VSpace(Insets.i8),
                         TextButton(
                             onPressed: () => homeScreenPvr.filePick(),
-                            child: Text("Click here",
+                            child: Text(appFonts.clickHere,
                                 style: appCss.dmDenseMedium12
                                     .textDecoration(TextDecoration.underline,
                                         color:
@@ -80,7 +80,7 @@ class _MyDocumentScreenState extends State<MyDocumentScreen> {
                       ]))),
           const VSpace(Insets.i15),
           Container(
-              height: 70,
+              height: Sizes.s70,
               decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -100,19 +100,19 @@ class _MyDocumentScreenState extends State<MyDocumentScreen> {
                         mainAxisAlignment: MainAxisAlignment.center,
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
-                          Text("Uploding file...",
+                          Text(appFonts.uploadingFile,
                               style: appCss.dmDenseMedium16.textColor(
                                   appColor(context).appTheme.primary)),
-                          Text("20MB",
+                          Text(appFonts.mB,
                               style: appCss.dmDenseMedium14.textColor(
                                   appColor(context).appTheme.lightText))
                         ]),
                     CircularPercentIndicator(
                         radius: 27.0,
-                        lineWidth: 6.0,
+                        lineWidth: Sizes.s6,
                         animation: true,
                         percent: 73 / 100,
-                        center: Text("73%",
+                        center: Text(appFonts.percent,
                             style: appCss.dmDenseMedium14.textColor(
                                 appColor(context).appTheme.lightText)),
                         backgroundColor:
@@ -123,7 +123,7 @@ class _MyDocumentScreenState extends State<MyDocumentScreen> {
           const VSpace(Insets.i15),
           Container(
               padding: EdgeInsets.all(12),
-              height: 70,
+              height: Sizes.s70,
               decoration: BoxDecoration(
                   boxShadow: [
                     BoxShadow(
@@ -142,15 +142,15 @@ class _MyDocumentScreenState extends State<MyDocumentScreen> {
                       children: [
                         SvgPicture.asset("assets/svg/jpeg.svg"),
                         const HSpace(Insets.i12),
-                        Text("Chanting Certificate",
+                        Text(appFonts.chantingCertificate,
                             style: appCss.dmDenseMedium16
                                 .textColor(appColor(context).appTheme.primary)),
                       ],
                     ),
                     Container(
                         padding: EdgeInsets.all(5),
-                        height: 30,
-                        width: 30,
+                        height: Sizes.s30,
+                        width: Sizes.s30,
                         decoration: BoxDecoration(
                             shape: BoxShape.circle,
                             color: appColor(context)

@@ -19,7 +19,7 @@ class BookLayout extends StatelessWidget {
         builder: (context, homeScreenPvr, child) {
           log("bookList :${bookList}");
       return SizedBox(
-          height: 180,
+          height: Sizes.s180,
           child: ScrollablePositionedList.builder(
               scrollDirection: Axis.horizontal,
               itemCount: bookList.length,

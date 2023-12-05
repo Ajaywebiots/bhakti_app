@@ -54,7 +54,7 @@ class BookDistributionLayout extends StatelessWidget {
                                             .appTheme
                                             .primary)),
                               ]),
-                          Text("Small Books",
+                          Text(appFonts.smallBooks,
                               style: appCss.dmDenseMedium12
                                   .textColor(
                                   appColor(context)
@@ -102,7 +102,7 @@ class BookDistributionLayout extends StatelessWidget {
                                             .appTheme
                                             .primary))
                               ]),
-                          Text("Medium Books",
+                          Text(appFonts.mediumBooks,
                               style: appCss.dmDenseMedium12
                                   .textColor(
                                   appColor(context)
@@ -150,7 +150,7 @@ class BookDistributionLayout extends StatelessWidget {
                                             .appTheme
                                             .primary))
                               ]),
-                          Text("Large Books",
+                          Text(appFonts.largeBooks,
                               style: appCss.dmDenseMedium12
                                   .textColor(
                                   appColor(context)

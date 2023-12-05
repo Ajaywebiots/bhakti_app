@@ -20,8 +20,8 @@ class AuthButtonLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        width: 250,
-        height: 50,
+        width: Sizes.s250,
+        height: Sizes.s50,
         decoration: BoxDecoration(boxShadow: const [
           BoxShadow(
               color: Color(0x1E000000),
@@ -34,7 +34,7 @@ class AuthButtonLayout extends StatelessWidget {
           SvgPicture.asset(iconPath),
           const HSpace(Insets.i12),
           Text(label,
-              style: label == "Login via Google"
+              style: label == appFonts.loginViaGoogle
                   ? appCss.dmDenseBold16
                       .textColor(appColor(context).appTheme.googleTxtClr)
                   : appCss.dmDenseBold16

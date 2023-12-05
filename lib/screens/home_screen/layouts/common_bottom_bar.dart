@@ -1,5 +1,7 @@
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/bottom_nav_provider.dart';
+import 'package:bhakti_app/providers/home_screen_provider.dart';
+import 'package:bhakti_app/screens/home_screen/drawer_screen/drawer_screen.dart';
 import 'package:bhakti_app/screens/home_screen/monitoring_screen/monitoring_screen.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/setting_screen.dart';
 
@@ -33,8 +35,9 @@ class _CommonBottomNavigationBarState extends State<CommonBottomNavigationBar> {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<BottomNavProvider>(builder: (context, bottomNavPrv, child) {
-      return Scaffold(
+    return Consumer2<BottomNavProvider,HomeScreenProvider>(builder: (context, bottomNavPrv,homeScreenPvr, child) {
+      return Scaffold(key: homeScreenPvr.key,
+          drawer: const DrawerScreen(),
           body: DefaultTabController(
               length: bottomNavPrv.dashList.length,
               child: Scaffold(

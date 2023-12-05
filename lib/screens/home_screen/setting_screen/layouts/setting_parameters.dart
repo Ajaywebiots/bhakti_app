@@ -26,7 +26,7 @@ class SettingParameters extends StatelessWidget {
                 onTap: () => Navigator.pop(context),
               ),
               const HSpace(Insets.i90),
-              Text("Parameters",
+              Text(appFonts.parameters,
                   style: appCss.philosopherBold28
                       .textColor(appColor(context).appTheme.oneText))
             ])),
@@ -91,7 +91,7 @@ class SettingParameters extends StatelessWidget {
                           borderRadius: BorderRadius.circular(8)),
                       height: 44,
                       width: 120,
-                      child: Text("Cancel",
+                      child: Text(appFonts.cancel,
                           style: appCss.dmDenseMedium16
                               .textColor(appColor(context).appTheme.primary)))
                   .inkWell(onTap: () {
@@ -105,7 +105,7 @@ class SettingParameters extends StatelessWidget {
                           color: appColor(context).appTheme.primary),
                       height: 44,
                       width: 120,
-                      child: Text("Save",
+                      child: Text(appFonts.save,
                           style: appCss.dmDenseMedium16.textColor(
                               appColor(context).appTheme.whiteColor)))
                   .inkWell(onTap: () {

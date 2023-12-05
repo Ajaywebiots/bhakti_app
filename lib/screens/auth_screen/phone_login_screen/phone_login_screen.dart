@@ -24,6 +24,7 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
   final focusNode = FocusNode();
   final formKey = GlobalKey<FormState>();
   String countryCode = "91";
+
   @override
   Widget build(BuildContext context) {
     return Consumer<PhoneLoginProvider>(
@@ -45,9 +46,9 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                       child: Form(
                           key: formKey,
                           child: Column(children: [
-                            Image.asset("assets/images/bhakti_logo.png",
-                                height: 63, width: 267),
-                            Text("Sadhana Record",
+                            Image.asset(eImageAssets.bhaktiLogo,
+                                height: Sizes.s63, width: Sizes.s267),
+                            Text(appFonts.sadhanaRecord,
                                 style: appCss.philosopherBold25),
                             VSpace(MediaQuery.of(context).size.height * 0.2),
                             Padding(
@@ -91,7 +92,25 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                                     controller: phoneNumber,
                                     keyboardType: TextInputType.number,
                                     style: appCss.dmDenseExtraBold16.textColor(appColor(context).appTheme.lightText),
-                                    decoration: InputDecoration(hintStyle: appCss.dmDenseExtraBold16.textColor(appColor(context).appTheme.primary.withOpacity(0.20)), counterText: "", hintText: 'Phone Number', label: Text('Phone Number', style: appCss.dmDenseExtraBold16.textColor(appColor(context).appTheme.lightText)), border: OutlineInputBorder(borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10)), borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20))), disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10))), focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10))), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10)))),
+                                    decoration: InputDecoration(
+                                        hintStyle: appCss.dmDenseExtraBold16.textColor(appColor(context).appTheme.primary.withOpacity(0.20)),
+                                        counterText: "",
+                                        hintText: 'Phone Number',
+                                        label: Text(
+                                          appFonts.phoneNumber,
+                                          style: appCss.dmDenseExtraBold16
+                                              .textColor(appColor(context)
+                                                  .appTheme
+                                                  .lightText),
+                                        ),
+                                        border: OutlineInputBorder(
+                                            borderRadius: const BorderRadius.all(
+                                              Radius.circular(AppRadius.r10),
+                                            ),
+                                            borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20))),
+                                        disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10))),
+                                        focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10))),
+                                        enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10)))),
                                     initialCountryCode: 'IN',
                                     onChanged: (phone) {})),
                             const VSpace(Insets.i25),
@@ -99,7 +118,8 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                             Center(
                                 child: GestureDetector(
                                     onTap: () async {
-                                      FocusScope.of(context).requestFocus(FocusNode());
+                                      FocusScope.of(context)
+                                          .requestFocus(FocusNode());
                                       isLoading = true;
                                       setState(() {});
                                       log("number:::${"+${countryCode + phoneNumber.text}"}");
@@ -138,8 +158,8 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                                     },
                                     child: Container(
                                         alignment: Alignment.center,
-                                        height: 44,
-                                        width: 141,
+                                        height: Sizes.s44,
+                                        width: Sizes.s141,
                                         decoration: BoxDecoration(
                                             color: appColor(context)
                                                 .appTheme
@@ -147,7 +167,7 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                                             borderRadius:
                                                 const BorderRadius.all(
                                                     Radius.circular(10))),
-                                        child: Text("Send OTP",
+                                        child: Text(appFonts.sendOtp,
                                             style: appCss.dmDenseMedium16
                                                 .textColor(Colors.white)))))
                           ])))

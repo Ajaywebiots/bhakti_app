@@ -27,7 +27,7 @@ class SharingWithMe extends StatelessWidget {
                 onTap: () => Navigator.pop(context),
               ),
               const HSpace(Insets.i70),
-              Text("Sharing with me",
+              Text(appFonts.sharingWithMe,
                   style: appCss.philosopherBold28
                       .textColor(appColor(context).appTheme.oneText))
             ])),
@@ -42,7 +42,7 @@ class SharingWithMe extends StatelessWidget {
               Column(mainAxisAlignment: MainAxisAlignment.start, children: [
                 const VSpace(Insets.i120),
                 Row(children: [
-                  Text("User List",
+                  Text(appFonts.userList,
                       style: appCss.philosopherBold18
                           .textColor(appColor(context).appTheme.oneText))
                 ]),
@@ -133,7 +133,7 @@ class SharingWithMe extends StatelessWidget {
                                                                 Insets.i10),
                                                             Center(
                                                                 child: Text(
-                                                                    "Delete user",
+                                                                    appFonts.deleteUser,
                                                                     style: appCss
                                                                         .philosopherBold18
                                                                         .textColor(
@@ -144,8 +144,7 @@ class SharingWithMe extends StatelessWidget {
                                                             const VSpace(
                                                                 Insets.i10),
                                                             Center(
-                                                                child: Text(
-                                                                    "Are You Sure You Want to Delete This user? ",
+                                                                child: Text(appFonts.areYouSure,
                                                                     style: appCss
                                                                         .dmDenseRegular14
                                                                         .textColor(
@@ -154,7 +153,7 @@ class SharingWithMe extends StatelessWidget {
                                                                             .appTheme
                                                                             .rulesClr))),
                                                             Center(
-                                                                child: Text(
+                                                                child: Text(appFonts.thisAction,
                                                                     style: appCss
                                                                         .dmDenseRegular14
                                                                         .textColor(
@@ -162,7 +161,7 @@ class SharingWithMe extends StatelessWidget {
                                                                             context)
                                                                             .appTheme
                                                                             .rulesClr),
-                                                                    "This Action Can’t Be Undone.")),
+                                                                    )),
                                                             const VSpace(
                                                                 Insets.i25),
                                                             Row(
@@ -189,8 +188,7 @@ class SharingWithMe extends StatelessWidget {
                                                                               8)),
                                                                       height: 44,
                                                                       width: 120,
-                                                                      child: Text(
-                                                                          "Cancel",
+                                                                      child: Text(appFonts.cancel,
                                                                           style: appCss
                                                                               .dmDenseMedium16
                                                                               .textColor(
@@ -222,8 +220,7 @@ class SharingWithMe extends StatelessWidget {
                                                                               .primary),
                                                                       height: 44,
                                                                       width: 120,
-                                                                      child: Text(
-                                                                          "Delete",
+                                                                      child: Text(appFonts.delete,
                                                                           style: appCss
                                                                               .dmDenseMedium16
                                                                               .textColor(
@@ -252,7 +249,7 @@ class SharingWithMe extends StatelessWidget {
                                           padding: const EdgeInsets.fromLTRB(
                                               20, 0, 0, 0),
                                           value: 1,
-                                          child: Text('Check Sadhana',
+                                          child: Text(appFonts.checkSadhana,
                                               style: appCss.dmDenseRegular14
                                                   .textColor(
                                                   appColor(context).appTheme
@@ -266,7 +263,7 @@ class SharingWithMe extends StatelessWidget {
                                           padding: const EdgeInsets.fromLTRB(
                                               20, 0, 0, 0),
                                           value: 2,
-                                          child: Text('Delete User',
+                                          child: Text(appFonts.deleteUser,
                                               style: appCss.dmDenseRegular14
                                                   .textColor(
                                                   appColor(context).appTheme

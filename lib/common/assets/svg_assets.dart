@@ -34,6 +34,9 @@ class SvgAssets {
   final location = 'assets/svg/location.svg';
   final global = 'assets/svg/global.svg';
   final call1 = 'assets/svg/call1.svg';
+  final eye = 'assets/svg/eye.svg';
+  final line11 = 'assets/svg/line11.svg';
+
 
 
 

@@ -30,35 +30,35 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
               child: Stack(alignment: Alignment.topCenter, children: [
                 SingleChildScrollView(
                     child: Column(children: [
-                  Image.asset("assets/images/bhakti_logo.png",
-                      height: 63, width: 267),
-                  Text("Sadhana Record", style: appCss.philosopherBold25),
+                  Image.asset(eImageAssets.bhaktiLogo,
+                      height: Sizes.s63, width: Sizes.s267),
+                  Text(appFonts.sadhanaRecord, style: appCss.philosopherBold25),
                   VSpace(MediaQuery.of(context).size.height * 0.2),
                   AuthButtonLayout(
-                      label: 'Login via Phone',
+                      label: appFonts.loginViaPhone,
                       color: appColor(context).appTheme.phoneClr,
                       iconPath: 'assets/svg/phoneAuth.svg',
                       onTap: () => loginAuthPvr.loginPhoneNavigator(context)),
                   const VSpace(Insets.i25),
                   AuthButtonLayout(
-                      label: 'Login via Google',
+                      label: appFonts.loginViaGoogle,
                       color: appColor(context).appTheme.googleClr,
                       iconPath: 'assets/svg/googleAuth.svg',
                       onTap: () => loginAuthPvr.signInWithGoogle(context)),
                   const VSpace(Insets.i25),
                   AuthButtonLayout(
-                      label: 'Login via Facebook',
+                      label: appFonts.loginViaFacebook,
                       color: appColor(context).appTheme.fbClr,
                       iconPath: 'assets/svg/fbAuth.svg',
                       onTap: () => loginAuthPvr.signInWithFacebook(context)),
                   const VSpace(Insets.i25),
                   AuthButtonLayout(
-                      label: 'Sign in with email',
+                      label: appFonts.signInWithEmail,
                       color: appColor(context).appTheme.emailClr,
                       iconPath: 'assets/svg/emailAuth.svg',
                       onTap: () => loginAuthPvr.loginEmailNavigator(context))
                 ]).paddingSymmetric(horizontal: Insets.i20)),
-                const Text("A new account will be created on the first login")
+                Text(appFonts.aNewAccount)
                     .alignment(Alignment.bottomCenter)
               ])));
     });

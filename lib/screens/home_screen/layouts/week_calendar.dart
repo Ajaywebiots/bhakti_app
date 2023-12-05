@@ -21,7 +21,7 @@ class _WeekCalendarState extends State<WeekCalendar> {
       log("HOME SEL : ${homeScreenPvr.selectedDate}");
       return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Container(
-            height: 72,
+            height: Sizes.s72,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: appColor(context).appTheme.whiteColor),

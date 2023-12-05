@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:developer';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/auth_screen/login_auth_screen/login_auth_screen.dart';
+import 'package:bhakti_app/screens/home_screen/book_read_presently_screen/book_read_presently_screen.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
@@ -16,8 +17,19 @@ import '../models/user_model.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
 
+  bookReadingPresentlyNavigate(context){
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) {
+          return BookReadPresentlyScreen(
+            bookReadingList: bookingLis,
+          );
+        }));
+  }
 
- List bookingLis = [];
+
+  final GlobalKey<ScaffoldState> key = GlobalKey();
+
+  List bookingLis = [];
  //call this function in init
  onReadyHome() async {
    final remoteConfig = FirebaseRemoteConfig.instance;

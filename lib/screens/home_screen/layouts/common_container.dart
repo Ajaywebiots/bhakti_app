@@ -48,7 +48,7 @@ class CommonContainer extends StatelessWidget {
                     ? const HSpace(Insets.i8)
                     : const HSpace(Insets.i51),
                 isToggle == true
-                    ? Text( timeText == "" ? "N/A" : timeText!,
+                    ? Text( timeText == "" ? appFonts.na : timeText!,
                         style: appCss.dmDenseMedium16
                             .textColor(appColor(context).appTheme.primary))
                     : FlutterSwitch(

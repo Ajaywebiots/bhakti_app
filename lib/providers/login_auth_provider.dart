@@ -3,6 +3,7 @@ import 'dart:developer';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/auth_screen/email_login_screen/email_login_screen.dart';
 import 'package:bhakti_app/screens/auth_screen/phone_login_screen/phone_login_screen.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/common_bottom_bar.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:bhakti_app/models/user_model.dart';
 import 'package:flutter_facebook_auth/flutter_facebook_auth.dart';
@@ -54,7 +55,7 @@ class LoginAuthProvider extends ChangeNotifier {
       }));
     } else {
       Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) {
-        return const HomeScreen();
+        return const CommonBottomNavigationBar();
       }));
     }
 
@@ -115,7 +116,7 @@ class LoginAuthProvider extends ChangeNotifier {
     //       } else {
     //         Navigator.pushReplacement(context,
     //             MaterialPageRoute(builder: (context) {
-    //           return const HomeScreen();
+    //           return const CommonBottomNavigationBar();
     //         }));
     //       }
     //

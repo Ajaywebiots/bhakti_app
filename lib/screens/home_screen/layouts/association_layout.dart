@@ -43,12 +43,12 @@ class AssociationLayout extends StatelessWidget {
                               Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("01:00",
+                                    Text(appFonts.time,
                                         style: appCss.dmDenseMedium16.textColor(
                                             appColor(context)
                                                 .appTheme
                                                 .primary)),
-                                    Text("Preaching",
+                                    Text(appFonts.preaching,
                                         style: appCss.dmDenseMedium14.textColor(
                                             appColor(context)
                                                 .appTheme
@@ -98,12 +98,12 @@ class AssociationLayout extends StatelessWidget {
                               Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("01:30",
+                                    Text(appFonts.time1,
                                         style: appCss.dmDenseMedium16.textColor(
                                             appColor(context)
                                                 .appTheme
                                                 .primary)),
-                                    Text("Hearing",
+                                    Text(appFonts.hearing,
                                         style: appCss.dmDenseMedium14.textColor(
                                             appColor(context)
                                                 .appTheme
@@ -153,12 +153,12 @@ class AssociationLayout extends StatelessWidget {
                               Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text("01:30",
+                                    Text(appFonts.time1,
                                         style: appCss.dmDenseMedium16.textColor(
                                             appColor(context)
                                                 .appTheme
                                                 .primary)),
-                                    Text("Chanting",
+                                    Text(appFonts.chanting,
                                         style: appCss.dmDenseMedium14.textColor(
                                             appColor(context)
                                                 .appTheme

@@ -4,7 +4,9 @@ import 'dart:developer';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/models/user_model.dart';
 import 'package:bhakti_app/providers/common_api_provider.dart';
-import 'package:bhakti_app/screens/home_screen/home_screen.dart';
+import 'package:bhakti_app/screens/auth_screen/email_sign_up_screen/email_sign_up_screen.dart';
+import 'package:bhakti_app/screens/auth_screen/phone_login_screen/phone_login_screen.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/common_bottom_bar.dart';
 import 'package:bhakti_app/screens/home_screen/setup_profile/setup_profile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:shared_preferences/shared_preferences.dart';
@@ -33,6 +35,24 @@ class EmailLoginProvider extends ChangeNotifier {
       return null;
     }
   }
+
+
+  signUpNavigate(context){
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) {
+          return const EmailSignUpScreen();
+        }));
+  }
+
+
+  phoneLoginNavigate(context){
+    Navigator.push(context,
+        MaterialPageRoute(builder: (context) {
+          return const PhoneLoginScreen();
+        }));
+  }
+
+
 
   passwordValidator(value) {
     notifyListeners();
@@ -89,10 +109,11 @@ class EmailLoginProvider extends ChangeNotifier {
             return const SetUpProfile();
           }));
         } else {
+          log('LOGGEDEee');
           // ignore: use_build_context_synchronously
           Navigator.pushReplacement(context,
               MaterialPageRoute(builder: (context) {
-            return const HomeScreen();
+            return const CommonBottomNavigationBar();
           }));
         }
         log("credential $credential");
