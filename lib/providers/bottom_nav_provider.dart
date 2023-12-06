@@ -1,6 +1,5 @@
 import 'package:bhakti_app/config.dart';
 
-import '../screens/home_screen/layouts/list_model.dart';
 
 class BottomNavProvider with ChangeNotifier {
   List dashList = [];
@@ -13,7 +12,7 @@ class BottomNavProvider with ChangeNotifier {
   }
 
   onInit(TickerProvider sync) {
-    dashList = bottomNavyList;
+    dashList = appArray.bottomNavyList;
     tabController = TabController(length: dashList.length, vsync: sync);
     notifyListeners();
   }

@@ -4,7 +4,6 @@ import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/setting_provider.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
@@ -47,7 +46,7 @@ class HomePageSection extends StatelessWidget {
                       height: 580,
                       child: ReorderableListView(
                         children: [
-                          for (final tile in homePageSectionList)
+                          for (final tile in appArray.homePageSectionList)
                             Padding(
                                 key: ValueKey(tile),
                                 padding: const EdgeInsets.only(top: 15),

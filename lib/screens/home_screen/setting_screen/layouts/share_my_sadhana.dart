@@ -1,13 +1,5 @@
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/setting_list_layouts.dart';
-import 'package:bhakti_app/widgets/common_trailing_layout.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../layouts/list_model.dart';
 
 class ShareMySadhana extends StatelessWidget {
   const ShareMySadhana({super.key});
@@ -40,206 +32,109 @@ class ShareMySadhana extends StatelessWidget {
                       image: AssetImage(eImageAssets.splashBg)))),
           SingleChildScrollView(
               child:
-                  Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            const VSpace(Insets.i120),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-              Text(appFonts.userList,
-                  style: appCss.philosopherBold18
-                      .textColor(appColor(context).appTheme.oneText)),
-              Row(children: [
-                SvgPicture.asset(eSvgAssets.add),
-                Text(appFonts.addUser,
-                    style: appCss.dmDenseMedium14
-                        .textColor(appColor(context).appTheme.primary)),
-              ],)
-            ]),
-            const VSpace(Insets.i15),
-            Container(
-                height: 50,
-                decoration: BoxDecoration(
-                    color: const Color(0x0FC35DD2),
-                    border: Border.all(
-                        color: appColor(context)
-                            .appTheme
-                            .primary
-                            .withOpacity(0.20)),
-                    borderRadius: BorderRadius.circular(8)),
-                child: TextField(
-                    decoration: InputDecoration(
-                        hintText: 'Search Here',
-                        prefixIcon: Row(
-                          children: [
-                            SvgPicture.asset("assets/svg/search-normal.svg"),
-                            const HSpace(Insets.i10),
-                            SvgPicture.asset(eSvgAssets.line)
-                          ],
-                        ).paddingAll(10),
-                        disabledBorder: const OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(AppRadius.r8)),
-                            borderSide: BorderSide.none),
-                        focusedBorder: const OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(AppRadius.r8)),
-                            borderSide: BorderSide.none),
-                        enabledBorder: const OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(AppRadius.r8)),
-                            borderSide: BorderSide.none),
-                        border: const OutlineInputBorder(
-                            borderRadius:
-                                BorderRadius.all(Radius.circular(AppRadius.r8)),
-                            borderSide: BorderSide.none)),
-                    onSubmitted: (String value) {
-                      debugPrint(value);
-                    })),
-            const VSpace(Insets.i15),
-            Container(
-                padding: const EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: appColor(context).appTheme.whiteColor,
-                    boxShadow: [
-                      BoxShadow(
-                          color: appColor(context).appTheme.shadowClr,
-                          blurRadius: 8,
-                          offset: const Offset(0, 4),
-                          spreadRadius: 0)
+              Column(mainAxisAlignment: MainAxisAlignment.start, children: [
+                const VSpace(Insets.i120),
+                Row(mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(appFonts.userList,
+                          style: appCss.philosopherBold18
+                              .textColor(appColor(context).appTheme.oneText)),
+                      Row(children: [
+                        SvgPicture.asset(eSvgAssets.add),
+                        TextButton(onPressed: () =>
+                            Navigator.push(context,
+                                MaterialPageRoute(builder: (context) {
+                                  return const AddUserLayout();
+                                })),
+                            child: Text(appFonts.addUser,
+                                style: appCss.dmDenseMedium14
+                                    .textColor(
+                                    appColor(context).appTheme.primary))
+                        )
+                      ])
                     ]),
-                child: Column(
-                        children: shareMySadhanaList.asMap().entries.map((e) {
-                  return Column(children: [
-                    SettingListLayouts(
-                        image: e.value['image'],
-                        index: e.key,
-                        isShare: true,
-                        widget: const CommonTrailingLayout(svg: "assets/svg/delete.svg").inkWell(onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Dialog(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius:
-                                        BorderRadius.circular(8)),
-                                    child: SizedBox(
-                                        height: 175,
-                                        child: Column(
-                                            mainAxisAlignment:
-                                            MainAxisAlignment
-                                                .center,
-                                            children: [
-                                              const VSpace(
-                                                  Insets.i10),
-                                              Center(
-                                                  child: Text(
-                                                      "Stop Sharing",
-                                                      style: appCss
-                                                          .philosopherBold18
-                                                          .textColor(
-                                                          appColor(
-                                                              context)
-                                                              .appTheme
-                                                              .primary))),
-                                              const VSpace(
-                                                  Insets.i10),
-                                              Center(
-                                                  child: Text(
-                                                      "Are You Sure You Want to stop shared",
-                                                      style: appCss
-                                                          .dmDenseRegular14
-                                                          .textColor(
-                                                          appColor(
-                                                              context)
-                                                              .appTheme
-                                                              .rulesClr))),
-                                              Center(
-                                                  child: Text(
-                                                      style: appCss
-                                                          .dmDenseRegular14
-                                                          .textColor(
-                                                          appColor(
-                                                              context)
-                                                              .appTheme
-                                                              .rulesClr),
-                                                      "Sadhana?")),
-                                              const VSpace(
-                                                  Insets.i25),
-                                              Row(mainAxisAlignment: MainAxisAlignment
-                                                  .center,
-                                                  children: [
-                                                    Container(
-                                                        alignment: Alignment
-                                                            .center,
-                                                        decoration: BoxDecoration(
-                                                            border: Border
-                                                                .all(
-                                                                width: 1,
-                                                                color: appColor(
-                                                                    context)
-                                                                    .appTheme
-                                                                    .primary),
-                                                            borderRadius: BorderRadius
-                                                                .circular(
-                                                                8)),
-                                                        height: 44,
-                                                        width: 120,
-                                                        child: Text(
-                                                            "Cancel",
-                                                            style: appCss
-                                                                .dmDenseMedium16
-                                                                .textColor(
-                                                                appColor(
-                                                                    context)
-                                                                    .appTheme
-                                                                    .primary)))
-                                                        .inkWell(
-                                                        onTap: () {
-                                                          Navigator
-                                                              .pop(
-                                                              context);
-                                                        }),
-                                                    const HSpace(
-                                                        Insets.i15),
-                                                    Container(
-                                                        alignment: Alignment
-                                                            .center,
-                                                        decoration: BoxDecoration(
-                                                            borderRadius: BorderRadius
-                                                                .circular(
-                                                                8),
-                                                            color: appColor(
-                                                                context)
-                                                                .appTheme
-                                                                .primary),
-                                                        height: 44,
-                                                        width: 120,
-                                                        child: Text(
-                                                            "Delete",
-                                                            style: appCss
-                                                                .dmDenseMedium16
-                                                                .textColor(
-                                                                appColor(
-                                                                    context)
-                                                                    .appTheme
-                                                                    .whiteColor)))
-                                                        .inkWell(
-                                                        onTap: () {
-                                                          Navigator
-                                                              .pop(
-                                                              context);
-                                                        })
-                                                  ])
-
-                                            ])));
-                              });
-                        },),
-                        list: shareMySadhanaList,
-                        text: e.value['name'])
-                  ]);
-                }).toList())
-                    .paddingSymmetric(vertical: Insets.i10))
-          ]).paddingSymmetric(horizontal: 20))
+                const VSpace(Insets.i15),
+                Container(alignment: Alignment.center,
+                    height: 50,
+                    decoration: BoxDecoration(
+                        border: Border.all(
+                            color: appColor(context)
+                                .appTheme
+                                .primary
+                                .withOpacity(0.20)),
+                        borderRadius: BorderRadius.circular(8)),
+                    child: TextField(
+                        decoration: InputDecoration(filled: true,
+                            fillColor: const Color(0x0FC35DD2),
+                            hintText: 'Search Here',
+                            hintStyle: appCss.dmDenseRegular14.textColor(
+                                appColor(context).appTheme.lightText),
+                            prefixIcon: Row(
+                              children: [
+                                SvgPicture.asset(
+                                    "assets/svg/search-normal.svg"),
+                                const HSpace(Insets.i10),
+                                SvgPicture.asset(eSvgAssets.line)
+                              ],
+                            ).paddingAll(10),
+                            disabledBorder: const OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(AppRadius.r8)),
+                                borderSide: BorderSide.none),
+                            focusedBorder: const OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(AppRadius.r8)),
+                                borderSide: BorderSide.none),
+                            enabledBorder: const OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(AppRadius.r8)),
+                                borderSide: BorderSide.none),
+                            border: const OutlineInputBorder(
+                                borderRadius:
+                                BorderRadius.all(Radius.circular(AppRadius.r8)),
+                                borderSide: BorderSide.none)),
+                        onSubmitted: (String value) {
+                          debugPrint(value);
+                        })),
+                const VSpace(Insets.i15),
+                Container(
+                    padding: const EdgeInsets.all(15),
+                    decoration: BoxDecoration(
+                        borderRadius: BorderRadius.circular(8),
+                        color: appColor(context).appTheme.whiteColor,
+                        boxShadow: [
+                          BoxShadow(
+                              color: appColor(context).appTheme.shadowClr,
+                              blurRadius: 8,
+                              offset: const Offset(0, 4),
+                              spreadRadius: 0)
+                        ]),
+                    child: Column(
+                        children: appArray.shareMySadhanaList
+                            .asMap()
+                            .entries
+                            .map((e) {
+                          return Column(
+                              children: [
+                            SettingListLayouts(
+                                image: e.value['image'],
+                                index: e.key,
+                                isShare: true,
+                                widget: const CommonTrailingLayout(
+                                    svg: "assets/svg/delete.svg").inkWell(
+                                  onTap: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) {
+                                          return const ShareMySadhanaDialog();
+                                        });
+                                  },),
+                                list: appArray.shareMySadhanaList,
+                                text: e.value['name'])
+                          ]);
+                        }).toList())
+                        .paddingSymmetric(vertical: Insets.i10))
+              ]).paddingSymmetric(horizontal: 20))
         ]));
   }
 }

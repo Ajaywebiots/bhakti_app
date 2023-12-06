@@ -159,6 +159,6 @@ class BookDistributionLayout extends StatelessWidget {
                               .paddingOnly(left: 8)
                         ])))
           ]);
-    },);
+    });
   }
 }

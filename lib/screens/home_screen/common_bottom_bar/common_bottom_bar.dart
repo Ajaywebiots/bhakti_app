@@ -7,7 +7,7 @@ import 'package:bhakti_app/screens/home_screen/setting_screen/setting_screen.dar
 
 import '../dashboard_screen/dashboard_screen.dart';
 import '../home_screen.dart';
-import 'bottom_nav_bar.dart';
+import '../common_bottom_bar/bottom_nav_bar.dart';
 
 class CommonBottomNavigationBar extends StatefulWidget {
   const CommonBottomNavigationBar({super.key});

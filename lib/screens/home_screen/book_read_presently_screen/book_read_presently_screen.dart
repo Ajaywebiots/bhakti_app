@@ -6,9 +6,6 @@ import 'package:bhakti_app/providers/home_screen_provider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bhakti_app/common/assets/index.dart';
 
-import '../layouts/list_model.dart';
-
-
 class BookReadPresentlyScreen extends StatelessWidget {
   final List? bookReadingList;
 
@@ -194,7 +191,7 @@ class BookReadPresentlyScreen extends StatelessWidget {
                                                             .whiteColor),
                                                     width: 34,
                                                     height: 35,
-                                                    child: bookList
+                                                    child: appArray.bookList
                                                         .where((element) =>
                                                     element['book_id'] ==
                                                         homeScreenPvr.bookingLis[index]['book_id'])
@@ -336,10 +333,10 @@ class BookReadPresentlyScreen extends StatelessWidget {
                                                         : SvgPicture.asset(
                                                         eSvgAssets.add))
                                                     .inkWell(onTap: () {
-                                                  if (!bookList
+                                                  if (!appArray.bookList
                                                       .contains(
                                                       homeScreenPvr.bookingLis[index])) {
-                                                    bookList
+                                                    appArray.bookList
                                                         .add(
                                                         homeScreenPvr.bookingLis[index]);
                                                   }

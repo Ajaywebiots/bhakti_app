@@ -6,8 +6,6 @@ import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/setting_list_layouts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
-import '../../layouts/list_model.dart';
-
 class SharingWithMe extends StatelessWidget {
   const SharingWithMe({super.key});
 
@@ -97,63 +95,68 @@ class SharingWithMe extends StatelessWidget {
                               offset: const Offset(0, 4),
                               spreadRadius: 0)
                         ]),
-                    child: Column(
-                        children: sharingWithMeList
-                            .asMap()
-                            .entries
-                            .map((e) {
-                          return Column(children: [
-                            SettingListLayouts(
-                                image: e.value['image'],
-                                index: e.key,
-                                isShare: true,
-                                widget: PopupMenuButton(
-                                    padding: EdgeInsets.zero,
-                                    offset: const Offset(0, 50),
-                                    onSelected: (value) {
-                                      if (value == 1) {
-                                        Navigator.pop(context);
-                                        // if value 2 show dialog
-                                      } else if (value == 2) {
-                                        showDialog(
-                                            context: context,
-                                            builder: (context) {
-                                              return Dialog(
-                                                  shape: RoundedRectangleBorder(
-                                                      borderRadius:
-                                                      BorderRadius.circular(8)),
-                                                  child: SizedBox(
-                                                      height: 175,
-                                                      child: Column(
-                                                          mainAxisAlignment:
-                                                          MainAxisAlignment
-                                                              .center,
-                                                          children: [
-                                                            const VSpace(
-                                                                Insets.i10),
-                                                            Center(
-                                                                child: Text(
-                                                                    appFonts.deleteUser,
-                                                                    style: appCss
-                                                                        .philosopherBold18
-                                                                        .textColor(
-                                                                        appColor(
-                                                                            context)
-                                                                            .appTheme
-                                                                            .primary))),
-                                                            const VSpace(
-                                                                Insets.i10),
-                                                            Center(
-                                                                child: Text(appFonts.areYouSure,
-                                                                    style: appCss
-                                                                        .dmDenseRegular14
-                                                                        .textColor(
-                                                                        appColor(
-                                                                            context)
-                                                                            .appTheme
-                                                                            .rulesClr))),
-                                                            Center(
-                                                                child: Text(appFonts.thisAction,
+                      child: Column(
+                          children: appArray.sharingWithMeList
+                              .asMap()
+                              .entries
+                              .map((e) {
+                            return Column(children: [
+                              SettingListLayouts(
+                                  image: e.value['image'],
+                                  index: e.key,
+                                  isShare: true,
+                                  widget: PopupMenuButton(
+                                      padding: EdgeInsets.zero,
+                                      offset: const Offset(0, 50),
+                                      onSelected: (value) {
+                                        if (value == 1) {
+                                          Navigator.pop(context);
+                                          // if value 2 show dialog
+                                        } else if (value == 2) {
+                                          showDialog(
+                                              context: context,
+                                              builder: (context) {
+                                                return Dialog(
+                                                    shape: RoundedRectangleBorder(
+                                                        borderRadius:
+                                                        BorderRadius.circular(8)),
+                                                    child: SizedBox(
+                                                        height: 175,
+                                                        child: Column(
+                                                            mainAxisAlignment:
+                                                            MainAxisAlignment
+                                                                .center,
+                                                            children: [
+                                                              const VSpace(
+                                                                  Insets.i10),
+                                                              Center(
+                                                                  child: Text(
+                                                                      appFonts
+                                                                          .deleteUser,
+                                                                      style: appCss
+                                                                          .philosopherBold18
+                                                                          .textColor(
+                                                                          appColor(
+                                                                              context)
+                                                                              .appTheme
+                                                                              .primary))),
+                                                              const VSpace(
+                                                                  Insets.i10),
+                                                              Center(
+                                                                  child: Text(
+                                                                      appFonts
+                                                                          .areYouSure,
+                                                                      style: appCss
+                                                                          .dmDenseRegular14
+                                                                          .textColor(
+                                                                          appColor(
+                                                                              context)
+                                                                              .appTheme
+                                                                              .rulesClr))),
+                                                              Center(
+                                                                  child: Text(
+                                                                    appFonts
+                                                                        .thisAction,
                                                                     style: appCss
                                                                         .dmDenseRegular14
                                                                         .textColor(
@@ -161,119 +164,123 @@ class SharingWithMe extends StatelessWidget {
                                                                             context)
                                                                             .appTheme
                                                                             .rulesClr),
-                                                                    )),
-                                                            const VSpace(
-                                                                Insets.i25),
-                                                            Row(
-                                                                mainAxisAlignment:
-                                                                MainAxisAlignment
-                                                                    .center,
-                                                                children: [
-                                                                  Container(
-                                                                      alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                      decoration: BoxDecoration(
-                                                                          border: Border
-                                                                              .all(
-                                                                              width:
-                                                                              1,
-                                                                              color: appColor(
-                                                                                  context)
-                                                                                  .appTheme
-                                                                                  .primary),
-                                                                          borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(
-                                                                              8)),
-                                                                      height: 44,
-                                                                      width: 120,
-                                                                      child: Text(appFonts.cancel,
-                                                                          style: appCss
-                                                                              .dmDenseMedium16
-                                                                              .textColor(
-                                                                              appColor(
-                                                                                  context)
-                                                                                  .appTheme
-                                                                                  .primary)))
-                                                                      .inkWell(
-                                                                      onTap: () {
-                                                                        Navigator
-                                                                            .pop(
-                                                                            context);
-                                                                      }),
-                                                                  const HSpace(
-                                                                      Insets
-                                                                          .i15),
-                                                                  Container(
-                                                                      alignment:
-                                                                      Alignment
-                                                                          .center,
-                                                                      decoration: BoxDecoration(
-                                                                          borderRadius:
-                                                                          BorderRadius
-                                                                              .circular(
-                                                                              8),
-                                                                          color: appColor(
-                                                                              context)
-                                                                              .appTheme
-                                                                              .primary),
-                                                                      height: 44,
-                                                                      width: 120,
-                                                                      child: Text(appFonts.delete,
-                                                                          style: appCss
-                                                                              .dmDenseMedium16
-                                                                              .textColor(
-                                                                              appColor(
-                                                                                  context)
-                                                                                  .appTheme
-                                                                                  .whiteColor)))
-                                                                      .inkWell(
-                                                                      onTap: () {
-                                                                        Navigator
-                                                                            .pop(
-                                                                            context);
-                                                                      })
-                                                                ])
-                                                          ])));
-                                            });
-                                      }
-                                    },
-                                    elevation: 2,
-                                    shape: TooltipShape(),
-                                    child: SvgPicture.asset(
-                                        "assets/svg/option.svg"),
-                                    itemBuilder: (context) =>
-                                    [
-                                      PopupMenuItem(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              20, 0, 0, 0),
-                                          value: 1,
-                                          child: Text(appFonts.checkSadhana,
-                                              style: appCss.dmDenseRegular14
-                                                  .textColor(
-                                                  appColor(context).appTheme
-                                                      .rulesClr))),
-                                      PopupMenuItem(
-                                          height: 0, padding: EdgeInsets.zero,
-                                          child: SvgPicture.asset(
-                                              eSvgAssets.lineRuler)),
+                                                                  )),
+                                                              const VSpace(
+                                                                  Insets.i25),
+                                                              Row(
+                                                                  mainAxisAlignment:
+                                                                  MainAxisAlignment
+                                                                      .center,
+                                                                  children: [
+                                                                    Container(
+                                                                        alignment:
+                                                                        Alignment
+                                                                            .center,
+                                                                        decoration: BoxDecoration(
+                                                                            border: Border
+                                                                                .all(
+                                                                                width:
+                                                                                1,
+                                                                                color: appColor(
+                                                                                    context)
+                                                                                    .appTheme
+                                                                                    .primary),
+                                                                            borderRadius:
+                                                                            BorderRadius
+                                                                                .circular(
+                                                                                8)),
+                                                                        height: 44,
+                                                                        width: 120,
+                                                                        child: Text(
+                                                                            appFonts
+                                                                                .cancel,
+                                                                            style: appCss
+                                                                                .dmDenseMedium16
+                                                                                .textColor(
+                                                                                appColor(
+                                                                                    context)
+                                                                                    .appTheme
+                                                                                    .primary)))
+                                                                        .inkWell(
+                                                                        onTap: () {
+                                                                          Navigator
+                                                                              .pop(
+                                                                              context);
+                                                                        }),
+                                                                    const HSpace(
+                                                                        Insets
+                                                                            .i15),
+                                                                    Container(
+                                                                        alignment:
+                                                                        Alignment
+                                                                            .center,
+                                                                        decoration: BoxDecoration(
+                                                                            borderRadius:
+                                                                            BorderRadius
+                                                                                .circular(
+                                                                                8),
+                                                                            color: appColor(
+                                                                                context)
+                                                                                .appTheme
+                                                                                .primary),
+                                                                        height: 44,
+                                                                        width: 120,
+                                                                        child: Text(
+                                                                            appFonts
+                                                                                .delete,
+                                                                            style: appCss
+                                                                                .dmDenseMedium16
+                                                                                .textColor(
+                                                                                appColor(
+                                                                                    context)
+                                                                                    .appTheme
+                                                                                    .whiteColor)))
+                                                                        .inkWell(
+                                                                        onTap: () {
+                                                                          Navigator
+                                                                              .pop(
+                                                                              context);
+                                                                        })
+                                                                  ])
+                                                            ])));
+                                              });
+                                        }
+                                      },
+                                      elevation: 2,
+                                      shape: TooltipShape(),
+                                      child: SvgPicture.asset(
+                                          "assets/svg/option.svg"),
+                                      itemBuilder: (context) =>
+                                      [
+                                        PopupMenuItem(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                20, 0, 0, 0),
+                                            value: 1,
+                                            child: Text(appFonts.checkSadhana,
+                                                style: appCss.dmDenseRegular14
+                                                    .textColor(
+                                                    appColor(context).appTheme
+                                                        .rulesClr))),
+                                        PopupMenuItem(
+                                            height: 0, padding: EdgeInsets.zero,
+                                            child: SvgPicture.asset(
+                                                eSvgAssets.lineRuler)),
 
-                                      PopupMenuItem(
-                                          padding: const EdgeInsets.fromLTRB(
-                                              20, 0, 0, 0),
-                                          value: 2,
-                                          child: Text(appFonts.deleteUser,
-                                              style: appCss.dmDenseRegular14
-                                                  .textColor(
-                                                  appColor(context).appTheme
-                                                      .rulesClr)))
-                                    ]
-                                ),
-                                list: sharingWithMeList,
-                                text: e.value['name'])
-                          ]);
-                        }).toList())
+                                        PopupMenuItem(
+                                            padding: const EdgeInsets.fromLTRB(
+                                                20, 0, 0, 0),
+                                            value: 2,
+                                            child: Text(appFonts.deleteUser,
+                                                style: appCss.dmDenseRegular14
+                                                    .textColor(
+                                                    appColor(context).appTheme
+                                                        .rulesClr)))
+                                      ]
+                                  ),
+                                  list: appArray.sharingWithMeList,
+                                  text: e.value['name'])
+                            ]);
+                          }).toList())
                         .paddingSymmetric(vertical: Insets.i10))
               ]).paddingSymmetric(horizontal: 20))
         ]));

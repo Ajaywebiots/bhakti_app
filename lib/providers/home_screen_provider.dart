@@ -4,7 +4,6 @@ import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/auth_screen/login_auth_screen/login_auth_screen.dart';
 import 'package:bhakti_app/screens/home_screen/book_read_presently_screen/book_read_presently_screen.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
 import 'package:bhakti_app/services/sadhana_api_data.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
@@ -427,7 +426,7 @@ class HomeScreenProvider extends ChangeNotifier {
             chantinglist.add(sadhana.sadhanaData[0]['data']['chanting']
                 ['slot_$i']['rounds']);
           }
-          rulesList = [
+          appArray.rulesList = [
             {'rule': 'No meat eating', 'isOn': regulations['no_meat_eating']},
             {'rule': 'No intoxication', 'isOn': regulations['no_intoxication']},
             {'rule': 'No illicit sex', 'isOn': regulations['no_illicit_sex']},
@@ -437,14 +436,14 @@ class HomeScreenProvider extends ChangeNotifier {
 
           for (int i = 0; i < book_data.length; i++) {
             log("book_data[i] : ${book_data[i]}");
-            bookList.add(book_data[i]);
+            appArray.bookList.add(book_data[i]);
           }
 
           smallBooks = book_distribution['small_books'];
           mediumBooks = book_distribution['medium_books'];
           largeBooks = book_distribution['big_books'];
 
-          log('Book Read: ${bookList}');
+          log('Book Read: ${appArray.bookList}');
         } else {
           ScaffoldMessenger.of(context)
               .showSnackBar(SnackBar(content: Text(value.message)));

@@ -1,5 +1,5 @@
-import 'layouts/homescreen_bottom_layout.dart';
-import 'layouts/homescreen_upper_layout.dart';
+import 'layouts/homescreen_bottom_layout/homescreen_bottom_layout.dart';
+import 'layouts/homescreen_upper_layout/homescreen_upper_layout.dart';
 import 'layouts/notes_layout.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/common/assets/index.dart';
@@ -43,9 +43,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           CommonAppBar(),
                           VSpace(Insets.i23),
                           HomeScreenUpperLayout(),
-                          HomeScreenBottomLayout(),
-                          VSpace(Insets.i15),
-                          NotesLayout()
+                          HomeScreenBottomLayout()
                         ]).paddingOnly(
                             top: MediaQuery.of(context).size.height * 0.01,
                             bottom: MediaQuery.of(context).size.height * 0.05,

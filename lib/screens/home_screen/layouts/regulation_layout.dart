@@ -1,10 +1,6 @@
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/spacing.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/home_screen_provider.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_regulation.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
-import 'package:flutter_svg/svg.dart';
 
 class RegulationLayout extends StatelessWidget {
   const RegulationLayout({super.key});
@@ -26,11 +22,11 @@ class RegulationLayout extends StatelessWidget {
                     spreadRadius: 0)
               ]),
           child: Column(
-              children: rulesList.asMap().entries.map((e) {
+              children: appArray.rulesList.asMap().entries.map((e) {
             return Column(children: [
               CommonRegulation(
                   index: e.key,
-                  list: rulesList,
+                  list: appArray.rulesList,
                   isRegulation: true,
                   status: e.value['isOn'],
                   text: e.value['rule'],

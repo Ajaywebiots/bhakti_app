@@ -1,7 +1,5 @@
 import 'package:bhakti_app/config.dart';
 
-import '../screens/home_screen/layouts/list_model.dart';
-
 class SettingProvider extends ChangeNotifier {
   void updateMyTiles(int oldIndex, int newIndex) {
     notifyListeners();
@@ -10,9 +8,9 @@ class SettingProvider extends ChangeNotifier {
       newIndex -= 1;
     }
     // get the tile we are moving
-    final Map<String, dynamic> tile = homePageSectionList.removeAt(oldIndex);
+    final Map<String, dynamic> tile = appArray.homePageSectionList.removeAt(oldIndex);
     // place the tile in new position
-    homePageSectionList.insert(newIndex, tile);
+    appArray.homePageSectionList.insert(newIndex, tile);
   }
 
 }

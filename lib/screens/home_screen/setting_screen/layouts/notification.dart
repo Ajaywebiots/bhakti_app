@@ -4,7 +4,6 @@ import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_regulation.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class NotificationLayouts extends StatelessWidget {
@@ -59,10 +58,10 @@ class NotificationLayouts extends StatelessWidget {
                           spreadRadius: 0)
                     ]),
                 child: Column(
-                    children: notificationSettingList.asMap().entries.map((e) {
+                    children: appArray.notificationSettingList.asMap().entries.map((e) {
                   return Column(children: [
                     CommonRegulation(
-                        list: notificationSettingList,
+                        list: appArray.notificationSettingList,
                         index: e.key,
                         status: e.value['isOn'],
                         text: e.value['name'],

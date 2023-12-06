@@ -1,6 +1,6 @@
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/providers/login_auth_provider.dart';
+import 'package:bhakti_app/widgets/common_auth_button.dart';
 import 'package:flutter_svg/svg.dart';
 import '../../../../common/assets/index.dart';
 import '../../../../common/extension/spacing.dart';
@@ -17,18 +17,7 @@ class LoginBottomLayout extends StatelessWidget {
         builder: (context, emailLoginPvr, loginAuthPvr, child) {
       return Column(children: [
         const VSpace(Insets.i25),
-        Center(
-                child: Container(
-                    alignment: Alignment.center,
-                    width: Sizes.s141,
-                    height: Sizes.s44,
-                    decoration: BoxDecoration(
-                        borderRadius: BorderRadius.circular(8),
-                        color: appColor(context).appTheme.primary),
-                    child: Text(appFonts.login,
-                        style: appCss.dmDenseMedium16
-                            .textColor(appColor(context).appTheme.whiteColor))))
-            .inkWell(onTap: () => emailLoginPvr.loginButton(context)),
+        CommonAuthButton(onTap: () => emailLoginPvr.loginButton(context),text: appFonts.login),
         const VSpace(Insets.i28),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           SvgPicture.asset(eSvgAssets.line11),

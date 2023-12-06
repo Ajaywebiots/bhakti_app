@@ -1,5 +1,12 @@
 import 'dart:io';
-
+export 'package:bhakti_app/common/assets/index.dart';
+export 'package:bhakti_app/common/extension/spacing.dart';
+export 'package:bhakti_app/common/extension/text_style_extensions.dart';
+export 'package:bhakti_app/common/extension/widget_extension.dart';
+export 'package:bhakti_app/widgets/common_trailing_layout.dart';
+export '../../../../routes/screen_list.dart';
+export '../../../../package_list.dart';
+import 'package:bhakti_app/common/app_array.dart';
 import 'package:bhakti_app/common/session.dart';
 import 'package:bhakti_app/models/user_model.dart';
 import 'package:bhakti_app/services/api_methods.dart';
@@ -20,6 +27,7 @@ Session session = Session();
 AppFonts appFonts = AppFonts();
 NavigationClass route = NavigationClass();
 ApiServices apiServices = ApiServices();
+AppArray appArray = AppArray();
 
 UserModel? userModel;
 

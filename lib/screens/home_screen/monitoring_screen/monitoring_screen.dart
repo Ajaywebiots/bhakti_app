@@ -1,4 +1,3 @@
-import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/user_view_layout/group_view_chanting_common_container.dart';
 import 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/user_view_layout/group_view_sleep_common_container.dart';
 import 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/all_user_layout/knowledge_group_layout.dart';
@@ -264,7 +263,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                                   ]),
                               child: Column(
                                   children:
-                                      worshipUserList.asMap().entries.map((e) {
+                                  appArray.worshipUserList.asMap().entries.map((e) {
                                 return Column(children: [
                                   Row(children: [
                                     SvgPicture.asset(e.value['svgImage']),

@@ -3,6 +3,7 @@ import 'package:bhakti_app/providers/common_api_provider.dart';
 import 'package:bhakti_app/providers/dashboard_provider.dart';
 import 'package:bhakti_app/providers/monitoring_provider.dart';
 import 'package:bhakti_app/providers/setting_provider.dart';
+import 'package:bhakti_app/providers/splash_screen_provider.dart';
 import 'config.dart';
 import 'dart:developer';
 import 'common/assets/index.dart';
@@ -51,7 +52,8 @@ class MyApp extends StatelessWidget {
                   ChangeNotifierProvider(create: (_) => BottomNavProvider()),
                   ChangeNotifierProvider(create: (_) => SettingProvider()),
                   ChangeNotifierProvider(create: (_) => DashboardProvider()),
-                  ChangeNotifierProvider(create: (_) => MonitoringProvider())
+                  ChangeNotifierProvider(create: (_) => MonitoringProvider()),
+                  ChangeNotifierProvider(create: (_) => SplashScreenProvider())
                 ],
                 child: Consumer2<ThemeService, CommonApiProvider>(
                     builder: (context, theme, commonApi, child) {

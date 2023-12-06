@@ -5,7 +5,6 @@ import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/home_screen_provider.dart';
 import 'package:bhakti_app/screens/home_screen/drawer_screen/layouts/my_documents_screen.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
 class DrawerScreen extends StatefulWidget {
@@ -25,7 +24,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
         Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           const VSpace(Insets.i40),
           Image.asset(eImageAssets.bhaktiLogo, height: Sizes.s30, width: Sizes.s136),
-          ...drawerList.asMap().entries.map((e) {
+          ...appArray.drawerList.asMap().entries.map((e) {
             List testingList = [];
             if (e.value['name'] == "Online Tests") {
               testingList = e.value['list'];

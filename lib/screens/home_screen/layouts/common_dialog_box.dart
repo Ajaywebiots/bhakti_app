@@ -4,7 +4,6 @@ import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/mangla_Alert_List_layout.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/sandhya_alert_list_layout.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -84,7 +83,7 @@ class _CommonDialogState extends State<CommonDialog> {
                           borderRadius: BorderRadius.circular(8),
                           color: appColor(context).appTheme.whiteColor),
                       child: Column(
-                          children: manglaArtiTypeList.asMap().entries.map((e) {
+                          children: appArray.manglaArtiTypeList.asMap().entries.map((e) {
                         return Column(children: [
                           ManglaAlertList(
                               status: e.value['isOn'],
@@ -109,7 +108,7 @@ class _CommonDialogState extends State<CommonDialog> {
                           ),
                           child: Column(
                               children:
-                                  sandhyaTypeList.asMap().entries.map((e) {
+                              appArray.sandhyaTypeList.asMap().entries.map((e) {
                             return Column(children: [
                               SandhyaAlertList(
                                   status: e.value['isOn'],

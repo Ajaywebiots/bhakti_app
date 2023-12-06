@@ -4,7 +4,6 @@ import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/bottom_nav_provider.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/list_model.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/setting_list_layouts.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
@@ -62,7 +61,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                   spreadRadius: 0)
                             ]),
                         child: Column(
-                            children: settingList
+                            children: appArray.settingList
                                 .asMap()
                                 .entries
                                 .map((e) {
@@ -261,7 +260,7 @@ class _SettingScreenState extends State<SettingScreen> {
                                     index: e.key,
                                     widget: SvgPicture.asset(
                                         "assets/svg/arrow_left_to_right.svg"),
-                                    list: settingList,
+                                    list: appArray.settingList,
                                     svgImage: e.value['image'],
                                     text: e.value['rule'])
                               ]);
