@@ -1,6 +1,3 @@
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/bottom_nav_provider.dart';
 import 'package:bhakti_app/providers/dashboard_provider.dart';
@@ -9,9 +6,7 @@ import 'package:bhakti_app/screens/home_screen/dashboard_screen/layouts/chanting
 import 'package:bhakti_app/screens/home_screen/dashboard_screen/layouts/common_container_design.dart';
 import 'package:bhakti_app/screens/home_screen/dashboard_screen/layouts/sleep_pattern_chart.dart';
 import 'package:bhakti_app/widgets/stateful_wrapper.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:table_calendar/table_calendar.dart';
-import '../../../common/extension/spacing.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({super.key});

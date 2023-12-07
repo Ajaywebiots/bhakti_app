@@ -1,10 +1,4 @@
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/homescreen_upper_layout/layouts/sleep_layout.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/week_calendar.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/homescreen_upper_layout/layouts/worship_layout.dart';
-import '../../../../common/extension/spacing.dart';
-import 'layouts/chanting_common_layout.dart';
 
 class HomeScreenUpperLayout extends StatelessWidget {
   const HomeScreenUpperLayout({super.key});

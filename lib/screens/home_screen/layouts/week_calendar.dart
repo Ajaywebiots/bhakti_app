@@ -2,7 +2,7 @@ import 'dart:developer';
 
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/home_screen_provider.dart';
-import 'package:bhakti_app/widgets/custom_week_calendar.dart';
+import 'package:bhakti_app/customise/custom_week_calendar/custom_week_calendar.dart';
 
 class WeekCalendar extends StatefulWidget {
   const WeekCalendar({super.key});
@@ -39,7 +39,7 @@ class _WeekCalendarState extends State<WeekCalendar> {
                 activeNavigatorColor: appColor(context).appTheme.whiteColor,
                 inactiveNavigatorColor: appColor(context).appTheme.whiteColor,
                 onDateChange: (date) =>
-                    homeScreenPvr.onCalendarDateChange(date))),
+                    homeScreenPvr.onCalendarDateChange(date)))
       ]);
     });
   }

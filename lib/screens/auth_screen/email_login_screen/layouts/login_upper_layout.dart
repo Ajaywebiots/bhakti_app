@@ -1,12 +1,6 @@
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/email_login_screen_provider/email_login_screen_provider.dart';
-import 'package:bhakti_app/providers/email_login_screen_provider/layouts/email_login_text_field.dart';
-import 'package:bhakti_app/providers/email_login_screen_provider/layouts/password_login_text_field.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '../../../../common/assets/index.dart';
+
+
 
 class LoginUpperLayout extends StatelessWidget {
   const LoginUpperLayout({super.key});

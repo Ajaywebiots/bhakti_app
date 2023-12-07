@@ -1,11 +1,5 @@
-import 'package:bhakti_app/screens/auth_screen/email_login_screen/layouts/login_upper_layout.dart';
-import 'package:flutter/gestures.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/providers/email_login_screen_provider/email_login_screen_provider.dart';
-import 'layouts/login_bottom_layout.dart';
+
 
 class EmailLoginScreen extends StatefulWidget {
   const EmailLoginScreen({super.key});

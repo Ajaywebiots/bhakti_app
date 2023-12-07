@@ -38,7 +38,6 @@ class SettingListLayouts extends StatelessWidget {
                   decoration: BoxDecoration(
                       shape: BoxShape.circle,
                       image: DecorationImage(image: AssetImage(image!)))),
-
           const HSpace(Insets.i10),
           Text(text!,
               style: appCss.dmDenseMedium16
@@ -47,8 +46,8 @@ class SettingListLayouts extends StatelessWidget {
         widget!
       ]).inkWell(onTap: onTap),
       if (index != list!.length - 1)
-        SvgPicture.asset(eSvgAssets.lineRuler)
-            .paddingSymmetric(vertical: isShare == true ?  Insets.i10 : Insets.i15)
+        SvgPicture.asset(eSvgAssets.lineRuler).paddingSymmetric(
+            vertical: isShare == true ? Insets.i10 : Insets.i15)
     ]);
   }
 }

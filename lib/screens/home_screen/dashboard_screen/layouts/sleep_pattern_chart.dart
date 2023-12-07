@@ -1,9 +1,4 @@
-import 'dart:developer';
-
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:intl/intl.dart';
-import 'package:mrx_charts/mrx_charts.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
+import 'package:time_chart/time_chart.dart';
 
 import '../../../../config.dart';
 
@@ -16,10 +11,50 @@ class SleepPatternChart extends StatefulWidget {
 
 class _SleepPatternChartState extends State<SleepPatternChart> {
   bool whichCandleMock = true;
+  final data = [
+    DateTimeRange(
+      start: DateTime(2021, 2, 24),
+      end: DateTime(2021, 2, 25),
+    ),
+    DateTimeRange(
+      start: DateTime(2021, 2, 22, 1, 55),
+      end: DateTime(2021, 2, 22, 9, 12),
+    ),
+    DateTimeRange(
+      start: DateTime(2021, 2, 20, 0, 25),
+      end: DateTime(2021, 2, 20, 7, 34),
+    ),
+    DateTimeRange(
+      start: DateTime(2021, 2, 17, 21, 23),
+      end: DateTime(2021, 2, 18, 4, 52),
+    ),
+    DateTimeRange(
+      start: DateTime(2021, 2, 13, 6, 32),
+      end: DateTime(2021, 2, 13, 13, 12),
+    ),
+    DateTimeRange(
+      start: DateTime(2021, 2, 1, 9, 32),
+      end: DateTime(2021, 2, 1, 15, 22),
+    ),
+    DateTimeRange(
+      start: DateTime(2021, 1, 22, 12, 10),
+      end: DateTime(2021, 1, 22, 16, 20),
+    ),
+  ];
+  final sizedBox = const SizedBox(height: 16);
 
   @override
   Widget build(BuildContext context) {
-    return Center(
+    return Column(children: [
+      const Text('Weekly time chart'),
+      TimeChart(
+        data: data,
+        viewMode: ViewMode.weekly,
+      ),
+      sizedBox
+    ]);
+
+    /*Center(
       child: Container(
         color: Colors.black,
         constraints: const BoxConstraints(
@@ -34,18 +69,19 @@ class _SleepPatternChartState extends State<SleepPatternChart> {
           ),
         ),
       ),
-    );
+    );*/
 
     /*SfCartesianChart(
-        legend: const Legend(
-            isVisible: true,
-            padding: 2,
-            itemPadding: 10,
-            position: LegendPosition.bottom,
-            iconWidth: Sizes.s10,
-            iconHeight: Sizes.s10),
+        // legend: const Legend(
+        //     // isVisible: true,
+        //     padding: 2,
+        //     itemPadding: 10,
+        //     position: LegendPosition.bottom,
+        //     iconWidth: Sizes.s10,
+        //     iconHeight: Sizes.s10),
+
         series: <CandleSeries>[
-          CandleSeries<_ChartData, DateTime>(
+          CandleSeries(
               bearColor: appColor(context).appTheme.primary,enableSolidCandles: true,
               bullColor: appColor(context).appTheme.primary,
               legendIconType: LegendIconType.circle,
@@ -86,17 +122,18 @@ class _SleepPatternChartState extends State<SleepPatternChart> {
                         DateTime.now().month,
                         DateTime.now().day-6),2,3,6,2),
               ],
-              xValueMapper: (_ChartData data, _) => data.xDate,
-              lowValueMapper: (_ChartData data, _) => data.low,
-              highValueMapper: (_ChartData data, _) => data.high,
-              openValueMapper: (_ChartData data, _) => data.open,
-              closeValueMapper: (_ChartData data, _) => data.close),
+              xValueMapper: (data, _) => data.xDate,
+              lowValueMapper: (data, _) => data.low,
+              highValueMapper: (data, _) => data.high,
+              openValueMapper: (data, _) => data.open,
+              closeValueMapper: (data, _) => data.close),
         ],
         primaryXAxis: DateTimeAxis(dateFormat: DateFormat('dd MMM')),
-        primaryYAxis: DateTimeAxis(dateFormat: DateFormat('hh:mm:a')))*/
+        primaryYAxis: DateTimeAxis(dateFormat: DateFormat('hh:mm a')))*/
+    ;
   }
 
-  List<ChartLayer> layers() {
+/* List<ChartLayer> layers() {
     final double frequency =
         (DateTime(2023, 12, 6).millisecondsSinceEpoch.toDouble() -
             DateTime(2023, 11, 30).millisecondsSinceEpoch.toDouble());
@@ -155,15 +192,15 @@ class _SleepPatternChartState extends State<SleepPatternChart> {
         value1: ChartCandleDataItemValue(max: max1, min: min1),
         value2: ChartCandleDataItemValue(max: max2, min: min2),
         x: x);
-  }
+  }*/
 }
 
-//
-// class _ChartData {
-//   _ChartData(this.xDate, this.low, this.high, this.open, this.close);
-//   final dynamic xDate;
-//   final dynamic low;
-//   final dynamic high;
-//   final dynamic open;
-//   final dynamic close;
-// }
+class _ChartData {
+  _ChartData(this.xDate, this.low, this.high, this.open, this.close);
+
+  final dynamic xDate;
+  final dynamic low;
+  final dynamic high;
+  final dynamic open;
+  final dynamic close;
+}

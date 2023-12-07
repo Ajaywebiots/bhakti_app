@@ -1,4 +1,3 @@
-import 'package:flutter_svg/flutter_svg.dart';
 import '../../../../config.dart';
 
 class CommonSocialContainer extends StatelessWidget {

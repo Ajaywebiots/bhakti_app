@@ -1,14 +1,5 @@
-import 'layouts/homescreen_bottom_layout/homescreen_bottom_layout.dart';
-import 'layouts/homescreen_upper_layout/homescreen_upper_layout.dart';
-import 'layouts/notes_layout.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/widgets/common_app_bar.dart';
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/widgets/stateful_wrapper.dart';
-import 'package:bhakti_app/providers/home_screen_provider.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
-import 'package:bhakti_app/screens/home_screen/drawer_screen/drawer_screen.dart';
+
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});

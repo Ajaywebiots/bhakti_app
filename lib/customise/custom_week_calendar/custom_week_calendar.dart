@@ -8,7 +8,7 @@ import 'package:carousel_slider/carousel_slider.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 import 'package:intl/intl.dart';
 
-import '../config.dart';
+import '../../config.dart';
 
 enum WeekStartFrom {
   Sunday,

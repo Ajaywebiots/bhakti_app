@@ -59,36 +59,36 @@ class AssociationChart extends StatelessWidget {
               appColor(context).appTheme.primary,
               borderWidth: 2,
               gradient: linearGradient,
-              dataSource: <SalesData>[
-                SalesData(
-                    "Bhawadgita",
-                    DateTime(
-                        DateTime.now().year,
-                        DateTime.now().month,
-                        DateTime.now().day,
-                        DateTime.now().hour + 6)),
-                SalesData(
-                    "Bhagwatam",
-                    DateTime(
-                        DateTime.now().year,
-                        DateTime.now().month,
-                        DateTime.now().day,
-                        DateTime.now().hour + 4)),
-                SalesData(
-                    "Ramayan",
-                    DateTime(
-                        DateTime.now().year,
-                        DateTime.now().month,
-                        DateTime.now().day,
-                        DateTime.now().hour + 10)),
-                SalesData(
-                    "Mahabharat",
-                    DateTime(
-                        DateTime.now().year,
-                        DateTime.now().month,
-                        DateTime.now().day,
-                        DateTime.now().hour + 8))
-              ],
+                dataSource: <SalesData>[
+                  SalesData(
+                      "Bhawadgita",
+                      DateTime(
+                          DateTime.now().year,
+                          DateTime.now().month,
+                          DateTime.now().day,
+                          DateTime.now().hour + 6)),
+                  SalesData(
+                      "Bhagwatam",
+                      DateTime(
+                          DateTime.now().year,
+                          DateTime.now().month,
+                          DateTime.now().day,
+                          DateTime.now().hour + 4)),
+                  SalesData(
+                      "Ramayan",
+                      DateTime(
+                          DateTime.now().year,
+                          DateTime.now().month,
+                          DateTime.now().day,
+                          DateTime.now().hour + 10)),
+                  SalesData(
+                      "Mahabharat",
+                      DateTime(
+                          DateTime.now().year,
+                          DateTime.now().month,
+                          DateTime.now().day,
+                          DateTime.now().hour + 8))
+                ],
               xValueMapper: (SalesData time, _) => time.x,
               yValueMapper: (SalesData data, _) {
                 return data.y.millisecondsSinceEpoch;

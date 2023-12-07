@@ -1,11 +1,8 @@
 import 'dart:developer';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
 import 'package:bhakti_app/providers/home_screen_provider.dart';
-import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scrollable_positioned_list.dart';
+import '../../../../../customise/scrollable_positioned_list/scrollable_positioned_list.dart';
 
 
 class BookLayout extends StatelessWidget {

@@ -1,11 +1,4 @@
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/mangla_Alert_List_layout.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/sandhya_alert_list_layout.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class CommonDialog extends StatefulWidget {
   final ValueSetter<int>? onHourChange;

@@ -1,11 +1,7 @@
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/home_screen_provider.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/homescreen_upper_layout/layouts/common_circle_design_layout.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+
+import '../../home_screen_upper_layout/layouts/common_circle_design_layout.dart';
 
 class AssociationLayout extends StatelessWidget {
   const AssociationLayout({super.key});

@@ -5,7 +5,7 @@
 import 'dart:async';
 import 'dart:math';
 
-import 'package:bhakti_app/screens/home_screen/scrollable_positioned_list/scroll_offset_listener.dart';
+import 'package:bhakti_app/customise/scrollable_positioned_list/scroll_offset_listener.dart';
 import 'package:collection/collection.dart' show IterableExtension;
 import 'package:flutter/scheduler.dart';
 import 'package:flutter/widgets.dart';

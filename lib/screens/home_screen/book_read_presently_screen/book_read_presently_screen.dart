@@ -1,10 +1,5 @@
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/home_screen_provider.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import 'package:bhakti_app/common/assets/index.dart';
 
 class BookReadPresentlyScreen extends StatelessWidget {
   final List? bookReadingList;
