@@ -9,8 +9,7 @@ import 'package:image/image.dart' as img;
 import 'package:bhakti_app/models/user_model.dart';
 import 'package:firebase_storage/firebase_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
-import '../screens/home_screen/common_bottom_bar/common_bottom_bar.dart';
+import 'package:bhakti_app/screens/home_screen/common_bottom_bar/common_bottom_bar.dart';
 
 class SetUpProfileProvider extends ChangeNotifier {
   final TextEditingController name = TextEditingController();
@@ -69,6 +68,17 @@ class SetUpProfileProvider extends ChangeNotifier {
     log("message :$countrySelected");
     notifyListeners();
   }
+
+  onPersonalInfoExpansionChanged() {
+    notifyListeners();
+    onChange = !onChange;
+  }
+
+
+  onContactInfoExpansionChanged(){
+    onChange1 = !onChange1;
+    }
+
 
   Future<String> resizeAndEncodeImage(File imageFile) async {
     List<int> imageBytes = await imageFile.readAsBytes();

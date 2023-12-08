@@ -1,11 +1,5 @@
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/home_screen_provider.dart';
-import 'package:bhakti_app/screens/home_screen/drawer_screen/layouts/my_documents_screen.dart';
-import 'package:flutter_svg/flutter_svg.dart';
+import 'package:bhakti_app/screens/home_screen/drawer_screen/layouts/drawer_list_tile_layout.dart';
 
 class DrawerScreen extends StatefulWidget {
   const DrawerScreen({super.key});
@@ -29,48 +23,8 @@ class _DrawerScreenState extends State<DrawerScreen> {
             if (e.value['name'] == "Online Tests") {
               testingList = e.value['list'];
             }
-            return ListTile(
-                onTap: () {
-                  Navigator.push(context, MaterialPageRoute(builder: (context) {
-                    return const MyDocumentScreen();
-                  }));
-                },
-                title: e.value['name'] == "Online Tests"
-                    ? ExpansionTile(
-                        trailing: SvgPicture.asset(
-                            homeScreenPvr.onChange == false
-                                ? eSvgAssets.arrowDown1
-                                : eSvgAssets.arrowUp),
-                        onExpansionChanged: (value) {
-                          setState(() {
-                            homeScreenPvr.onChange = !homeScreenPvr.onChange;
-                          });
-                        },
-                        tilePadding: EdgeInsets.zero,
-                        title: Row(children: [
-                          SvgPicture.asset(e.value['icon']),
-                          const HSpace(Insets.i10),
-                          Text(appFonts.onlineTest,
-                              style: appCss.dmDenseRegular16.textColor(
-                                  appColor(context).appTheme.lightText))
-                        ]),
-                        children: testingList
-                            .asMap()
-                            .entries
-                            .map((s) => ListTile(
-                                leading: SvgPicture.asset(s.value['icon']),
-                                title: Text(s.value['name'],
-                                    style: appCss.dmDenseRegular16.textColor(
-                                        appColor(context).appTheme.lightText))))
-                            .toList())
-                    : Row(children: [
-                        SvgPicture.asset(e.value['icon']),
-                        const HSpace(Insets.i10),
-                        Text(e.value['name'],
-                            style: appCss.dmDenseRegular16.textColor(
-                                appColor(context).appTheme.lightText))
-                      ]));
-          }).toList(),
+            return DrawerListTileLayout(data: e.value,testingList:testingList);
+          }),
           const VSpace(Insets.i83),
           const VSpace(Insets.i49)
         ]),

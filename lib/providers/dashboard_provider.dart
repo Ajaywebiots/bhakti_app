@@ -3,9 +3,10 @@ import 'package:jiffy/jiffy.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
 import 'package:table_calendar/table_calendar.dart';
 
-class DashboardProvider extends ChangeNotifier{
+import '../config.dart';
 
-  onInit(context){
+class DashboardProvider extends ChangeNotifier {
+  onInit(context) {
     notifyListeners();
     tooltipBehavior = TooltipBehavior(enable: true);
   }
@@ -31,13 +32,45 @@ class DashboardProvider extends ChangeNotifier{
   bool onChange = false;
   DateTime focusedDay = DateTime.now();
 
-  void onDaySelected(DateTime selectDay, DateTime focusDay) {
-    if (!isSameDay(selectedDay, selectedDay)) {
+  // void onDaySelected(DateTime selectDay, DateTime focusDay) {
+  //   if (!isSameDay(selectedDay, selectedDay)) {
+  //     selectedDay = selectDay;
+  //     focusedDay = focusDay;
+  //     notifyListeners();
+  //   }
+  // }
 
-        selectedDay = selectDay;
-        focusedDay = focusDay;
-        notifyListeners();
+  tabController(context) {
+    notifyListeners();
+    final bottomPvr = Provider.of<BottomNavProvider>(context, listen: true);
+    bottomPvr.tabController!.index = 0;
+  }
+
+  onFormatChanged(format) {
+    if (calendarFormat != format) {
+      calendarFormat = format;
     }
+  }
+
+  onDaySelected() {
+    notifyListeners();
+    selectedDay = selectedDay;
+    focusedDay = focusedDay;
+  }
+
+  onPageChanged() {
+    notifyListeners();
+    focusedDay = focusedDay;
+  }
+
+  onExpansionChanged() {
+    notifyListeners();
+    onChange = !onChange;
+  }
+
+  onUserSelection(isSelected, index) {
+    notifyListeners();
+    selectedIndex = isSelected ? -1 : index;
   }
 
   // int currentValue = 1;
@@ -50,23 +83,18 @@ class DashboardProvider extends ChangeNotifier{
   String? startedRange;
 
   void onRangeSelected(DateTime? start, DateTime? end, DateTime focusDay) {
-
-      selectedDay = null;
-      focusedDay = focusDay;
-      rangeStart = start;
-      rangeEnd = end;
-      startedRange =
-          Jiffy.parseFromDateTime(rangeStart!).format(pattern: "do MMM");
-      if (end != null) {
-        endedRange =
-            Jiffy.parseFromDateTime(rangeEnd!).format(pattern: "do MMM yyyy");
-      }
-   notifyListeners();
+    selectedDay = null;
+    focusedDay = focusDay;
+    rangeStart = start;
+    rangeEnd = end;
+    startedRange =
+        Jiffy.parseFromDateTime(rangeStart!).format(pattern: "do MMM");
+    if (end != null) {
+      endedRange =
+          Jiffy.parseFromDateTime(rangeEnd!).format(pattern: "do MMM yyyy");
+    }
+    notifyListeners();
   }
 
   TooltipBehavior? tooltipBehavior;
-
-
-
-
 }

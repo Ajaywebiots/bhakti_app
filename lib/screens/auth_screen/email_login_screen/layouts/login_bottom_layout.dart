@@ -1,6 +1,5 @@
 import '../../../../config.dart';
 
-
 class LoginBottomLayout extends StatelessWidget {
   const LoginBottomLayout({super.key});
 
@@ -10,7 +9,10 @@ class LoginBottomLayout extends StatelessWidget {
         builder: (context, emailLoginPvr, loginAuthPvr, child) {
       return Column(children: [
         const VSpace(Insets.i25),
-        CommonAuthButton(onTap: () => emailLoginPvr.loginButton(context),text: appFonts.login),
+        CommonButton(
+            onTap: () => emailLoginPvr.loginButton(context),
+            text: appFonts.login,
+            width: Sizes.s141),
         const VSpace(Insets.i28),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
           SvgPicture.asset(eSvgAssets.line11),

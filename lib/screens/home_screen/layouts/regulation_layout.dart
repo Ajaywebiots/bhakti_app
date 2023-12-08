@@ -1,5 +1,4 @@
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/home_screen_provider.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_regulation.dart';
 
 class RegulationLayout extends StatelessWidget {

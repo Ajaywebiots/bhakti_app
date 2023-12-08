@@ -1,30 +1,38 @@
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-
 import '../config.dart';
 
-class CommonAuthButton extends StatelessWidget {
+class CommonButton extends StatelessWidget {
   final String? text;
   final GestureTapCallback? onTap;
-  const CommonAuthButton({super.key, this.text, this.onTap});
+  final bool? isColor;
+  final double? width;
+  final double? radius;
+  final Color? borderColor;
+  final Color? bColor;
+  final TextStyle? style;
+
+  const CommonButton(
+      {super.key,
+      this.text,
+      this.onTap,
+      this.width,
+      this.isColor = false,
+      this.radius,
+      this.borderColor, this.bColor, this.style});
 
   @override
   Widget build(BuildContext context) {
-    return Center(
-        child: GestureDetector(
-            onTap: onTap,
-            child: Container(
-                alignment: Alignment.center,
-                height: Sizes.s44,
-                width: Sizes.s141,
-                decoration: BoxDecoration(
-                    color: appColor(context)
-                        .appTheme
-                        .primary,
-                    borderRadius:
-                    const BorderRadius.all(
-                        Radius.circular(10))),
-                child: Text(text!,
-                    style: appCss.dmDenseMedium16
-                        .textColor(Colors.white)))));
+    return Container(
+            alignment: Alignment.center,
+            height: Sizes.s44,
+            width: width ?? MediaQuery.of(context).size.width,
+            decoration: BoxDecoration(
+                color: bColor ?? appColor(context).appTheme.primary,
+                borderRadius: BorderRadius.circular(radius ?? 10),
+                border: Border.all(
+                    color: borderColor ?? appColor(context).appTheme.trans)),
+            child: Text(text!,
+                style: style ?? appCss.dmDenseMedium16
+                        .textColor(appColor(context).appTheme.whiteColor)))
+        .inkWell(onTap: onTap);
   }
 }

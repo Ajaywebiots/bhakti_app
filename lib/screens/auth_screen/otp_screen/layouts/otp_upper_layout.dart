@@ -1,9 +1,5 @@
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/otp_screen_provider.dart';
 import 'package:pinput/pinput.dart';
-import '../../../../common/assets/index.dart';
 
 class OtpUpperLayout extends StatelessWidget {
   const OtpUpperLayout({super.key});

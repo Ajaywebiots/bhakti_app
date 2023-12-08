@@ -1,10 +1,5 @@
 import 'dart:async';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/widgets/stateful_wrapper.dart';
-import '../../../providers/splash_screen_provider.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

@@ -1,9 +1,4 @@
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/phone_login_provider.dart';
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/spacing.dart';
-import '../../../widgets/common_auth_button.dart';
-import 'layouts/phone_login_upper_layout.dart';
 
 class PhoneLoginScreen extends StatefulWidget {
   const PhoneLoginScreen({super.key});
@@ -39,7 +34,8 @@ class _PhoneLoginScreenState extends State<PhoneLoginScreen> {
                             const PhoneLoginUpperLayout(),
                             const VSpace(Insets.i25),
                             const VSpace(Insets.i20),
-                            CommonAuthButton(
+                            CommonButton(
+                                width: Sizes.s141,
                                 onTap: () =>
                                     phoneLoginPvr.sendOtpButton(context),
                                 text: appFonts.sendOtp)

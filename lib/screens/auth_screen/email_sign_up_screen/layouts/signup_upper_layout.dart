@@ -1,12 +1,4 @@
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../../../common/assets/index.dart';
-import '../../../../common/extension/spacing.dart';
-import '../../../../providers/email_sign_up_provider/email_sign_up_provider.dart';
-import '../../../../providers/email_sign_up_provider/layouts/email_text_field.dart';
-import '../../../../providers/email_sign_up_provider/layouts/password_text_field.dart';
 
 class SignUpUpperLayout extends StatelessWidget {
   const SignUpUpperLayout({super.key});
@@ -15,7 +7,7 @@ class SignUpUpperLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<EmailSignUpProvider>(
         builder: (context, emailSignUpPvr, child) {
-      return Column(children: [
+      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const VSpace(Insets.i40),
         Center(child: Image.asset(eImageAssets.bhaktiLogo, height: Sizes.s45)),
         const VSpace(Insets.i50),

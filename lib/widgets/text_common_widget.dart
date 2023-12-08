@@ -21,7 +21,7 @@ class TextFieldCommon extends StatelessWidget {
   final bool? readOnly;
 
   const TextFieldCommon({
-    Key? key,
+    super.key,
     this.hintText,
     this.errorText,
     this.validator,
@@ -41,12 +41,14 @@ class TextFieldCommon extends StatelessWidget {
     this.minLines,
     this.maxLines,
     this.counterText,
-  }) : super(key: key);
+  });
 
   @override
   Widget build(BuildContext context) {
 // Text field common
     return TextFormField(
+        cursorColor: appColor(context).appTheme.primary,
+        showCursor: true,
         maxLines: maxLines ?? 1,
         style: appCss.dmDenseExtraBold16.textColor(const Color(0xff767676)),
         focusNode: focusNode,
@@ -62,9 +64,7 @@ class TextFieldCommon extends StatelessWidget {
         decoration: InputDecoration(
             counterText: '',
             errorMaxLines: 1,
-            errorText: "",
             errorStyle: const TextStyle(fontSize: 0, color: Colors.transparent),
-            isDense: true,
             disabledBorder: const OutlineInputBorder(
                 borderRadius: BorderRadius.all(Radius.circular(AppRadius.r8)),
                 borderSide: BorderSide.none),
@@ -82,7 +82,8 @@ class TextFieldCommon extends StatelessWidget {
             contentPadding: EdgeInsets.symmetric(
                 vertical: vertical ?? 17.0, horizontal: 15.0),
             hintText: hintText,
-            hintStyle: appCss.dmDenseMedium14.textColor(const Color(0xff767676)),
+            hintStyle:
+                appCss.dmDenseMedium14.textColor(const Color(0xff767676)),
             labelStyle:
                 appCss.dmDenseRegular14.textColor(const Color(0xff767676))));
   }

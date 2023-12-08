@@ -15,71 +15,66 @@ import '../customise/scrollable_positioned_list/scrollable_positioned_list.dart'
 import '../models/user_model.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
-
-  bookReadingPresentlyNavigate(context){
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) {
-          return BookReadPresentlyScreen(
-            bookReadingList: bookingLis,
-          );
-        }));
+  bookReadingPresentlyNavigate(context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return BookReadPresentlyScreen(
+        bookReadingList: bookingLis,
+      );
+    }));
   }
-
 
   final GlobalKey<ScaffoldState> key = GlobalKey();
 
   List bookingLis = [];
- //call this function in init
- onReadyHome() async {
-   final remoteConfig = FirebaseRemoteConfig.instance;
-   await remoteConfig.setConfigSettings(RemoteConfigSettings(
-     fetchTimeout: const Duration(minutes: 1),
-     minimumFetchInterval: const Duration(minutes: 5),
-   ));
-   await remoteConfig.fetchAndActivate();
-   // String technicalIssueStatus = remoteConfig.getString('books');
-  List mapValues = json.decode(remoteConfig.getValue("books").asString());
 
-   bookingLis = mapValues;
-   print("mapValues $bookingLis");
-   notifyListeners();
- }
+  //call this function in init
+  onReadyHome() async {
+    final remoteConfig = FirebaseRemoteConfig.instance;
+    await remoteConfig.setConfigSettings(RemoteConfigSettings(
+      fetchTimeout: const Duration(minutes: 1),
+      minimumFetchInterval: const Duration(minutes: 5),
+    ));
+    await remoteConfig.fetchAndActivate();
+    // String technicalIssueStatus = remoteConfig.getString('books');
+    List mapValues = json.decode(remoteConfig.getValue("books").asString());
 
+    bookingLis = mapValues;
+    print("mapValues $bookingLis");
+    notifyListeners();
+  }
 
- filePick() async {
-   FilePickerResult? result = await FilePicker.platform.pickFiles(
-     type: FileType.custom,
-     allowedExtensions: ['pdf', 'jpg', 'png'],
-   );
+  filePick() async {
+    FilePickerResult? result = await FilePicker.platform.pickFiles(
+      type: FileType.custom,
+      allowedExtensions: ['pdf', 'jpg', 'png'],
+    );
 
-   if (result != null) {
-     PlatformFile file = result.files.first;
+    if (result != null) {
+      PlatformFile file = result.files.first;
 
-     print('File name: ${file.name}');
-     print('File size: ${formatBytes(file.size)}');
-     print('File extension: ${file.extension}');
-     print('File path: ${file.path}');
-   } else {
-   }
- }
+      print('File name: ${file.name}');
+      print('File size: ${formatBytes(file.size)}');
+      print('File extension: ${file.extension}');
+      print('File path: ${file.path}');
+    } else {}
+  }
 
- String formatBytes(int bytes) {
-   int KB = 1024;
-   int MB = 1024 * KB;
+  String formatBytes(int bytes) {
+    int KB = 1024;
+    int MB = 1024 * KB;
 
-   if (bytes >= MB) {
-     double sizeInMB = bytes / MB;
-     return '${sizeInMB.toStringAsFixed(2)} MB';
-   } else if (bytes >= KB) {
-     double sizeInKB = bytes / KB;
-     return '${sizeInKB.toStringAsFixed(2)} KB';
-   } else {
-     return '$bytes bytes';
-   }
- }
+    if (bytes >= MB) {
+      double sizeInMB = bytes / MB;
+      return '${sizeInMB.toStringAsFixed(2)} MB';
+    } else if (bytes >= KB) {
+      double sizeInKB = bytes / KB;
+      return '${sizeInKB.toStringAsFixed(2)} KB';
+    } else {
+      return '$bytes bytes';
+    }
+  }
 
-
- int index = 0;
+  int index = 0;
   bool onLastPage = false;
   bool onChange = false;
   bool onLength = false;
@@ -259,6 +254,11 @@ class HomeScreenProvider extends ChangeNotifier {
         });
   }
 
+  onExpansionChanged() {
+    notifyListeners();
+    onChange = !onChange;
+  }
+
   onManglaArtiSelect(context) {
     showDialog(
         context: context,
@@ -388,7 +388,6 @@ class HomeScreenProvider extends ChangeNotifier {
     showLoading(context);
     notifyListeners();
     try {
-
       Map<String, String> body = {
         "from_date": "2023-11-14",
         "to_date": "2023-11-20"
@@ -396,7 +395,7 @@ class HomeScreenProvider extends ChangeNotifier {
       await apiServices
           .postApi(api.getSadhana, body, isToken: true)
           .then((value) async {
-      hideLoading(context);
+        hideLoading(context);
         notifyListeners();
         log('From Date: ${value.isSuccess!}');
         if (value.isSuccess!) {

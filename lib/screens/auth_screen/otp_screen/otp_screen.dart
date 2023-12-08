@@ -1,11 +1,4 @@
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/otp_screen_provider.dart';
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import '../../../widgets/common_auth_button.dart';
-import 'layouts/otp_upper_layout.dart';
 
 class OtpScreen extends StatefulWidget {
   const OtpScreen({super.key});
@@ -41,7 +34,8 @@ class _OtpScreenState extends State<OtpScreen> {
                                   style: appCss.dmDenseMedium16.textColor(
                                       appColor(context).appTheme.red)),
                             const VSpace(Insets.i100),
-                            CommonAuthButton(
+                            CommonButton(
+                                width: Sizes.s141,
                                 onTap: () => otpPvr.verifyButton(context),
                                 text: appFonts.verify)
                           ])))

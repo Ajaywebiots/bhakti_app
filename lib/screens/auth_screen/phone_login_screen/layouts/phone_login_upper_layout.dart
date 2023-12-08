@@ -1,11 +1,4 @@
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/phone_login_provider.dart';
-import 'package:intl_phone_field/country_picker_dialog.dart';
-import 'package:intl_phone_field/intl_phone_field.dart';
-import '../../../../common/assets/index.dart';
-import '../../../../common/extension/spacing.dart';
 
 class PhoneLoginUpperLayout extends StatelessWidget {
   const PhoneLoginUpperLayout({super.key});
@@ -52,7 +45,19 @@ class PhoneLoginUpperLayout extends StatelessWidget {
                 controller: phoneLoginPvr.phoneNumber,
                 keyboardType: TextInputType.number,
                 style: appCss.dmDenseExtraBold16.textColor(appColor(context).appTheme.lightText),
-                decoration: InputDecoration(hintStyle: appCss.dmDenseExtraBold16.textColor(appColor(context).appTheme.primary.withOpacity(0.20)), counterText: "", hintText: 'Phone Number', label: Text(appFonts.phoneNumber, style: appCss.dmDenseExtraBold16.textColor(appColor(context).appTheme.lightText)), border: OutlineInputBorder(borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10)), borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20))), disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10))), focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10))), enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10)))),
+                decoration: InputDecoration(
+                    hintStyle: appCss.dmDenseExtraBold16.textColor(appColor(context).appTheme.primary.withOpacity(0.20)),
+                    counterText: "",
+                    hintText: 'Phone Number',
+                    label: Text(
+                      appFonts.phoneNumber,
+                      style: appCss.dmDenseExtraBold16
+                          .textColor(appColor(context).appTheme.lightText)
+                    ),
+                    border: OutlineInputBorder(borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10)), borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20))),
+                    disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10))),
+                    focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10))),
+                    enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10)))),
                 initialCountryCode: 'IN')
             .paddingSymmetric(horizontal: 20)
       ]);

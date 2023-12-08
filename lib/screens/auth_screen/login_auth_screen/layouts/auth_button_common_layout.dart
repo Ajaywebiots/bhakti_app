@@ -1,8 +1,4 @@
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class AuthButtonLayout extends StatelessWidget {
   final String label;

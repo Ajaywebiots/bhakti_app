@@ -47,10 +47,7 @@ class _SleepPatternChartState extends State<SleepPatternChart> {
   Widget build(BuildContext context) {
     return Column(children: [
       const Text('Weekly time chart'),
-      TimeChart(
-        data: data,
-        viewMode: ViewMode.weekly,
-      ),
+      TimeChart(data: data, viewMode: ViewMode.weekly),
       sizedBox
     ]);
 

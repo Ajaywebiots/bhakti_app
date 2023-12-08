@@ -1,5 +1,3 @@
-import 'package:bhakti_app/common/extension/widget_extension.dart';
-import 'package:flutter_svg/svg.dart';
 import '../config.dart';
 
 class CommonTrailingLayout extends StatelessWidget {

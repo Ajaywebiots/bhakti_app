@@ -1,8 +1,3 @@
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/providers/bottom_nav_provider.dart';
-import 'package:bhakti_app/widgets/stateful_wrapper.dart';
-import 'package:flutter_svg/svg.dart';
-
 import '../../../config.dart';
 
 class BottomNavBar extends StatefulWidget {
@@ -18,8 +13,8 @@ class _BottomNavBarState extends State<BottomNavBar>
   Widget build(BuildContext context) {
     return Consumer<BottomNavProvider>(builder: (context, bottomNavPvr, child) {
       return StatefulWrapper(
-          onInit: () => Future.delayed(
-              Duration(milliseconds: 100), () => bottomNavPvr.onInit(this)),
+          onInit: () => Future.delayed(const Duration(milliseconds: 100),
+              () => bottomNavPvr.onInit(this)),
           child: TabBar(
               onTap: (val) => bottomNavPvr.onTapTab(val),
               controller: bottomNavPvr.tabController,

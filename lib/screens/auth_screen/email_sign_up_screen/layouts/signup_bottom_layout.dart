@@ -1,11 +1,4 @@
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/email_login_screen_provider/email_login_screen_provider.dart';
-import 'package:bhakti_app/providers/login_auth_provider.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../../../common/assets/index.dart';
-import '../../email_login_screen/layouts/common_social_container.dart';
 
 class SignUpBottomLayout extends StatelessWidget {
   const SignUpBottomLayout({super.key});

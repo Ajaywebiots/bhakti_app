@@ -1,5 +1,7 @@
 import 'package:bhakti_app/config.dart';
 
+import '../../../widgets/common_selection_button.dart';
+
 class CommonDialog extends StatefulWidget {
   final ValueSetter<int>? onHourChange;
   final ValueSetter<int>? onMinChange;
@@ -179,36 +181,9 @@ class _CommonDialogState extends State<CommonDialog> {
                           : widget.text == "Hearing"
                               ? const VSpace(Insets.i30)
                               : const VSpace(Insets.i10),
-              Row(mainAxisAlignment: MainAxisAlignment.spaceEvenly, children: [
-                Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            border: Border.all(
-                                width: Sizes.s1,
-                                color: appColor(context).appTheme.primary),
-                            borderRadius: BorderRadius.circular(8)),
-                        height: Sizes.s44,
-                        width: Sizes.s120,
-                        child: Text(appFonts.cancel,
-                            style: appCss.dmDenseMedium14
-                                .textColor(appColor(context).appTheme.primary)))
-                    .inkWell(onTap: () {
-                  Navigator.pop(context);
-                }),
-                Container(
-                        alignment: Alignment.center,
-                        decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(8),
-                            color: appColor(context).appTheme.primary),
-                        height: Sizes.s44,
-                        width: Sizes.s120,
-                        child: Text(appFonts.save,
-                            style: appCss.dmDenseMedium14.textColor(
-                                appColor(context).appTheme.whiteColor)))
-                    .inkWell(onTap: () {
-                  Navigator.pop(context);
-                })
-              ])
+                  CommonSelectionButton(
+                      onTapOne: () => Navigator.pop(context),
+                      onTapTwo: () => Navigator.pop(context))
             ]).paddingAll(15)));
   }
 }

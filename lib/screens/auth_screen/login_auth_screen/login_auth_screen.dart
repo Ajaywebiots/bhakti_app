@@ -1,9 +1,4 @@
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
-import 'package:bhakti_app/providers/login_auth_provider.dart';
-import 'package:bhakti_app/screens/auth_screen/login_auth_screen/layouts/auth_button_common_layout.dart';
 
 class LoginAuthScreen extends StatefulWidget {
   const LoginAuthScreen({super.key});
@@ -58,8 +53,7 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                       iconPath: 'assets/svg/emailAuth.svg',
                       onTap: () => loginAuthPvr.loginEmailNavigator(context))
                 ]).paddingSymmetric(horizontal: Insets.i20)),
-                Text(appFonts.aNewAccount)
-                    .alignment(Alignment.bottomCenter)
+                Text(appFonts.aNewAccount).alignment(Alignment.bottomCenter)
               ])));
     });
   }

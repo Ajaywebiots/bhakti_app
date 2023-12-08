@@ -7,6 +7,8 @@ import 'package:bhakti_app/widgets/custom_title_widget.dart';
 import 'package:bhakti_app/widgets/text_common_widget.dart';
 import 'package:flutter_svg/flutter_svg.dart';
 
+import '../../../../widgets/common_selection_button.dart';
+
 class SettingParameters extends StatelessWidget {
   const SettingParameters({super.key});
 
@@ -81,37 +83,10 @@ class SettingParameters extends StatelessWidget {
                               height: 24, width: 24),
                           const HSpace(Insets.i20)
                         ]))).paddingSymmetric(vertical: 10),
-            Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-              Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          border: Border.all(
-                              width: 1,
-                              color: appColor(context).appTheme.primary),
-                          borderRadius: BorderRadius.circular(8)),
-                      height: 44,
-                      width: 120,
-                      child: Text(appFonts.cancel,
-                          style: appCss.dmDenseMedium16
-                              .textColor(appColor(context).appTheme.primary)))
-                  .inkWell(onTap: () {
-                Navigator.pop(context);
-              }),
-              const HSpace(Insets.i15),
-              Container(
-                      alignment: Alignment.center,
-                      decoration: BoxDecoration(
-                          borderRadius: BorderRadius.circular(8),
-                          color: appColor(context).appTheme.primary),
-                      height: 44,
-                      width: 120,
-                      child: Text(appFonts.save,
-                          style: appCss.dmDenseMedium16.textColor(
-                              appColor(context).appTheme.whiteColor)))
-                  .inkWell(onTap: () {
-                Navigator.pop(context);
-              })
-            ]).marginSymmetric(vertical: Insets.i20)
+                    CommonSelectionButton(
+                        textTwo: appFonts.delete,
+                        onTapOne: () => Navigator.pop(context),
+                        onTapTwo: () => Navigator.pop(context)).marginSymmetric(vertical: Insets.i20)
           ]).paddingSymmetric(horizontal: 20))
         ]));
   }

@@ -1,4 +1,3 @@
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/config.dart';
 
 class CustomDraw extends CustomPainter {
@@ -48,14 +47,13 @@ class CustomTitleWidget extends StatefulWidget {
   final Color? color;
 
   const CustomTitleWidget(
-      {Key? key,
+      {super.key,
       required this.height,
       required this.width,
       required this.title,
       required this.child,
       required this.color,
-      this.radius})
-      : super(key: key);
+      this.radius});
 
   @override
   State<CustomTitleWidget> createState() => _CustomTitleWidgetState();

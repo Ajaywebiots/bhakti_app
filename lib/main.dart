@@ -1,22 +1,8 @@
-import 'package:bhakti_app/providers/bottom_nav_provider.dart';
-import 'package:bhakti_app/providers/common_api_provider.dart';
-import 'package:bhakti_app/providers/dashboard_provider.dart';
-import 'package:bhakti_app/providers/monitoring_provider.dart';
-import 'package:bhakti_app/providers/setting_provider.dart';
-import 'package:bhakti_app/providers/splash_screen_provider.dart';
 import 'config.dart';
 import 'dart:developer';
-import 'common/assets/index.dart';
-import 'common/theme/app_theme.dart';
+import 'package:bhakti_app/common/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'providers/phone_login_provider.dart';
-import 'providers/email_login_screen_provider/email_login_screen_provider.dart';
-import 'package:bhakti_app/providers/login_auth_provider.dart';
-import 'package:bhakti_app/providers/otp_screen_provider.dart';
-import 'package:bhakti_app/providers/home_screen_provider.dart';
-import 'package:bhakti_app/providers/email_sign_up_provider/email_sign_up_provider.dart';
-import 'package:bhakti_app/providers/setup_profile_provider.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
