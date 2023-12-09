@@ -1,8 +1,5 @@
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:flutter_switch/flutter_switch.dart';
 
 class GroupViewChantingCommonContainer extends StatelessWidget {
@@ -36,8 +33,7 @@ class GroupViewChantingCommonContainer extends StatelessWidget {
                           style: appCss.dmDenseMedium11
                               .textColor(appColor(context).appTheme.lightText))
                     ])
-                  ]),
-
+                  ])
             ]));
   }
 }

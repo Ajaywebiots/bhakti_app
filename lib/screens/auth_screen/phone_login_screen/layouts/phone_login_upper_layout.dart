@@ -14,12 +14,12 @@ class PhoneLoginUpperLayout extends StatelessWidget {
         VSpace(MediaQuery.of(context).size.height * 0.2),
         IntlPhoneField(
                 pickerDialogStyle: PickerDialogStyle(
-                    padding: const EdgeInsets.all(20),
+                    padding: const EdgeInsets.all(Insets.i20),
                     searchFieldInputDecoration: InputDecoration(
                         hintStyle: appCss.dmDenseExtraBold16
                             .textColor(appColor(context).appTheme.lightText),
                         counterText: "",
-                        hintText: 'Search Country Name/Code',
+                        hintText: appFonts.searchCountryName,
                         border: OutlineInputBorder(
                             borderRadius: const BorderRadius.all(
                                 Radius.circular(AppRadius.r10)),
@@ -48,7 +48,7 @@ class PhoneLoginUpperLayout extends StatelessWidget {
                 decoration: InputDecoration(
                     hintStyle: appCss.dmDenseExtraBold16.textColor(appColor(context).appTheme.primary.withOpacity(0.20)),
                     counterText: "",
-                    hintText: 'Phone Number',
+                    hintText: appFonts.phoneNumber,
                     label: Text(
                       appFonts.phoneNumber,
                       style: appCss.dmDenseExtraBold16
@@ -58,8 +58,8 @@ class PhoneLoginUpperLayout extends StatelessWidget {
                     disabledBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10))),
                     focusedBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10))),
                     enabledBorder: OutlineInputBorder(borderSide: BorderSide(color: appColor(context).appTheme.primary.withOpacity(0.20)), borderRadius: const BorderRadius.all(Radius.circular(AppRadius.r10)))),
-                initialCountryCode: 'IN')
-            .paddingSymmetric(horizontal: 20)
+                initialCountryCode: appFonts.iN)
+            .paddingSymmetric(horizontal: Insets.i20)
       ]);
     });
   }

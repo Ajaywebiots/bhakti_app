@@ -25,6 +25,60 @@ class SvgAssets {
   final camera = 'assets/svg/camera.svg';
   final user = 'assets/svg/user.svg';
   final userInitiated = 'assets/svg/userInitiated.svg';
+  final searchNormal = 'assets/svg/search-normal.svg';
+  final delete = 'assets/svg/delete.svg';
+  final calendarEdit = 'assets/svg/calendarEdit.svg';
+  final rightSide = 'assets/svg/rightSide.svg';
+  final leftSide = 'assets/svg/leftSide.svg';
+  final arrowLeft = 'assets/svg/arrowLeft.svg';
+  final frame = 'assets/svg/Frame.svg';
+  final wedding = 'assets/svg/wedding.svg';
+  final profile = 'assets/svg/profile.svg';
+  final didMangla = 'assets/svg/Didmangla.svg';
+  final tulsiImg = 'assets/svg/TulsiImg.svg';
+  final bhog = 'assets/svg/bhog.svg';
+  final sandhyaImg = 'assets/svg/sandhyaImg.svg';
+
+
+  final setting5 = 'assets/svg/setting-5.svg';
+  final book1 = 'assets/svg/book1.svg';
+  final shareMySadhana  = 'assets/svg/SharemySadhana.svg';
+  final profileUser = 'assets/svg/profile-2user.svg';
+  final key = 'assets/svg/key.svg';
+  final notification = 'assets/svg/notification.svg';
+  final setting2 = 'assets/svg/setting-2.svg';
+  final dragIcon = 'assets/svg/dragIcon.svg';
+  final book = 'assets/svg/book.svg';
+
+  final unSelectHome = 'assets/svg/unselecthome.svg';
+  final home = 'assets/svg/home.svg';
+  final monitoring = 'assets/svg/monitering.svg';
+  final selectMonitor = 'assets/svg/selectmonitor.svg';
+  final category = 'assets/svg/category.svg';
+  final selectCategory = 'assets/svg/selectcategory.svg';
+  final setting = 'assets/svg/setting.svg';
+  final selectSetting = 'assets/svg/selectsetting.svg';
+
+  final document = 'assets/svg/document.svg';
+  final information = 'assets/svg/information.svg';
+  final autoBrightness = 'assets/svg/autobrightness.svg';
+  final callCalling = 'assets/svg/call-calling.svg';
+
+  final home1 = 'assets/svg/home1.svg';
+  final user1 = 'assets/svg/user1.svg';
+  final link = 'assets/svg/link.svg';
+
+
+
+
+  final calculator = 'assets/svg/calculator.svg';
+  final clock = 'assets/svg/clock.svg';
+  final verticalLine = 'assets/svg/verticalLine.svg';
+  final logOut = 'assets/svg/logOut.svg';
+  final  documentUpload = 'assets/svg/documentUpload.svg';
+  final jpeg = 'assets/svg/jpeg.svg';
+  final closeButton = 'assets/svg/closeButton.svg';
+  final line11 = 'assets/svg/line11.svg';
   final arrowUp = 'assets/svg/arrowUp.svg';
   final arrowDown1 = 'assets/svg/arrow-down1.svg';
   final arrowDown = 'assets/svg/arrow-down.svg';
@@ -35,24 +89,13 @@ class SvgAssets {
   final global = 'assets/svg/global.svg';
   final call1 = 'assets/svg/call1.svg';
   final eye = 'assets/svg/eye.svg';
-  final line11 = 'assets/svg/line11.svg';
-
-
-
-
-
-
-  final String profile = 'images/svg/profile.svg';
-
-  final String phoneNum = 'images/svg/call.svg';
-  final String country = 'images/svg/global.svg';
-  final String state = 'images/svg/map.svg';
-  final String city = 'images/svg/location.svg';
-
-  final String wedding = 'images/svg/wedding.svg';
-
-  final String frame = 'images/svg/Frame.svg';
-  final String arrow = 'images/svg/Vector.svg';
-
-  final String arrowLeft = 'images/svg/arrowleft.svg';
+  final  phoneNum = 'images/svg/call.svg';
+  final  country = 'images/svg/global.svg';
+  final  state = 'images/svg/map.svg';
+  final  city = 'images/svg/location.svg';
+  final  arrow = 'images/svg/Vector.svg';
+  final  phoneAuth = 'assets/svg/phoneAuth.svg';
+  final  googleAuth = 'assets/svg/googleAuth.svg';
+  final  fbAuth = 'assets/svg/fbAuth.svg';
+  final  emailAuth = 'assets/svg/emailAuth.svg';
 }

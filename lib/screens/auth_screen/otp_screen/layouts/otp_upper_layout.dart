@@ -16,7 +16,7 @@ class OtpUpperLayout extends StatelessWidget {
         textStyle: appCss.dmDenseMedium22
             .textColor(appColor(context).appTheme.lightText),
         decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(19),
+            borderRadius: BorderRadius.circular(Insets.i19),
             border: Border.all(color: borderColor)));
 
     return Consumer<OtpScreenProvider>(builder: (context, otpPvr, child) {
@@ -41,15 +41,15 @@ class OtpUpperLayout extends StatelessWidget {
                 onChanged: (value) => otpPvr.onChanged(value, context),
                 focusedPinTheme: defaultPinTheme.copyWith(
                     decoration: defaultPinTheme.decoration!.copyWith(
-                        borderRadius: BorderRadius.circular(8),
+                        borderRadius: BorderRadius.circular(Insets.i8),
                         border: Border.all(color: focusedBorderColor))),
                 submittedPinTheme: defaultPinTheme.copyWith(
                     decoration: defaultPinTheme.decoration!.copyWith(
                         color: fillColor,
-                        borderRadius: BorderRadius.circular(19),
+                        borderRadius: BorderRadius.circular(Insets.i19),
                         border: Border.all(color: focusedBorderColor))),
                 errorPinTheme: defaultPinTheme.copyBorderWith(
-                    border: Border.all(color: Colors.redAccent))))
+                    border: Border.all(color: appColor(context).appTheme.red))))
       ]);
     });
   }

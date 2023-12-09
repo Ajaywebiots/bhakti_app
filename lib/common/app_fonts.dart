@@ -34,9 +34,13 @@ class AppFonts {
   final signInWithEmail = "Sign in with email";
   final loginViaPhone = "Login via Phone";
   final delete = "Delete";
+  final iN = "IN";
+  final booksReadingPresently = "Books Reading Presently";
   final sadhanaRecord = "Sadhana Record";
   final sendOtp = "Send OTP";
   final phoneNumber = "Phone Number";
+  final searchHere = "Search Here";
+  final searchCountryName = "Search Country Name/Code";
   final selectCountry = "Select Country";
   final personalInfo = "Personal Info";
   final contactInfo = "Contact Info";
@@ -71,7 +75,7 @@ class AppFonts {
   final time = "01:00";
   final time1 = "01:30";
   final hearing = "Hearing";
-  final chantingCertificate = "Chanting Certificate%";
+  final shradhavanCertificate = "Shradhavan Certificate";
   final percent = "73%";
   final mB = "20MB";
   final uploadingFile = "Uploding file...";
@@ -93,4 +97,32 @@ class AppFonts {
   final gallery = "Gallery";
   final setUp = "Set Up Profile..";
   final enterYourDetails = "Enter your personal Details.";
+  final enterYourDetailsBelow = "Enter your details below";
+  final setting = "Setting";
+  final no = "No";
+  final shareWithMe = "Sharing with me";
+  final sandhyaAarti = "Sandhya Aarti :";
+  final offeredBhoga = "Offered Bhoga :";
+  final shareTheKey = "share the key...";
+  final bhaktiStepsAccessKey = "Bhakti Steps Access Key";
+  final bhaktiStepsApplication = "bhakti steps application you can copy and";
+  final thisAccessKey = "This Access key will provide you access of";
+
+  final shreliyanKhanna = 'Shreliyan Khanna';
+  final janeCooper = 'Jane Cooper';
+  final codyFisher = 'Cody Fisher';
+  final wadeWarren = 'Wade Warren';
+  final eleanorPena = 'Eleanor Pena';
+  final guyHawkins = 'Guy Hawkins';
+  final courtneyHenry = 'Courtney Henry';
+  final brooklynSimmons = 'Brooklyn Simmons';
+  final noMeat = 'No meat eating';
+  final noIntox = 'No intoxication';
+  final noIllicit = 'No illicit sex';
+  final noGambling = 'No gambling';
+  final onlyPrasadam = 'Only prasadam';
+  final prasadam = 'Prasadam';
+  final tulasiParikrama = 'Tulasi parikrama :';
+  final time2 = '7:00 AM';
+  final didMangalaArti = 'Did Mangala Arti :';
 }

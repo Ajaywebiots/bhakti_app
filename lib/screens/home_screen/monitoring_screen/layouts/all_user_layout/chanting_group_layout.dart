@@ -1,6 +1,4 @@
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/monitoring_provider.dart';
 
 class ChantingLayouts extends StatelessWidget {
   const ChantingLayouts({super.key});

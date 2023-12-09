@@ -1,14 +1,9 @@
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/widgets/text_common_widget.dart';
-import 'package:flutter/material.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:bhakti_app/widgets/custom_title_widget.dart';
 
-import '../../../../common/assets/index.dart';
 
 class UpdateDateOfBirthBox extends StatelessWidget {
   const UpdateDateOfBirthBox({super.key});
@@ -71,7 +66,6 @@ class UpdateDateOfBirthBox extends StatelessWidget {
               if (pickedDate != null) {
                 String formattedDate =
                     DateFormat('yyyy-MM-dd').format(pickedDate);
-
                 profilePvr.dob.text = formattedDate;
                 profilePvr.notifyListeners();
               } else {}
@@ -85,7 +79,7 @@ class UpdateDateOfBirthBox extends StatelessWidget {
                   const HSpace(Insets.i10),
                   SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
                   const HSpace(Insets.i20)
-                ])),
+                ]))
       ).paddingSymmetric(vertical: 10);
     });
   }

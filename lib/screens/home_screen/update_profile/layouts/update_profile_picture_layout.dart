@@ -1,8 +1,5 @@
 import 'dart:io';
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:flutter_svg/svg.dart';
 import 'package:image_picker/image_picker.dart';
 
 class UpdateProfilePicture extends StatelessWidget {

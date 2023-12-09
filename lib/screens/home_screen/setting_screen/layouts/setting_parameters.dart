@@ -1,12 +1,6 @@
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/widgets/custom_title_widget.dart';
 import 'package:bhakti_app/widgets/text_common_widget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-
 import '../../../../widgets/common_selection_button.dart';
 
 class SettingParameters extends StatelessWidget {
@@ -24,7 +18,7 @@ class SettingParameters extends StatelessWidget {
             leadingWidth: 0,
             title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               const HSpace(Insets.i20),
-              SvgPicture.asset("assets/svg/arrowLeft.svg").inkWell(
+              SvgPicture.asset(eSvgAssets.arrowLeft).inkWell(
                 onTap: () => Navigator.pop(context),
               ),
               const HSpace(Insets.i90),
@@ -56,7 +50,7 @@ class SettingParameters extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           const HSpace(Insets.i20),
-                          SvgPicture.asset("assets/svg/calculator.svg",
+                          SvgPicture.asset(eSvgAssets.calculator,
                               height: 20),
                           const HSpace(Insets.i10),
                           SvgPicture.asset(eSvgAssets.line,
@@ -77,7 +71,7 @@ class SettingParameters extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           const HSpace(Insets.i20),
-                          SvgPicture.asset("assets/svg/clock.svg", height: 20),
+                          SvgPicture.asset(eSvgAssets.clock, height: 20),
                           const HSpace(Insets.i10),
                           SvgPicture.asset(eSvgAssets.line,
                               height: 24, width: 24),

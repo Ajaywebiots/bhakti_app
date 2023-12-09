@@ -1,7 +1,7 @@
 // WheelSlider(
 //   horizontalListWidth: 300,
 //   customPointer:
-//       SvgPicture.asset("assets/svg/ruler.svg")
+//       SvgPicture.asset(123"assets/svg/ruler.svg")
 //           .paddingOnly(top: 40),
 //   totalCount: totalCount,
 //   initValue: initValue,

@@ -32,25 +32,25 @@ class _LoginAuthScreenState extends State<LoginAuthScreen> {
                   AuthButtonLayout(
                       label: appFonts.loginViaPhone,
                       color: appColor(context).appTheme.phoneClr,
-                      iconPath: 'assets/svg/phoneAuth.svg',
+                      iconPath: eSvgAssets.phoneAuth,
                       onTap: () => loginAuthPvr.loginPhoneNavigator(context)),
                   const VSpace(Insets.i25),
                   AuthButtonLayout(
                       label: appFonts.loginViaGoogle,
                       color: appColor(context).appTheme.googleClr,
-                      iconPath: 'assets/svg/googleAuth.svg',
+                      iconPath: eSvgAssets.googleAuth,
                       onTap: () => loginAuthPvr.signInWithGoogle(context)),
                   const VSpace(Insets.i25),
                   AuthButtonLayout(
                       label: appFonts.loginViaFacebook,
                       color: appColor(context).appTheme.fbClr,
-                      iconPath: 'assets/svg/fbAuth.svg',
+                      iconPath: eSvgAssets.fbAuth,
                       onTap: () => loginAuthPvr.signInWithFacebook(context)),
                   const VSpace(Insets.i25),
                   AuthButtonLayout(
                       label: appFonts.signInWithEmail,
                       color: appColor(context).appTheme.emailClr,
-                      iconPath: 'assets/svg/emailAuth.svg',
+                      iconPath: eSvgAssets.emailAuth,
                       onTap: () => loginAuthPvr.loginEmailNavigator(context))
                 ]).paddingSymmetric(horizontal: Insets.i20)),
                 Text(appFonts.aNewAccount).alignment(Alignment.bottomCenter)

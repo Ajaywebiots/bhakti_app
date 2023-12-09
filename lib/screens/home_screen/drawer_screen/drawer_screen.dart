@@ -33,11 +33,11 @@ class _DrawerScreenState extends State<DrawerScreen> {
               style: appCss.dmDenseRegular14
                   .textColor(appColor(context).appTheme.lightText)),
           const VSpace(Insets.i8),
-          SvgPicture.asset("assets/svg/versionLine.svg"),
+          SvgPicture.asset(eSvgAssets.verticalLine),
           const VSpace(Insets.i19),
           Row(children: [
             const HSpace(Insets.i20),
-            SvgPicture.asset("assets/svg/logOut.svg"),
+            SvgPicture.asset(eSvgAssets.logOut),
             const HSpace(Insets.i10),
             Text(appFonts.logOut,
                 style: appCss.dmDenseRegular16

@@ -1,7 +1,5 @@
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/home_screen_provider.dart';
 
-import '../../home_screen_upper_layout/layouts/common_circle_design_layout.dart';
 
 class AssociationLayout extends StatelessWidget {
   const AssociationLayout({super.key});

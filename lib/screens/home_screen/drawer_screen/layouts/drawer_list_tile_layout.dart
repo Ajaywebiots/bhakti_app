@@ -6,7 +6,6 @@ class DrawerListTileLayout extends StatelessWidget {
   final List? testingList;
 
   const DrawerListTileLayout({super.key, this.data, this.testingList});
-
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(

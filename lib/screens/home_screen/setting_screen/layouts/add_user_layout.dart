@@ -1,10 +1,4 @@
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/setting_list_layouts.dart';
-import 'package:flutter_svg/svg.dart';
-import '../../../../common/assets/index.dart';
-import '../../../../common/extension/spacing.dart';
 
 class AddUserLayout extends StatelessWidget {
   const AddUserLayout({super.key});
@@ -29,7 +23,7 @@ class AddUserLayout extends StatelessWidget {
                 titleSpacing: 0,
                 leadingWidth: 0,
                 title: Row(children: [
-                  SvgPicture.asset("assets/svg/arrowLeft.svg")
+                  SvgPicture.asset(eSvgAssets.arrowLeft)
                       .inkWell(onTap: () => Navigator.pop(context)),
                   const HSpace(Insets.i120),
                   Text("Search",
@@ -63,7 +57,7 @@ class AddUserLayout extends StatelessWidget {
                         hintText: 'Search Here',
                         hintStyle: appCss.dmDenseMedium12,
                         prefixIcon: Row(children: [
-                          SvgPicture.asset("assets/svg/search-normal.svg"),
+                          SvgPicture.asset(eSvgAssets.searchNormal),
                           const HSpace(Insets.i10),
                           SvgPicture.asset(eSvgAssets.line)
                         ]).paddingAll(10),

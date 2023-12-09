@@ -1,20 +1,8 @@
-import 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/user_view_layout/group_view_chanting_common_container.dart';
-import 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/user_view_layout/group_view_sleep_common_container.dart';
-import 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/all_user_layout/knowledge_group_layout.dart';
-import 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/all_user_layout/prasadam_group_layout.dart';
-import 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/all_user_layout/sleep_group_layout.dart';
-import 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/user_todo_slider.dart';
-import 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/all_user_layout/worship_group_layout.dart';
-import '../../../providers/bottom_nav_provider.dart';
-import '/common/assets/index.dart';
-import '/common/extension/spacing.dart';
-import '/common/extension/text_style_extensions.dart';
-import '/common/extension/widget_extension.dart';
+import 'package:bhakti_app/widgets/common_app_bar.dart';
+import 'package:bhakti_app/widgets/common_container_tile.dart';
+import 'package:bhakti_app/widgets/common_left_side_text.dart';
 import '/config.dart';
-import '/screens/home_screen/layouts/week_calendar.dart';
-import 'package:flutter_svg/flutter_svg.dart';
-import '/providers/monitoring_provider.dart';
-import 'layouts/all_user_layout/chanting_group_layout.dart';
+import 'layouts/common_chanting_row.dart';
 
 class MonitoringScreen extends StatefulWidget {
   const MonitoringScreen({super.key});
@@ -41,32 +29,17 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                             image: AssetImage(eImageAssets.splashBg)))),
                 SingleChildScrollView(
                     child: Column(children: [
-                  AppBar(
-                      leading: Container(),
-                      backgroundColor: Colors.transparent,
-                      titleSpacing: 0,
-                      leadingWidth: 0,
-                      title: Row(
-                          mainAxisAlignment: MainAxisAlignment.start,
-                          children: [
-                            SvgPicture.asset("assets/svg/arrowLeft.svg")
-                                .inkWell(onTap: () {
-                              dashPvr.tabController!.index = 0;
-                              dashPvr.notifyListeners();
-                            }),
-                            const HSpace(Insets.i90),
-                            Text("Group View",
-                                style: appCss.philosopherBold28.textColor(
-                                    appColor(context).appTheme.oneText))
-                          ])),
+                  CommonAppBar(
+                      onTap: () {
+                        dashPvr.tabController!.index = 0;
+                        dashPvr.notifyListeners();
+                      },
+                      text: "Group View",
+                      hSpace: Insets.i90),
                   const VSpace(Insets.i25),
                   const WeekCalendar(),
                   const VSpace(Insets.i25),
-                  Row(children: [
-                    Text("User Section",
-                        style: appCss.philosopherBold18
-                            .textColor(appColor(context).appTheme.rulesClr))
-                  ]),
+                  const CommonLeftSideText(text: "User Section"),
                   const VSpace(Insets.i15),
                   SizedBox(
                       height: 50,
@@ -148,11 +121,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                         ])
                       : SingleChildScrollView(
                           child: Column(children: [
-                          Row(children: [
-                            Text("Sleep",
-                                style: appCss.philosopherBold18.textColor(
-                                    appColor(context).appTheme.rulesClr))
-                          ]),
+                          const CommonLeftSideText(text: "Sleep"),
                           const VSpace(Insets.i15),
                           Container(
                               padding: const EdgeInsets.symmetric(vertical: 20),
@@ -186,84 +155,39 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                                             appColor(context).appTheme.primary))
                                   ])),
                           const VSpace(Insets.i25),
-                          Row(children: [
-                            Text("Chanting",
-                                style: appCss.philosopherBold18.textColor(
-                                    appColor(context).appTheme.rulesClr))
-                          ]),
+                          const CommonLeftSideText(text: "Chanting"),
                           const VSpace(Insets.i15),
-                          Container(
-                              padding: const EdgeInsets.symmetric(vertical: 20),
-                              alignment: Alignment.center,
-                              decoration: BoxDecoration(
-                                  borderRadius:
-                                      BorderRadius.circular(Insets.i8),
-                                  color: appColor(context).appTheme.whiteColor),
+                          CommonContainerTile(
+                              paddingArea:
+                                  const EdgeInsets.symmetric(vertical: 20),
                               child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
-                                    Row(
-                                        crossAxisAlignment:
-                                            CrossAxisAlignment.center,
-                                        children: [
-                                          const HSpace(Insets.i15),
-                                          GroupViewChantingCommonContainer(
-                                              text: 'Before 6:30 am',
-                                              countText: '1',
-                                              svgImage: eSvgAssets.chanting),
-                                          const HSpace(Insets.i28),
-                                          SvgPicture.asset(
-                                              "assets/svg/verticalLine.svg"),
-                                          const HSpace(Insets.i20),
-                                          GroupViewChantingCommonContainer(
-                                              text: 'Before 8:30 am',
-                                              countText: '2',
-                                              svgImage: eSvgAssets.chanting)
-                                        ]),
+                                    const CommonChantingRow(
+                                        countOne: '1',
+                                        countTwo: '2',
+                                        textOne: 'Before 6:30 am',
+                                        textTwo: 'Before 8:30 am'),
                                     const VSpace(Insets.i10),
                                     SvgPicture.asset(eSvgAssets.lineRuler),
                                     const VSpace(Insets.i10),
-                                    Row(children: [
-                                      const HSpace(Insets.i15),
-                                      GroupViewChantingCommonContainer(
-                                          text: 'Before 10:00 am',
-                                          countText: '3',
-                                          svgImage: eSvgAssets.chanting),
-                                      const HSpace(Insets.i28),
-                                      SvgPicture.asset(
-                                          "assets/svg/verticalLine.svg"),
-                                      const HSpace(Insets.i20),
-                                      GroupViewChantingCommonContainer(
-                                          text: 'Before 11:30 am',
-                                          countText: '4',
-                                          svgImage: eSvgAssets.chanting)
-                                    ])
+                                    const CommonChantingRow(
+                                        countOne: '3',
+                                        countTwo: '4',
+                                        textOne: 'Before 10:00 am',
+                                        textTwo: 'Before 11:30 am'),
                                   ])),
                           const VSpace(Insets.i25),
-                          Row(children: [
-                            Text("Worship",
-                                style: appCss.philosopherBold18.textColor(
-                                    appColor(context).appTheme.rulesClr))
-                          ]),
+                          const CommonLeftSideText(text: "Worship"),
                           const VSpace(Insets.i15),
-                          Container(
-                              padding: const EdgeInsets.all(15),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: appColor(context).appTheme.whiteColor,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: appColor(context)
-                                            .appTheme
-                                            .shadowClr,
-                                        blurRadius: 8,
-                                        offset: const Offset(0, 4),
-                                        spreadRadius: 0)
-                                  ]),
+                          CommonContainerTile(
+                              paddingArea: const EdgeInsets.all(15),
                               child: Column(
-                                  children:
-                                  appArray.worshipUserList.asMap().entries.map((e) {
+                                  children: appArray.worshipUserList
+                                      .asMap()
+                                      .entries
+                                      .map((e) {
                                 return Column(children: [
                                   Row(children: [
                                     SvgPicture.asset(e.value['svgImage']),
@@ -286,26 +210,10 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                                 ]);
                               }).toList())),
                           const VSpace(Insets.i25),
-                          Row(children: [
-                            Text("Knowledge",
-                                style: appCss.philosopherBold18.textColor(
-                                    appColor(context).appTheme.rulesClr))
-                          ]),
+                          const CommonLeftSideText(text: "Knowledge"),
                           const VSpace(Insets.i15),
-                          Container(
-                              padding: const EdgeInsets.all(15),
-                              decoration: BoxDecoration(
-                                  borderRadius: BorderRadius.circular(8),
-                                  color: appColor(context).appTheme.whiteColor,
-                                  boxShadow: [
-                                    BoxShadow(
-                                        color: appColor(context)
-                                            .appTheme
-                                            .shadowClr,
-                                        blurRadius: 8,
-                                        offset: const Offset(0, 4),
-                                        spreadRadius: 0)
-                                  ]),
+                          CommonContainerTile(
+                              paddingArea: const EdgeInsets.all(15),
                               child: Column(children: [
                                 Row(
                                     mainAxisAlignment: MainAxisAlignment.center,
@@ -354,7 +262,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                                                   .lightText))
                                     ])
                               ])),
-                          const VSpace(Insets.i15),
+                          const VSpace(Insets.i15)
                         ]))
                 ]).paddingSymmetric(horizontal: Insets.i20))
               ])));

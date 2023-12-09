@@ -41,6 +41,8 @@ class AppTheme {
 
   Color containColor;
 
+  Color textFieldClr;
+
   /// Default constructor
   AppTheme({
     required this.isDark,
@@ -70,7 +72,7 @@ class AppTheme {
     required this.myDocumentColor,
     required this.processColor,
     required this.green,
-    required this.whiteColor, required this.bottomText, required this.containColor,
+    required this.whiteColor, required this.bottomText, required this.containColor, required this.textFieldClr,
   });
 
   /// fromType factory constructor
@@ -85,6 +87,7 @@ class AppTheme {
             processColor: const Color(0xffEDEDED),
             darkText: const Color(0xff00162E),
             bottomText: const Color(0xffA48AA9),
+            textFieldClr: const Color(0x0FC35DD2),
             lightText: const Color(0xff767676),
             oneText: const Color(0xff2D2D2D),
             twoText: const Color(0xff3d3d3d),
@@ -138,7 +141,7 @@ class AppTheme {
             googleClr: const Color(0xffEBF2FA),
             fbClr: const Color(0xff0084FF),
             emailClr: const Color(0xffD0011B),
-            googleTxtClr: const Color(0xff707477), bottomText: Color(0xffA48AA9), containColor: Color(0xff929292));
+            googleTxtClr: const Color(0xff707477), bottomText: const Color(0xffA48AA9), containColor: const Color(0xff929292), textFieldClr: const Color(0x0FC35DD2));
     }
   }
 

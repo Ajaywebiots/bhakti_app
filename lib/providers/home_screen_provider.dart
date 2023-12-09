@@ -11,7 +11,6 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import '../customise/scrollable_positioned_list/scrollable_positioned_list.dart';
 import '../models/user_model.dart';
 
 class HomeScreenProvider extends ChangeNotifier {

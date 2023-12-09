@@ -24,7 +24,7 @@ class AuthButtonLayout extends StatelessWidget {
               blurRadius: 4,
               offset: Offset(0, 2),
               spreadRadius: 0)
-        ], color: color, borderRadius: BorderRadius.circular(50)),
+        ], color: color, borderRadius: BorderRadius.circular(Insets.i50)),
         child: Row(children: [
           const HSpace(Insets.i20),
           SvgPicture.asset(iconPath),

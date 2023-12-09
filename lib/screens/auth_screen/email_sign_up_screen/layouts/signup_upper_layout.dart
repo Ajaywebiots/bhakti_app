@@ -14,7 +14,7 @@ class SignUpUpperLayout extends StatelessWidget {
         Text(appFonts.signUpHere1,
             style: appCss.philosopherBold28
                 .textColor(appColor(context).appTheme.oneText)),
-        Text("Enter your details below",
+        Text(appFonts.enterYourDetailsBelow,
             style: appCss.dmDenseMedium14
                 .textColor(appColor(context).appTheme.threeText)),
         const VSpace(Insets.i30),

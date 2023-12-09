@@ -29,7 +29,7 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                           children: [
                             const VSpace(Insets.i70),
                             Row(children: [
-                              SvgPicture.asset("assets/svg/arrowLeft.svg")
+                              SvgPicture.asset(eSvgAssets.arrowLeft)
                                   .inkWell(onTap: () {
                                 Navigator.pop(context);
                               }),

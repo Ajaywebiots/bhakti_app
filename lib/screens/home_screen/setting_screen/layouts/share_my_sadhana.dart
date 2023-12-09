@@ -16,7 +16,7 @@ class ShareMySadhana extends StatelessWidget {
             leadingWidth: 0,
             title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               const HSpace(Insets.i20),
-              SvgPicture.asset("assets/svg/arrowLeft.svg").inkWell(
+              SvgPicture.asset(eSvgAssets.arrowLeft).inkWell(
                 onTap: () => Navigator.pop(context),
               ),
               const HSpace(Insets.i50),

@@ -13,7 +13,7 @@ class TableCalendarLayout extends StatelessWidget {
           trailing: SvgPicture.asset(dashboardPvr.onChange == false
               ? eSvgAssets.arrowDown1
               : eSvgAssets.arrowUp),
-          leading: SvgPicture.asset("assets/svg/calendarEdit.svg"),
+          leading: SvgPicture.asset(eSvgAssets.calendarEdit),
           title: Text(
               "${dashboardPvr.startedRange ?? appFonts.selectFromDate} ${dashboardPvr.startedRange == null ? appFonts.and : appFonts.to} ${dashboardPvr.endedRange ?? appFonts.toDate}",
               style: appCss.dmDenseMedium16
@@ -54,13 +54,13 @@ class TableCalendarLayout extends StatelessWidget {
                                 .appTheme
                                 .primary
                                 .withOpacity(0.10)),
-                        child: SvgPicture.asset("assets/svg/rightSide.svg")),
+                        child: SvgPicture.asset(eSvgAssets.rightSide)),
                     leftChevronIcon: Container(
                         padding: const EdgeInsets.all(6),
                         height: Sizes.s26,
                         width: Sizes.s26,
                         decoration: BoxDecoration(borderRadius: BorderRadius.circular(6), color: appColor(context).appTheme.primary.withOpacity(0.10)),
-                        child: SvgPicture.asset("assets/svg/leftSide.svg")),
+                        child: SvgPicture.asset(eSvgAssets.leftSide)),
                     leftChevronMargin: const EdgeInsets.only(left: 50),
                     rightChevronMargin: const EdgeInsets.only(right: 50),
                     formatButtonVisible: false,

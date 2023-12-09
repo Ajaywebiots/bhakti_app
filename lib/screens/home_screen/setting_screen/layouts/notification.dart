@@ -1,10 +1,5 @@
-import 'package:bhakti_app/common/assets/index.dart';
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/text_style_extensions.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/layouts/common_regulation.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 
 class NotificationLayouts extends StatelessWidget {
   const NotificationLayouts({super.key});
@@ -21,7 +16,7 @@ class NotificationLayouts extends StatelessWidget {
             leadingWidth: 0,
             title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               const HSpace(Insets.i20),
-              SvgPicture.asset("assets/svg/arrowLeft.svg").inkWell(
+              SvgPicture.asset(eSvgAssets.arrowLeft).inkWell(
                 onTap: () => Navigator.pop(context),
               ),
               const HSpace(Insets.i90),

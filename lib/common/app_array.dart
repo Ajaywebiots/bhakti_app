@@ -1,188 +1,127 @@
-import 'package:bhakti_app/common/assets/index.dart';
+import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/book_read_presently_screen/book_read_presently_screen.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/homepage_section_priorities.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/setting_parameters.dart';
-
-import '../screens/home_screen/setting_screen/layouts/notification.dart';
-import '../screens/home_screen/setting_screen/layouts/share_my_sadhana.dart';
-import '../screens/home_screen/setting_screen/layouts/share_with_me.dart';
+import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/notification.dart';
+import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/share_my_sadhana.dart';
+import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/share_with_me.dart';
 
 class AppArray {
   List<Map<String, dynamic>> rulesList = [
-    {'rule': 'No meat eating', 'isOn': false},
-    {'rule': 'No intoxication', 'isOn': false},
-    {'rule': 'No illicit sex', 'isOn': false},
-    {'rule': 'No gambling', 'isOn': false},
-    {'rule': 'Only prasadam', 'isOn': false}
+    {'rule': appFonts.noMeat, 'isOn': false},
+    {'rule': appFonts.noIntox, 'isOn': false},
+    {'rule': appFonts.noIllicit, 'isOn': false},
+    {'rule': appFonts.noGambling, 'isOn': false},
+    {'rule': appFonts.onlyPrasadam, 'isOn': false}
   ];
 
   List worshipUserList = [
     {
-      'svgImage': 'assets/svg/Didmangla.svg',
-      'title': 'Did Mangala Arti :',
-      'data': 'Yes 7:00 AM'
+      'svgImage': eSvgAssets.didMangla,
+      'title': appFonts.didMangalaArti,
+      'data': appFonts.time2
     },
     {
-      'svgImage': 'assets/svg/TulsiImg.svg',
-      'title': 'Tulasi parikrama :',
-      'data': 'No'
+      'svgImage': eSvgAssets.tulsiImg,
+      'title': appFonts.tulasiParikrama,
+      'data': appFonts.no
     },
     {
-      'svgImage': 'assets/svg/bhog.svg',
-      'title': 'Offered Bhoga :',
-      'data': 'No'
+      'svgImage': eSvgAssets.bhog,
+      'title': appFonts.offeredBhoga,
+      'data': appFonts.no
     },
     {
-      'svgImage': 'assets/svg/sandhyaImg.svg',
-      'title': 'Sandhya Aarti :',
-      'data': 'No'
-    },
+      'svgImage': eSvgAssets.sandhyaImg,
+      'title': appFonts.sandhyaAarti,
+      'data': appFonts.no
+    }
   ];
 
   List<Map<String, dynamic>> settingList = [
     {
-      'image': "assets/svg/setting-5.svg",
-      'rule': 'Parameters',
+      'image': eSvgAssets.setting5,
+      'rule': appFonts.parameters,
       'navigate': const SettingParameters()
     },
     {
-      'image': "assets/svg/book1.svg",
-      'rule': 'Books Reading Presently',
+      'image': eSvgAssets.book1,
+      'rule': appFonts.booksReadingPresently,
       'navigate': const BookReadPresentlyScreen()
     },
     {
-      'image': "assets/svg/SharemySadhana.svg",
-      'rule': 'Share my Sadhana',
+      'image': eSvgAssets.shareMySadhana,
+      'rule': appFonts.shareMyShadhana,
       'navigate': const ShareMySadhana()
     },
     {
-      'image': "assets/svg/profile-2user.svg",
-      'rule': 'Sharing with me',
+      'image': eSvgAssets.profileUser,
+      'rule': appFonts.shareWithMe,
       'navigate': const SharingWithMe()
     },
     {
-      'image': "assets/svg/key.svg",
+      'image': eSvgAssets.key,
       'rule': 'Bhakti Steps Access Key ',
       'navigate': ""
     },
     {
-      'image': "assets/svg/notification.svg",
+      'image': eSvgAssets.notification,
       'rule': 'Notification',
       'navigate': const NotificationLayouts()
     },
     {
-      'image': "assets/svg/setting-2.svg",
+      'image': eSvgAssets.setting2,
       'rule': 'Home page Section Priorities',
       'navigate': const HomePageSection()
     }
   ];
 
   List<Map<String, dynamic>> homePageSectionList = [
-    {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Sleep', 'isOn': false},
-    {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Worship', 'isOn': false},
-    {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Chanting', 'isOn': false},
-    {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Prasadam', 'isOn': false},
+    {'svgImage': eSvgAssets.dragIcon, 'name': appFonts.sleep, 'isOn': false},
+    {'svgImage': eSvgAssets.dragIcon, 'name': appFonts.worship, 'isOn': false},
+    {'svgImage': eSvgAssets.dragIcon, 'name': appFonts.chanting, 'isOn': false},
+    {'svgImage': eSvgAssets.dragIcon, 'name': appFonts.prasadam, 'isOn': false},
     {
-      'svgImage': "assets/svg/dragIcon.svg",
-      'name': 'Accociation',
+      'svgImage': eSvgAssets.dragIcon,
+      'name': appFonts.association,
       'isOn': false
     },
-    {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Books', 'isOn': false},
+    {'svgImage': eSvgAssets.dragIcon, 'name': appFonts.books, 'isOn': false},
     {
-      'svgImage': "assets/svg/dragIcon.svg",
-      'name': 'Book distribution',
+      'svgImage': eSvgAssets.dragIcon,
+      'name': appFonts.bookDistribution,
       'isOn': false
     },
-    {'svgImage': "assets/svg/dragIcon.svg", 'name': 'Notes', 'isOn': false},
+    {'svgImage': eSvgAssets.dragIcon, 'name': 'Notes', 'isOn': false}
   ];
 
   List bookList = [];
   List<Map<String, dynamic>> shareMySadhanaList = [
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Shreliyan Khanna',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Jane Cooper',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Cody Fisher',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Wade Warren',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Eleanor Pena',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Guy Hawkins',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Cody Fisher',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Courtney Henry',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Brooklyn Simmons',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Cody Fisher',
-    },
+    {'image': eImageAssets.profile, 'name': appFonts.shreliyanKhanna},
+    {'image': eImageAssets.profile, 'name': appFonts.janeCooper},
+    {'image': eImageAssets.profile, 'name': appFonts.codyFisher},
+    {'image': eImageAssets.profile, 'name': appFonts.wadeWarren},
+    {'image': eImageAssets.profile, 'name': appFonts.eleanorPena},
+    {'image': eImageAssets.profile, 'name': appFonts.guyHawkins},
+    {'image': eImageAssets.profile, 'name': appFonts.courtneyHenry},
+    {'image': eImageAssets.profile, 'name': appFonts.brooklynSimmons},
+    {'image': eImageAssets.profile, 'name': appFonts.codyFisher},
+    {'image': eImageAssets.profile, 'name': appFonts.codyFisher},
   ];
   List<Map<String, dynamic>> sharingWithMeList = [
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Shreliyan Khanna',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Jane Cooper',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Cody Fisher',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Wade Warren',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Eleanor Pena',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Guy Hawkins',
-    },
+    {'image': eImageAssets.profile, 'name': appFonts.shreliyanKhanna},
+    {'image': eImageAssets.profile, 'name': appFonts.janeCooper},
+    {'image': eImageAssets.profile, 'name': appFonts.codyFisher},
+    {'image': eImageAssets.profile, 'name': appFonts.wadeWarren},
+    {'image': eImageAssets.profile, 'name': appFonts.eleanorPena},
+    {'image': eImageAssets.profile, 'name': appFonts.guyHawkins},
   ];
 
   List<Map<String, dynamic>> searchList = [
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Cody Fisher',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Jane Cooper',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Cody Fisher',
-    },
-    {
-      'image': "assets/images/profile.png",
-      'name': 'Courtney Henry',
-    },
+    {'image': eImageAssets.profile, 'name': appFonts.shreliyanKhanna},
+    {'image': eImageAssets.profile, 'name': appFonts.janeCooper},
+    {'image': eImageAssets.profile, 'name': appFonts.codyFisher},
+    {'image': eImageAssets.profile, 'name': appFonts.wadeWarren}
   ];
 
   List serverWidgets = [];
@@ -196,7 +135,7 @@ class AppArray {
     {'artiType': 'Narasimha Arti', 'isOn': false},
     {'artiType': 'Tulasi Arti & Parikrama', 'isOn': false},
     {'artiType': 'Guru Arti', 'isOn': false},
-    {'artiType': 'Bhoga Offering', 'isOn': false}
+    {'artiType': 'Bhoga Offering ', 'isOn': false}
   ];
 
   List<Map<String, dynamic>> sandhyaTypeList = [
@@ -208,22 +147,22 @@ class AppArray {
   List chantingList = ['0', '0', '0', '0'];
 
   List drawerList = [
-    {"icon": "assets/svg/home1.svg", "name": "Home"},
-    {"icon": "assets/svg/user1.svg", "name": "Profile"},
-    {"icon": "assets/svg/link.svg", "name": "Tutorials"},
+    {"icon": eSvgAssets.home1, "name": "Home"},
+    {"icon": eSvgAssets.user1, "name": "Profile"},
+    {"icon": eSvgAssets.link, "name": "Tutorials"},
     {
-      "icon": "assets/svg/book.svg",
+      "icon": eSvgAssets.book,
       "name": "Online Tests",
       "list": [
-        {"icon": "assets/svg/book.svg", "name": "test 1"},
-        {"icon": "assets/svg/book.svg", "name": "test 2"},
-        {"icon": "assets/svg/book.svg", "name": "test 3"}
+        {"icon": eSvgAssets.book, "name": "test 1"},
+        {"icon": eSvgAssets.book, "name": "test 2"},
+        {"icon": eSvgAssets.book, "name": "test 3"}
       ]
     },
-    {"icon": "assets/svg/document.svg", "name": "My Documents"},
-    {"icon": "assets/svg/information.svg", "name": "About Bhakti Steps"},
-    {"icon": "assets/svg/autobrightness.svg", "name": "About CDM"},
-    {"icon": "assets/svg/call-calling.svg", "name": "Contact Us"},
+    {"icon": eSvgAssets.document, "name": "My Documents"},
+    {"icon": eSvgAssets.information, "name": "About Bhakti Steps"},
+    {"icon": eSvgAssets.autoBrightness, "name": "About CDM"},
+    {"icon": eSvgAssets.callCalling, "name": "Contact Us"}
   ];
 
   List bookReadingList = [
@@ -250,29 +189,29 @@ class AppArray {
       'bookName': "Sri Brahma-samhita",
       'author': "By : Sarasvati Goswami",
       'isAdded': true
-    },
+    }
   ];
 
   var bottomNavyList = [
     {
-      "icon": "assets/svg/unselecthome.svg",
+      "icon": eSvgAssets.unSelectHome,
       "title": 'Home',
-      "icon2": "assets/svg/home.svg",
+      "icon2": eSvgAssets.home,
     },
     {
-      "icon": "assets/svg/monitering.svg",
+      "icon": eSvgAssets.monitoring,
       "title": "Dashboard",
-      "icon2": "assets/svg/selectmonitor.svg"
+      "icon2": eSvgAssets.selectMonitor
     },
     {
-      "icon": "assets/svg/category.svg",
+      "icon": eSvgAssets.category,
       "title": "Monitoring",
-      "icon2": "assets/svg/selectcategory.svg"
+      "icon2": eSvgAssets.selectCategory
     },
     {
-      "icon": "assets/svg/setting.svg",
+      "icon": eSvgAssets.setting,
       "title": "Setting",
-      "icon2": "assets/svg/selectsetting.svg"
-    },
+      "icon2": eSvgAssets.selectSetting
+    }
   ];
 }

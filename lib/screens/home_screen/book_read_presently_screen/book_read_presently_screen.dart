@@ -20,29 +20,29 @@ class BookReadPresentlyScreen extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.start,
                       children: [
                 CommonAppBar(
-                    text: 'Books Reading Presently',
+                    text: appFonts.booksReadingPresently,
                     onTap: () => Navigator.pop(context),
                     hSpace: Insets.i12),
                 const VSpace(Insets.i25),
                 Container(
-                    height: 50,
+                    height: Sizes.s50,
                     decoration: BoxDecoration(
-                        color: const Color(0x0FC35DD2),
+                        color: appColor(context).appTheme.textFieldClr,
                         border: Border.all(
                             color: appColor(context)
                                 .appTheme
                                 .primary
                                 .withOpacity(0.20)),
-                        borderRadius: BorderRadius.circular(8)),
+                        borderRadius: BorderRadius.circular(Insets.i8)),
                     child: TextField(
                         decoration: InputDecoration(
-                            hintText: 'Search Here',
+                            hintText: appFonts.searchHere,
                             hintStyle: appCss.dmDenseMedium12,
                             prefixIcon: Row(children: [
-                              SvgPicture.asset("assets/svg/search-normal.svg"),
+                              SvgPicture.asset(eSvgAssets.searchNormal),
                               const HSpace(Insets.i10),
                               SvgPicture.asset(eSvgAssets.line)
-                            ]).paddingAll(10),
+                            ]).paddingAll(Insets.i10),
                             disabledBorder: const OutlineInputBorder(
                                 borderRadius: BorderRadius.all(
                                     Radius.circular(AppRadius.r8)),
@@ -73,25 +73,25 @@ class BookReadPresentlyScreen extends StatelessWidget {
                     alignment: Alignment.topCenter,
                     decoration: BoxDecoration(
                         color: appColor(context).appTheme.whiteColor,
-                        borderRadius: BorderRadius.circular(6),
+                        borderRadius: BorderRadius.circular(Insets.i6),
                         boxShadow: [
                           BoxShadow(
                               color: appColor(context).appTheme.shadowClr,
-                              blurRadius: 16,
+                              blurRadius: Insets.i16,
                               offset: const Offset(0, 4),
                               spreadRadius: 0)
                         ]),
                     child: ListView.builder(
                         itemCount: homeScreenPvr.bookingLis.length,
                         shrinkWrap: true,
-                        padding: const EdgeInsets.all(15),
+                        padding: const EdgeInsets.all(Insets.i15),
                         physics: const NeverScrollableScrollPhysics(),
                         itemBuilder: (context, index) {
                           return BookReadingPresentlyLayout(
                               data: homeScreenPvr.bookingLis[index],
                               index: index);
                         }))
-              ]).paddingSymmetric(horizontal: 20))));
+              ]).paddingSymmetric(horizontal: Insets.i20))));
     });
   }
 }

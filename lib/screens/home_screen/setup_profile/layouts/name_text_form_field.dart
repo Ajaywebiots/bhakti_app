@@ -1,11 +1,6 @@
-import 'package:bhakti_app/common/extension/spacing.dart';
-import 'package:bhakti_app/common/extension/widget_extension.dart';
-import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/widgets/text_common_widget.dart';
-import 'package:flutter_svg/flutter_svg.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/widgets/custom_title_widget.dart';
-import 'package:bhakti_app/common/assets/index.dart';
 
 class NameTextBox extends StatelessWidget {
   const NameTextBox({super.key});

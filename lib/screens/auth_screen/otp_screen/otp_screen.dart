@@ -39,7 +39,7 @@ class _OtpScreenState extends State<OtpScreen> {
                                 onTap: () => otpPvr.verifyButton(context),
                                 text: appFonts.verify)
                           ])))
-                ]).paddingSymmetric(horizontal: 20))),
+                ]).paddingSymmetric(horizontal: Insets.i20))),
         if (otpPvr.isLoading) const CircularProgressIndicator()
       ]);
     });

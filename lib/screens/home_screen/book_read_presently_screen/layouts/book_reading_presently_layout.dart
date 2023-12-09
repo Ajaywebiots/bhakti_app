@@ -52,7 +52,7 @@ class BookReadingPresentlyLayout extends StatelessWidget {
                           .where((element) =>
                               element['book_id'] == data['book_id'])
                           .isNotEmpty
-                      ? SvgPicture.asset("assets/svg/delete.svg").inkWell(
+                      ? SvgPicture.asset(eSvgAssets.delete).inkWell(
                           onTap: () {
                           showDialog(
                               context: context,

@@ -23,7 +23,7 @@ class HomePageSection extends StatelessWidget {
               leadingWidth: 0,
               title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
                 const HSpace(Insets.i20),
-                SvgPicture.asset("assets/svg/arrowLeft.svg")
+                SvgPicture.asset(eSvgAssets.arrowLeft)
                     .inkWell(onTap: () => Navigator.pop(context)),
                 const HSpace(Insets.i40),
                 Text(appFonts.homePageSection,

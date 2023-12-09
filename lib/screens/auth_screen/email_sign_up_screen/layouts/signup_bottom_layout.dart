@@ -10,11 +10,11 @@ class SignUpBottomLayout extends StatelessWidget {
       return Column(children: [
         const VSpace(Insets.i28),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
-          SvgPicture.asset("assets/svg/line11.svg"),
+          SvgPicture.asset(eSvgAssets.line11),
           const HSpace(Insets.i8),
-          Text("Or", style: appCss.dmDenseMedium12),
+          Text(appFonts.or, style: appCss.dmDenseMedium12),
           const HSpace(Insets.i8),
-          SvgPicture.asset("assets/svg/line11.svg")
+          SvgPicture.asset(eSvgAssets.line11)
         ]),
         const VSpace(Insets.i20),
         Row(mainAxisAlignment: MainAxisAlignment.center, children: [
