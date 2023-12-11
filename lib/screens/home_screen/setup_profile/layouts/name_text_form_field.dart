@@ -8,8 +8,8 @@ class NameTextBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<SetUpProfileProvider>(
-      builder: (context, profilePvr, child) {
-        return CustomTitleWidget(
+        builder: (context, profilePvr, child) {
+      return CustomTitleWidget(
           height: 52,
           color: profilePvr.nameValid == null
               ? const Color(0xff541F5C).withOpacity(.20)
@@ -18,17 +18,7 @@ class NameTextBox extends StatelessWidget {
           title: 'Name*',
           radius: 8,
           child: TextFieldCommon(
-              validator: (value) {
-                if (value!.isEmpty) {
-                  profilePvr.nameValid = appFonts.enterCorrectName;
-                  profilePvr.notifyListeners();
-                  return appFonts.enterCorrectName;
-                } else {
-                  profilePvr.nameValid = null;
-                  profilePvr.notifyListeners();
-                  return null;
-                }
-              },
+              validator: (value) => profilePvr.nameValidator(value),
               hintText: "Name",
               errorText: profilePvr.nameValid,
               controller: profilePvr.name,
@@ -40,10 +30,8 @@ class NameTextBox extends StatelessWidget {
                     SvgPicture.asset(eSvgAssets.user, height: 20),
                     const HSpace(Insets.i10),
                     SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
-                    const HSpace(Insets.i20),
-                  ])),
-        ).paddingSymmetric(vertical: 10);
-      },
-    );
+                    const HSpace(Insets.i20)
+                  ]))).paddingSymmetric(vertical: 10);
+    });
   }
 }

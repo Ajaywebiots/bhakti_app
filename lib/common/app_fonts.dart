@@ -40,6 +40,7 @@ class AppFonts {
   final sendOtp = "Send OTP";
   final phoneNumber = "Phone Number";
   final searchHere = "Search Here";
+  final search = "Search";
   final searchCountryName = "Search Country Name/Code";
   final selectCountry = "Select Country";
   final personalInfo = "Personal Info";
@@ -107,7 +108,6 @@ class AppFonts {
   final bhaktiStepsAccessKey = "Bhakti Steps Access Key";
   final bhaktiStepsApplication = "bhakti steps application you can copy and";
   final thisAccessKey = "This Access key will provide you access of";
-
   final shreliyanKhanna = 'Shreliyan Khanna';
   final janeCooper = 'Jane Cooper';
   final codyFisher = 'Cody Fisher';

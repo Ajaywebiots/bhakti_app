@@ -28,6 +28,10 @@ class MonitoringProvider extends ChangeNotifier {
     "Sandhya Aarti"
   ];
 
+  tabControl(index) {
+    index = 0;
+  }
+
   List prasadamList = ["", "Breakfast", "Lunch", "Dinner"];
   List knowledgeList = ["", "Preaching", "Audio Lectures", "KC Services"];
 

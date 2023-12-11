@@ -17,8 +17,8 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<DashboardProvider>(
-        builder: (context1, dashboardPvr, child) {
+    return Consumer2<DashboardProvider, BottomNavProvider>(
+        builder: (context1, dashboardPvr, bottomNavPvr, child) {
       return StatefulWrapper(
           onInit: () => Future.delayed(DurationsClass.ms150)
               .then((value) => dashboardPvr.onInit(context)),
@@ -34,9 +34,12 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         CommonAppBar(
                             text: appFonts.dashboard,
                             hSpace: Insets.i90,
-                            onTap: () => dashboardPvr.tabController(context)),
+                            onTap: () => dashboardPvr.tabControl(
+                                bottomNavPvr.tabController!.index)),
                         const VSpace(Insets.i25),
-                        const CommonContainerTile(child: TableCalendarLayout()),
+                        const CommonContainerTile(
+                            paddingArea: EdgeInsets.zero,
+                            child: TableCalendarLayout()),
                         const VSpace(Insets.i25),
                         CommonLeftSideText(text: appFonts.userSection),
                         const VSpace(Insets.i25),

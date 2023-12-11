@@ -1,4 +1,8 @@
 import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/add_user_search_layout.dart';
+import 'package:bhakti_app/widgets/common_app_bar.dart';
+import 'package:bhakti_app/widgets/common_container_tile.dart';
+import 'package:bhakti_app/widgets/common_left_side_text.dart';
 
 class AddUserLayout extends StatelessWidget {
   const AddUserLayout({super.key});
@@ -17,30 +21,15 @@ class AddUserLayout extends StatelessWidget {
           SingleChildScrollView(
               child:
                   Column(mainAxisAlignment: MainAxisAlignment.start, children: [
-            AppBar(
-                leading: Container(),
-                backgroundColor: Colors.transparent,
-                titleSpacing: 0,
-                leadingWidth: 0,
-                title: Row(children: [
-                  SvgPicture.asset(eSvgAssets.arrowLeft)
-                      .inkWell(onTap: () => Navigator.pop(context)),
-                  const HSpace(Insets.i120),
-                  Text("Search",
-                      style: appCss.philosopherBold28
-                          .textColor(appColor(context).appTheme.oneText))
-                ])),
-            Row(mainAxisAlignment: MainAxisAlignment.spaceBetween, children: [
-              Text(appFonts.userList,
-                  style: appCss.philosopherBold18
-                      .textColor(appColor(context).appTheme.oneText)),
-              Row(children: [
-                SvgPicture.asset(eSvgAssets.add),
-                Text(appFonts.addUser,
-                    style: appCss.dmDenseMedium14
-                        .textColor(appColor(context).appTheme.primary))
-              ])
-            ]),
+            CommonAppBar(
+                text: appFonts.search,
+                onTap: () => Navigator.pop(context),
+                hSpace: Insets.i120),
+            CommonLeftSideText(
+                isRightText: true,
+                onTap: () {},
+                text: appFonts.userList,
+                rightText: appFonts.addUser),
             const VSpace(Insets.i15),
             Container(
                 height: 50,
@@ -81,44 +70,11 @@ class AddUserLayout extends StatelessWidget {
                       debugPrint(value);
                     })),
             const VSpace(Insets.i15),
-            Container(
-                padding: const EdgeInsets.all(15),
-                decoration: BoxDecoration(
-                    borderRadius: BorderRadius.circular(8),
-                    color: appColor(context).appTheme.whiteColor,
-                    boxShadow: [
-                      BoxShadow(
-                          color: appColor(context).appTheme.shadowClr,
-                          blurRadius: 8,
-                          offset: const Offset(0, 4),
-                          spreadRadius: 0)
-                    ]),
+            CommonContainerTile(
+                paddingArea: const EdgeInsets.all(15),
                 child: Column(
                     children: appArray.searchList.asMap().entries.map((e) {
-                  return Column(children: [
-                    SettingListLayouts(
-                        image: e.value['image'],
-                        index: e.key,
-                        isShare: true,
-                        widget: Container(
-                            padding: const EdgeInsets.all(6),
-                            decoration: BoxDecoration(
-                                borderRadius: BorderRadius.circular(6),
-                                boxShadow: [
-                                  BoxShadow(
-                                      color:
-                                          appColor(context).appTheme.shadowClr,
-                                      blurRadius: 16,
-                                      offset: const Offset(0, 4),
-                                      spreadRadius: 0)
-                                ],
-                                color: appColor(context).appTheme.whiteColor),
-                            width: 34,
-                            height: 35,
-                            child: SvgPicture.asset(eSvgAssets.add)),
-                        list: appArray.searchList,
-                        text: e.value['name'])
-                  ]);
+                  return AddUserSearchLayout(dataInt: e.key, data: e.value);
                 }).toList()))
           ]).paddingSymmetric(horizontal: 20))
         ]));

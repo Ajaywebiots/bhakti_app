@@ -1,4 +1,3 @@
-import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/widgets/text_common_widget.dart';
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/widgets/custom_title_widget.dart';
@@ -9,24 +8,18 @@ class UpdateCityTextFieldBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UpdateProfileProvider>(
-        builder: (context, profilePvr, child) {
+        builder: (context, updateProfilePvr, child) {
       return CustomTitleWidget(
           height: 52,
           width: double.infinity,
-          color: profilePvr.cityValid == null
+          color: updateProfilePvr.cityValid == null
               ? const Color(0xff541F5C).withOpacity(.20)
               : appColor(context).appTheme.red,
           title: 'City',
           radius: 8,
           child: TextFieldCommon(
-              controller: profilePvr.city,
-              validator: (value) {
-                if (value!.isNotEmpty) {
-                  profilePvr.cityValid = null;
-                  profilePvr.notifyListeners();
-                  return null;
-                }
-              },
+              controller: updateProfilePvr.city,
+              validator: (value) => updateProfilePvr.cityTextField(value),
               hintText: "City",
               prefixIcon: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

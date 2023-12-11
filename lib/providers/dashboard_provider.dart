@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/cupertino.dart';
 import 'package:jiffy/jiffy.dart';
 import 'package:syncfusion_flutter_charts/charts.dart';
@@ -40,10 +42,12 @@ class DashboardProvider extends ChangeNotifier {
   //   }
   // }
 
-  tabController(context) {
+  tabControl(index) {
+    log('kajhdfajkfhdjkfnds asdasdasd     $index');
     notifyListeners();
-    final bottomPvr = Provider.of<BottomNavProvider>(context, listen: true);
-    bottomPvr.tabController!.index = 0;
+    index = 0;
+    notifyListeners();
+    log('kajhdfajkfhdjkfnds      $index');
   }
 
   onFormatChanged(format) {

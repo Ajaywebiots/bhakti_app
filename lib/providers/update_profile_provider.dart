@@ -8,8 +8,8 @@ import 'package:firebase_storage/firebase_storage.dart';
 import 'package:flutter/services.dart';
 import 'package:image_picker/image_picker.dart';
 import 'package:image/image.dart' as img;
+import 'package:intl/intl.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 class UpdateProfileProvider extends ChangeNotifier {
   bool imgStatus = false;
@@ -67,6 +67,7 @@ class UpdateProfileProvider extends ChangeNotifier {
     countrySelected = countryItems[0];
     notifyListeners();
   }
+
   Future<String> resizeAndEncodeImage(File imageFile) async {
     List<int> imageBytes = await imageFile.readAsBytes();
     img.Image image = img.decodeImage(Uint8List.fromList(imageBytes))!;
@@ -96,7 +97,6 @@ class UpdateProfileProvider extends ChangeNotifier {
           }, onError: (err) {});
         });
 
-
         log("dssf4444 sss $downloadUrl");
         log("dssf4444 $newUrl");
         Map<String, dynamic> body = {
@@ -109,7 +109,7 @@ class UpdateProfileProvider extends ChangeNotifier {
               : "",
           "email": emailId.text,
           "mobile_number":
-          phoneNum.text.isNotEmpty ? "$countryCode-${phoneNum.text}" : "",
+              phoneNum.text.isNotEmpty ? "$countryCode-${phoneNum.text}" : "",
           "country": countrySelected['code'],
           "state": state.text,
           "city": city.text,
@@ -152,6 +152,228 @@ class UpdateProfileProvider extends ChangeNotifier {
         log("CATCH : $e");
       }
     }
+  }
+
+  cameraButton(context) async {
+    Navigator.pop(context);
+    XFile? photo = await picker.pickImage(source: ImageSource.camera);
+    imagePath = photo!.path;
+    imgStatus = true;
+    notifyListeners();
+  }
+
+  cityTextField(value) {
+    if (value!.isNotEmpty) {
+      cityValid = null;
+      notifyListeners();
+      return null;
+    }
+  }
+
+  dobValidator(value) {
+    if (value!.isNotEmpty) {
+      dateValid = null;
+      notifyListeners();
+      return null;
+    }
+  }
+
+  femaleGender(value) {
+    selectedGender = value!;
+    notifyListeners();
+  }
+
+  initiatedDateValidator(value) {
+    if (value!
+        .isNotEmpty) /*{
+                  initiatedDateValid = 'Enter a Initiated Date!';
+                  notifyListeners();
+                  return 'Enter a Initiated Date!';
+                } else*/
+    {
+      initiatedDateValid = null;
+      notifyListeners();
+      return null;
+    }
+  }
+
+  initiatedNameValidator(value) {
+    if (value!.isNotEmpty) {
+      initiatedNameValid = null;
+      notifyListeners();
+      return null;
+    }
+  }
+
+  yesCheckBox() {
+    value = !value;
+    if (value = true) {
+      valueFirst = false;
+    } else {
+      valueFirst = true;
+    }
+    notifyListeners();
+  }
+
+  marriedChanged(value) {
+    selectedMarital = value!;
+    showError = false;
+    notifyListeners();
+  }
+
+  unMarriedChanged(value) {
+    selectedMarital = value!;
+    notifyListeners();
+  }
+
+  nameTextField(value) {
+    if (value!.isEmpty) {
+      nameValid = appFonts.enterCorrectName;
+      notifyListeners();
+      return appFonts.enterCorrectName;
+    } else {
+      nameValid = null;
+      notifyListeners();
+      return null;
+    }
+  }
+
+  phoneNumberValidator(value) {
+    if (value!.isNotEmpty) {
+      phoneNumberValid = null;
+      notifyListeners();
+      return null;
+    }
+    return null;
+  }
+
+  countryCodeOnChanged(countryCode, value) {
+    countryCode = value;
+    notifyListeners();
+  }
+
+  spiritualOnChanged(newValue) {
+    spiritualSelectedItems = newValue!;
+    notifyListeners();
+  }
+
+  selectState(value) {
+    if (value!.isNotEmpty) {
+      stateValid = null;
+      notifyListeners();
+      return null;
+    }
+  }
+
+  yatraNameValidator(value) {
+    if (value!.isNotEmpty) {
+      /*  profilePvr.yatraNameValid = 'Enter a Yatra Name!';
+                  profilePvr.notifyListeners();
+                  return 'Enter a Yatra Name!';
+                } else {*/
+      yatraNameValid = null;
+      notifyListeners();
+      return null;
+    }
+  }
+
+
+
+
+  profilePicUpdate(context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(children: [
+            ListTile(
+                onTap: () => cameraButton(context),
+                title: Text(appFonts.camera),
+                leading: const Icon(Icons.camera_alt)),
+            ListTile(
+                onTap: () => galleryButton(context),
+                title: Text(appFonts.gallery),
+                leading: const Icon(Icons.image))
+          ]);
+        });
+  }
+
+  noCheckBox() {
+    valueFirst = !valueFirst;
+    if (valueFirst = true) {
+      value = false;
+    } else {
+      value = true;
+    }
+    notifyListeners();
+  }
+
+  maleGender(value) {
+    selectedGender = value!;
+    notifyListeners();
+  }
+
+  emailValidator(value) {
+    if (value!.isNotEmpty &&
+        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(value)) {
+      emailValid = appFonts.enterValidEmail;
+      notifyListeners();
+      return 'Enter a valid email!';
+    } /*else {
+                  emailValid = null;
+                  notifyListeners();
+                  return null;
+                }*/
+  }
+
+  dobTextPicker(context) async {
+    DateTime? pickedDate = await showDatePicker(
+        context: context,
+        initialDate: DateTime.now(),
+        firstDate: DateTime(1886),
+        lastDate: DateTime.now(),
+        builder: (context, child) {
+          return Theme(
+              data: Theme.of(context).copyWith(
+                  dialogTheme: DialogTheme(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(20.0))),
+                  colorScheme: ColorScheme.light(
+                      primary: appColor(context).appTheme.primary,
+                      onSurface: Colors.black,
+                      error: Colors.red),
+                  textButtonTheme: TextButtonThemeData(
+                      style: TextButton.styleFrom(
+                          textStyle: const TextStyle(
+                              color: Colors.white,
+                              fontSize: 12,
+                              fontWeight: FontWeight.bold),
+                          primary: appColor(context).appTheme.whiteColor,
+                          backgroundColor: appColor(context).appTheme.primary,
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(20))))),
+              child: child!);
+        });
+
+    if (pickedDate != null) {
+      String formattedDate = DateFormat('yyyy-MM-dd').format(pickedDate);
+      dob.text = formattedDate;
+      notifyListeners();
+    } else {}
+  }
+
+  selectCountry() {
+    log("value :$value");
+    countrySelected = value;
+    notifyListeners();
+  }
+
+  galleryButton(context) async {
+    Navigator.pop(context);
+    image = await picker.pickImage(source: ImageSource.gallery);
+    imagePath = image!.path;
+    imgStatus = true;
+    notifyListeners();
   }
 
   // Future<void> saveData(context) async {

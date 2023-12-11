@@ -278,7 +278,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                             onBackClick();
                           },
                           child: SvgPicture.asset(
-                              "assets/svg/liftarrow.svg")),
+                              eSvgAssets.leftArrow)),
                       for (int weekIndex = 0;
                       weekIndex < listOfWeeks[ind].length;
                       weekIndex++)
@@ -399,7 +399,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                           }
                               : null,
                           child: SvgPicture.asset(
-                              "assets/svg/rightArrow.svg"))
+                              eSvgAssets.rightArrow))
                     ]).paddingSymmetric(horizontal: 8))
           ],
           options: CarouselOptions(

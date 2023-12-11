@@ -18,19 +18,7 @@ class EmailTextBox extends StatelessWidget {
             : appColor(context).appTheme.red,
         radius: 8,
         child: TextFieldCommon(
-            validator: (value) {
-              if (value!.isNotEmpty &&
-                  !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
-                      .hasMatch(value)) {
-                profilePvr.emailValid = appFonts.enterValidEmail;
-                profilePvr.notifyListeners();
-                return 'Enter a valid email!';
-              } /*else {
-                  profilePvr.emailValid = null;
-                  profilePvr.notifyListeners();
-                  return null;
-                }*/
-            },
+            validator: (value) => profilePvr.emailValidator(value),
             keyboardType: TextInputType.emailAddress,
             hintText: 'Email',
             controller: profilePvr.emailId,
@@ -43,7 +31,7 @@ class EmailTextBox extends StatelessWidget {
                   const HSpace(Insets.i10),
                   SvgPicture.asset(eSvgAssets.line, height: Sizes.s24, width: Sizes.s24),
                   const HSpace(Insets.i20)
-                ])),
+                ]))
       ).paddingSymmetric(vertical: 10);
     });
   }

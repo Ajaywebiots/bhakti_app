@@ -16,9 +16,8 @@ class NotificationLayouts extends StatelessWidget {
             leadingWidth: 0,
             title: Row(mainAxisAlignment: MainAxisAlignment.start, children: [
               const HSpace(Insets.i20),
-              SvgPicture.asset(eSvgAssets.arrowLeft).inkWell(
-                onTap: () => Navigator.pop(context),
-              ),
+              SvgPicture.asset(eSvgAssets.arrowLeft)
+                  .inkWell(onTap: () => Navigator.pop(context)),
               const HSpace(Insets.i90),
               Text(appFonts.notification,
                   style: appCss.philosopherBold28
@@ -39,7 +38,7 @@ class NotificationLayouts extends StatelessWidget {
                   style: appCss.dmDenseExtraBold18
                       .textColor(appColor(context).appTheme.rulesClr))
             ]),
-            VSpace(Insets.i15),
+            const VSpace(Insets.i15),
             Container(
                 padding: const EdgeInsets.all(15),
                 decoration: BoxDecoration(
@@ -53,7 +52,10 @@ class NotificationLayouts extends StatelessWidget {
                           spreadRadius: 0)
                     ]),
                 child: Column(
-                    children: appArray.notificationSettingList.asMap().entries.map((e) {
+                    children: appArray.notificationSettingList
+                        .asMap()
+                        .entries
+                        .map((e) {
                   return Column(children: [
                     CommonRegulation(
                         list: appArray.notificationSettingList,

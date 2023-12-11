@@ -74,11 +74,128 @@ class SetUpProfileProvider extends ChangeNotifier {
     onChange = !onChange;
   }
 
-
-  onContactInfoExpansionChanged(){
+  onContactInfoExpansionChanged() {
     onChange1 = !onChange1;
-    }
+  }
 
+  cityValidator(value) {
+    if (value!.isNotEmpty) {
+      cityValid = null;
+      notifyListeners();
+      return null;
+    }
+  }
+
+  dobValidator(value) {
+    if (value!.isNotEmpty) {
+      dateValid = null;
+      notifyListeners();
+      return null;
+    }
+  }
+
+  emailValidator(value) {
+    if (value!.isNotEmpty &&
+        !RegExp(r"^[a-zA-Z0-9.a-zA-Z0-9.!#$%&'*+-/=?^_`{|}~]+@[a-zA-Z0-9]+\.[a-zA-Z]+")
+            .hasMatch(value)) {
+      emailValid = appFonts.enterValidEmail;
+      notifyListeners();
+      return 'Enter a valid email!';
+    } /*else {
+                  emailValid = null;
+                  notifyListeners();
+                  return null;
+                }*/
+  }
+
+  maleGender(value) {
+    selectedGender = value!;
+    notifyListeners();
+  }
+
+  femaleGender(value) {
+    selectedGender = value!;
+    notifyListeners();
+  }
+
+  initiatedNameValidator(value) {
+    if (value!.isNotEmpty) {
+      initiatedNameValid = null;
+      notifyListeners();
+      return null;
+    }
+  }
+
+  nameValidator(value) {
+    if (value!.isEmpty) {
+      nameValid = appFonts.enterCorrectName;
+      notifyListeners();
+      return appFonts.enterCorrectName;
+    } else {
+      nameValid = null;
+      notifyListeners();
+      return null;
+    }
+  }
+
+  phoneNumValidator(value) {
+    if (value!.isNotEmpty) {
+      phoneNumberValid = null;
+      notifyListeners();
+      return null;
+    }
+    return null;
+  }
+
+  phoneOnChanged(value) {
+    log("coudhsfjsdhf$value");
+    countryCode = value;
+    notifyListeners();
+  }
+
+  profilePicture(context) {
+    showDialog(
+        context: context,
+        builder: (context) {
+          return SimpleDialog(children: [
+            ListTile(
+                onTap: () async {
+                  Navigator.pop(context);
+                  XFile? photo =
+                      await picker.pickImage(source: ImageSource.camera);
+                  imagePath = photo!.path;
+                  imgStatus = true;
+                  notifyListeners();
+                },
+                title: Text(appFonts.camera),
+                leading: const Icon(Icons.camera_alt)),
+            ListTile(
+                onTap: () async {
+                  Navigator.pop(context);
+                  image = await picker.pickImage(source: ImageSource.gallery);
+                  imagePath = image!.path;
+                  imgStatus = true;
+                  notifyListeners();
+                },
+                title: Text(appFonts.gallery),
+                leading: const Icon(Icons.image))
+          ]);
+        });
+  }
+
+  stateValidator(value) {
+    if (value!.isNotEmpty) {
+      stateValid = null;
+      notifyListeners();
+      return null;
+    }
+  }
+
+  countryOnChanged(value) {
+    log("value :$value");
+    countrySelected = value;
+    notifyListeners();
+  }
 
   Future<String> resizeAndEncodeImage(File imageFile) async {
     List<int> imageBytes = await imageFile.readAsBytes();

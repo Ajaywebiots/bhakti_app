@@ -1,4 +1,3 @@
-import 'dart:developer';
 import 'package:bhakti_app/widgets/text_common_widget.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:bhakti_app/config.dart';
@@ -9,29 +8,23 @@ class UpdatePhoneNumberTextBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<UpdateProfileProvider,SetUpProfileProvider>(
-        builder: (context, profilePvr,updatePvr, child) {
+    return Consumer2<UpdateProfileProvider, SetUpProfileProvider>(
+        builder: (context, updateProfilePvr, profilePvr, child) {
       return CustomTitleWidget(
           height: 52,
           width: double.infinity,
-          color: profilePvr.phoneNumberValid == null
+          color: updateProfilePvr.phoneNumberValid == null
               ? const Color(0xff541F5C).withOpacity(.20)
               : appColor(context).appTheme.red,
           title: 'Phone Number',
           radius: 8,
           child: TextFieldCommon(
               maxLength: 10,
-              validator: (value) {
-                if (value!.isNotEmpty) {
-                  profilePvr.phoneNumberValid = null;
-                  profilePvr.notifyListeners();
-                  return null;
-                }
-                return null;
-              },
+              validator: (value) =>
+                  updateProfilePvr.phoneNumberValidator(value),
               keyboardType: TextInputType.number,
               hintText: "Phone Number",
-              controller: profilePvr.phoneNum,
+              controller: updateProfilePvr.phoneNum,
               prefixIcon: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   mainAxisSize: MainAxisSize.min,
@@ -39,13 +32,12 @@ class UpdatePhoneNumberTextBox extends StatelessWidget {
                     const HSpace(Insets.i20),
                     CountryCodePicker(
                         showFlag: false,
-                        searchDecoration:
-                            const InputDecoration(hintText: "Search Country Code"),
+                        searchDecoration: const InputDecoration(
+                            hintText: "Search Country Code"),
                         padding: EdgeInsets.zero,
-                        onChanged: (value) {
-                          updatePvr.countryCode = value;
-                          profilePvr.notifyListeners();
-                        },
+                        onChanged: (value) =>
+                            updateProfilePvr.countryCodeOnChanged(
+                                profilePvr.countryCode, value),
                         textStyle: appCss.dmDenseMedium14
                             .textColor(appColor(context).appTheme.lightText),
                         dialogTextStyle: appCss.dmDenseMedium16,

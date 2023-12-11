@@ -1,5 +1,5 @@
-import '../../../../config.dart';
-import '../../../../widgets/common_selection_button.dart';
+import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/widgets/common_selection_button.dart';
 
 class ShareMySadhanaDialog extends StatelessWidget {
   const ShareMySadhanaDialog({super.key});

@@ -19,13 +19,7 @@ class CityTextFieldBox extends StatelessWidget {
           radius: 8,
           child: TextFieldCommon(
               controller: profilePvr.city,
-              validator: (value) {
-                if (value!.isNotEmpty) {
-                  profilePvr.cityValid = null;
-                  profilePvr.notifyListeners();
-                  return null;
-                }
-              },
+              validator: (value) => profilePvr.cityValidator(value),
               hintText: "City",
               prefixIcon: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

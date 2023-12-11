@@ -45,7 +45,7 @@ class NotesLayout extends StatelessWidget {
                         borderRadius:
                         BorderRadius.circular(8)),
                     child: SvgPicture.asset(
-                        "assets/svg/tick.svg")))
+                        eSvgAssets.tick)))
           ]));
     },);
   }

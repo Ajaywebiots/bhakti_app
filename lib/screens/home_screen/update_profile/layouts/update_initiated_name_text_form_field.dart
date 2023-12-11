@@ -1,6 +1,5 @@
 import 'package:bhakti_app/widgets/text_common_widget.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/widgets/custom_title_widget.dart';
 
 class UpdateInitiatedNameTextBox extends StatelessWidget {
@@ -9,24 +8,19 @@ class UpdateInitiatedNameTextBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UpdateProfileProvider>(
-        builder: (context, profilePvr, child) {
+        builder: (context, updateProfilePvr, child) {
       return CustomTitleWidget(
         height: 52,
         width: double.infinity,
-        color: profilePvr.initiatedNameValid == null
+        color: updateProfilePvr.initiatedNameValid == null
             ? const Color(0xff541F5C).withOpacity(.20)
             : appColor(context).appTheme.red,
         title: 'Initiated Name',
         radius: 8,
         child: TextFieldCommon(
-            validator: (value) {
-              if (value!.isNotEmpty) {
-                profilePvr.initiatedNameValid = null;
-                profilePvr.notifyListeners();
-                return null;
-              }
-            },
-            controller: profilePvr.initiatedName,
+            validator: (value) =>
+                updateProfilePvr.initiatedNameValidator(value),
+            controller: updateProfilePvr.initiatedName,
             hintText: "Initiated Name",
             prefixIcon: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,

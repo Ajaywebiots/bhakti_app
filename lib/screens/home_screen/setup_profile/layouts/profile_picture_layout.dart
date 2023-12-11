@@ -32,37 +32,7 @@ class ProfilePicture extends StatelessWidget {
                         end: Alignment.bottomRight,
                         colors: [Color(0xff83006E), Color(0xff0060AD)])),
                 child: InkWell(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return SimpleDialog(children: [
-                              ListTile(
-                                  onTap: () async {
-                                    Navigator.pop(context);
-                                    XFile? photo = await profilePvr.picker
-                                        .pickImage(source: ImageSource.camera);
-                                    profilePvr.imagePath = photo!.path;
-                                    profilePvr.imgStatus = true;
-                                    profilePvr.notifyListeners();
-                                  },
-                                  title: Text(appFonts.camera),
-                                  leading: const Icon(Icons.camera_alt)),
-                              ListTile(
-                                  onTap: () async {
-                                    Navigator.pop(context);
-                                    profilePvr.image = await profilePvr.picker
-                                        .pickImage(source: ImageSource.gallery);
-                                    profilePvr.imagePath =
-                                        profilePvr.image!.path;
-                                    profilePvr.imgStatus = true;
-                                    profilePvr.notifyListeners();
-                                  },
-                                  title: Text(appFonts.gallery),
-                                  leading: const Icon(Icons.image))
-                            ]);
-                          });
-                    },
+                    onTap: () => profilePvr.profilePicture(context),
                     child: SvgPicture.asset(eSvgAssets.camera, height: 30))))
       ]).paddingSymmetric(vertical: 30);
     });

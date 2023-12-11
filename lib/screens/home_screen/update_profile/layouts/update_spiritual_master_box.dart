@@ -7,7 +7,7 @@ class UpdateSpiritualMasterBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UpdateProfileProvider>(
-        builder: (context, profilePvr, child) {
+        builder: (context, updateProfilePvr, child) {
       return CustomTitleWidget(
           radius: 8,
           height: 52,
@@ -27,19 +27,17 @@ class UpdateSpiritualMasterBox extends StatelessWidget {
                   alignment: Alignment.topLeft,
                   elevation: 0,
                   borderRadius: BorderRadius.circular(5),
-                  value: profilePvr.spiritualSelectedItems,
+                  value: updateProfilePvr.spiritualSelectedItems,
                   icon: Container(),
-                  items: profilePvr.items.map((String items) {
+                  items: updateProfilePvr.items.map((String items) {
                     return DropdownMenuItem(
                         value: items,
                         child: Text(items,
                             style: appCss.dmDenseMedium14.textColor(
                                 appColor(context).appTheme.lightText)));
                   }).toList(),
-                  onChanged: (newValue) {
-                    profilePvr.spiritualSelectedItems = newValue!;
-                    profilePvr.notifyListeners();
-                  })
+                  onChanged: (newValue) =>
+                      updateProfilePvr.spiritualOnChanged(newValue))
             ]),
             SvgPicture.asset(eSvgAssets.arrowDown)
                 .marginSymmetric(horizontal: Insets.i20)

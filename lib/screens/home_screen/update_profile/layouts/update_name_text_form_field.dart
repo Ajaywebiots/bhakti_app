@@ -8,41 +8,30 @@ class UpdateNameTextBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UpdateProfileProvider>(
-        builder: (context, profilePvr, child) {
+        builder: (context, updateProfilePvr, child) {
       return CustomTitleWidget(
-        height: 52,
-        color: profilePvr.nameValid == null
-            ? const Color(0xff541F5C).withOpacity(.20)
-            : appColor(context).appTheme.red,
-        width: double.infinity,
-        title: 'Name*',
-        radius: 8,
-        child: TextFieldCommon(
-            validator: (value) {
-              if (value!.isEmpty) {
-                profilePvr.nameValid = appFonts.enterCorrectName;
-                profilePvr.notifyListeners();
-                return appFonts.enterCorrectName;
-              } else {
-                profilePvr.nameValid = null;
-                profilePvr.notifyListeners();
-                return null;
-              }
-            },
-            hintText: "Name",
-            errorText: profilePvr.nameValid,
-            controller: profilePvr.name,
-            prefixIcon: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                mainAxisSize: MainAxisSize.min,
-                children: <Widget>[
-                  const HSpace(Insets.i20),
-                  SvgPicture.asset(eSvgAssets.user, height: 20),
-                  const HSpace(Insets.i10),
-                  SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
-                  const HSpace(Insets.i20)
-                ])),
-      ).paddingSymmetric(vertical: 10);
+          height: 52,
+          color: updateProfilePvr.nameValid == null
+              ? const Color(0xff541F5C).withOpacity(.20)
+              : appColor(context).appTheme.red,
+          width: double.infinity,
+          title: 'Name*',
+          radius: 8,
+          child: TextFieldCommon(
+              validator: (value) => updateProfilePvr.nameTextField(value),
+              hintText: "Name",
+              errorText: updateProfilePvr.nameValid,
+              controller: updateProfilePvr.name,
+              prefixIcon: Row(
+                  mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                  mainAxisSize: MainAxisSize.min,
+                  children: <Widget>[
+                    const HSpace(Insets.i20),
+                    SvgPicture.asset(eSvgAssets.user, height: 20),
+                    const HSpace(Insets.i10),
+                    SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
+                    const HSpace(Insets.i20)
+                  ]))).paddingSymmetric(vertical: 10);
     });
   }
 }

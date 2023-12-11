@@ -95,8 +95,7 @@ class AssociationChart extends StatelessWidget {
         ],
         annotations: <CartesianChartAnnotation>[
           CartesianChartAnnotation(
-              widget: SvgPicture.asset(
-                  "assets/svg/chartIcon.svg",
+              widget: SvgPicture.asset(eSvgAssets.chartIcon,
                   height: 12),
               coordinateUnit: CoordinateUnit.point,
               x: "Bhawadgita",
@@ -107,8 +106,7 @@ class AssociationChart extends StatelessWidget {
                   DateTime.now().hour + 6)
                   .millisecondsSinceEpoch),
           CartesianChartAnnotation(
-              widget: SvgPicture.asset(
-                  "assets/svg/chartIcon.svg",
+              widget: SvgPicture.asset(eSvgAssets.chartIcon,
                   height: 12),
               coordinateUnit: CoordinateUnit.point,
               x: "Bhagwatam",
@@ -119,8 +117,7 @@ class AssociationChart extends StatelessWidget {
                   DateTime.now().hour + 4)
                   .millisecondsSinceEpoch),
           CartesianChartAnnotation(
-              widget: SvgPicture.asset(
-                  "assets/svg/chartIcon.svg",
+              widget: SvgPicture.asset(eSvgAssets.chartIcon,
                   height: 12),
               coordinateUnit: CoordinateUnit.point,
               x: "Ramayan",
@@ -131,8 +128,7 @@ class AssociationChart extends StatelessWidget {
                   DateTime.now().hour + 10)
                   .millisecondsSinceEpoch),
           CartesianChartAnnotation(
-              widget: SvgPicture.asset(
-                  "assets/svg/chartIcon.svg",
+              widget: SvgPicture.asset(eSvgAssets.chartIcon,
                   height: 12),
               coordinateUnit: CoordinateUnit.point,
               x: "Mahabharat",

@@ -1,8 +1,8 @@
+import '../../../config.dart';
 import 'package:bhakti_app/widgets/common_app_bar.dart';
 import 'package:bhakti_app/widgets/common_container_tile.dart';
 import 'package:bhakti_app/widgets/common_left_side_text.dart';
-import '/config.dart';
-import 'layouts/common_chanting_row.dart';
+import 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/common_chanting_row.dart';
 
 class MonitoringScreen extends StatefulWidget {
   const MonitoringScreen({super.key});
@@ -14,9 +14,8 @@ class MonitoringScreen extends StatefulWidget {
 class _MonitoringScreenState extends State<MonitoringScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<MonitoringProvider>(
-        builder: (context1, monitoringPvr, child) {
-      final dashPvr = Provider.of<BottomNavProvider>(context, listen: true);
+    return Consumer2<MonitoringProvider, BottomNavProvider>(
+        builder: (context1, monitoringPvr, bottomNavPvr, child) {
       return SafeArea(
           child: Scaffold(
               extendBodyBehindAppBar: true,
@@ -30,10 +29,8 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                 SingleChildScrollView(
                     child: Column(children: [
                   CommonAppBar(
-                      onTap: () {
-                        dashPvr.tabController!.index = 0;
-                        dashPvr.notifyListeners();
-                      },
+                      onTap: () => monitoringPvr
+                          .tabControl(bottomNavPvr.tabController!.index),
                       text: "Group View",
                       hSpace: Insets.i90),
                   const VSpace(Insets.i25),
@@ -134,23 +131,22 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                                   crossAxisAlignment: CrossAxisAlignment.center,
                                   children: [
                                     Row(children: [
-                                      const GroupViewSleepCommonContainer(
+                                      GroupViewSleepCommonContainer(
                                           text: 'Slept time',
                                           timeText: '10:30 PM',
-                                          svgImage: 'assets/svg/sleptTime.svg'),
-                                      const HSpace(Insets.i28),
-                                      SvgPicture.asset(
-                                          "assets/svg/verticalLine.svg"),
+                                          svgImage: eSvgAssets.sleptTime),
+                                      const HSpace(Insets.i36),
+                                      SvgPicture.asset(eSvgAssets.verticalLine),
                                       const HSpace(Insets.i20),
-                                      const GroupViewSleepCommonContainer(
+                                      GroupViewSleepCommonContainer(
                                           text: 'Woke time',
                                           timeText: '05:30 AM',
-                                          svgImage: 'assets/svg/wokeTime.svg'),
+                                          svgImage: eSvgAssets.wokeTime)
                                     ]).marginSymmetric(horizontal: 15),
                                     const VSpace(Insets.i10),
                                     SvgPicture.asset(eSvgAssets.lineRuler),
                                     const VSpace(Insets.i10),
-                                    Text("Duration :8 Hours",
+                                    Text("Duration : 8 Hours",
                                         style: appCss.dmDenseMedium16.textColor(
                                             appColor(context).appTheme.primary))
                                   ])),
@@ -159,7 +155,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                           const VSpace(Insets.i15),
                           CommonContainerTile(
                               paddingArea:
-                                  const EdgeInsets.symmetric(vertical: 20),
+                                  const EdgeInsets.symmetric(vertical: 10),
                               child: Column(
                                   mainAxisAlignment: MainAxisAlignment.center,
                                   crossAxisAlignment: CrossAxisAlignment.center,
@@ -176,7 +172,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                                         countOne: '3',
                                         countTwo: '4',
                                         textOne: 'Before 10:00 am',
-                                        textTwo: 'Before 11:30 am'),
+                                        textTwo: 'Before 11:30 am')
                                   ])),
                           const VSpace(Insets.i25),
                           const CommonLeftSideText(text: "Worship"),
@@ -229,8 +225,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                                                   .appTheme
                                                   .lightText)),
                                       const HSpace(Insets.i20),
-                                      SvgPicture.asset(
-                                          "assets/svg/verticalLine.svg",
+                                      SvgPicture.asset(eSvgAssets.verticalLine,
                                           height: 30),
                                       const HSpace(Insets.i20),
                                       Text("Class : ",

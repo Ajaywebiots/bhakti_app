@@ -1,8 +1,5 @@
-import 'dart:developer';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/setup_profile_provider.dart';
 import 'package:bhakti_app/widgets/custom_title_widget.dart';
-import 'package:bhakti_app/widgets/stateful_wrapper.dart';
 
 class UpdateCountryDropDownBox extends StatelessWidget {
   const UpdateCountryDropDownBox({super.key});
@@ -10,8 +7,8 @@ class UpdateCountryDropDownBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UpdateProfileProvider>(
-        builder: (context1, profilePvr, child) {
-      return profilePvr.countryItems.isNotEmpty
+        builder: (context1, updateProfilePvr, child) {
+      return updateProfilePvr.countryItems.isNotEmpty
           ? CustomTitleWidget(
               radius: 8,
               height: 52,
@@ -40,8 +37,8 @@ class UpdateCountryDropDownBox extends StatelessWidget {
                                       appColor(context).appTheme.lightText),
                                   isExpanded: true,
                                   icon: Container(),
-                                  value: profilePvr.countrySelected,
-                                  items: profilePvr.countryItems.map((e) {
+                                  value: updateProfilePvr.countrySelected,
+                                  items: updateProfilePvr.countryItems.map((e) {
                                     return DropdownMenuItem(
                                         value: e,
                                         child: Row(
@@ -60,11 +57,8 @@ class UpdateCountryDropDownBox extends StatelessWidget {
                                                           0xff767676)))
                                             ]));
                                   }).toList(),
-                                  onChanged: (value) {
-                                    log("value :$value");
-                                    profilePvr.countrySelected = value;
-                                    profilePvr.notifyListeners();
-                                  })))
+                                  onChanged: (value) =>
+                                      updateProfilePvr.selectCountry())))
                     ])),
                     SvgPicture.asset(eSvgAssets.arrowDown)
                         .marginSymmetric(horizontal: Insets.i20)

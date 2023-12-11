@@ -19,13 +19,7 @@ class StateTextFieldBox extends StatelessWidget {
               : appColor(context).appTheme.red,
           child: TextFieldCommon(
               controller: profilePvr.state,
-              validator: (value) {
-                if (value!.isNotEmpty) {
-                  profilePvr.stateValid = null;
-                  profilePvr.notifyListeners();
-                  return null;
-                }
-              },
+              validator: (value) => profilePvr.stateValidator(value),
               hintText: "State",
               prefixIcon: Row(
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,

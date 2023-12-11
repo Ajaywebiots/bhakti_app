@@ -7,7 +7,7 @@ class UpdateInitiatedStatusBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UpdateProfileProvider>(
-        builder: (context, profilePvr, child) {
+        builder: (context, updateProfilePvr, child) {
       return CustomTitleWidget(
           height: 52,
           width: double.infinity,
@@ -21,15 +21,7 @@ class UpdateInitiatedStatusBox extends StatelessWidget {
             SvgPicture.asset(eSvgAssets.line),
             const HSpace(Sizes.s22),
             InkWell(
-                onTap: () {
-                  profilePvr.value = !profilePvr.value;
-                  if (profilePvr.value = true) {
-                    profilePvr.valueFirst = false;
-                  } else {
-                    profilePvr.valueFirst = true;
-                  }
-                  profilePvr.notifyListeners();
-                },
+                onTap: () => updateProfilePvr.yesCheckBox(),
                 child: Container(
                     height: Sizes.s20,
                     width: Sizes.s20,
@@ -37,7 +29,7 @@ class UpdateInitiatedStatusBox extends StatelessWidget {
                         borderRadius: BorderRadius.circular(5),
                         border: Border.all(
                             color: const Color(0xFF541F5C), width: 1.3)),
-                    child: profilePvr.value == true
+                    child: updateProfilePvr.value == true
                         ? const Icon(Icons.check, size: 14)
                         : Container())),
             const HSpace(Sizes.s10),
@@ -46,24 +38,15 @@ class UpdateInitiatedStatusBox extends StatelessWidget {
                     .textColor(const Color(0xff767676))),
             const HSpace(Sizes.s10),
             InkWell(
-                onTap: () {
-                  profilePvr.valueFirst = !profilePvr.valueFirst;
-                  if (profilePvr.valueFirst = true) {
-                    profilePvr.value = false;
-                  } else {
-                    profilePvr.value = true;
-                  }
-                  profilePvr.notifyListeners();
-                },
+                onTap: () => updateProfilePvr.noCheckBox(),
                 child: Container(
                     height: Sizes.s20,
                     width: Sizes.s20,
                     decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(6),
-                      border: Border.all(
-                          color: const Color(0xFF541F5C), width: 1.3),
-                    ),
-                    child: profilePvr.valueFirst == true
+                        borderRadius: BorderRadius.circular(6),
+                        border: Border.all(
+                            color: const Color(0xFF541F5C), width: 1.3)),
+                    child: updateProfilePvr.valueFirst == true
                         ? const Icon(Icons.check, size: 14)
                         : Container())),
             const HSpace(Sizes.s10),

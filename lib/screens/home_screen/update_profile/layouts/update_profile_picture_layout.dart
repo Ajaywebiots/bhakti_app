@@ -7,15 +7,16 @@ class UpdateProfilePicture extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer<UpdateProfileProvider>(builder: (child, profilePvr, ss) {
+    return Consumer<UpdateProfileProvider>(
+        builder: (child, updateProfilePvr, ss) {
       return Stack(children: [
-        profilePvr.imagePath != "" && profilePvr.image != null
+        updateProfilePvr.imagePath != "" && updateProfilePvr.image != null
             ? CircleAvatar(
-                backgroundImage: FileImage(File(profilePvr.imagePath)),
+                backgroundImage: FileImage(File(updateProfilePvr.imagePath)),
                 maxRadius: 55)
-            : profilePvr.downloadUrl != ""
+            : updateProfilePvr.downloadUrl != ""
                 ? CircleAvatar(
-                    backgroundImage: NetworkImage(profilePvr.downloadUrl),
+                    backgroundImage: NetworkImage(updateProfilePvr.downloadUrl),
                     maxRadius: 55)
                 : CircleAvatar(
                     maxRadius: 55, child: Image.asset(eImageAssets.profile)),
@@ -32,37 +33,7 @@ class UpdateProfilePicture extends StatelessWidget {
                         end: Alignment.bottomRight,
                         colors: [Color(0xff83006E), Color(0xff0060AD)])),
                 child: InkWell(
-                    onTap: () {
-                      showDialog(
-                          context: context,
-                          builder: (context) {
-                            return SimpleDialog(children: [
-                              ListTile(
-                                  onTap: () async {
-                                    Navigator.pop(context);
-                                    XFile? photo = await profilePvr.picker
-                                        .pickImage(source: ImageSource.camera);
-                                    profilePvr.imagePath = photo!.path;
-                                    profilePvr.imgStatus = true;
-                                    profilePvr.notifyListeners();
-                                  },
-                                  title: Text(appFonts.camera),
-                                  leading: const Icon(Icons.camera_alt)),
-                              ListTile(
-                                  onTap: () async {
-                                    Navigator.pop(context);
-                                    profilePvr.image = await profilePvr.picker
-                                        .pickImage(source: ImageSource.gallery);
-                                    profilePvr.imagePath =
-                                        profilePvr.image!.path;
-                                    profilePvr.imgStatus = true;
-                                    profilePvr.notifyListeners();
-                                  },
-                                  title: Text(appFonts.gallery),
-                                  leading: const Icon(Icons.image))
-                            ]);
-                          });
-                    },
+                    onTap: () => updateProfilePvr.profilePicUpdate(context),
                     child: SvgPicture.asset(eSvgAssets.camera, height: 30))))
       ]).paddingSymmetric(vertical: 30);
     });

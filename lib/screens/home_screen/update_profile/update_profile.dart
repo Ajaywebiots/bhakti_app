@@ -30,13 +30,11 @@ class _ProfileEditScreenState extends State<ProfileEditScreen> {
                             const VSpace(Insets.i70),
                             Row(children: [
                               SvgPicture.asset(eSvgAssets.arrowLeft)
-                                  .inkWell(onTap: () {
-                                Navigator.pop(context);
-                              }),
+                                  .inkWell(onTap: () => Navigator.pop(context)),
                               const HSpace(Insets.i90),
-                                  Text("Profile Edit",
-                                    style: appCss.philosopherBold28
-                                        .weight(FontWeight.w700)
+                              Text("Profile Edit",
+                                  style: appCss.philosopherBold28
+                                      .weight(FontWeight.w700)
                                       .textColor(const Color(0xff2d2d2d)))
                             ]),
                             const ProfileEditUpperLayout(),

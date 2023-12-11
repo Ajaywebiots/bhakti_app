@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:bhakti_app/widgets/text_common_widget.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:bhakti_app/config.dart';
@@ -22,14 +20,7 @@ class PhoneNumberTextBox extends StatelessWidget {
           radius: 8,
           child: TextFieldCommon(
               maxLength: 10,
-              validator: (value) {
-                if (value!.isNotEmpty) {
-                  setupProfilePvr.phoneNumberValid = null;
-                  setupProfilePvr.notifyListeners();
-                  return null;
-                }
-                return null;
-              },
+              validator: (value) => setupProfilePvr.phoneNumValidator(value),
               keyboardType: TextInputType.number,
               hintText: "Phone Number",
               controller: setupProfilePvr.phoneNum,
@@ -40,14 +31,11 @@ class PhoneNumberTextBox extends StatelessWidget {
                     const HSpace(Insets.i20),
                     CountryCodePicker(
                         showFlag: false,
-                        searchDecoration:
-                        InputDecoration(hintText: "Search Country Code"),
+                        searchDecoration: const InputDecoration(
+                            hintText: "Search Country Code"),
                         padding: EdgeInsets.zero,
-                        onChanged: (value) {
-                          log("coudhsfjsdhf$value");
-                          setupProfilePvr.countryCode = value;
-                          setupProfilePvr.notifyListeners();
-                        },
+                        onChanged: (value) =>
+                            setupProfilePvr.phoneOnChanged(value),
                         textStyle: appCss.dmDenseMedium14
                             .textColor(appColor(context).appTheme.lightText),
                         dialogTextStyle: appCss.dmDenseMedium16,
@@ -57,7 +45,8 @@ class PhoneNumberTextBox extends StatelessWidget {
                         showOnlyCountryWhenClosed: false,
                         alignLeft: false),
                     const HSpace(Insets.i10),
-                    SvgPicture.asset(eSvgAssets.line, height: Sizes.s24, width: Sizes.s24),
+                    SvgPicture.asset(eSvgAssets.line,
+                        height: Sizes.s24, width: Sizes.s24),
                     const HSpace(Insets.i20)
                   ]))).paddingSymmetric(vertical: 10);
     });

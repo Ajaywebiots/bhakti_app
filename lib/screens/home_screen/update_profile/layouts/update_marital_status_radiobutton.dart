@@ -7,12 +7,12 @@ class UpdateMaritalStatusBox extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<UpdateProfileProvider>(
-        builder: (context, profilePvr, child) {
+        builder: (context, updateProfilePvr, child) {
       return CustomTitleWidget(
           height: 52,
           width: double.infinity,
           title: 'Marital Status',
-          color: profilePvr.nameValid == null
+          color: updateProfilePvr.nameValid == null
               ? const Color(0xff541F5C).withOpacity(.20)
               : appColor(context).appTheme.red,
           radius: 8,
@@ -25,12 +25,8 @@ class UpdateMaritalStatusBox extends StatelessWidget {
                 fillColor: MaterialStateColor.resolveWith(
                     (states) => const Color(0xFF541F5C)),
                 value: 1,
-                groupValue: profilePvr.selectedMarital,
-                onChanged: (value) {
-                  profilePvr.selectedMarital = value!;
-                  profilePvr.showError = false;
-                  profilePvr.notifyListeners();
-                }),
+                groupValue: updateProfilePvr.selectedMarital,
+                onChanged: (value) => updateProfilePvr.marriedChanged(value)),
             Text("Married",
                 style: appCss.dmDenseMedium14
                     .textColor(appColor(context).appTheme.lightText)),
@@ -38,11 +34,8 @@ class UpdateMaritalStatusBox extends StatelessWidget {
                 fillColor: MaterialStateColor.resolveWith(
                     (states) => const Color(0xFF541F5C)),
                 value: 2,
-                groupValue: profilePvr.selectedMarital,
-                onChanged: (value) {
-                  profilePvr.selectedMarital = value!;
-                  profilePvr.notifyListeners();
-                }),
+                groupValue: updateProfilePvr.selectedMarital,
+                onChanged: (value) => updateProfilePvr.unMarriedChanged(value)),
             Text("Unmarried",
                 style: appCss.dmDenseMedium14
                     .textColor(appColor(context).appTheme.lightText))
