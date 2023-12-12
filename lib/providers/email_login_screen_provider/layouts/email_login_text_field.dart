@@ -11,7 +11,7 @@ class EmailLoginTextField extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return CustomTitleWidget(
-        height: 52,
+        height: Sizes.s52,
         width: double.infinity,
         title: appFonts.email,
         color: dataPvr!.emailValid == null
@@ -28,9 +28,9 @@ class EmailLoginTextField extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                   const HSpace(Sizes.s20),
-                  SvgPicture.asset(eSvgAssets.emailId, height: 20),
+                  SvgPicture.asset(eSvgAssets.emailId, height: Sizes.s20),
                   const HSpace(Sizes.s10),
-                  SvgPicture.asset(eSvgAssets.line, height: 24, width: 24),
+                  SvgPicture.asset(eSvgAssets.line, height: Sizes.s24, width: Sizes.s24),
                   const HSpace(Sizes.s20)
                 ])));
   }

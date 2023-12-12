@@ -17,13 +17,15 @@ class _DrawerScreenState extends State<DrawerScreen> {
           child: Stack(alignment: Alignment.bottomCenter, children: [
         Column(mainAxisAlignment: MainAxisAlignment.start, children: [
           const VSpace(Insets.i40),
-          Image.asset(eImageAssets.bhaktiLogo, height: Sizes.s30, width: Sizes.s136),
+          Image.asset(eImageAssets.bhaktiLogo,
+              height: Sizes.s30, width: Sizes.s136),
           ...appArray.drawerList.asMap().entries.map((e) {
             List testingList = [];
             if (e.value['name'] == "Online Tests") {
               testingList = e.value['list'];
             }
-            return DrawerListTileLayout(data: e.value,testingList:testingList);
+            return DrawerListTileLayout(
+                data: e.value, testingList: testingList);
           }),
           const VSpace(Insets.i83),
           const VSpace(Insets.i49)
@@ -33,7 +35,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
               style: appCss.dmDenseRegular14
                   .textColor(appColor(context).appTheme.lightText)),
           const VSpace(Insets.i8),
-          SvgPicture.asset(eSvgAssets.verticalLine),
+          SvgPicture.asset(eSvgAssets.profileLine, width: Sizes.s224),
           const VSpace(Insets.i19),
           Row(children: [
             const HSpace(Insets.i20),

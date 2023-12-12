@@ -1,7 +1,5 @@
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/setting_layout.dart';
-import 'package:bhakti_app/widgets/common_app_bar.dart';
-import 'package:bhakti_app/widgets/common_container_tile.dart';
 
 class SettingScreen extends StatefulWidget {
   const SettingScreen({super.key});

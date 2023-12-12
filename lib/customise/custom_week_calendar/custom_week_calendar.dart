@@ -359,7 +359,7 @@ class _HorizontalWeekCalendarState extends State<HorizontalWeekCalendar> {
                                                       : widget
                                                       .inactiveWeekColor ??
                                                       Colors.white)),
-                                          const SizedBox(height: 4),
+                                          const SizedBox(height: Sizes.s4),
                                           FittedBox(
                                               child: Text(
                                                   "${listOfWeeks[ind][weekIndex]

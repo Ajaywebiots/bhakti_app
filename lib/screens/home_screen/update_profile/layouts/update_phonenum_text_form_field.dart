@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bhakti_app/widgets/text_common_widget.dart';
 import 'package:country_code_picker/country_code_picker.dart';
 import 'package:bhakti_app/config.dart';
@@ -8,8 +10,8 @@ class UpdatePhoneNumberTextBox extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Consumer2<UpdateProfileProvider, SetUpProfileProvider>(
-        builder: (context, updateProfilePvr, profilePvr, child) {
+    return Consumer<UpdateProfileProvider>(
+        builder: (context1, updateProfilePvr, child) {
       return CustomTitleWidget(
           height: 52,
           width: double.infinity,
@@ -36,12 +38,11 @@ class UpdatePhoneNumberTextBox extends StatelessWidget {
                             hintText: "Search Country Code"),
                         padding: EdgeInsets.zero,
                         onChanged: (value) =>
-                            updateProfilePvr.countryCodeOnChanged(
-                                profilePvr.countryCode, value),
+                            updateProfilePvr.countryCodeOnChanged(value),
                         textStyle: appCss.dmDenseMedium14
                             .textColor(appColor(context).appTheme.lightText),
                         dialogTextStyle: appCss.dmDenseMedium16,
-                        initialSelection: 'IT',
+                        initialSelection: "${updateProfilePvr.countryCode}",
                         favorite: const ['+91', 'भारत'],
                         showCountryOnly: false,
                         showOnlyCountryWhenClosed: false,

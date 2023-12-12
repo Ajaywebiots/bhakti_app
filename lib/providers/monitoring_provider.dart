@@ -299,4 +299,14 @@ class MonitoringProvider extends ChangeNotifier {
     isSelected = index;
     notifyListeners();
   }
+
+
+  singleUserData(){
+  isAllSelected = false;
+  notifyListeners();
+}
+  allUserData(){
+  isAllSelected = true;
+  notifyListeners();
+}
 }

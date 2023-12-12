@@ -1,5 +1,4 @@
 import '../../../../config.dart';
-import '../../../../widgets/common_left_side_text.dart';
 
 class CommonContainerDesign extends StatelessWidget {
   final Widget? child;

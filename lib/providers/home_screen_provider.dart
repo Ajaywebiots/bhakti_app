@@ -1,17 +1,7 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/screens/auth_screen/login_auth_screen/login_auth_screen.dart';
-import 'package:bhakti_app/screens/home_screen/book_read_presently_screen/book_read_presently_screen.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
-import 'package:bhakti_app/services/sadhana_api_data.dart';
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:file_picker/file_picker.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:intl/intl.dart';
-import 'package:shared_preferences/shared_preferences.dart';
-import '../models/user_model.dart';
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
   bookReadingPresentlyNavigate(context) {
@@ -22,6 +12,7 @@ class HomeScreenProvider extends ChangeNotifier {
     }));
   }
 
+  TextEditingController? searchHere;
   final GlobalKey<ScaffoldState> key = GlobalKey();
 
   List bookingLis = [];
@@ -51,11 +42,64 @@ class HomeScreenProvider extends ChangeNotifier {
     if (result != null) {
       PlatformFile file = result.files.first;
 
-      print('File name: ${file.name}');
-      print('File size: ${formatBytes(file.size)}');
-      print('File extension: ${file.extension}');
-      print('File path: ${file.path}');
+      log('File name: ${file.name}');
+      log('File size: ${formatBytes(file.size)}');
+      log('File extension: ${file.extension}');
+      log('File path: ${file.path}');
     } else {}
+  }
+
+  deleteData(context){
+    showDialog(
+        context: context,
+        builder: (context) {
+          return Dialog(
+              shape: RoundedRectangleBorder(
+                  borderRadius: BorderRadius.circular(8)),
+              child: SizedBox(
+                  height: 175,
+                  child: Column(
+                      mainAxisAlignment:
+                      MainAxisAlignment.center,
+                      children: [
+                        Center(
+                            child: Text(
+                                appFonts.deleteBook,
+                                style: appCss
+                                    .philosopherBold18
+                                    .textColor(
+                                    appColor(context)
+                                        .appTheme
+                                        .primary))),
+                        const VSpace(Insets.i10),
+                        Center(
+                            child: Text(
+                                appFonts
+                                    .areYouSureYouWantToDelete,
+                                style: appCss
+                                    .dmDenseRegular14
+                                    .textColor(
+                                    appColor(context)
+                                        .appTheme
+                                        .rulesClr))),
+                        Center(
+                            child: Text(
+                                style: appCss
+                                    .dmDenseRegular14
+                                    .textColor(
+                                    appColor(context)
+                                        .appTheme
+                                        .rulesClr),
+                                appFonts.thisActionCant)),
+                        const VSpace(Insets.i25),
+                        CommonSelectionButton(
+                            textTwo: appFonts.delete,
+                            onTapOne: () =>
+                                Navigator.pop(context),
+                            onTapTwo: () =>
+                                Navigator.pop(context))
+                      ])));
+        });
   }
 
   String formatBytes(int bytes) {

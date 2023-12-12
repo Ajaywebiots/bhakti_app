@@ -1,5 +1,4 @@
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/widgets/common_selection_button.dart';
 
 class ShareMySadhanaDialog extends StatelessWidget {
   const ShareMySadhanaDialog({super.key});
@@ -9,21 +8,21 @@ class ShareMySadhanaDialog extends StatelessWidget {
     return Dialog(
         shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(8)),
         child: SizedBox(
-            height: 175,
+            height: Sizes.s175,
             child:
                 Column(mainAxisAlignment: MainAxisAlignment.center, children: [
               const VSpace(Insets.i10),
               Center(
-                  child: Text("Stop Sharing",
+                  child: Text(appFonts.stopSharing,
                       style: appCss.philosopherBold18
                           .textColor(appColor(context).appTheme.primary))),
               const VSpace(Insets.i10),
               Center(
-                  child: Text("Are You Sure You Want to stop shared",
+                  child: Text(appFonts.areYouSureToStop,
                       style: appCss.dmDenseRegular14
                           .textColor(appColor(context).appTheme.rulesClr))),
               Center(
-                  child: Text("Sadhana?",
+                  child: Text(appFonts.sadhana,
                       style: appCss.dmDenseRegular14
                           .textColor(appColor(context).appTheme.rulesClr))),
               const VSpace(Insets.i25),

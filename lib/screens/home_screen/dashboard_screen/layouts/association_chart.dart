@@ -1,6 +1,4 @@
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-
 import '../../../../config.dart';
 
 class AssociationChart extends StatelessWidget {
@@ -96,7 +94,7 @@ class AssociationChart extends StatelessWidget {
         annotations: <CartesianChartAnnotation>[
           CartesianChartAnnotation(
               widget: SvgPicture.asset(eSvgAssets.chartIcon,
-                  height: 12),
+                  height: Sizes.s12),
               coordinateUnit: CoordinateUnit.point,
               x: "Bhawadgita",
               y: DateTime(
@@ -107,7 +105,7 @@ class AssociationChart extends StatelessWidget {
                   .millisecondsSinceEpoch),
           CartesianChartAnnotation(
               widget: SvgPicture.asset(eSvgAssets.chartIcon,
-                  height: 12),
+                  height: Sizes.s12),
               coordinateUnit: CoordinateUnit.point,
               x: "Bhagwatam",
               y: DateTime(
@@ -118,7 +116,7 @@ class AssociationChart extends StatelessWidget {
                   .millisecondsSinceEpoch),
           CartesianChartAnnotation(
               widget: SvgPicture.asset(eSvgAssets.chartIcon,
-                  height: 12),
+                  height: Sizes.s12),
               coordinateUnit: CoordinateUnit.point,
               x: "Ramayan",
               y: DateTime(
@@ -129,7 +127,7 @@ class AssociationChart extends StatelessWidget {
                   .millisecondsSinceEpoch),
           CartesianChartAnnotation(
               widget: SvgPicture.asset(eSvgAssets.chartIcon,
-                  height: 12),
+                  height: Sizes.s12),
               coordinateUnit: CoordinateUnit.point,
               x: "Mahabharat",
               y: DateTime(

@@ -32,7 +32,7 @@ class SignUpUpperLayout extends StatelessWidget {
                         ? SvgPicture.asset(eSvgAssets.hideEye)
                         : SvgPicture.asset(eSvgAssets.eye,
                             color: appColor(context).appTheme.primary))
-                .inkWell(onTap: () => emailSignUpPvr.isShowPassword)),
+                .inkWell(onTap: () => emailSignUpPvr.isShowPassword())),
         const VSpace(Insets.i25),
         Center(
                 child: Container(

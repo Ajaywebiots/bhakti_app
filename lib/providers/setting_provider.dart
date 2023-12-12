@@ -3,7 +3,7 @@ import 'package:bhakti_app/config.dart';
 import '../screens/home_screen/setting_screen/layouts/setting_dialog_layout.dart';
 
 class SettingProvider extends ChangeNotifier {
-  TextEditingController? numberOfRound, averageTime;
+  TextEditingController? numberOfRound, averageTime,searchBookHere,searchUser;
 
   tabControl(index) {
     notifyListeners();
@@ -21,6 +21,11 @@ class SettingProvider extends ChangeNotifier {
             return data!['navigate'];
           }));
   }
+
+
+
+
+  TextEditingController? accessKey;
 
   onSelected(context, value) {
     if (value == 1) {

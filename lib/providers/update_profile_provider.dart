@@ -34,6 +34,7 @@ class UpdateProfileProvider extends ChangeNotifier {
   final focusNode = FocusNode();
   CountryCode? countryCode;
 
+  String? code;
   bool value = false;
   bool valueFirst = true, isLoading = false;
 
@@ -76,26 +77,44 @@ class UpdateProfileProvider extends ChangeNotifier {
     return base64Encode(resizedImageBytes);
   }
 
+  List<String>? splitPhoneNum;
+
+  List<String>? myFunction() {
+    notifyListeners();
+    String phoneNumber = phoneNum.text;
+    splitPhoneNum = phoneNumber.split('+91-');
+    print("lalala $phoneNumber");
+    print("lalala ${splitPhoneNum![1]}");
+
+    return splitPhoneNum;
+  }
+
   Future<void> saveData(context) async {
+    var sssss = phoneNum.text.contains("$countryCode-");
+    log("asdasdasdad$sssss");
+    //   myFunction();
     SharedPreferences pref = await SharedPreferences.getInstance();
     if (formKey.currentState!.validate()) {
       showLoading(context);
       notifyListeners();
       try {
+        log("image : $image");
         String newUrl = "";
-        String base64Image = await resizeAndEncodeImage(File(image!.path));
-        newUrl = base64Image;
-        Reference reference = FirebaseStorage.instance.ref().child(image!.name);
-        var file = File(image!.path);
-        UploadTask uploadTask = reference.putFile(file);
-
-        await uploadTask.then((res) async {
-          await res.ref.getDownloadURL().then((images) async {
-            log("res : $images");
-            newUrl = images;
-            notifyListeners();
-          }, onError: (err) {});
-        });
+        if (image != null) {
+          String base64Image = await resizeAndEncodeImage(File(image!.path));
+          newUrl = base64Image;
+          Reference reference =
+              FirebaseStorage.instance.ref().child(image!.name);
+          var file = File(image!.path);
+          UploadTask uploadTask = reference.putFile(file);
+          await uploadTask.then((res) async {
+            await res.ref.getDownloadURL().then((images) async {
+              log("res : $images");
+              newUrl = images;
+              notifyListeners();
+            }, onError: (err) {});
+          });
+        }
 
         log("dssf4444 sss $downloadUrl");
         log("dssf4444 $newUrl");
@@ -108,8 +127,7 @@ class UpdateProfileProvider extends ChangeNotifier {
                   : "female"
               : "",
           "email": emailId.text,
-          "mobile_number":
-              phoneNum.text.isNotEmpty ? "$countryCode-${phoneNum.text}" : "",
+          "mobile_number": "${countryCode!.dialCode}-${phoneNum.text}",
           "country": countrySelected['code'],
           "state": state.text,
           "city": city.text,
@@ -125,8 +143,7 @@ class UpdateProfileProvider extends ChangeNotifier {
               : "",
           "profile_picture_url": newUrl == "" ? downloadUrl : newUrl
         };
-        log("country code in map${countryCode!}");
-
+        log("country code in map${body!}");
         await apiServices
             .postApi(api.profileUpdate, body, isToken: true)
             .then((value) async {
@@ -247,7 +264,7 @@ class UpdateProfileProvider extends ChangeNotifier {
     return null;
   }
 
-  countryCodeOnChanged(countryCode, value) {
+  countryCodeOnChanged(value) {
     countryCode = value;
     notifyListeners();
   }
@@ -277,9 +294,6 @@ class UpdateProfileProvider extends ChangeNotifier {
     }
   }
 
-
-
-
   profilePicUpdate(context) {
     showDialog(
         context: context,
@@ -287,12 +301,12 @@ class UpdateProfileProvider extends ChangeNotifier {
           return SimpleDialog(children: [
             ListTile(
                 onTap: () => cameraButton(context),
-                title: Text(appFonts.camera),
-                leading: const Icon(Icons.camera_alt)),
+                title: Text(appFonts.camera,style: appCss.dmDenseRegular14.textColor(appColor(context).appTheme.black)),
+                leading: const Icon(Icons.camera_alt,color: Colors.black)),
             ListTile(
                 onTap: () => galleryButton(context),
-                title: Text(appFonts.gallery),
-                leading: const Icon(Icons.image))
+                title: Text(appFonts.gallery,style: appCss.dmDenseRegular14.textColor(appColor(context).appTheme.black)),
+                leading: const Icon(Icons.image,color: Colors.black))
           ]);
         });
   }
@@ -406,7 +420,7 @@ class UpdateProfileProvider extends ChangeNotifier {
             : 2
         : 1;
     emailId.text = userModel!.email ?? "";
-    phoneNum.text = userModel!.mobileNumber ?? "";
+    String phone = userModel!.mobileNumber ?? "";
     int index = countryItems.indexWhere((element) {
       return element['code'] == userModel!.country;
     });
@@ -424,6 +438,11 @@ class UpdateProfileProvider extends ChangeNotifier {
             ? 1
             : 2
         : 1;
+    countryCode = CountryCode(dialCode: phone.split("-")[0]);
+    phoneNum.text = phone.split("-")[1];
+
+    log("DHRUVIIII :${CountryCode(dialCode: phone.split("-")[0])}");
+    log("DHRUVIIII :$countryCode");
 
     notifyListeners();
   }

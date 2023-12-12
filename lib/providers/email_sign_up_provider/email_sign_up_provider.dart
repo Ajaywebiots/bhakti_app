@@ -39,8 +39,8 @@ class EmailSignUpProvider extends ChangeNotifier {
   }
 
   isShowPassword(){
-    notifyListeners();
     isHide = !isHide;
+    notifyListeners();
   }
 
   emailSignupNavigate(context) async {

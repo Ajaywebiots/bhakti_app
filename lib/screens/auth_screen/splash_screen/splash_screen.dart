@@ -1,4 +1,4 @@
-import 'dart:async';
+
 import 'package:bhakti_app/config.dart';
 
 class SplashScreen extends StatefulWidget {

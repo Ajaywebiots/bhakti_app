@@ -1,6 +1,5 @@
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/screens/auth_screen/email_sign_up_screen/layouts/signup_bottom_layout.dart';
-import 'package:bhakti_app/screens/auth_screen/email_sign_up_screen/layouts/signup_upper_layout.dart';
+
 
 class EmailSignUpScreen extends StatefulWidget {
   const EmailSignUpScreen({super.key});

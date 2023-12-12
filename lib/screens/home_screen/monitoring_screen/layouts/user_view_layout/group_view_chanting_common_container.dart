@@ -1,9 +1,8 @@
-import 'package:bhakti_app/common/extension/widget_extension.dart';
 import 'package:bhakti_app/config.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 
 class GroupViewChantingCommonContainer extends StatelessWidget {
   final String? text, countText, svgImage;
+
 
   const GroupViewChantingCommonContainer(
       {super.key, this.text, this.countText, this.svgImage});
@@ -14,7 +13,6 @@ class GroupViewChantingCommonContainer extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: appColor(context).appTheme.whiteColor),
-        width: Sizes.s150,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,
@@ -23,8 +21,9 @@ class GroupViewChantingCommonContainer extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.center,
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: [
+                    HSpace(Insets.i10),
                     SvgPicture.asset(svgImage!),
-                    const HSpace(Insets.i10),
+                    const HSpace(Insets.i6),
                     Column(children: [
                       Text(countText!,
                           style: appCss.dmDenseBold24

@@ -1,12 +1,8 @@
-import 'dart:convert';
 import 'dart:developer';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/models/user_model.dart';
 import 'package:bhakti_app/screens/auth_screen/email_sign_up_screen/email_sign_up_screen.dart';
 import 'package:bhakti_app/screens/auth_screen/phone_login_screen/phone_login_screen.dart';
 import 'package:bhakti_app/screens/home_screen/setup_profile/setup_profile.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import '../../screens/home_screen/common_bottom_bar/common_bottom_bar.dart';
 
 class EmailLoginProvider extends ChangeNotifier {
@@ -34,23 +30,17 @@ class EmailLoginProvider extends ChangeNotifier {
     }
   }
 
-
-  signUpNavigate(context){
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) {
-          return const EmailSignUpScreen();
-        }));
+  signUpNavigate(context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return const EmailSignUpScreen();
+    }));
   }
 
-
-  phoneLoginNavigate(context){
-    Navigator.push(context,
-        MaterialPageRoute(builder: (context) {
-          return const PhoneLoginScreen();
-        }));
+  phoneLoginNavigate(context) {
+    Navigator.push(context, MaterialPageRoute(builder: (context) {
+      return const PhoneLoginScreen();
+    }));
   }
-
-
 
   passwordValidator(value) {
     notifyListeners();
@@ -118,11 +108,18 @@ class EmailLoginProvider extends ChangeNotifier {
         // ignore: use_build_context_synchronously
       } on FirebaseAuthException catch (e) {
         if (e.code == 'user-not-found') {
-          ScaffoldMessenger.of(context).showSnackBar(
-              const SnackBar(content: Text("No user found for that email")));
-        } else if (e.code == 'wrong-password') {
-          ScaffoldMessenger.of(context).showSnackBar(const SnackBar(
-              content: Text("Wrong password provided for that user.")));
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              content: Text(appFonts.noUserFound,
+                  style: appCss.dmDenseRegular16
+                      .textColor(appColor(context).appTheme.primary))));
+        } else if (e.code == appFonts.wrongPassword) {
+          ScaffoldMessenger.of(context).showSnackBar(SnackBar(
+              duration: Duration(seconds: 1),
+              content: Text(
+                appFonts.wrongPasswordProvided,
+                style: appCss.dmDenseRegular16
+                    .textColor(appColor(context).appTheme.primary),
+              )));
         }
         isValid = true;
         notifyListeners();

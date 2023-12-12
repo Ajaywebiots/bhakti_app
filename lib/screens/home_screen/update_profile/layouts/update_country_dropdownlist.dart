@@ -28,10 +28,10 @@ class UpdateCountryDropDownBox extends StatelessWidget {
                       Expanded(
                           child: DropdownButtonHideUnderline(
                               child: DropdownButton(
-                                  hint: const Align(
+                                  hint: Align(
                                       alignment: Alignment.centerLeft,
-                                      child: Text("Select Country",
-                                          style: TextStyle(
+                                      child: Text(appFonts.selectCountry,
+                                          style: const TextStyle(
                                               color: Color(0xff767676)))),
                                   style: appCss.dmDenseMedium14.textColor(
                                       appColor(context).appTheme.lightText),

@@ -1,11 +1,11 @@
 import 'package:bhakti_app/config.dart';
-import 'package:flutter_switch/flutter_switch.dart';
 
 class GroupViewSleepCommonContainer extends StatelessWidget {
   final String? text, timeText, svgImage;
+  final double? width;
 
   const GroupViewSleepCommonContainer(
-      {super.key, this.text, this.timeText, this.svgImage});
+      {super.key, this.text, this.timeText, this.svgImage, this.width});
 
   @override
   Widget build(BuildContext context) {
@@ -13,7 +13,7 @@ class GroupViewSleepCommonContainer extends StatelessWidget {
         decoration: BoxDecoration(
             borderRadius: BorderRadius.circular(8),
             color: appColor(context).appTheme.whiteColor),
-        width: Sizes.s140,
+        width: width??Sizes.s140,
         child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
             crossAxisAlignment: CrossAxisAlignment.start,

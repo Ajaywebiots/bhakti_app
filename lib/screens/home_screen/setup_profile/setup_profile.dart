@@ -1,5 +1,4 @@
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/widgets/common_bg_image.dart';
 import 'package:bhakti_app/widgets/loading_component.dart';
 
 class SetUpProfile extends StatefulWidget {
@@ -43,11 +42,12 @@ class _SetUpProfileState extends State<SetUpProfile> {
                                     const PersonalInfoExpansionTile(),
                                     const ContactInfoExpansionTile(),
                                     const VSpace(Insets.i18),
-                                    CommonButton(
-                                        width: Sizes.s141,
-                                        onTap: () =>
-                                            setUpProfilePvr.saveData(context),
-                                        text: appFonts.save)
+                                    Center(
+                                        child: CommonButton(
+                                            width: Sizes.s141,
+                                            onTap: () => setUpProfilePvr
+                                                .saveData(context),
+                                            text: appFonts.save))
                                   ]).marginSymmetric(
                                   horizontal: 20, vertical: 60)))))));
     });

@@ -1,10 +1,5 @@
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/dashboard_screen/layouts/chanting_chart.dart';
-import 'package:bhakti_app/screens/home_screen/dashboard_screen/layouts/table_calendar.dart';
-import 'package:bhakti_app/widgets/common_app_bar.dart';
-import 'package:bhakti_app/widgets/common_bg_image.dart';
-import 'package:bhakti_app/widgets/common_container_tile.dart';
-import 'package:bhakti_app/widgets/common_left_side_text.dart';
 import 'layouts/user_selection_layout.dart';
 
 class DashBoardScreen extends StatefulWidget {

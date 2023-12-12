@@ -7,14 +7,13 @@ class CommonChantingRow extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-      const HSpace(Insets.i15),
+
       GroupViewChantingCommonContainer(
           text: textOne,
           countText: countOne,
           svgImage: eSvgAssets.chanting),
-      const HSpace(Insets.i28),
+      const HSpace(Insets.i10),
       SvgPicture.asset(eSvgAssets.verticalLine),
-      const HSpace(Insets.i20),
       GroupViewChantingCommonContainer(
           text: textTwo, countText: countTwo, svgImage: eSvgAssets.chanting)
     ]);

@@ -1,9 +1,4 @@
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/pop_up_menu_button.dart';
-import 'package:bhakti_app/widgets/common_app_bar.dart';
-import 'package:bhakti_app/widgets/common_bg_image.dart';
-import 'package:bhakti_app/widgets/common_left_side_text.dart';
-import 'package:bhakti_app/widgets/common_textfield.dart';
 
 class SharingWithMe extends StatelessWidget {
   const SharingWithMe({super.key});
@@ -28,7 +23,6 @@ class SharingWithMe extends StatelessWidget {
                 const VSpace(Insets.i15),
                 CommonTextField(
                     hintText: appFonts.searchHere,
-                    prefixSvg1: eSvgAssets.line,
                     prefixSvg: eSvgAssets.searchNormal),
                 const VSpace(Insets.i15),
                 Container(

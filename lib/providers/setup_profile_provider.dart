@@ -167,8 +167,8 @@ class SetUpProfileProvider extends ChangeNotifier {
                   imgStatus = true;
                   notifyListeners();
                 },
-                title: Text(appFonts.camera),
-                leading: const Icon(Icons.camera_alt)),
+                title: Text(appFonts.camera,style: appCss.dmDenseRegular14.textColor(appColor(context).appTheme.black)),
+                leading: const Icon(Icons.camera_alt,color: Colors.black)),
             ListTile(
                 onTap: () async {
                   Navigator.pop(context);
@@ -177,8 +177,8 @@ class SetUpProfileProvider extends ChangeNotifier {
                   imgStatus = true;
                   notifyListeners();
                 },
-                title: Text(appFonts.gallery),
-                leading: const Icon(Icons.image))
+                title: Text(appFonts.gallery,style: appCss.dmDenseRegular14.textColor(appColor(context).appTheme.black)),
+                leading: const Icon(Icons.image,color: Colors.black))
           ]);
         });
   }

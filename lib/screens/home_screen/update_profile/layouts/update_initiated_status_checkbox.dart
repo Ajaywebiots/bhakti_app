@@ -9,7 +9,7 @@ class UpdateInitiatedStatusBox extends StatelessWidget {
     return Consumer<UpdateProfileProvider>(
         builder: (context, updateProfilePvr, child) {
       return CustomTitleWidget(
-          height: 52,
+          height: Sizes.s52,
           width: double.infinity,
           color: const Color(0xff541F5C).withOpacity(.20),
           radius: 8,
@@ -33,7 +33,7 @@ class UpdateInitiatedStatusBox extends StatelessWidget {
                         ? const Icon(Icons.check, size: 14)
                         : Container())),
             const HSpace(Sizes.s10),
-            Text("Yes",
+            Text(appFonts.yes,
                 style: appCss.dmDenseExtraBold16
                     .textColor(const Color(0xff767676))),
             const HSpace(Sizes.s10),
@@ -50,7 +50,7 @@ class UpdateInitiatedStatusBox extends StatelessWidget {
                         ? const Icon(Icons.check, size: 14)
                         : Container())),
             const HSpace(Sizes.s10),
-            Text("No",
+            Text(appFonts.no,
                 style: appCss.dmDenseExtraBold16
                     .textColor(const Color(0xff767676)))
           ])).paddingSymmetric(vertical: 10);

@@ -34,7 +34,7 @@ class NotificationLayouts extends StatelessWidget {
                   Column(mainAxisAlignment: MainAxisAlignment.start, children: [
             const VSpace(Insets.i100),
             Row(children: [
-              Text("Notification Setting",
+              Text(appFonts.notificationSetting,
                   style: appCss.dmDenseExtraBold18
                       .textColor(appColor(context).appTheme.rulesClr))
             ]),

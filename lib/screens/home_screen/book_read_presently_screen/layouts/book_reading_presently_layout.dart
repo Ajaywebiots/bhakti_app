@@ -1,5 +1,4 @@
 import '../../../../config.dart';
-import '../../../../widgets/common_selection_button.dart';
 
 class BookReadingPresentlyLayout extends StatelessWidget {
   final dynamic data;
@@ -53,56 +52,7 @@ class BookReadingPresentlyLayout extends StatelessWidget {
                               element['book_id'] == data['book_id'])
                           .isNotEmpty
                       ? SvgPicture.asset(eSvgAssets.delete).inkWell(
-                          onTap: () {
-                          showDialog(
-                              context: context,
-                              builder: (context) {
-                                return Dialog(
-                                    shape: RoundedRectangleBorder(
-                                        borderRadius: BorderRadius.circular(8)),
-                                    child: SizedBox(
-                                        height: 175,
-                                        child: Column(
-                                            mainAxisAlignment:
-                                                MainAxisAlignment.center,
-                                            children: [
-                                              Center(
-                                                  child: Text("Delete Book",
-                                                      style: appCss
-                                                          .philosopherBold18
-                                                          .textColor(
-                                                              appColor(context)
-                                                                  .appTheme
-                                                                  .primary))),
-                                              const VSpace(Insets.i10),
-                                              Center(
-                                                  child: Text(
-                                                      "Are You Sure You Want to Delete This Book?",
-                                                      style: appCss
-                                                          .dmDenseRegular14
-                                                          .textColor(
-                                                              appColor(context)
-                                                                  .appTheme
-                                                                  .rulesClr))),
-                                              Center(
-                                                  child: Text(
-                                                      style: appCss
-                                                          .dmDenseRegular14
-                                                          .textColor(
-                                                              appColor(context)
-                                                                  .appTheme
-                                                                  .rulesClr),
-                                                      "This Action Can’t Be Undone.")),
-                                              const VSpace(Insets.i25),
-                                              CommonSelectionButton(
-                                                  textTwo: appFonts.delete,
-                                                  onTapOne: () =>
-                                                      Navigator.pop(context),
-                                                  onTapTwo: () =>
-                                                      Navigator.pop(context))
-                                            ])));
-                              });
-                        })
+                          onTap: () => homeScreenPvr.deleteData(context))
                       : SvgPicture.asset(eSvgAssets.add))
               .inkWell(onTap: () {
             if (!appArray.bookList.contains(data)) {

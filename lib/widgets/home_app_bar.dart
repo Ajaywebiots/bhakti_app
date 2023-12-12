@@ -21,7 +21,7 @@ class HomeAppBar extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.transparent,
           titleSpacing: 10,
-          title: Image.asset(eImageAssets.bhaktiLogo, height: 35),
+          title: Image.asset(eImageAssets.bhaktiLogo, height: Sizes.s35),
           actions: [
             SvgPicture.asset(eSvgAssets.chat),
             const HSpace(Insets.i10),
@@ -45,8 +45,8 @@ class HomeAppBar extends StatelessWidget {
                 ? CachedNetworkImage(
                     imageUrl: homeScreenPvr.userModel!.profilePictureUrl!,
                     errorWidget: (context, url, error) => Container(
-                        height: 32,
-                        width: 32,
+                        height: Sizes.s32,
+                        width: Sizes.s32,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 fit: BoxFit.cover,
@@ -56,8 +56,8 @@ class HomeAppBar extends StatelessWidget {
                             color: appColor(context).appTheme.whiteColor)),
                     placeholder: (context, url) => const CircularProgressIndicator(),
                     imageBuilder: (context, imageProvider) => Container(
-                        height: 32,
-                        width: 32,
+                        height: Sizes.s32,
+                        width: Sizes.s32,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 fit: BoxFit.cover,
@@ -78,14 +78,14 @@ class HomeAppBar extends StatelessWidget {
                     });
                   })
                 : Container(
-                        height: 32,
-                        width: 32,
+                        height: Sizes.s32,
+                        width: Sizes.s32,
                         decoration: BoxDecoration(
                             image: DecorationImage(
                                 fit: BoxFit.cover,
                                 alignment: Alignment.center,
                                 image: AssetImage(eImageAssets.img)),
-                            borderRadius: BorderRadius.circular(4),
+                            borderRadius: BorderRadius.circular(Insets.i4),
                             color: appColor(context).appTheme.whiteColor))
                     .inkWell(onTap: () {
                     Navigator.push(context,

@@ -1,8 +1,5 @@
 import 'dart:developer';
-
 import 'package:intl/intl.dart';
-import 'package:syncfusion_flutter_charts/charts.dart';
-
 import '../../../../config.dart';
 
 class ChantingChart extends StatefulWidget {

@@ -9,13 +9,13 @@ class UpdateMaritalStatusBox extends StatelessWidget {
     return Consumer<UpdateProfileProvider>(
         builder: (context, updateProfilePvr, child) {
       return CustomTitleWidget(
-          height: 52,
+          height: Sizes.s52,
           width: double.infinity,
           title: 'Marital Status',
           color: updateProfilePvr.nameValid == null
               ? const Color(0xff541F5C).withOpacity(.20)
               : appColor(context).appTheme.red,
-          radius: 8,
+          radius: Insets.i8,
           child: Row(children: [
             const HSpace(Insets.i18),
             SvgPicture.asset(eSvgAssets.wedding),
@@ -27,7 +27,7 @@ class UpdateMaritalStatusBox extends StatelessWidget {
                 value: 1,
                 groupValue: updateProfilePvr.selectedMarital,
                 onChanged: (value) => updateProfilePvr.marriedChanged(value)),
-            Text("Married",
+            Text(appFonts.married,
                 style: appCss.dmDenseMedium14
                     .textColor(appColor(context).appTheme.lightText)),
             Radio(
@@ -36,7 +36,7 @@ class UpdateMaritalStatusBox extends StatelessWidget {
                 value: 2,
                 groupValue: updateProfilePvr.selectedMarital,
                 onChanged: (value) => updateProfilePvr.unMarriedChanged(value)),
-            Text("Unmarried",
+            Text(appFonts.unmarried,
                 style: appCss.dmDenseMedium14
                     .textColor(appColor(context).appTheme.lightText))
           ])).paddingSymmetric(vertical: 10);
