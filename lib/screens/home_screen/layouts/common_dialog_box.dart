@@ -1,6 +1,6 @@
+import 'dart:developer';
 import 'package:bhakti_app/config.dart';
-
-import '../../../widgets/common_selection_button.dart';
+import '../../../customise/custom_wheel_silder/wheel_slider.dart';
 
 class CommonDialog extends StatefulWidget {
   final ValueSetter<int>? onHourChange;
@@ -22,13 +22,17 @@ class CommonDialog extends StatefulWidget {
 class _CommonDialogState extends State<CommonDialog> {
   @override
   Widget build(BuildContext context) {
+    int currentValue = 1;
+    const int totalCount = 12;
+    const int initValue = 5;
     return Dialog(
+        insetPadding: const EdgeInsets.symmetric(horizontal: 20),
         backgroundColor: Colors.transparent,
         alignment: Alignment.center,
         child: Container(
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8), color: Colors.white),
-            width: Sizes.s335,
+            width: double.infinity,
             height: widget.text == "Mangala Arti"
                 ? Sizes.s660
                 : widget.text == "Sandhya Arti"
@@ -52,8 +56,40 @@ class _CommonDialogState extends State<CommonDialog> {
                       .textColor(appColor(context).appTheme.primary)),
               const VSpace(Insets.i32),
 
-              // CommonRulerPicker(
-              //     startValue: 1, maxValue: 12, onChange: widget.onHourChange!),
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                children: [
+                  Text(currentValue.toString(),
+                      style: const TextStyle(
+                          fontSize: 18,
+                          height: 2.0,
+                          fontWeight: FontWeight.w500)),
+                  Text(currentValue.toString(),
+                      style: const TextStyle(
+                          fontSize: 18,
+                          height: 2.0,
+                          fontWeight: FontWeight.w500)),
+                  Text(currentValue.toString(),
+                      style: const TextStyle(
+                          fontSize: 18,
+                          height: 2.0,
+                          fontWeight: FontWeight.w500)),
+                ],
+              ),
+              WheelSlider(
+                horizontalListWidth: 300,
+                customPointer: SvgPicture.asset("assets/svg/ruler.svg")
+                    .paddingOnly(top: 40),
+                totalCount: totalCount,
+                initValue: initValue,
+                onValueChanged: (val) {
+                  setState(() {
+                    currentValue = val;
+                  });
+                  log("$currentValue");
+                },
+              ),
+
               Text(
                   textAlign: TextAlign.start,
                   widget.text2!,
@@ -78,7 +114,10 @@ class _CommonDialogState extends State<CommonDialog> {
                           borderRadius: BorderRadius.circular(8),
                           color: appColor(context).appTheme.whiteColor),
                       child: Column(
-                          children: appArray.manglaArtiTypeList.asMap().entries.map((e) {
+                          children: appArray.manglaArtiTypeList
+                              .asMap()
+                              .entries
+                              .map((e) {
                         return Column(children: [
                           ManglaAlertList(
                               status: e.value['isOn'],
@@ -102,8 +141,10 @@ class _CommonDialogState extends State<CommonDialog> {
                             color: appColor(context).appTheme.whiteColor,
                           ),
                           child: Column(
-                              children:
-                              appArray.sandhyaTypeList.asMap().entries.map((e) {
+                              children: appArray.sandhyaTypeList
+                                  .asMap()
+                                  .entries
+                                  .map((e) {
                             return Column(children: [
                               SandhyaAlertList(
                                   status: e.value['isOn'],
@@ -142,8 +183,7 @@ class _CommonDialogState extends State<CommonDialog> {
                                       MainAxisAlignment.spaceBetween,
                                   children: [
                                     Text(appFonts.chapter1),
-                                    SvgPicture.asset(
-                                        eSvgAssets.arrowDown1)
+                                    SvgPicture.asset(eSvgAssets.arrowDown1)
                                   ]))
                           : widget.text == "Hearing"
                               ? Container(
@@ -180,9 +220,9 @@ class _CommonDialogState extends State<CommonDialog> {
                           : widget.text == "Hearing"
                               ? const VSpace(Insets.i30)
                               : const VSpace(Insets.i10),
-                  CommonSelectionButton(
-                      onTapOne: () => Navigator.pop(context),
-                      onTapTwo: () => Navigator.pop(context))
+              CommonSelectionButton(
+                  onTapOne: () => Navigator.pop(context),
+                  onTapTwo: () => Navigator.pop(context))
             ]).paddingAll(15)));
   }
 }

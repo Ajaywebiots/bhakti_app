@@ -38,7 +38,13 @@ class EmailSignUpProvider extends ChangeNotifier {
     }
   }
 
-  isShowPassword(){
+  alreadyAccountNavigate(context) {
+    Navigator.pop(context);
+    emailId.text = "";
+    password.text = "";
+  }
+
+  isShowPassword() {
     isHide = !isHide;
     notifyListeners();
   }
@@ -47,6 +53,7 @@ class EmailSignUpProvider extends ChangeNotifier {
     if (formKey.currentState!.validate()) {
       notifyListeners();
       try {
+        showLoading(context);
         final credential =
             await FirebaseAuth.instance.createUserWithEmailAndPassword(
           email: emailId.text,
@@ -54,16 +61,19 @@ class EmailSignUpProvider extends ChangeNotifier {
         );
         log("credential $credential");
         // ignore: use_build_context_synchronously
+        hideLoading(context);
         Navigator.pop(context);
         emailId.text = "";
         password.text = "";
       } on FirebaseAuthException catch (e) {
+        hideLoading(context);
         if (e.code == 'weak-password') {
           log('The password provided is too weak.');
         } else if (e.code == 'email-already-in-use') {
           log('The account already exists for that email.');
         }
       } catch (e) {
+        hideLoading(context);
         print(e);
       }
     }

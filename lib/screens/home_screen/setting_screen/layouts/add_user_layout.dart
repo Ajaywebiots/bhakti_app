@@ -29,10 +29,15 @@ class AddUserLayout extends StatelessWidget {
                       text: appFonts.userList,
                       rightText: appFonts.addUser),
                   const VSpace(Insets.i15),
-                  CommonTextField(
-                      hintText: appFonts.searchHere,
-                      prefixSvg: eSvgAssets.searchNormal,
-                      controller: settingPvr.searchUser),
+                      CommonTextField(
+                          prefixIcon: Row(children: [
+                            SvgPicture.asset(eSvgAssets.searchNormal)
+                                .paddingOnly(right: 10, left: 10),
+                            SvgPicture.asset(eSvgAssets.line).paddingOnly(right: 10)
+                          ]),
+                          height: 50,
+                          controller: settingPvr.searchUser,
+                          hintText: appFonts.searchHere),
                   const VSpace(Insets.i15),
                   CommonContainerTile(
                       paddingArea: const EdgeInsets.all(15),

@@ -96,6 +96,8 @@ class EmailLoginProvider extends ChangeNotifier {
               MaterialPageRoute(builder: (context) {
             return const SetUpProfile();
           }));
+          emailId.text = "";
+          password.text = "";
         } else {
           log('LOGGEDEee');
           // ignore: use_build_context_synchronously
@@ -103,6 +105,8 @@ class EmailLoginProvider extends ChangeNotifier {
               MaterialPageRoute(builder: (context) {
             return const CommonBottomNavigationBar();
           }));
+          emailId.text = "";
+          password.text = "";
         }
         log("credential $credential");
         // ignore: use_build_context_synchronously
@@ -114,7 +118,7 @@ class EmailLoginProvider extends ChangeNotifier {
                       .textColor(appColor(context).appTheme.primary))));
         } else if (e.code == appFonts.wrongPassword) {
           ScaffoldMessenger.of(context).showSnackBar(SnackBar(
-              duration: Duration(seconds: 1),
+              duration: const Duration(seconds: 1),
               content: Text(
                 appFonts.wrongPasswordProvided,
                 style: appCss.dmDenseRegular16
@@ -127,5 +131,7 @@ class EmailLoginProvider extends ChangeNotifier {
         notifyListeners();
       }
     }
+    emailId.text = "";
+    password.text = "";
   }
 }

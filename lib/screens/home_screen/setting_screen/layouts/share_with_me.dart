@@ -22,8 +22,14 @@ class SharingWithMe extends StatelessWidget {
                 CommonLeftSideText(text: appFonts.userList),
                 const VSpace(Insets.i15),
                 CommonTextField(
-                    hintText: appFonts.searchHere,
-                    prefixSvg: eSvgAssets.searchNormal),
+                    prefixIcon: Row(children: [
+                      SvgPicture.asset(eSvgAssets.searchNormal)
+                          .paddingOnly(right: 10, left: 10),
+                      SvgPicture.asset(eSvgAssets.line).paddingOnly(right: 10)
+                    ]),
+                    height: 50,
+                    controller: settingPvr.searchUser,
+                    hintText: appFonts.searchHere),
                 const VSpace(Insets.i15),
                 Container(
                     padding: const EdgeInsets.all(15),

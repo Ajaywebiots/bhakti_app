@@ -22,46 +22,46 @@ class CommonContainer extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-        decoration: BoxDecoration(
-            borderRadius: BorderRadius.circular(8),
-            boxShadow: [
-              BoxShadow(
-                  color: appColor(context).appTheme.shadowClr,
-                  blurRadius: 8,
-                  offset: const Offset(0, 4),
-                  spreadRadius: 0)
-            ],
-            color: appColor(context).appTheme.whiteColor),
-        height: Sizes.s90,
-        child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Row(crossAxisAlignment: CrossAxisAlignment.center, children: [
-                const HSpace(Insets.i10),
-                SvgPicture.asset(svgImage!),
-                isToggle == true
-                    ? const HSpace(Insets.i8)
-                    : const HSpace(Insets.i51),
-                isToggle == true
-                    ? Text( timeText == "" ? appFonts.na : timeText!,
-                        style: appCss.dmDenseMedium16
-                            .textColor(appColor(context).appTheme.primary))
-                    : FlutterSwitch(
-                        width: Sizes.s41,
-                        height: Sizes.s23,
-                        padding: 3,
-                        toggleSize: Sizes.s17,
-                        value: status!,
-                        activeColor: appColor(context).appTheme.primary,
-                        inactiveColor: appColor(context).appTheme.lightText,
-                        borderRadius: 40.0,
-                        onToggle: onToggle!),
-              ]),
-              Text(text!,
+            decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                boxShadow: [
+                  BoxShadow(
+                      color: appColor(context).appTheme.shadowClr,
+                      blurRadius: 8,
+                      offset: const Offset(0, 4),
+                      spreadRadius: 0)
+                ],
+                color: appColor(context).appTheme.whiteColor),
+            child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Row(
+                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                      crossAxisAlignment: CrossAxisAlignment.center,
+                      children: [
+                        SvgPicture.asset(svgImage!),
+                        isToggle == true
+                            ? Text(timeText == "" ? appFonts.na : timeText!,
+                                style: appCss.dmDenseMedium16.textColor(
+                                    appColor(context).appTheme.primary))
+                            : FlutterSwitch(
+                                width: Sizes.s41,
+                                height: Sizes.s23,
+                                padding: 3,
+                                toggleSize: Sizes.s17,
+                                value: status!,
+                                activeColor: appColor(context).appTheme.primary,
+                                inactiveColor:
+                                    appColor(context).appTheme.lightText,
+                                borderRadius: 40.0,
+                                onToggle: onToggle!)
+                      ]),
+                  const VSpace(Insets.i4),
+                  Text(text!,
                       style: appCss.dmDenseMedium14
                           .textColor(appColor(context).appTheme.lightText))
-                  .paddingOnly(left: 10, top: 4)
-            ])).inkWell(onTap: onTap);
+                ]).paddingAll(Insets.i10))
+        .inkWell(onTap: onTap);
   }
 }

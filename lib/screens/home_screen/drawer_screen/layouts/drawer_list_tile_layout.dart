@@ -1,6 +1,8 @@
 import '../../../../config.dart';
 import 'package:bhakti_app/screens/home_screen/drawer_screen/layouts/my_documents_screen.dart';
 
+import 'common_expansion_tile.dart';
+
 class DrawerListTileLayout extends StatelessWidget {
   final dynamic data;
   final List? testingList;
@@ -12,14 +14,14 @@ class DrawerListTileLayout extends StatelessWidget {
     return Consumer<HomeScreenProvider>(
         builder: (context, homeScreenPvr, child) {
       return ListTile(
-              dense: true,
-              onTap: () {
-                Navigator.push(context, MaterialPageRoute(builder: (context) {
-                  return const MyDocumentScreen();
-                }));
-              },
-              title: data['name'] == "Online Tests"
-                  ? ListTileTheme(
+          dense: true,
+          onTap: () {
+            Navigator.push(context, MaterialPageRoute(builder: (context) {
+              return const MyDocumentScreen();
+            }));
+          },
+          title: data['name'] == "Online Tests"
+              ? /*ListTileTheme(
                       data: const ListTileThemeData(
                           minVerticalPadding: 0,
                           contentPadding: EdgeInsets.zero,
@@ -54,17 +56,34 @@ class DrawerListTileLayout extends StatelessWidget {
                                               .appTheme
                                               .lightText))))
                               .toList()),
-                    )
-                  : Row(children: [
-                      SvgPicture.asset(data['icon']),
-                      const HSpace(Insets.i10),
-                      Text(data['name'],
-                          style: appCss.dmDenseRegular16
-                              .textColor(appColor(context).appTheme.lightText))
-                    ]))
-          .decorated(
-              color:
-                  data['name'] == "Online Tests" ? Colors.green : Colors.black);
+                    )*/
+              CustomExpansionTile(
+                  svgIcon: data['icon'],
+                  title: 'Online Tests',
+                  children: testingList!
+                      .asMap()
+                      .entries
+                      .map((s) => ListTile(
+                              dense: true,
+                              tileColor: s.value['selected'] == true
+                                  ? appColor(context).appTheme.green
+                                  : null,
+                              onTap: () {
+                                homeScreenPvr.toggleSelection(s.key);
+                              },
+                              leading: SvgPicture.asset(s.value['icon']),
+                              title: Text(s.value['name'],
+                                  style: appCss.dmDenseRegular16.textColor(
+                                      appColor(context).appTheme.lightText)))
+                          .paddingOnly(top: Insets.i5))
+                      .toList())
+              : Row(children: [
+                  SvgPicture.asset(data['icon']),
+                  const HSpace(Insets.i10),
+                  Text(data['name'],
+                      style: appCss.dmDenseRegular16
+                          .textColor(appColor(context).appTheme.lightText))
+                ]));
     });
   }
 }

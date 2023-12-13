@@ -7,8 +7,7 @@ class LoginUpperLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<EmailLoginProvider>(
         builder: (context, emailLoginPvr, child) {
-      return Column(
-          crossAxisAlignment: CrossAxisAlignment.start, children: [
+      return Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
         const VSpace(Insets.i40),
         Center(child: Image.asset(eImageAssets.bhaktiLogo, height: Sizes.s45)),
         const VSpace(Insets.i50),

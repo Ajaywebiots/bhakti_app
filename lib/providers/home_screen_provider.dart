@@ -12,6 +12,17 @@ class HomeScreenProvider extends ChangeNotifier {
     }));
   }
 
+
+
+  List<bool> _selectedList = List.generate(3, (index) => false);
+
+  List<bool> get selectedList => _selectedList;
+
+  void toggleSelection(index) {
+    _selectedList[index] = !_selectedList[index];
+    notifyListeners();
+  }
+
   TextEditingController? searchHere;
   final GlobalKey<ScaffoldState> key = GlobalKey();
 

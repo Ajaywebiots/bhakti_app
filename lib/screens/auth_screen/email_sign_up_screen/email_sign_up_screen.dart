@@ -1,5 +1,5 @@
 import 'package:bhakti_app/config.dart';
-
+import 'package:bhakti_app/widgets/loading_component.dart';
 
 class EmailSignUpScreen extends StatefulWidget {
   const EmailSignUpScreen({super.key});
@@ -15,44 +15,43 @@ class _EmailSignUpScreenState extends State<EmailSignUpScreen> {
             EmailLoginProvider>(
         builder:
             (context1, emailSignUpPvr, loginAuthPvr, emailLoginPvr, child) {
-      return Scaffold(
-          resizeToAvoidBottomInset: false,
-          body: Container(
-              height: double.infinity,
-              padding: EdgeInsets.only(
-                  bottom: Insets.i27,
-                  top: MediaQuery.of(context).size.height * 0.08),
-              decoration: BoxDecoration(
-                  image: DecorationImage(
-                      fit: BoxFit.fill,
-                      image: AssetImage(eImageAssets.splashBg))),
-              child: Stack(children: [
-                Form(
-                    key: emailSignUpPvr.formKey,
-                    child: const Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        children: [
-                          SignUpUpperLayout(),
-                          SignUpBottomLayout(),
-                        ]).paddingSymmetric(horizontal: Insets.i20)),
-                RichText(
-                    text: TextSpan(
-                        style: appCss.dmDenseSemiBold14
-                            .textColor(appColor(context).appTheme.oneText),
-                        children: [
-                      TextSpan(text: appFonts.alreadyHaveAccount),
-                      TextSpan(
-                          text: appFonts.loginHere,
+      return LoadingComponent(
+        child: Scaffold(
+            resizeToAvoidBottomInset: false,
+            body: Container(
+                height: double.infinity,
+                padding: EdgeInsets.only(
+                    bottom: Insets.i27,
+                    top: MediaQuery.of(context).size.height * 0.08),
+                decoration: BoxDecoration(
+                    image: DecorationImage(
+                        fit: BoxFit.fill,
+                        image: AssetImage(eImageAssets.splashBg))),
+                child: Stack(children: [
+                  Form(
+                      key: emailSignUpPvr.formKey,
+                      child: const Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            SignUpUpperLayout(),
+                            SignUpBottomLayout(),
+                          ]).paddingSymmetric(horizontal: Insets.i20)),
+                  RichText(
+                      text: TextSpan(
                           style: appCss.dmDenseSemiBold14
-                              .textColor(appColor(context).appTheme.primary),
-                          recognizer: TapGestureRecognizer()
-                            ..onTap = () {
-                              Navigator.pop(context);
-                              emailSignUpPvr.emailId.text = "";
-                              emailSignUpPvr.password.text = "";
-                            })
-                    ])).alignment(Alignment.bottomCenter)
-              ])));
+                              .textColor(appColor(context).appTheme.oneText),
+                          children: [
+                        TextSpan(text: appFonts.alreadyHaveAccount),
+                        TextSpan(
+                            text: appFonts.loginHere,
+                            style: appCss.dmDenseSemiBold14
+                                .textColor(appColor(context).appTheme.primary),
+                            recognizer: TapGestureRecognizer()
+                              ..onTap = () =>
+                                  emailSignUpPvr.alreadyAccountNavigate(context))
+                      ])).alignment(Alignment.bottomCenter)
+                ]))),
+      );
     });
   }
 }

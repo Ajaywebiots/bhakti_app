@@ -24,9 +24,13 @@ class BookReadPresentlyScreen extends StatelessWidget {
                     hSpace: Insets.i12),
                 const VSpace(Insets.i25),
                 CommonTextField(
-                    isPrefixSvg: true,
+                    prefixIcon: Row(children: [
+                      SvgPicture.asset(eSvgAssets.searchNormal)
+                          .paddingOnly(right: 10, left: 10),
+                      SvgPicture.asset(eSvgAssets.line).paddingOnly(right: 10)
+                    ]),
+                    height: 50,
                     controller: homeScreenPvr.searchHere,
-                    prefixSvg: eSvgAssets.searchNormal,
                     hintText: appFonts.searchHere),
                 const VSpace(Insets.i15),
                 CommonLeftSideText(text: appFonts.bookList),

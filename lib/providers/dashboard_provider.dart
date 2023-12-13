@@ -77,9 +77,7 @@ class DashboardProvider extends ChangeNotifier {
     selectedIndex = isSelected ? -1 : index;
   }
 
-  // int currentValue = 1;
-  // final int totalCount = 12;
-  // final int initValue = 5;
+
   DateTime? rangeStart;
   DateTime? rangeEnd;
   CalendarFormat calendarFormat = CalendarFormat.month;

@@ -55,11 +55,11 @@ class SettingDialogLayout extends StatelessWidget {
                   //                 borderRadius: BorderRadius.all(Radius.circular(AppRadius.r8)),
                   //                 borderSide: BorderSide.none)))),
                   Expanded(
-                    child: CommonTextField(
-                        hintText: "",
-                        controller: settingPvr.accessKey,
-                        readOnly: true),
-                  ),
+                      child: CommonTextField(
+                          height: 50,
+                          readOnly: true,
+                          controller: settingPvr.accessKey,
+                          hintText: "")),
                   const HSpace(Insets.i10),
                   AccessKeyContainer(svgImage: eSvgAssets.documentCopy),
                   const HSpace(Insets.i10),

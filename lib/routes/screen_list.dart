@@ -38,6 +38,10 @@ export 'package:bhakti_app/screens/home_screen/setup_profile/layouts/email_text_
 export 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
 export 'package:bhakti_app/screens/home_screen/setting_screen/layouts/pop_up_menu_button.dart';
 export 'package:bhakti_app/screens/home_screen/setup_profile/layouts/dob_text_form_field.dart';
+export 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/user_view_layout/monitoring_chanting_layout.dart';
+export 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/user_view_layout/monitoring_knowledge_layout.dart';
+export 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/user_view_layout/monitoring_sleep_layout.dart';
+export 'package:bhakti_app/screens/home_screen/monitoring_screen/layouts/user_view_layout/monitoring_worship_layout.dart';
 export 'package:bhakti_app/screens/home_screen/setup_profile/layouts/gender_radio_button.dart';
 export 'package:bhakti_app/screens/home_screen/setup_profile/layouts/initiated_name_text_form_field.dart';
 export 'package:bhakti_app/screens/home_screen/setup_profile/layouts/name_text_form_field.dart';

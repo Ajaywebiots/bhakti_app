@@ -3,7 +3,7 @@ import 'package:bhakti_app/config.dart';
 import '../screens/home_screen/setting_screen/layouts/setting_dialog_layout.dart';
 
 class SettingProvider extends ChangeNotifier {
-  TextEditingController? numberOfRound, averageTime,searchBookHere,searchUser;
+  TextEditingController? numberOfRound, averageTime, searchBookHere, searchUser;
 
   tabControl(index) {
     notifyListeners();
@@ -22,8 +22,10 @@ class SettingProvider extends ChangeNotifier {
           }));
   }
 
-
-
+  onNotificationToggle(val, data) {
+    notifyListeners();
+    data['isOn'] = val;
+  }
 
   TextEditingController? accessKey;
 

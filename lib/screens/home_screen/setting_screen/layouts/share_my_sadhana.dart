@@ -35,10 +35,15 @@ class ShareMySadhana extends StatelessWidget {
                       isRightText: true,
                       rightText: appFonts.addUser),
                   const VSpace(Insets.i15),
-                  CommonTextField(
-                      controller: settingPvr.searchBookHere,
-                      hintText: appFonts.searchHere,
-                      prefixSvg: eSvgAssets.searchNormal),
+                      CommonTextField(
+                          prefixIcon: Row(children: [
+                            SvgPicture.asset(eSvgAssets.searchNormal)
+                                .paddingOnly(right: 10, left: 10),
+                            SvgPicture.asset(eSvgAssets.line).paddingOnly(right: 10)
+                          ]),
+                          height: 50,
+                          controller: settingPvr.searchBookHere,
+                          hintText: appFonts.searchHere),
                   const VSpace(Insets.i15),
                   CommonContainerTile(
                       paddingArea: const EdgeInsets.all(15),

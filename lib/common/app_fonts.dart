@@ -43,7 +43,7 @@ class AppFonts {
   final count1 = "2";
   final count2 = "3";
   final count3 = "4";
-  final wokeTime = "Woke time";
+  final wokeUpTime = "Woke up time";
   final time3 = "10:30 PM";
   final time4 = "05:30 AM";
   final sleptTime = "Slept time";

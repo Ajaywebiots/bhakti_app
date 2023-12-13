@@ -19,6 +19,7 @@ class _DrawerScreenState extends State<DrawerScreen> {
           const VSpace(Insets.i40),
           Image.asset(eImageAssets.bhaktiLogo,
               height: Sizes.s30, width: Sizes.s136),
+          const VSpace(Insets.i40),
           ...appArray.drawerList.asMap().entries.map((e) {
             List testingList = [];
             if (e.value['name'] == "Online Tests") {
@@ -27,8 +28,6 @@ class _DrawerScreenState extends State<DrawerScreen> {
             return DrawerListTileLayout(
                 data: e.value, testingList: testingList);
           }),
-          const VSpace(Insets.i83),
-          const VSpace(Insets.i49)
         ]),
         Column(mainAxisAlignment: MainAxisAlignment.end, children: [
           Text(appFonts.version,
