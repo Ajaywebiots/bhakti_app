@@ -13,7 +13,7 @@ class _BottomNavBarState extends State<BottomNavBar>
   Widget build(BuildContext context) {
     return Consumer<BottomNavProvider>(builder: (context, bottomNavPvr, child) {
       return StatefulWrapper(
-          onInit: () => Future.delayed(const Duration(milliseconds: 100),
+          onInit: () => Future.delayed(const Duration(milliseconds: 50),
               () => bottomNavPvr.onInit(this)),
           child: TabBar(
               onTap: (val) => bottomNavPvr.onTapTab(val),

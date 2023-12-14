@@ -2,7 +2,6 @@ import 'config.dart';
 import 'dart:developer';
 import 'package:bhakti_app/common/theme/app_theme.dart';
 import 'package:firebase_core/firebase_core.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();

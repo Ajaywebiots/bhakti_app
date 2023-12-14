@@ -10,8 +10,8 @@ class MonitoringScreen extends StatefulWidget {
 class _MonitoringScreenState extends State<MonitoringScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer2<MonitoringProvider, BottomNavProvider>(
-        builder: (context1, monitoringPvr, bottomNavPvr, child) {
+    return Consumer<MonitoringProvider>(
+        builder: (context1, monitoringPvr, child) {
       return SafeArea(
           child: Scaffold(
               extendBodyBehindAppBar: true,
@@ -25,8 +25,7 @@ class _MonitoringScreenState extends State<MonitoringScreen> {
                 SingleChildScrollView(
                     child: Column(children: [
                   CommonAppBar(
-                      onTap: () => monitoringPvr
-                          .tabControl(bottomNavPvr.tabController!.index),
+                      onTap: () => monitoringPvr.tabControl(context),
                       text: appFonts.groupView,
                       hSpace: Insets.i65),
                   const VSpace(Insets.i25),

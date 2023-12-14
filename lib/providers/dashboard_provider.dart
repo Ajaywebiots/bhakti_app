@@ -42,12 +42,10 @@ class DashboardProvider extends ChangeNotifier {
   //   }
   // }
 
-  tabControl(index) {
-    log('kajhdfajkfhdjkfnds asdasdasd     $index');
+  tabControl(context) {
+    final bottomNavPvr = Provider.of<BottomNavProvider>(context, listen: false);
+    bottomNavPvr.onTapTab(0);
     notifyListeners();
-    index = 0;
-    notifyListeners();
-    log('kajhdfajkfhdjkfnds      $index');
   }
 
   onFormatChanged(format) {
@@ -76,7 +74,6 @@ class DashboardProvider extends ChangeNotifier {
     notifyListeners();
     selectedIndex = isSelected ? -1 : index;
   }
-
 
   DateTime? rangeStart;
   DateTime? rangeEnd;

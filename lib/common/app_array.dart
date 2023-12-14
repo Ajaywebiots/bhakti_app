@@ -147,22 +147,63 @@ class AppArray {
   List chantingList = ['0', '0', '0', '0'];
 
   List drawerList = [
-    {"icon": eSvgAssets.home1, "name": "Home"},
-    {"icon": eSvgAssets.user1, "name": "Profile"},
-    {"icon": eSvgAssets.link, "name": "Tutorials"},
+    {
+      "icon": eSvgAssets.home1,
+      'fillIcon': 'assets/svg/home-1.svg',
+      "name": "Home"
+    },
+    {
+      "icon": eSvgAssets.user1,
+      'fillIcon': 'assets/svg/user-1.svg',
+      "name": "Profile"
+    },
+    {
+      "icon": eSvgAssets.link,
+      'fillIcon': 'assets/svg/link-1.svg',
+      "name": "Tutorials"
+    },
     {
       "icon": eSvgAssets.book,
+      'fillIcon': 'assets/svg/book-1.svg',
       "name": "Online Tests",
       "list": [
-        {"icon": eSvgAssets.book, "name": "test 1"},
-        {"icon": eSvgAssets.book, "name": "test 2"},
-        {"icon": eSvgAssets.book, "name": "test 3"}
+        {
+          "icon": eSvgAssets.book,
+          'fillIcon': 'assets/svg/book-1.svg',
+          "name": "Test 1"
+        },
+        {
+          "icon": eSvgAssets.book,
+          'fillIcon': 'assets/svg/book-1.svg',
+          "name": "Test 2"
+        },
+        {
+          "icon": eSvgAssets.book,
+          'fillIcon': 'assets/svg/book-1.svg',
+          "name": "Test 3"
+        }
       ]
     },
-    {"icon": eSvgAssets.document, "name": "My Documents"},
-    {"icon": eSvgAssets.information, "name": "About Bhakti Steps"},
-    {"icon": eSvgAssets.autoBrightness, "name": "About CDM"},
-    {"icon": eSvgAssets.callCalling, "name": "Contact Us"}
+    {
+      "icon": 'assets/svg/document-text.svg',
+      'fillIcon': eSvgAssets.document,
+      "name": "My Documents"
+    },
+    {
+      "icon": eSvgAssets.information,
+      'fillIcon': 'assets/svg/information-1.svg',
+      "name": "About Bhakti Steps"
+    },
+    {
+      "icon": eSvgAssets.autoBrightness,
+      'fillIcon': 'assets/svg/auto-brightness-1.svg',
+      "name": "About CDM"
+    },
+    {
+      "icon": eSvgAssets.callCalling,
+      'fillIcon': 'assets/svg/call-calling-1.svg',
+      "name": "Contact Us"
+    },
   ];
 
   List bookReadingList = [

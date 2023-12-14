@@ -63,6 +63,7 @@ class AppFonts {
   final deleteBook = "Delete Book";
   final areYouSureYouWantToDelete =
       "Are You Sure You Want to Delete This Book?";
+  final areYouSureYouWantToLogOut = "Are You Sure You Want to Log Out ?";
   final thisActionCant = "This Action Can’t Be Undone.";
   final iN = "IN";
   final booksReadingPresently = "Books Reading Presently";
@@ -144,8 +145,8 @@ class AppFonts {
   final sandhyaAarti = "Sandhya Aarti :";
   final offeredBhoga = "Offered Bhoga :";
   final bhaktiStepsAccessKey = "Bhakti Steps Access Key";
-    final bhaktiStepsApplication = "bhakti steps application you can copy and This Access key will provide you access of share the key...";
-
+  final bhaktiStepsApplication =
+      "bhakti steps application you can copy and This Access key will provide you access of share the key...";
   final shreliyanKhanna = 'Shreliyan Khanna';
   final janeCooper = 'Jane Cooper';
   final codyFisher = 'Cody Fisher';

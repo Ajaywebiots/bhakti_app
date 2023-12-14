@@ -1,5 +1,5 @@
 import 'dart:developer';
-import 'package:bhakti_app/config.dart';
+import '../config.dart';
 import 'package:intl/intl.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 
@@ -13,13 +13,37 @@ class HomeScreenProvider extends ChangeNotifier {
   }
 
 
+  onListNavigate(){
+    // Navigator.push(context, MaterialPageRoute(builder: (context) {
+    //   return const MyDocumentScreen();
+    // }));
+    // homeScreenPvr.key.currentState!.closeDrawer();
+  }
 
-  List<bool> _selectedList = List.generate(3, (index) => false);
+  int selectedIndex = 0;
 
-  List<bool> get selectedList => _selectedList;
+  onTapDrawer(index) {
+    isExpanded = false;
+    selectedIndex = index;
+    notifyListeners();
+  }
 
-  void toggleSelection(index) {
-    _selectedList[index] = !_selectedList[index];
+  bool isExpanded = false;
+
+  final colors = [Colors.amber[400], Colors.yellow[400]];
+  final stops = [0.0, 0.9];
+
+  onExpandTileTap() {
+    isExpanded = !isExpanded;
+    notifyListeners();
+  }
+
+  List<bool> selectedList = List.generate(3, (index) => false);
+
+  List<bool> get selectedLists => selectedList;
+
+  void drawerExpansionList(index) {
+    selectedList[index] = !selectedList[index];
     notifyListeners();
   }
 
@@ -60,7 +84,7 @@ class HomeScreenProvider extends ChangeNotifier {
     } else {}
   }
 
-  deleteData(context){
+  deleteData(context) {
     showDialog(
         context: context,
         builder: (context) {
@@ -70,45 +94,27 @@ class HomeScreenProvider extends ChangeNotifier {
               child: SizedBox(
                   height: 175,
                   child: Column(
-                      mainAxisAlignment:
-                      MainAxisAlignment.center,
+                      mainAxisAlignment: MainAxisAlignment.center,
                       children: [
                         Center(
-                            child: Text(
-                                appFonts.deleteBook,
-                                style: appCss
-                                    .philosopherBold18
-                                    .textColor(
-                                    appColor(context)
-                                        .appTheme
-                                        .primary))),
+                            child: Text(appFonts.deleteBook,
+                                style: appCss.philosopherBold18.textColor(
+                                    appColor(context).appTheme.primary))),
                         const VSpace(Insets.i10),
                         Center(
-                            child: Text(
-                                appFonts
-                                    .areYouSureYouWantToDelete,
-                                style: appCss
-                                    .dmDenseRegular14
-                                    .textColor(
-                                    appColor(context)
-                                        .appTheme
-                                        .rulesClr))),
+                            child: Text(appFonts.areYouSureYouWantToDelete,
+                                style: appCss.dmDenseRegular14.textColor(
+                                    appColor(context).appTheme.rulesClr))),
                         Center(
                             child: Text(
-                                style: appCss
-                                    .dmDenseRegular14
-                                    .textColor(
-                                    appColor(context)
-                                        .appTheme
-                                        .rulesClr),
+                                style: appCss.dmDenseRegular14.textColor(
+                                    appColor(context).appTheme.rulesClr),
                                 appFonts.thisActionCant)),
                         const VSpace(Insets.i25),
                         CommonSelectionButton(
                             textTwo: appFonts.delete,
-                            onTapOne: () =>
-                                Navigator.pop(context),
-                            onTapTwo: () =>
-                                Navigator.pop(context))
+                            onTapOne: () => Navigator.pop(context),
+                            onTapTwo: () => Navigator.pop(context))
                       ])));
         });
   }

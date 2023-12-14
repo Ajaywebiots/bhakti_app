@@ -6,17 +6,16 @@ class BottomNavProvider with ChangeNotifier {
   TabController? tabController;
 
   onTapTab(val) {
-    tabController?.index = val;
+    tabController!.index = val;
     notifyListeners();
   }
 
   onInit(TickerProvider sync) {
     dashList = appArray.bottomNavyList;
-    tabController = TabController(length: dashList.length, vsync: sync);
     notifyListeners();
+    tabController = TabController(length: dashList.length, vsync: sync);
   }
 
-  int currentTab = 0;
 
   final List<Widget> screens = [
     const HomeScreen(),
@@ -25,8 +24,5 @@ class BottomNavProvider with ChangeNotifier {
     const SettingScreen()
   ];
 
-  void onItemTapped(int index) {
-    notifyListeners();
-    currentTab = index;
-  }
+
 }

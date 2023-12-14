@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/setting_screen/layouts/setting_layout.dart';
 
@@ -11,8 +13,8 @@ class SettingScreen extends StatefulWidget {
 class _SettingScreenState extends State<SettingScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer2<SettingProvider, BottomNavProvider>(
-        builder: (context, settingPvr, bottomNavPvr, child) {
+    return Consumer<SettingProvider>(
+        builder: (context, settingPvr, child) {
       return Scaffold(
           extendBodyBehindAppBar: true,
           extendBody: true,
@@ -28,8 +30,7 @@ class _SettingScreenState extends State<SettingScreen> {
                     children: [
                   CommonAppBar(
                       text: appFonts.setting,
-                      onTap: () => settingPvr
-                          .tabControl(bottomNavPvr.tabController!.index),
+                      onTap: () => settingPvr.tabControl(context),
                       hSpace: Insets.i100),
                   const VSpace(Insets.i25),
                   CommonContainerTile(

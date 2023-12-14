@@ -28,8 +28,10 @@ class MonitoringProvider extends ChangeNotifier {
     "Sandhya Aarti"
   ];
 
-  tabControl(index) {
-    index = 0;
+  tabControl(context) {
+    final bottomNavPvr = Provider.of<BottomNavProvider>(context, listen: false);
+    bottomNavPvr.onTapTab(0);
+    notifyListeners();
   }
 
   List prasadamList = ["", "Breakfast", "Lunch", "Dinner"];
@@ -300,13 +302,13 @@ class MonitoringProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  singleUserData() {
+    isAllSelected = false;
+    notifyListeners();
+  }
 
-  singleUserData(){
-  isAllSelected = false;
-  notifyListeners();
-}
-  allUserData(){
-  isAllSelected = true;
-  notifyListeners();
-}
+  allUserData() {
+    isAllSelected = true;
+    notifyListeners();
+  }
 }

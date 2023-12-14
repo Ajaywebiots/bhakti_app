@@ -1,7 +1,4 @@
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/widgets/common_app_bar.dart';
-import 'package:bhakti_app/widgets/common_bg_image.dart';
-import 'package:bhakti_app/widgets/common_container_tile.dart';
 import 'package:percent_indicator/circular_percent_indicator.dart';
 import 'package:bhakti_app/screens/home_screen/drawer_screen/layouts/dotted_border_layout.dart';
 

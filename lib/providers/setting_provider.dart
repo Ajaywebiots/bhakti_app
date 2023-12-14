@@ -5,9 +5,10 @@ import '../screens/home_screen/setting_screen/layouts/setting_dialog_layout.dart
 class SettingProvider extends ChangeNotifier {
   TextEditingController? numberOfRound, averageTime, searchBookHere, searchUser;
 
-  tabControl(index) {
+  tabControl(context) {
+    final bottomNavPvr = Provider.of<BottomNavProvider>(context, listen: false);
+    bottomNavPvr.onTapTab(0);
     notifyListeners();
-    index = 0;
   }
 
   onTap(dataInt, context, data) {

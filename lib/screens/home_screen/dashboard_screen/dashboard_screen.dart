@@ -1,6 +1,5 @@
 import 'package:bhakti_app/config.dart';
 import 'package:bhakti_app/screens/home_screen/dashboard_screen/layouts/chanting_chart.dart';
-import 'layouts/user_selection_layout.dart';
 
 class DashBoardScreen extends StatefulWidget {
   const DashBoardScreen({super.key});
@@ -12,8 +11,8 @@ class DashBoardScreen extends StatefulWidget {
 class _DashBoardScreenState extends State<DashBoardScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer2<DashboardProvider, BottomNavProvider>(
-        builder: (context1, dashboardPvr, bottomNavPvr, child) {
+    return Consumer<DashboardProvider>(
+        builder: (context1, dashboardPvr, child) {
       return StatefulWrapper(
           onInit: () => Future.delayed(DurationsClass.ms150)
               .then((value) => dashboardPvr.onInit(context)),
@@ -29,8 +28,7 @@ class _DashBoardScreenState extends State<DashBoardScreen> {
                         CommonAppBar(
                             text: appFonts.dashboard,
                             hSpace: Insets.i90,
-                            onTap: () => dashboardPvr.tabControl(
-                                bottomNavPvr.tabController!.index)),
+                            onTap: () => dashboardPvr.tabControl(context)),
                         const VSpace(Insets.i25),
                         const CommonContainerTile(
                             paddingArea: EdgeInsets.zero,

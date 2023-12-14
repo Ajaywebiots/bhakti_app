@@ -26,8 +26,12 @@ class _DrawerScreenState extends State<DrawerScreen> {
               testingList = e.value['list'];
             }
             return DrawerListTileLayout(
-                data: e.value, testingList: testingList);
-          }),
+                index: e.key,
+                selectedIndex: homeScreenPvr.selectedIndex,
+                drawerOnTap: () => homeScreenPvr.onTapDrawer(e.key),
+                data: e.value,
+                testingList: testingList);
+          })
         ]),
         Column(mainAxisAlignment: MainAxisAlignment.end, children: [
           Text(appFonts.version,
@@ -43,7 +47,42 @@ class _DrawerScreenState extends State<DrawerScreen> {
             Text(appFonts.logOut,
                 style: appCss.dmDenseRegular16
                     .textColor(appColor(context).appTheme.lightText))
-          ]).inkWell(onTap: () => homeScreenPvr.onSignOutClick(context))
+          ]).inkWell(onTap: () {
+            homeScreenPvr.key.currentState!.closeDrawer();
+            showDialog(
+                context: context,
+                builder: (context) {
+                  return Dialog(
+                      shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(8)),
+                      child: SizedBox(
+                          height: 175,
+                          child: Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Center(
+                                    child: Text(appFonts.logOut,
+                                        style: appCss.philosopherBold18
+                                            .textColor(appColor(context)
+                                                .appTheme
+                                                .primary))),
+                                const VSpace(Insets.i10),
+                                Center(
+                                    child: Text(
+                                        appFonts.areYouSureYouWantToLogOut,
+                                        style: appCss.dmDenseRegular14
+                                            .textColor(appColor(context)
+                                                .appTheme
+                                                .rulesClr))),
+                                const VSpace(Insets.i25),
+                                CommonSelectionButton(textOne: appFonts.no,
+                                    textTwo: appFonts.yes,
+                                    onTapOne: () => Navigator.pop(context),
+                                    onTapTwo: () =>
+                                        homeScreenPvr.onSignOutClick(context))
+                              ])));
+                });
+          })
         ]).paddingSymmetric(vertical: 50)
       ]));
     });

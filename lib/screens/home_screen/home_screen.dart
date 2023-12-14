@@ -1,5 +1,6 @@
 import 'dart:io';
 import 'package:bhakti_app/config.dart';
+import 'package:bhakti_app/screens/home_screen/common_bottom_bar/common_bottom_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({super.key});
@@ -11,10 +12,10 @@ class HomeScreen extends StatefulWidget {
 class _HomeScreenState extends State<HomeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<HomeScreenProvider>(
-        builder: (context1, homeScreenPvr, child) {
+    return Consumer2<HomeScreenProvider,BottomNavProvider>(
+        builder: (context1, homeScreenPvr,bottomPvr, child) {
       return StatefulWrapper(
-          onInit: () => Future.delayed(DurationsClass.ms150)
+          onInit: () => Future.delayed(DurationsClass.ms50)
               .then((value) => homeScreenPvr.onReady(context)),
           child: PopScope(
               canPop: false,
