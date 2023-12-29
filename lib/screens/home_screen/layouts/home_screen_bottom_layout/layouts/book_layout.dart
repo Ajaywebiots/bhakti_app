@@ -1,9 +1,5 @@
 import 'dart:developer';
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/screens/home_screen/layouts/common_dialog_box.dart';
-import 'package:bhakti_app/providers/home_screen_provider.dart';
-import '../../../../../customise/scrollable_positioned_list/scrollable_positioned_list.dart';
-
 
 class BookLayout extends StatelessWidget {
   const BookLayout({super.key});
@@ -12,7 +8,7 @@ class BookLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(
         builder: (context, homeScreenPvr, child) {
-          log("bookList :${appArray.bookList}");
+      log("bookList :${appArray.bookList}");
       return SizedBox(
           height: Sizes.s180,
           child: ScrollablePositionedList.builder(
@@ -38,10 +34,16 @@ class BookLayout extends StatelessWidget {
                         children: [
                           ClipRRect(
                               borderRadius: BorderRadius.circular(2),
-                              child: Image.asset(appArray.bookReadingList[index]['book'],
+                              child: Image.network(
+                                  homeScreenPvr.bookingLis[index]['image_src']
+                                      .toString(),
                                   height: Sizes.s132)),
                           const VSpace(Insets.i6),
-                          Text(appArray.bookList[index]['reading_time'].toString(),
+                          Text(
+                              appArray.bookList[index]['reading_time'] == null
+                                  ? 'N/A'
+                                  : appArray.bookList[index]['reading_time']
+                                      .toString(),
                               style: appCss.dmDenseMedium16.textColor(
                                   appColor(context).appTheme.primary))
                         ])).inkWell(onTap: () {
@@ -49,7 +51,7 @@ class BookLayout extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return CommonDialog(
-                            text: appArray.bookReadingList[index]['book_title'],
+                            text: homeScreenPvr.bookingLis[index]['book_name'],
                             text1: 'Hour',
                             text2: 'Minutes',
                             onHourChange: (value) {
@@ -64,7 +66,7 @@ class BookLayout extends StatelessWidget {
                             onMinChange: (value) {
                               appArray.bookList[index] == 0
                                   ? homeScreenPvr.bhagavadGitaMin = value
-                                  :appArray.bookList[index] == 1
+                                  : appArray.bookList[index] == 1
                                       ? homeScreenPvr.srilaMin = value
                                       : homeScreenPvr.selfRealizationMin =
                                           value;

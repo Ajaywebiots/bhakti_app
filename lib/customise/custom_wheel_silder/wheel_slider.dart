@@ -7,6 +7,7 @@ import 'package:wheel_chooser/wheel_chooser.dart';
 //ignore: must_be_immutable
 class WheelSlider extends StatefulWidget {
 
+
   final double horizontalListHeight, horizontalListWidth, verticalListHeight, verticalListWidth;
   final int totalCount;
   final int initValue;
@@ -80,27 +81,36 @@ class WheelSlider extends StatefulWidget {
      ) : null;
    }
 
-   static List<Widget> barUI(totalCount, horizontal, lineColor) {
-     return List.generate(totalCount+1, (index) => Container(
-       height: horizontal
-           ? multipleOfFive(index) ? 35.0 : 20.0
-           : 1.5,
-       width: horizontal
-           ? 1.5
-           : multipleOfFive(index) ? 35.0 : 20.0,
-       alignment: Alignment.center,
-       child: Container(
-         height: horizontal
-             ? multipleOfFive(index) ? 35.0 : 20.0
-             : 1.5,
-         width: horizontal
-             ? 1.5
-             : multipleOfFive(index) ? 35.0 : 20.0,
-         color: lineColor,
-         alignment: Alignment.center,
-       ),
-     ));
-   }
+  static List<Widget> barUI(totalCount, horizontal, lineColor) {
+    List<Widget> bars = [];
+
+    for (int index = 0; index <= totalCount; index++) {
+      bool isBigLine = (index % 5 == 0) && (index != 1);
+
+      Widget line = Container(
+        height: horizontal ? (isBigLine ? 40.0 : 20.0) : 1.5,
+        width: horizontal ? 1.5 : (isBigLine ? 35.0 : 20.0),
+        alignment: Alignment.center,
+        child: Container(
+          height: horizontal ? (isBigLine ? 40.0 : 20.0) : 1.5,
+          width: horizontal ? 1.5 : (isBigLine ? 35.0 : 20.0),
+          color: lineColor,
+          alignment: Alignment.center,
+        ),
+      );
+
+      bars.add(line);
+    }
+
+    return bars;
+  }
+
+
+
+
+
+
+
 
   /// Displays numbers instead of lines.
   WheelSlider.number({

@@ -1,4 +1,5 @@
 import 'dart:developer';
+import 'dart:io';
 import '../config.dart';
 import 'package:intl/intl.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
@@ -12,13 +13,15 @@ class HomeScreenProvider extends ChangeNotifier {
     }));
   }
 
-
-  onListNavigate(){
+  onListNavigate() {
     // Navigator.push(context, MaterialPageRoute(builder: (context) {
     //   return const MyDocumentScreen();
     // }));
     // homeScreenPvr.key.currentState!.closeDrawer();
   }
+
+
+
 
   int selectedIndex = 0;
 
@@ -171,6 +174,7 @@ class HomeScreenProvider extends ChangeNotifier {
   final ItemScrollController itemScrollController = ItemScrollController();
   final ItemScrollController itemScrollController1 = ItemScrollController();
   TextEditingController dob = TextEditingController();
+  TextEditingController notesCtrl = TextEditingController();
 
   onSleepTimeSelect(context) {
     showDialog(
@@ -337,6 +341,43 @@ class HomeScreenProvider extends ChangeNotifier {
               });
         });
   }
+  Future<bool> showExitPopup(context) async {
+    return await showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return AlertDialog(
+              content: SizedBox(
+                  height: 90,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        const Text("Do you want to exit?"),
+                        const SizedBox(height: 20),
+                        Row(children: [
+                          Expanded(
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    print('yes selected');
+                                    exit(0);
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.red.shade800),
+                                  child: const Text("Yes"))),
+                          const SizedBox(width: 15),
+                          Expanded(
+                              child: ElevatedButton(
+                                  onPressed: () {
+                                    print('no selected');
+                                    Navigator.of(context).pop();
+                                  },
+                                  style: ElevatedButton.styleFrom(
+                                      primary: Colors.white),
+                                  child: const Text("No",
+                                      style: TextStyle(color: Colors.black))))
+                        ])
+                      ])));
+        });
+  }
 
   onBhagvadGitaSelect(context) {
     showDialog(
@@ -444,6 +485,13 @@ class HomeScreenProvider extends ChangeNotifier {
   List chantinglist = [];
   List regulations = [];
 
+  String? sadhanaHearing;
+  String? hearingGuru;
+  String? hearingOthers;
+  String? preaching;
+  String? otherActivities;
+  String? notes;
+
   getData(context) async {
     showLoading(context);
     notifyListeners();
@@ -465,9 +513,27 @@ class HomeScreenProvider extends ChangeNotifier {
           var sandhyaData = sadhana.sadhanaData[0]['data']['sandhya_arti'];
           var dateFormat = DateFormat("h:mm a");
           var regulations = sadhana.sadhanaData[0]['data']['regulations'];
+
+          sadhanaHearing =
+              sadhana.sadhanaData[0]['data']['association']['hearing_sp'];
+          hearingGuru =
+              sadhana.sadhanaData[0]['data']['association']['hearing_guru'];
+          hearingOthers =
+              sadhana.sadhanaData[0]['data']['association']['hearing_others'];
+          preaching =
+              sadhana.sadhanaData[0]['data']['association']['preaching'];
+          otherActivities =
+              sadhana.sadhanaData[0]['data']['association']['other_activities'];
+
+          notes = sadhana.sadhanaData[0]['data']['notes'];
+
+          notesCtrl.text = notes!;
+
           List book_data = sadhana.sadhanaData[0]['data']['book_reading'];
+
           var book_distribution =
               sadhana.sadhanaData[0]['data']['book_distribution'];
+
           DateTime slept_time =
               DateFormat("hh:mm").parse(sleepData['slept_time']);
           DateTime wakeup_timeData =

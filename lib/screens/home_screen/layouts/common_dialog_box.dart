@@ -23,8 +23,8 @@ class _CommonDialogState extends State<CommonDialog> {
   @override
   Widget build(BuildContext context) {
     int currentValue = 1;
-    const int totalCount = 12;
-    const int initValue = 5;
+    const int totalCount = 60;
+    const int initValue = 4;
     return Dialog(
         insetPadding: const EdgeInsets.symmetric(horizontal: 20),
         backgroundColor: Colors.transparent,
@@ -55,41 +55,25 @@ class _CommonDialogState extends State<CommonDialog> {
                   style: appCss.dmDenseMedium14
                       .textColor(appColor(context).appTheme.primary)),
               const VSpace(Insets.i32),
+              Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                Text("$currentValue",
+                    style: const TextStyle(
+                        fontSize: 18, height: 2.0, fontWeight: FontWeight.w500))
+              ]),
 
-              Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                children: [
-                  Text(currentValue.toString(),
-                      style: const TextStyle(
-                          fontSize: 18,
-                          height: 2.0,
-                          fontWeight: FontWeight.w500)),
-                  Text(currentValue.toString(),
-                      style: const TextStyle(
-                          fontSize: 18,
-                          height: 2.0,
-                          fontWeight: FontWeight.w500)),
-                  Text(currentValue.toString(),
-                      style: const TextStyle(
-                          fontSize: 18,
-                          height: 2.0,
-                          fontWeight: FontWeight.w500)),
-                ],
-              ),
               WheelSlider(
-                horizontalListWidth: 300,
-                customPointer: SvgPicture.asset("assets/svg/ruler.svg")
-                    .paddingOnly(top: 40),
-                totalCount: totalCount,
-                initValue: initValue,
-                onValueChanged: (val) {
-                  setState(() {
-                    currentValue = val;
-                  });
-                  log("$currentValue");
-                },
-              ),
-
+                  isInfinite: false,
+                  horizontalListWidth: 300,
+                  customPointer: SvgPicture.asset("assets/svg/ruler.svg")
+                      .paddingOnly(top: 40),
+                  totalCount: totalCount,
+                  initValue: initValue,
+                  onValueChanged: (val) {
+                    setState(() {
+                      currentValue = val;
+                    });
+                    log("$currentValue");
+                  }),
               Text(
                   textAlign: TextAlign.start,
                   widget.text2!,
