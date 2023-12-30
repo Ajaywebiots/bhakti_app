@@ -60,7 +60,6 @@ class _CommonDialogState extends State<CommonDialog> {
                     style: const TextStyle(
                         fontSize: 18, height: 2.0, fontWeight: FontWeight.w500))
               ]),
-
               WheelSlider(
                   isInfinite: false,
                   horizontalListWidth: 300,

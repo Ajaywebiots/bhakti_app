@@ -1,6 +1,5 @@
 import 'package:bhakti_app/screens/home_screen/layouts/regulation_layout.dart';
 import '../../../../config.dart';
-import '../../../../widgets/common_left_side_text.dart';
 import 'layouts/association_layout.dart';
 import 'layouts/book_distribution_layout.dart';
 import 'layouts/book_layout.dart';

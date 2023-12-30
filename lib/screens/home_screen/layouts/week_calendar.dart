@@ -1,8 +1,5 @@
-import 'dart:developer';
-
 import 'package:bhakti_app/config.dart';
-import 'package:bhakti_app/providers/home_screen_provider.dart';
-import 'package:bhakti_app/customise/custom_week_calendar/custom_week_calendar.dart';
+import '../../../customise/custom_week_calendar/custom_week_calendar.dart';
 
 class WeekCalendar extends StatefulWidget {
   const WeekCalendar({super.key});
@@ -12,16 +9,13 @@ class WeekCalendar extends StatefulWidget {
 }
 
 class _WeekCalendarState extends State<WeekCalendar> {
-  DateTime? toDate, fromDate;
-
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(
         builder: (context1, homeScreenPvr, child) {
-      log("HOME SEL : ${homeScreenPvr.selectedDate}");
       return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Container(
-            height: Sizes.s72,
+            height: 72,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: appColor(context).appTheme.whiteColor),
@@ -29,7 +23,6 @@ class _WeekCalendarState extends State<WeekCalendar> {
                 datePickChange: homeScreenPvr.selectedDate,
                 todayDate: DateTime.now(),
                 inactiveWeekColor: appColor(context).appTheme.rulesClr,
-                weekStartFrom: WeekStartFrom.Sunday,
                 activeBackgroundColor: appColor(context).appTheme.primary,
                 activeTextColor: Colors.white,
                 inactiveBackgroundColor: appColor(context).appTheme.whiteColor,
@@ -38,8 +31,10 @@ class _WeekCalendarState extends State<WeekCalendar> {
                 disabledBackgroundColor: appColor(context).appTheme.whiteColor,
                 activeNavigatorColor: appColor(context).appTheme.whiteColor,
                 inactiveNavigatorColor: appColor(context).appTheme.whiteColor,
-                onDateChange: (date) =>
-                    homeScreenPvr.onCalendarDateChange(date)))
+                onDateChange: (date) => {
+                      homeScreenPvr.onCalendarDateChange(date),
+                      homeScreenPvr.getData(context)
+                    })),
       ]);
     });
   }

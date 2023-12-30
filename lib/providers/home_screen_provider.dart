@@ -3,6 +3,7 @@ import 'dart:io';
 import '../config.dart';
 import 'package:intl/intl.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:http/http.dart' as http;
 
 class HomeScreenProvider extends ChangeNotifier {
   bookReadingPresentlyNavigate(context) {
@@ -19,9 +20,6 @@ class HomeScreenProvider extends ChangeNotifier {
     // }));
     // homeScreenPvr.key.currentState!.closeDrawer();
   }
-
-
-
 
   int selectedIndex = 0;
 
@@ -289,7 +287,6 @@ class HomeScreenProvider extends ChangeNotifier {
 
   onCalendarDateChange(date) {
     selectedDate = date;
-
     notifyListeners();
     log("onCalendarDateChange ::: $selectedDate");
   }
@@ -341,6 +338,7 @@ class HomeScreenProvider extends ChangeNotifier {
               });
         });
   }
+
   Future<bool> showExitPopup(context) async {
     return await showDialog(
         context: context,
@@ -492,20 +490,29 @@ class HomeScreenProvider extends ChangeNotifier {
   String? otherActivities;
   String? notes;
 
+  updateText() {
+    String newText = notesCtrl.text;
+  }
+
   getData(context) async {
     showLoading(context);
     notifyListeners();
+    DateTime getDate(DateTime d) => DateTime(d.year, d.month, d.day);
+    var toData = DateFormat("yyyy-MM-dd").format(selectedDate);
+    var fromData = DateFormat("yyyy-MM-dd") .format(getDate(selectedDate).subtract(const Duration(days: 6)));
     try {
-      Map<String, String> body = {
-        "from_date": "2023-11-14",
-        "to_date": "2023-11-20"
-      };
+      Map<String, String> body = {"from_date": fromData, "to_date": toData};
+      // Map<String, String> body = {
+      //   "from_date": "2023-11-14",
+      //   "to_date": "2023-11-20"
+      // };
       await apiServices
           .postApi(api.getSadhana, body, isToken: true)
           .then((value) async {
         hideLoading(context);
         notifyListeners();
         log('From Date: ${value.isSuccess!}');
+        print("RESPONSE ${value.data}");
         if (value.isSuccess!) {
           Sadhana sadhana = Sadhana.fromJson(value.data);
           var sleepData = sadhana.sadhanaData[0]['data']['sleep'];
