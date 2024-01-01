@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:bhakti_app/screens/home_screen/layouts/regulation_layout.dart';
 import '../../../../config.dart';
 import 'layouts/association_layout.dart';
@@ -22,8 +24,9 @@ class HomeScreenBottomLayout extends StatelessWidget {
             isRightText: true,
             text: appFonts.books,
             onTap: () => homeScreenPvr.bookReadingPresentlyNavigate(context)),
-        homeScreenPvr.bookingLis == [] ? const VSpace(Insets.i15) : Container(),
-        homeScreenPvr.bookingLis == [] ? Container() : const BookLayout(),
+        appArray.bookList.isEmpty ? const VSpace(Insets.i15) : Container(),
+        appArray.bookList.isEmpty ? Container() : const BookLayout(),
+
         const VSpace(Insets.i25),
         CommonLeftSideText(text: appFonts.association),
         const VSpace(Insets.i15),

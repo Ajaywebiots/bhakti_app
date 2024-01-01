@@ -12,7 +12,7 @@ import '../scrollable_positioned_list/scrollable_positioned_list.dart';
 /// You can get horizontal and vertical ruler view with the package.
 class RulerPicker extends StatefulWidget {
   const RulerPicker(
-      {Key? key,
+      {super.key,
       this.minValue = 10,
       this.maxValue = 120,
       this.startValue = 10,
@@ -20,8 +20,7 @@ class RulerPicker extends StatefulWidget {
       this.lineColor = Colors.black,
       this.padding = const EdgeInsets.all(4),
       this.direction = Axis.vertical,
-      required this.onChange})
-      : super(key: key);
+      required this.onChange});
 
   /// event for get to ruler value
   final ValueSetter<int> onChange;

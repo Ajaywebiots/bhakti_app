@@ -105,13 +105,6 @@ class WheelSlider extends StatefulWidget {
     return bars;
   }
 
-
-
-
-
-
-
-
   /// Displays numbers instead of lines.
   WheelSlider.number({
     Key? key,
