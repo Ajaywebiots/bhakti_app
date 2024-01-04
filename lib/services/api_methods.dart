@@ -7,4 +7,5 @@ class ApiMethods {
   String getProfile = '$apiUrl/GetProfile';
   String profileUpdate = '$apiUrl/ProfileUpdate';
   String getSadhana = '$apiUrl/GetSadhana';
+  String sadhanaUpdate = '$apiUrl/SadhanaUpdate';
 }

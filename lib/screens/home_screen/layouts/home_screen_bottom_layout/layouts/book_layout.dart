@@ -8,13 +8,22 @@ class BookLayout extends StatelessWidget {
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(
         builder: (context, homeScreenPvr, child) {
-      log("bookList :${appArray.bookList}");
+      List<dynamic> filteredBooks =
+          homeScreenPvr.bookingLis.where((configBookList) {
+        return appArray.bookList.any((selectedBook) =>
+            selectedBook['book_id'] == configBookList['book_id']);
+      }).toList();
+      List reverseList = List.from(appArray.bookList.reversed);
+      log("bookList: ${appArray.bookList}");
+      log("filteredBooks $filteredBooks");
+
       return SizedBox(
           height: Sizes.s180,
           child: ScrollablePositionedList.builder(
               scrollDirection: Axis.horizontal,
-              itemCount: appArray.bookList.length,
+              itemCount: filteredBooks.length,
               itemBuilder: (context, index) {
+                log("appArray.bookList ${appArray.bookList[index]['reading_time']}");
                 return Container(
                     margin: const EdgeInsets.only(right: 15),
                     decoration: BoxDecoration(
@@ -35,15 +44,10 @@ class BookLayout extends StatelessWidget {
                           ClipRRect(
                               borderRadius: BorderRadius.circular(2),
                               child: Image.network(
-                                  homeScreenPvr.bookingLis[index]['image_src']
-                                      .toString(),
+                                  filteredBooks[index]['image_src'].toString(),
                                   height: Sizes.s132)),
                           const VSpace(Insets.i6),
-                          Text(
-                              appArray.bookList[index]['reading_time'] == null
-                                  ? 'N/A'
-                                  : appArray.bookList[index]['reading_time']
-                                      .toString(),
+                          Text(reverseList[index]['reading_time'] ?? 'N/A',
                               style: appCss.dmDenseMedium16.textColor(
                                   appColor(context).appTheme.primary))
                         ])).inkWell(onTap: () {
@@ -51,26 +55,10 @@ class BookLayout extends StatelessWidget {
                       context: context,
                       builder: (BuildContext context) {
                         return CommonDialog(
-                            text: homeScreenPvr.bookingLis[index]['book_name'],
-                            text1: 'Hour',
-                            text2: 'Minutes',
-                            onHourChange: (value) {
-                              log("value :: $value");
-                              appArray.bookList[index] == 0
-                                  ? homeScreenPvr.bhagavadGitaHour = value
-                                  : appArray.bookList[index] == 1
-                                      ? homeScreenPvr.srilaHour = value
-                                      : homeScreenPvr.selfRealizationHour =
-                                          value;
-                            },
-                            onMinChange: (value) {
-                              appArray.bookList[index] == 0
-                                  ? homeScreenPvr.bhagavadGitaMin = value
-                                  : appArray.bookList[index] == 1
-                                      ? homeScreenPvr.srilaMin = value
-                                      : homeScreenPvr.selfRealizationMin =
-                                          value;
-                            });
+                          text:reverseList[index]['book_name'],
+                          text1: 'Hour',
+                          text2: 'Minutes',
+                        );
                       });
                 });
               }));

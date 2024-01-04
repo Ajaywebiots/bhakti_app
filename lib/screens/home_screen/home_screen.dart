@@ -31,7 +31,8 @@ class _HomeScreenState extends State<HomeScreen> {
                             HomeAppBar(),
                             VSpace(Insets.i23),
                             HomeScreenUpperLayout(),
-                            HomeScreenBottomLayout()
+                            HomeScreenBottomLayout(),
+
                           ]).paddingOnly(
                                   top:
                                       MediaQuery.of(context).size.height * 0.01,

@@ -6,7 +6,7 @@ class NotesLayout extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<HomeScreenProvider>(
-        builder: (context, homeScreenPvr, child) {
+        builder: (context1, homeScreenPvr, child) {
       return Container(
           height: Sizes.s119,
           decoration: BoxDecoration(
@@ -28,9 +28,8 @@ class NotesLayout extends StatelessWidget {
                     border: InputBorder.none),
                 keyboardType: TextInputType.multiline,
                 maxLines: 4),
-            Positioned(
-                bottom: 0,
-                right: 0,
+            Align(
+                alignment: Alignment.bottomRight,
                 child: Container(
                         margin: const EdgeInsets.only(bottom: 6, right: 6),
                         alignment: Alignment.center,
@@ -40,7 +39,7 @@ class NotesLayout extends StatelessWidget {
                             color: appColor(context).appTheme.primary,
                             borderRadius: BorderRadius.circular(8)),
                         child: SvgPicture.asset(eSvgAssets.tick))
-                    .inkWell(onTap: () => homeScreenPvr.updateText()))
+                    .inkWell(onTap: () => homeScreenPvr.updateData(context)))
           ]));
     });
   }

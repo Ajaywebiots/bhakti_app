@@ -1,11 +1,9 @@
-import 'dart:developer';
-
 import 'package:bhakti_app/screens/home_screen/layouts/regulation_layout.dart';
-import '../../../../config.dart';
+import 'package:bhakti_app/config.dart';
 import 'layouts/association_layout.dart';
 import 'layouts/book_distribution_layout.dart';
 import 'layouts/book_layout.dart';
-import '../notes_layout.dart';
+import 'package:bhakti_app/screens/home_screen/layouts/notes_layout.dart';
 
 class HomeScreenBottomLayout extends StatelessWidget {
   const HomeScreenBottomLayout({super.key});
@@ -26,7 +24,6 @@ class HomeScreenBottomLayout extends StatelessWidget {
             onTap: () => homeScreenPvr.bookReadingPresentlyNavigate(context)),
         appArray.bookList.isEmpty ? const VSpace(Insets.i15) : Container(),
         appArray.bookList.isEmpty ? Container() : const BookLayout(),
-
         const VSpace(Insets.i25),
         CommonLeftSideText(text: appFonts.association),
         const VSpace(Insets.i15),
@@ -38,7 +35,7 @@ class HomeScreenBottomLayout extends StatelessWidget {
         const VSpace(Insets.i25),
         CommonLeftSideText(text: appFonts.notes),
         const VSpace(Insets.i15),
-        const NotesLayout()
+        const NotesLayout(),
       ]);
     });
   }

@@ -15,7 +15,7 @@ class _WeekCalendarState extends State<WeekCalendar> {
         builder: (context1, homeScreenPvr, child) {
       return Column(mainAxisAlignment: MainAxisAlignment.center, children: [
         Container(
-            height: 72,
+            height: Sizes.s72,
             decoration: BoxDecoration(
                 borderRadius: BorderRadius.circular(8),
                 color: appColor(context).appTheme.whiteColor),
@@ -34,7 +34,7 @@ class _WeekCalendarState extends State<WeekCalendar> {
                 onDateChange: (date) => {
                       homeScreenPvr.onCalendarDateChange(date),
                       homeScreenPvr.getData(context)
-                    })),
+                    }))
       ]);
     });
   }

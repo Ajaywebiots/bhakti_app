@@ -1,5 +1,8 @@
 import 'dart:developer';
 import 'dart:io';
+import 'package:bhakti_app/services/sadhna_update_data.dart';
+import 'package:vibration/vibration.dart';
+
 import '../config.dart';
 import 'package:intl/intl.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
@@ -8,9 +11,7 @@ import 'package:http/http.dart' as http;
 class HomeScreenProvider extends ChangeNotifier {
   bookReadingPresentlyNavigate(context) {
     Navigator.push(context, MaterialPageRoute(builder: (context) {
-      return BookReadPresentlyScreen(
-        bookReadingList: bookingLis,
-      );
+      return BookReadPresentlyScreen(bookReadingList: bookingLis);
     }));
   }
 
@@ -40,6 +41,46 @@ class HomeScreenProvider extends ChangeNotifier {
     notifyListeners();
   }
 
+  final dynamic nTotalCount = 100;
+  final dynamic nInitValue = 0;
+  dynamic nCurrentValue = 0;
+  final dynamic nTotalCount1 = 100;
+  final dynamic nInitValue1 = 0;
+  dynamic nCurrentValue1 = 0;
+
+  Widget yourBackgroundWidget() {
+    return Container(
+      color: Colors.blue[100],
+    );
+  }
+
+  onFirstChanged(val) {
+    notifyListeners();
+    nCurrentValue = val;
+    Vibration.vibrate(
+        duration: 10,
+        amplitude: 128,
+        pattern: [100, 100],
+        intensities: [1, 255]);
+  }
+
+
+  onSecondChanged(val) {
+    notifyListeners();
+    nCurrentValue1 = val;
+    Vibration.vibrate(
+        duration: 10,
+        amplitude: 128,
+        pattern: [100, 100],
+        intensities: [1, 255]);
+  }
+
+  
+  vvv(){
+    
+    
+    log("ssss : ");
+  }
   bool isExpanded = false;
 
   final colors = [Colors.amber[400], Colors.yellow[400]];
@@ -59,7 +100,11 @@ class HomeScreenProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  TextEditingController? searchHere;
+  TextEditingController searchHere = TextEditingController();
+  TextEditingController smallBookCtrl = TextEditingController();
+  TextEditingController mediumBookCtrl = TextEditingController();
+  TextEditingController largeBookCtrl = TextEditingController();
+
   final GlobalKey<ScaffoldState> key = GlobalKey();
 
   List bookingLis = [];
@@ -72,7 +117,7 @@ class HomeScreenProvider extends ChangeNotifier {
       minimumFetchInterval: const Duration(minutes: 5),
     ));
     await remoteConfig.fetchAndActivate();
-    // String technicalIssueStatus = remoteConfig.getString('books');
+
     List mapValues = json.decode(remoteConfig.getValue("books").asString());
 
     bookingLis = mapValues;
@@ -153,9 +198,6 @@ class HomeScreenProvider extends ChangeNotifier {
   String sleepAt = "";
   String wakeupTime = "";
   String mangalaArtiTime = "";
-  int smallBooks = 0;
-  int mediumBooks = 0;
-  int largeBooks = 0;
   dynamic slot1, slot2, slot3, slot4;
   int sleepTimeHour = 0;
   int sleepTimeMin = 0;
@@ -193,19 +235,10 @@ class HomeScreenProvider extends ChangeNotifier {
             return Consumer<HomeScreenProvider>(
                 builder: (context, ctrl, child) {
               return CommonDialog(
-                  text: 'Sleep Time',
-                  text1: 'Hour',
-                  text2: 'Minutes',
-                  onHourChange: (value) {
-                    sleepTimeHour = value;
-                    ctrl.notifyListeners();
-                    log("sleepTimeHour :$sleepTimeHour");
-                    setState;
-                  },
-                  onMinChange: (value) {
-                    sleepTimeMin = value;
-                    notifyListeners();
-                  });
+                text: 'Sleep Time',
+                text1: 'Hour',
+                text2: 'Minutes',
+              );
             });
           });
         });
@@ -222,17 +255,10 @@ class HomeScreenProvider extends ChangeNotifier {
         context: context,
         builder: (BuildContext context1) {
           return CommonDialog(
-              text: 'WokeUp Time',
-              text1: 'Hour',
-              text2: 'Minutes',
-              onHourChange: (value) {
-                wokeUpTimeHour = value;
-                notifyListeners();
-              },
-              onMinChange: (value) {
-                wokeUpTimeMin = value;
-                notifyListeners();
-              });
+            text: 'WokeUp Time',
+            text1: 'Hour',
+            text2: 'Minutes',
+          );
         });
   }
 
@@ -241,17 +267,10 @@ class HomeScreenProvider extends ChangeNotifier {
         context: context,
         builder: (BuildContext context) {
           return CommonDialog(
-              text: 'Chanting',
-              text1: 'Count of Rounds',
-              text2: 'Chanting Quality Rating',
-              onHourChange: (value) {
-                countRounds = value;
-                notifyListeners();
-              },
-              onMinChange: (value) {
-                qualityRating = value;
-                notifyListeners();
-              });
+            text: 'Chanting',
+            text1: 'Count of Rounds',
+            text2: 'Chanting Quality Rating',
+          );
         });
   }
 
@@ -311,17 +330,10 @@ class HomeScreenProvider extends ChangeNotifier {
             return Consumer<HomeScreenProvider>(
                 builder: (context1, ctrl, child) {
               return CommonDialog(
-                  text: 'Sandhya Arti',
-                  text1: 'Hour',
-                  text2: 'Minutes',
-                  onHourChange: (value) {
-                    ctrl.sandhyaArtiHour = value;
-                    ctrl.notifyListeners();
-                  },
-                  onMinChange: (value) {
-                    ctrl.sandhyaArtiMin = value;
-                    ctrl.notifyListeners();
-                  });
+                text: 'Sandhya Arti',
+                text1: 'Hour',
+                text2: 'Minutes',
+              );
             });
           });
         });
@@ -337,17 +349,10 @@ class HomeScreenProvider extends ChangeNotifier {
         context: context,
         builder: (BuildContext context) {
           return CommonDialog(
-              text: 'Mangala Arti',
-              text1: 'Hour',
-              text2: 'Minutes',
-              onHourChange: (value) {
-                bhagavadGitaHour = value;
-                notifyListeners();
-              },
-              onMinChange: (value) {
-                bhagavadGitaMin = value;
-                notifyListeners();
-              });
+            text: 'Mangala Arti',
+            text1: 'Hour',
+            text2: 'Minutes',
+          );
         });
   }
 
@@ -394,17 +399,10 @@ class HomeScreenProvider extends ChangeNotifier {
         context: context,
         builder: (BuildContext context) {
           return CommonDialog(
-              text: 'Bhagavadgita',
-              text1: 'Hour',
-              text2: 'Minutes',
-              onHourChange: (value) {
-                bhagavadGitaHour = value;
-                notifyListeners();
-              },
-              onMinChange: (value) {
-                bhagavadGitaMin = value;
-                notifyListeners();
-              });
+            text: 'Bhagavadgita',
+            text1: 'Hour',
+            text2: 'Minutes',
+          );
         });
   }
 
@@ -413,17 +411,10 @@ class HomeScreenProvider extends ChangeNotifier {
         context: context,
         builder: (BuildContext context) {
           return CommonDialog(
-              text: 'Hearing',
-              text1: 'Hour',
-              text2: 'Minutes',
-              onHourChange: (value) {
-                hearingHour = value;
-                notifyListeners();
-              },
-              onMinChange: (value) {
-                hearingMin = value;
-                notifyListeners();
-              });
+            text: 'Hearing',
+            text1: 'Hour',
+            text2: 'Minutes',
+          );
         });
   }
 
@@ -432,17 +423,10 @@ class HomeScreenProvider extends ChangeNotifier {
         context: context,
         builder: (BuildContext context) {
           return CommonDialog(
-              text: 'Preaching',
-              text1: 'Hour',
-              text2: 'Minutes',
-              onHourChange: (value) {
-                preachingHour = value;
-                notifyListeners();
-              },
-              onMinChange: (value) {
-                preachingMin = value;
-                notifyListeners();
-              });
+            text: 'Preaching',
+            text1: 'Hour',
+            text2: 'Minutes',
+          );
         });
   }
 
@@ -451,17 +435,10 @@ class HomeScreenProvider extends ChangeNotifier {
         context: context,
         builder: (BuildContext context) {
           return CommonDialog(
-              text: 'Chanting',
-              text1: 'Hour',
-              text2: 'Minutes',
-              onHourChange: (value) {
-                chantingHour = value;
-                notifyListeners();
-              },
-              onMinChange: (value) {
-                chantingMin = value;
-                notifyListeners();
-              });
+            text: 'Chanting',
+            text1: 'Hour',
+            text2: 'Minutes',
+          );
         });
   }
 
@@ -501,6 +478,9 @@ class HomeScreenProvider extends ChangeNotifier {
   String? preaching;
   String? otherActivities;
   String? notes;
+  int? small;
+  int? medium;
+  int? large;
 
   updateText() {
     String newText = notesCtrl.text;
@@ -516,10 +496,9 @@ class HomeScreenProvider extends ChangeNotifier {
     try {
       Map<String, String> body = {"from_date": fromData, "to_date": toData};
       // Map<String, String> body = {
-      //   "from_date": "2023-11-14",
-      //   "to_date": "2023-11-20"
+      //   "from_date": "2023-12-30",
+      //   "to_date": "2023-12-30"
       // };
-
       log("BODY $body");
       await apiServices
           .postApi(api.getSadhana, body, isToken: true)
@@ -528,6 +507,7 @@ class HomeScreenProvider extends ChangeNotifier {
         notifyListeners();
         log('From Date: ${value.isSuccess!}');
         print("RESPONSE ${value.data}");
+        print("RESPONSEs ${value.data['book_reading']}");
         if (value.isSuccess!) {
           notifyListeners();
           Sadhana sadhana = Sadhana.fromJson(value.data);
@@ -539,6 +519,12 @@ class HomeScreenProvider extends ChangeNotifier {
             var sandhyaData = sadhana.sadhanaData[0]['data']['sandhya_arti'];
             var dateFormat = DateFormat("h:mm a");
             var regulations = sadhana.sadhanaData[0]['data']['regulations'];
+
+            ////////////////////////////////////
+
+
+
+            /////////////////////////////////////
 
             if (sadhana.sadhanaData[0]['data']['association'] != null) {
               log("ASSSS : ${sadhana.sadhanaData[0]['data']['association'] != "null"}");
@@ -554,20 +540,42 @@ class HomeScreenProvider extends ChangeNotifier {
               otherActivities = sadhana.sadhanaData[0]['data']['association']
                   ['other_activities'];
             } else {
-              sadhanaHearing = null;
-              hearingGuru = null;
-              hearingOthers = null;
-              preaching = null;
-              otherActivities = null;
+              sadhanaHearing = 'N/A';
+              hearingGuru = 'N/A';
+              hearingOthers = 'N/A';
+              preaching = 'N/A';
+              otherActivities = 'N/A';
             }
             notifyListeners();
             notes = sadhana.sadhanaData[0]['data']['notes'];
 
             notesCtrl.text = notes!;
 
+            small = sadhana.sadhanaData[0]['data']['book_distribution']
+                ['small_books'];
+            medium = sadhana.sadhanaData[0]['data']['book_distribution']
+                ['medium_books'];
+            large = sadhana.sadhanaData[0]['data']['book_distribution']
+                ['big_books'];
+
+            smallBookCtrl.text = small.toString();
+            mediumBookCtrl.text = medium.toString();
+            largeBookCtrl.text = large.toString();
+            // if (sadhana.sadhanaData[0]['data']['book_distribution'] != null) {
+            //   small = sadhana.sadhanaData[0]['data']['book_distribution']['small_books'];
+            //   medium = sadhana.sadhanaData[0]['data']['book_distribution']['medium_books'];
+            //   large = sadhana.sadhanaData[0]['data']['book_distribution']['big_books'];
+            //
+            //   smallBookCtrl.text = small.toString();
+            //   mediumBookCtrl.text = medium.toString();
+            //   largeBookCtrl.text = large.toString();
+            // } else {
+            //   smallBookCtrl.text = '00';
+            //   mediumBookCtrl.text = '00';
+            //   largeBookCtrl.text = '00';
+            // }
+
             List book_data = sadhana.sadhanaData[0]['data']['book_reading'];
-            var book_distribution =
-                sadhana.sadhanaData[0]['data']['book_distribution'];
 
             DateTime slept_time =
                 DateFormat("hh:mm").parse(sleepData['slept_time']);
@@ -602,9 +610,6 @@ class HomeScreenProvider extends ChangeNotifier {
               appArray.bookList.add(book_data[i]);
             }
 
-            smallBooks = book_distribution['small_books'];
-            mediumBooks = book_distribution['medium_books'];
-            largeBooks = book_distribution['big_books'];
             notifyListeners();
             log('Book Read: ${appArray.bookList}');
           } else {
@@ -616,9 +621,9 @@ class HomeScreenProvider extends ChangeNotifier {
             chantinglist.clear();
             appArray.bookList.clear();
             notifyListeners();
-            smallBooks = 0;
-            mediumBooks = 0;
-            largeBooks = 0;
+            smallBookCtrl.text = '00';
+            mediumBookCtrl.text = '00';
+            largeBookCtrl.text = '00';
             notifyListeners();
             log('Book Read: ${appArray.bookList}');
             for (int ii = 0; ii < appArray.rulesList.length; ii++) {
@@ -638,5 +643,78 @@ class HomeScreenProvider extends ChangeNotifier {
       notifyListeners();
       log("CATCH : $e");
     }
+  }
+
+  updateData(context) async {
+    log("SSS ");
+    var body = {
+      "date": DateFormat('yyyy-MM-dd').format(selectedDate),
+      "data": {
+        "sleep": {"slept_time": "22:35:00", "wakeup_time": "05:30:00"},
+        "mangala_arti": {
+          "time": "06:30:00",
+          "guru_astaka": true,
+          "narasimha_arti": true,
+          "tulasi_arti": true,
+          "guru_arti": true,
+          "bhoga_offering": false
+        },
+        "sandhya_arti": {
+          "time": "07:30:00",
+          "sandhya_arti": true,
+          "narasimha_arti": true,
+          "bhoga_offering": false
+        },
+        "chanting": {
+          "slot_1": {"rounds": 0, "quality": 5},
+          "slot_2": {"rounds": 8, "quality": 8},
+          "slot_3": {"rounds": 8, "quality": 6},
+          "slot_4": {"rounds": 4, "quality": 7}
+        },
+        "regulations": {
+          "no_meat_eating": appArray.rulesList[0]['isOn'],
+          "no_intoxication": appArray.rulesList[1]['isOn'],
+          "no_illicit_sex": appArray.rulesList[2]['isOn'],
+          "no_gambling": appArray.rulesList[3]['isOn'],
+          "only_prasadam": appArray.rulesList[4]['isOn']
+        },
+        "book_reading": [
+          {"book_id": 22, "chapter": 11, "reading_time": "00:50:00"},
+          {"book_id": 10, "chapter": 11, "reading_time": "00:40:00"}
+        ],
+        "association": {
+          "hearing_sp": sadhanaHearing,
+          "hearing_guru": hearingGuru,
+          "hearing_others": hearingOthers,
+          "preaching": preaching,
+          "other_activities": otherActivities
+        },
+        "book_distribution": {
+          "small_books": smallBookCtrl.text,
+          "medium_books": mediumBookCtrl.text,
+          "big_books": largeBookCtrl.text
+        },
+        "notes": notesCtrl.text
+      }
+    };
+
+    log("BBBBB :$body");
+
+    await apiServices
+        .postApi(api.sadhanaUpdate, body, isToken: true)
+        .then((value) async {
+      log("sadhanaUpdate  :: ${value.data}");
+
+      hideLoading(context);
+      notifyListeners();
+      print("value.data ${value.data}");
+
+      if (value.isSuccess!) {
+        notifyListeners();
+      } else {
+        ScaffoldMessenger.of(context)
+            .showSnackBar(SnackBar(content: Text(value.message)));
+      }
+    });
   }
 }

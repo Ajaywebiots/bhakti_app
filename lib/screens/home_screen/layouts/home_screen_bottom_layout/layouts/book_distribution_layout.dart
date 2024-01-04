@@ -10,15 +10,15 @@ class BookDistributionLayout extends StatelessWidget {
         builder: (context, homeProviderPvr, child) {
       return Row(mainAxisAlignment: MainAxisAlignment.center, children: [
         CommonBookDistribution(
-            textOne: homeProviderPvr.smallBooks.toString(),
+            controller: homeProviderPvr.smallBookCtrl,
             textTwo: appFonts.smallBooks),
         const HSpace(Insets.i10),
         CommonBookDistribution(
-            textOne: homeProviderPvr.mediumBooks.toString(),
+            controller: homeProviderPvr.mediumBookCtrl,
             textTwo: appFonts.mediumBooks),
         const HSpace(Insets.i10),
         CommonBookDistribution(
-            textOne: homeProviderPvr.largeBooks.toString(),
+            controller: homeProviderPvr.largeBookCtrl,
             textTwo: appFonts.largeBooks)
       ]);
     });

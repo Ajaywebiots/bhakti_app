@@ -109,7 +109,7 @@ class ApiServices {
             //set data to class
             apiData.message =responseData['StatusText'];
             apiData.isSuccess = true;
-            apiData.data = responseData['data'];
+            apiData.data = responseData['data'] ?? "";
             return apiData;
           } else {
             //set data to class
@@ -166,8 +166,6 @@ class ApiServices {
       }
     }
   }
-
-
 }
 
 Exception handleErrorResponse(http.Response response) {
