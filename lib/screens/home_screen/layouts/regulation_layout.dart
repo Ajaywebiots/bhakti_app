@@ -29,10 +29,7 @@ class RegulationLayout extends StatelessWidget {
                   isRegulation: true,
                   status: e.value['isOn'],
                   text: e.value['rule'],
-                  onToggle: (val) {
-                    homeScreenPvr.notifyListeners();
-                    e.value['isOn'] = val;
-                  })
+                  onToggle: (val) => homeScreenPvr.regulationToggle(val, e,context))
             ]);
           }).toList()));
     });

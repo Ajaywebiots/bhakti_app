@@ -328,7 +328,19 @@ class Sizes {
   static const double s485 = 485 * scale;
   static const double s490 = 490 * scale;
   static const double s500 = 500 * scale;
+  static const double s510 = 510 * scale;
+  static const double s520 = 520 * scale;
+  static const double s530 = 530 * scale;
+  static const double s540 = 540 * scale;
+  static const double s550 = 550 * scale;
+  static const double s560 = 560 * scale;
+  static const double s570 = 570 * scale;
   static const double s580 = 580 * scale;
   static const double s600 = 600 * scale;
   static const double s660 = 660 * scale;
+  static const double s610 = 610 * scale;
+  static const double s620 = 620 * scale;
+  static const double s630 = 630 * scale;
+  static const double s640 = 640 * scale;
+  static const double s650 = 650 * scale;
 }

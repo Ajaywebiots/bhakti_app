@@ -1,12 +1,13 @@
 import 'dart:developer';
 import 'dart:io';
-import 'package:bhakti_app/services/sadhna_update_data.dart';
+
+import 'package:bhakti_app/screens/home_screen/layouts/common_wheel_slider.dart';
+import 'package:calendar_date_picker2/calendar_date_picker2.dart';
+import 'package:intl/intl.dart';
 import 'package:vibration/vibration.dart';
 
 import '../config.dart';
-import 'package:intl/intl.dart';
-import 'package:calendar_date_picker2/calendar_date_picker2.dart';
-import 'package:http/http.dart' as http;
+import '../customise/custom_wheel_sildersss/wheel_sliderssss.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
   bookReadingPresentlyNavigate(context) {
@@ -15,11 +16,18 @@ class HomeScreenProvider extends ChangeNotifier {
     }));
   }
 
+  regulationToggle(val, e, context) {
+    notifyListeners();
+    e.value['isOn'] = val;
+    updateData(context);
+    notifyListeners();
+  }
+
   onListNavigate() {
     // Navigator.push(context, MaterialPageRoute(builder: (context) {
     //   return const MyDocumentScreen();
     // }));
-    // homeScreenPvr.key.currentState!.closeDrawer();
+    // key.currentState!.closeDrawer();
   }
 
   int totalCount = 100;
@@ -35,28 +43,35 @@ class HomeScreenProvider extends ChangeNotifier {
 
   int selectedIndex = 0;
 
-  onTapDrawer(index) {
-    isExpanded = false;
-    selectedIndex = index;
-    notifyListeners();
-  }
-
-  final dynamic nTotalCount = 100;
-  final dynamic nInitValue = 0;
-  dynamic nCurrentValue = 0;
-  final dynamic nTotalCount1 = 100;
-  final dynamic nInitValue1 = 0;
-  dynamic nCurrentValue1 = 0;
-
   Widget yourBackgroundWidget() {
     return Container(
       color: Colors.blue[100],
     );
   }
 
-  onFirstChanged(val) {
+  onTapDrawer(index) {
+    isExpanded = false;
+    selectedIndex = index;
     notifyListeners();
-    nCurrentValue = val;
+  }
+
+  final dynamic sleepTotalHour = 24;
+  final dynamic sleepInitHour = 0;
+
+  dynamic sleepCurrentHour = 0;
+  final dynamic sleepTotalMinute = 59;
+  final dynamic sleepInitMinute = 0;
+
+  dynamic sleepCurrentMinute = 0;
+
+  onSleepAtHour(val) {
+    int hour12 = val % 12;
+    String period = (val < 12) ? 'AM' : 'PM';
+    sleepAt =
+        "${hour12.toString().padLeft(2, '0')}:${sleepCurrentMinute.toString().padLeft(2, '0')} $period";
+    print("Updated sleepAt: $sleepAt");
+    sleepCurrentHour = val;
+    notifyListeners();
     Vibration.vibrate(
         duration: 10,
         amplitude: 128,
@@ -64,10 +79,16 @@ class HomeScreenProvider extends ChangeNotifier {
         intensities: [1, 255]);
   }
 
-
-  onSecondChanged(val) {
+  onSleepAtMinute(val) {
+    int hour12 = sleepCurrentHour % 12;
+    String period = (sleepCurrentHour < 12) ? 'AM' : 'PM';
     notifyListeners();
-    nCurrentValue1 = val;
+    sleepAt =
+        "${hour12.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')} $period";
+    print("Updated sleepAt: $sleepAt");
+    sleepCurrentMinute = val;
+    notifyListeners();
+
     Vibration.vibrate(
         duration: 10,
         amplitude: 128,
@@ -75,12 +96,49 @@ class HomeScreenProvider extends ChangeNotifier {
         intensities: [1, 255]);
   }
 
-  
-  vvv(){
-    
-    
-    log("ssss : ");
+  final dynamic wokeUpTotalHour = 24;
+  final dynamic wokeUpInitHour = 0;
+  dynamic wokeUpCurrentHour = 0;
+
+  final dynamic wokeUpTotalMinute = 11;
+  final dynamic wokeUpInitMinute = 0;
+  dynamic wokeUpCurrentMinute = 0;
+
+  onWokeUpHour(val) {
+    int hour12 = val % 12;
+    String period = (val < 12) ? 'AM' : 'PM';
+    wakeupTime =
+        "${hour12.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')} $period";
+    print("Updated sleepAt: $wakeupTime");
+    notifyListeners();
+    wokeUpCurrentHour = val;
+    Vibration.vibrate(
+        duration: 10,
+        amplitude: 128,
+        pattern: [100, 100],
+        intensities: [1, 255]);
   }
+
+  onWokeUpMinute(val) {
+    int hour12 = wokeUpCurrentHour % 12;
+    String period = (sleepCurrentHour < 12) ? 'AM' : 'PM';
+    notifyListeners();
+    wakeupTime =
+        "${hour12.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')} $period";
+    print("Updated sleepAt: $wakeupTime");
+    notifyListeners();
+    wokeUpCurrentMinute = val;
+
+    Vibration.vibrate(
+        duration: 10,
+        amplitude: 128,
+        pattern: [100, 100],
+        intensities: [1, 255]);
+
+    wakeupTime =
+        "${wokeUpCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}";
+  }
+
   bool isExpanded = false;
 
   final colors = [Colors.amber[400], Colors.yellow[400]];
@@ -113,9 +171,8 @@ class HomeScreenProvider extends ChangeNotifier {
   onReadyHome() async {
     final remoteConfig = FirebaseRemoteConfig.instance;
     await remoteConfig.setConfigSettings(RemoteConfigSettings(
-      fetchTimeout: const Duration(minutes: 1),
-      minimumFetchInterval: const Duration(minutes: 5),
-    ));
+        fetchTimeout: const Duration(minutes: 1),
+        minimumFetchInterval: const Duration(minutes: 5)));
     await remoteConfig.fetchAndActivate();
 
     List mapValues = json.decode(remoteConfig.getValue("books").asString());
@@ -234,11 +291,59 @@ class HomeScreenProvider extends ChangeNotifier {
           return StatefulBuilder(builder: (context, setState) {
             return Consumer<HomeScreenProvider>(
                 builder: (context, ctrl, child) {
-              return CommonDialog(
-                text: 'Sleep Time',
-                text1: 'Hour',
-                text2: 'Minutes',
-              );
+              return Dialog(
+                  insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+                  backgroundColor: Colors.transparent,
+                  alignment: Alignment.center,
+                  child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white),
+                      width: double.infinity,
+                      height: Sizes.s420,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                                    child: Text('Sleep Time',
+                                        style: appCss.philosopherBold18
+                                            .textColor(appColor(context)
+                                                .appTheme
+                                                .primary)))
+                                .paddingSymmetric(vertical: 20),
+                            Text(
+                                textAlign: TextAlign.start,
+                                'Hour',
+                                style: appCss.dmDenseMedium14.textColor(
+                                    appColor(context).appTheme.primary)),
+                            const VSpace(Insets.i15),
+                            CommonWheelSlider(
+                                interval: 1,
+                                totalCount: sleepTotalHour,
+                                initValue: sleepInitHour,
+                                currentIndex: sleepCurrentHour,
+                                onValueChanged: (val) => onSleepAtHour(val)),
+                            const VSpace(Insets.i15),
+                            Text(
+                                textAlign: TextAlign.start,
+                                'Minutes',
+                                style: appCss.dmDenseMedium14.textColor(
+                                    appColor(context).appTheme.primary)),
+                            const VSpace(Insets.i15),
+                            CommonWheelSlider(
+                                interval: 5,
+                                totalCount: sleepTotalMinute,
+                                initValue: sleepInitMinute,
+                                currentIndex: sleepCurrentMinute,
+                                onValueChanged: (val) => onSleepAtMinute(val)),
+                            const VSpace(Insets.i60),
+                            CommonSelectionButton(
+                                onTapOne: () => Navigator.pop(context),
+                                onTapTwo: () {
+                                  Navigator.pop(context);
+                                  updateData(context);
+                                })
+                          ]).paddingAll(15)));
             });
           });
         });
@@ -254,23 +359,154 @@ class HomeScreenProvider extends ChangeNotifier {
     showDialog(
         context: context,
         builder: (BuildContext context1) {
-          return CommonDialog(
-            text: 'WokeUp Time',
-            text1: 'Hour',
-            text2: 'Minutes',
-          );
+          return Dialog(
+              insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+              backgroundColor: Colors.transparent,
+              alignment: Alignment.center,
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white),
+                  width: double.infinity,
+                  height: Sizes.s420,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                                child: Text('WokeUp Time',
+                                    style: appCss.philosopherBold18.textColor(
+                                        appColor(context).appTheme.primary)))
+                            .paddingSymmetric(vertical: 20),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Hour',
+                            style: appCss.dmDenseMedium14
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 1,
+                            totalCount: wokeUpTotalHour,
+                            initValue: wokeUpInitHour,
+                            currentIndex: wokeUpCurrentHour,
+                            onValueChanged: (val) => onWokeUpHour(val)),
+                        const VSpace(Insets.i15),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Minutes',
+                            style: appCss.dmDenseMedium14
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 5,
+                            totalCount: wokeUpTotalMinute,
+                            initValue: wokeUpInitMinute,
+                            currentIndex: wokeUpCurrentMinute,
+                            onValueChanged: (val) => onWokeUpMinute(val)),
+                        const VSpace(Insets.i60),
+                        CommonSelectionButton(
+                            onTapOne: () => Navigator.pop(context),
+                            onTapTwo: () {
+                              updateData(context);
+                              Navigator.pop(context);
+                            })
+                      ]).paddingAll(15)));
         });
   }
 
-  onChantingCountSelect(context) {
+  final dynamic chantingCountTotalRounds = 100;
+  final dynamic chantingCountInitRounds = 0;
+  dynamic chantingCountCurrentRounds = 0;
+
+  final dynamic chantingCountTotalQuality = 100;
+  final dynamic chantingCountInitQuality = 0;
+  dynamic chantingCountCurrentQuality = 0;
+
+  onChantingCountRounds(val, index) {
+    notifyListeners();
+    chantingCountCurrentRounds = val;
+
+    chantinglist[index]["rounds"] = val;
+    notifyListeners();
+    Vibration.vibrate(
+        duration: 10,
+        amplitude: 128,
+        pattern: [100, 100],
+        intensities: [1, 255]);
+  }
+
+  onChantingCountQuality(val,index) {
+    notifyListeners();
+    chantingCountCurrentQuality = val;
+    chantinglist[index]["quality"] = val;
+    notifyListeners();
+    Vibration.vibrate(
+        duration: 10,
+        amplitude: 128,
+        pattern: [100, 100],
+        intensities: [1, 255]);
+  }
+
+  onChantingCountSelect(context, index) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return CommonDialog(
-            text: 'Chanting',
-            text1: 'Count of Rounds',
-            text2: 'Chanting Quality Rating',
-          );
+          return Dialog(
+              insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+              backgroundColor: Colors.transparent,
+              alignment: Alignment.center,
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white),
+                  width: double.infinity,
+                  height: Sizes.s420,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                                child: Text('Chanting',
+                                    style: appCss.philosopherBold18.textColor(
+                                        appColor(context).appTheme.primary)))
+                            .paddingSymmetric(vertical: 20),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Count of Rounds',
+                            style: appCss.dmDenseMedium14
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 1,
+                            totalCount: chantingCountTotalRounds,
+                            initValue: chantingCountInitRounds,
+                            currentIndex: chantingCountCurrentRounds,
+                            onValueChanged: (val) =>
+                                onChantingCountRounds(val, index)),
+                        const VSpace(Insets.i10),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Chanting Quality Rating',
+                            style: appCss.dmDenseMedium14
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 1,
+                            totalCount: chantingCountTotalQuality,
+                            initValue: chantingCountInitQuality,
+                            currentIndex: chantingCountCurrentQuality,
+                            onValueChanged: (val) =>
+                                onChantingCountQuality(val, index)),
+                        const VSpace(Insets.i10),
+                        const VSpace(Insets.i20),
+                        const VSpace(Insets.i10),
+                        CommonSelectionButton(
+                            onTapOne: () => Navigator.pop(context),
+                            onTapTwo: () {
+                              updateData(context);
+                              Navigator.pop(context);
+                            })
+                      ]).paddingAll(15)));
+
+          ;
         });
   }
 
@@ -322,6 +558,66 @@ class HomeScreenProvider extends ChangeNotifier {
     print("onCalendarDateChange ::: $selectedDate");
   }
 
+  onSandhyaContainerTap(context) {
+    isSandhyaArti = !isSandhyaArti;
+    if (isSandhyaArti == true) {
+      onSandhyaArtiSelect(context);
+    }
+    notifyListeners();
+  }
+
+  onSandhyaContainerToggle(context) {
+    isSandhyaArti = !isSandhyaArti;
+    if (isSandhyaArti == true) {
+      onSandhyaArtiSelect(context);
+    }
+    notifyListeners();
+  }
+
+  final dynamic sandhyaArtiTotalHour = 24;
+  final dynamic sandhyaArtiInitHour = 0;
+  dynamic sandhyaArtiCurrentHour = 0;
+
+  final dynamic sandhyaArtiTotalMinute = 11;
+  final dynamic sandhyaArtiInitMinute = 0;
+  dynamic sandhyaArtiCurrentMinute = 0;
+
+  String sandhyaArtiTime = "";
+
+  onSandhyaArtiHour(val) {
+    int hour12 = val % 12;
+    String period = (val < 12) ? 'AM' : 'PM';
+    sandhyaArtiTime =
+        "${hour12.toString().padLeft(2, '0')}:${sandhyaArtiCurrentMinute.toString().padLeft(2, '0')} $period";
+    print("Updated sleepAt: $sandhyaArtiTime");
+    notifyListeners();
+    sandhyaArtiCurrentHour = val;
+    Vibration.vibrate(
+        duration: 10,
+        amplitude: 128,
+        pattern: [100, 100],
+        intensities: [1, 255]);
+  }
+
+  onSandhyaArtiMinute(val) {
+    sandhyaArtiTime =
+        "${wokeUpCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}";
+    print("Updated sleepAt: $sandhyaArtiTime");
+    notifyListeners();
+    wokeUpCurrentMinute = val;
+    Vibration.vibrate(
+        duration: 10,
+        amplitude: 128,
+        pattern: [100, 100],
+        intensities: [1, 255]);
+  }
+
+  onSandhyaToggle(val, e) {
+    notifyListeners();
+    e.value['isOn'] = val;
+    notifyListeners();
+  }
+
   onSandhyaArtiSelect(context) {
     showDialog(
         context: context,
@@ -329,11 +625,89 @@ class HomeScreenProvider extends ChangeNotifier {
           return StatefulBuilder(builder: (context2, setState) {
             return Consumer<HomeScreenProvider>(
                 builder: (context1, ctrl, child) {
-              return CommonDialog(
-                text: 'Sandhya Arti',
-                text1: 'Hour',
-                text2: 'Minutes',
-              );
+              return Dialog(
+                  insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+                  backgroundColor: Colors.transparent,
+                  alignment: Alignment.center,
+                  child: Container(
+                      decoration: BoxDecoration(
+                          borderRadius: BorderRadius.circular(8),
+                          color: Colors.white),
+                      width: double.infinity,
+                      height: Sizes.s520,
+                      child: Column(
+                          crossAxisAlignment: CrossAxisAlignment.start,
+                          children: [
+                            Center(
+                                    child: Text('Sandhya Arti',
+                                        style: appCss.philosopherBold18
+                                            .textColor(appColor(context)
+                                                .appTheme
+                                                .primary)))
+                                .paddingSymmetric(vertical: 20),
+                            Text(
+                                textAlign: TextAlign.start,
+                                'Hour',
+                                style: appCss.dmDenseMedium14.textColor(
+                                    appColor(context).appTheme.primary)),
+                            const VSpace(Insets.i15),
+                            CommonWheelSlider(
+                                interval: 1,
+                                totalCount: sandhyaArtiTotalHour,
+                                initValue: sandhyaArtiInitHour,
+                                currentIndex: sandhyaArtiCurrentHour,
+                                onValueChanged: (val) =>
+                                    onSandhyaArtiHour(val)),
+                            const VSpace(Insets.i10),
+                            Text(
+                                textAlign: TextAlign.start,
+                                'Minute',
+                                style: appCss.dmDenseMedium14.textColor(
+                                    appColor(context).appTheme.primary)),
+                            const VSpace(Insets.i15),
+                            CommonWheelSlider(
+                                interval: 5,
+                                currentIndex: sandhyaArtiCurrentMinute,
+                                initValue: sandhyaArtiInitMinute,
+                                onValueChanged: (val) =>
+                                    onSandhyaArtiMinute(val),
+                                totalCount: sandhyaArtiTotalMinute),
+                            const VSpace(Insets.i25),
+                            Container(
+                                padding: const EdgeInsets.all(15),
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color:
+                                        appColor(context).appTheme.whiteColor),
+                                child: Column(
+                                    children: appArray.sandhyaTypeList
+                                        .asMap()
+                                        .entries
+                                        .map((e) {
+                                  return Column(children: [
+                                    SandhyaAlertList(
+                                        status: e.value['isOn'],
+                                        text: e.value['artiType'],
+                                        onToggle: (val) =>
+                                            onSandhyaToggle(val, e)),
+                                    const VSpace(Sizes.s10),
+                                    e.key == 2
+                                        ? Container()
+                                        : SvgPicture.asset(
+                                            eSvgAssets.lineRuler),
+                                    e.key == 2
+                                        ? Container()
+                                        : const VSpace(Sizes.s10)
+                                  ]);
+                                }).toList())),
+                            const VSpace(Insets.i10),
+                            CommonSelectionButton(
+                                onTapOne: () => Navigator.pop(context),
+                                onTapTwo: () {
+                                  updateData(context);
+                                  Navigator.pop(context);
+                                })
+                          ]).paddingAll(15)));
             });
           });
         });
@@ -344,15 +718,131 @@ class HomeScreenProvider extends ChangeNotifier {
     onChange = !onChange;
   }
 
+  final dynamic manglaArtiTotalHour = 24;
+  final dynamic manglaArtiInitHour = 0;
+  dynamic manglaArtiCurrentHour = 0;
+
+  final dynamic manglaArtiTotalMinute = 11;
+  final dynamic manglaArtiInitMinute = 0;
+  dynamic manglaArtiCurrentMinute = 0;
+
+  onManglaArtiHour(val) {
+    int hour12 = val % 12;
+    String period = (val < 12) ? 'AM' : 'PM';
+    mangalaArtiTime =
+        "${hour12.toString().padLeft(2, '0')}:${wokeUpCurrentMinute.toString().padLeft(2, '0')} $period";
+    print("Updated sleepAt: $mangalaArtiTime");
+    notifyListeners();
+    wokeUpCurrentHour = val;
+    Vibration.vibrate(
+        duration: 10,
+        amplitude: 128,
+        pattern: [100, 100],
+        intensities: [1, 255]);
+  }
+
+  onManglaArtiMinute(val) {
+    wakeupTime =
+        "${wokeUpCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}";
+    print("Updated sleepAt: $wakeupTime");
+    notifyListeners();
+    wokeUpCurrentMinute = val;
+    Vibration.vibrate(
+        duration: 10,
+        amplitude: 128,
+        pattern: [100, 100],
+        intensities: [1, 255]);
+  }
+
+  manglaArtiToggle(val, e) {
+    notifyListeners();
+    e.value['isOn'] = val;
+    notifyListeners();
+  }
+
   onManglaArtiSelect(context) {
+    notifyListeners();
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return CommonDialog(
-            text: 'Mangala Arti',
-            text1: 'Hour',
-            text2: 'Minutes',
-          );
+          notifyListeners();
+          return Dialog(
+              insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+              backgroundColor: Colors.transparent,
+              alignment: Alignment.center,
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white),
+                  width: double.infinity,
+                  height: Sizes.s610,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                                child: Text('Mangala Arti',
+                                    style: appCss.philosopherBold18.textColor(
+                                        appColor(context).appTheme.primary)))
+                            .paddingSymmetric(vertical: 20),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Hour',
+                            style: appCss.dmDenseMedium14
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 1,
+                            currentIndex: manglaArtiCurrentHour,
+                            initValue: manglaArtiInitHour,
+                            onValueChanged: (val) => onManglaArtiHour(val),
+                            totalCount: manglaArtiTotalHour),
+                        const VSpace(Insets.i10),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Minutes',
+                            style: appCss.dmDenseMedium14
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 5,
+                            currentIndex: manglaArtiCurrentMinute,
+                            initValue: manglaArtiInitMinute,
+                            onValueChanged: (val) => onManglaArtiMinute(val),
+                            totalCount: manglaArtiTotalMinute),
+                        const VSpace(Insets.i25),
+                        Container(
+                            padding: const EdgeInsets.all(15),
+                            decoration: BoxDecoration(
+                                borderRadius: BorderRadius.circular(8),
+                                color: appColor(context).appTheme.whiteColor),
+                            child: Column(
+                                children: appArray.manglaArtiTypeList
+                                    .asMap()
+                                    .entries
+                                    .map((e) {
+                              return Column(children: [
+                                SandhyaAlertList(
+                                    status: e.value['isOn'],
+                                    text: e.value['artiType'],
+                                    onToggle: (val) =>
+                                        manglaArtiToggle(val, e)),
+                                const VSpace(Sizes.s10),
+                                e.key == 4
+                                    ? Container()
+                                    : SvgPicture.asset(eSvgAssets.lineRuler),
+                                e.key == 4
+                                    ? Container()
+                                    : const VSpace(Sizes.s10)
+                              ]);
+                            }).toList())),
+                        const VSpace(Insets.i10),
+                        CommonSelectionButton(
+                            onTapOne: () => Navigator.pop(context),
+                            onTapTwo: () {
+                              updateData(context);
+                              Navigator.pop(context);
+                            })
+                      ]).paddingAll(15)));
         });
   }
 
@@ -394,27 +884,11 @@ class HomeScreenProvider extends ChangeNotifier {
         });
   }
 
-  onBhagvadGitaSelect(context) {
-    showDialog(
-        context: context,
-        builder: (BuildContext context) {
-          return CommonDialog(
-            text: 'Bhagavadgita',
-            text1: 'Hour',
-            text2: 'Minutes',
-          );
-        });
-  }
-
   onHearingSelect(context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return CommonDialog(
-            text: 'Hearing',
-            text1: 'Hour',
-            text2: 'Minutes',
-          );
+          return CommonDialog(text: 'Hearing', text1: 'Hour', text2: 'Minutes');
         });
   }
 
@@ -423,10 +897,7 @@ class HomeScreenProvider extends ChangeNotifier {
         context: context,
         builder: (BuildContext context) {
           return CommonDialog(
-            text: 'Preaching',
-            text1: 'Hour',
-            text2: 'Minutes',
-          );
+              text: 'Preaching', text1: 'Hour', text2: 'Minutes');
         });
   }
 
@@ -464,12 +935,10 @@ class HomeScreenProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  String chantingRounds = "";
-  String chantingRounds1 = "";
-  String chantingRounds2 = "";
-  String chantingRounds3 = "";
-
   List chantinglist = [];
+
+  List qualityList = [];
+
   List regulations = [];
 
   String? sadhanaHearing;
@@ -482,15 +951,11 @@ class HomeScreenProvider extends ChangeNotifier {
   int? medium;
   int? large;
 
-  updateText() {
-    String newText = notesCtrl.text;
-  }
-
   getData(context) async {
     showLoading(context);
     notifyListeners();
     DateTime getDate(DateTime d) => DateTime(d.year, d.month, d.day);
-    var toData = DateFormat("yyyy-MM-dd").format(selectedDate);
+      var toData = DateFormat("yyyy-MM-dd").format(selectedDate);
     var fromData = DateFormat("yyyy-MM-dd")
         .format(getDate(selectedDate).subtract(const Duration(days: 6)));
     try {
@@ -510,19 +975,27 @@ class HomeScreenProvider extends ChangeNotifier {
         print("RESPONSEs ${value.data['book_reading']}");
         if (value.isSuccess!) {
           notifyListeners();
+
+
           Sadhana sadhana = Sadhana.fromJson(value.data);
           log("AAAA : ${sadhana.sadhanaData}");
           if (sadhana.sadhanaData.isNotEmpty) {
+
+            for(var sadhnaData in sadhana.sadhanaData){
+              if(sadhnaData["date"] == toData){
+
+              }
+            }
             notifyListeners();
             var sleepData = sadhana.sadhanaData[0]['data']['sleep'];
             var mangalaData = sadhana.sadhanaData[0]['data']['mangala_arti'];
             var sandhyaData = sadhana.sadhanaData[0]['data']['sandhya_arti'];
             var dateFormat = DateFormat("h:mm a");
             var regulations = sadhana.sadhanaData[0]['data']['regulations'];
+            var mangalaArti = sadhana.sadhanaData[0]['data']['mangala_arti'];
+            var sandhyaArti = sadhana.sadhanaData[0]['data']['sandhya_arti'];
 
             ////////////////////////////////////
-
-
 
             /////////////////////////////////////
 
@@ -548,7 +1021,6 @@ class HomeScreenProvider extends ChangeNotifier {
             }
             notifyListeners();
             notes = sadhana.sadhanaData[0]['data']['notes'];
-
             notesCtrl.text = notes!;
 
             small = sadhana.sadhanaData[0]['data']['book_distribution']
@@ -591,9 +1063,16 @@ class HomeScreenProvider extends ChangeNotifier {
             isSandhyaArti = sandhyaArtiData;
             notifyListeners();
             for (int i = 1; i <= 4; i++) {
-              chantinglist.add(sadhana.sadhanaData[0]['data']['chanting']
-                  ['slot_$i']['rounds']);
+              chantinglist.add({
+                'rounds': sadhana.sadhanaData[0]['data']['chanting']['slot_$i']
+                    ['rounds'],
+                "quality": sadhana.sadhanaData[0]['data']['chanting']['slot_$i']
+                    ['quality']
+              });
             }
+
+            log("message   $qualityList");
+
             appArray.rulesList = [
               {'rule': 'No meat eating', 'isOn': regulations['no_meat_eating']},
               {
@@ -603,6 +1082,34 @@ class HomeScreenProvider extends ChangeNotifier {
               {'rule': 'No illicit sex', 'isOn': regulations['no_illicit_sex']},
               {'rule': 'No gambling', 'isOn': regulations['no_gambling']},
               {'rule': 'Only prasadam', 'isOn': regulations['only_prasadam']}
+            ];
+            appArray.manglaArtiTypeList = [
+              {'artiType': 'Guru Astaka', 'isOn': mangalaArti['guru_astaka']},
+              {
+                'artiType': 'Narasimha Arti',
+                'isOn': mangalaArti['narasimha_arti']
+              },
+              {
+                'artiType': 'Tulasi Arti & Parikrama',
+                'isOn': mangalaArti['tulasi_arti']
+              },
+              {'artiType': 'Guru Arti', 'isOn': mangalaArti['guru_arti']},
+              {
+                'artiType': 'Bhoga Offering ',
+                'isOn': mangalaArti['bhoga_offering']
+              }
+            ];
+
+            appArray.sandhyaTypeList = [
+              {'artiType': 'Sandhya Arti', 'isOn': sandhyaArti['sandhya_arti']},
+              {
+                'artiType': 'Narasimha Arti',
+                'isOn': sandhyaArti['narasimha_arti']
+              },
+              {
+                'artiType': 'Bhoga Offering',
+                'isOn': sandhyaArti['bhoga_offering']
+              }
             ];
             notifyListeners();
             for (int i = 0; i < book_data.length; i++) {
@@ -646,30 +1153,32 @@ class HomeScreenProvider extends ChangeNotifier {
   }
 
   updateData(context) async {
-    log("SSS ");
+    log("SSS $selectedDate");
+    log("SSS $sleepAt");
+    log("SSS $wakeupTime");
     var body = {
       "date": DateFormat('yyyy-MM-dd').format(selectedDate),
       "data": {
-        "sleep": {"slept_time": "22:35:00", "wakeup_time": "05:30:00"},
+        "sleep": {"slept_time": sleepAt, "wakeup_time": wakeupTime},
         "mangala_arti": {
-          "time": "06:30:00",
-          "guru_astaka": true,
-          "narasimha_arti": true,
-          "tulasi_arti": true,
-          "guru_arti": true,
-          "bhoga_offering": false
+          "time": mangalaArtiTime,
+          "guru_astaka": appArray.manglaArtiTypeList[0]['isOn'],
+          "narasimha_arti": appArray.manglaArtiTypeList[1]['isOn'],
+          "tulasi_arti": appArray.manglaArtiTypeList[2]['isOn'],
+          "guru_arti": appArray.manglaArtiTypeList[3]['isOn'],
+          "bhoga_offering": appArray.manglaArtiTypeList[4]['isOn']
         },
         "sandhya_arti": {
           "time": "07:30:00",
-          "sandhya_arti": true,
-          "narasimha_arti": true,
-          "bhoga_offering": false
+          "sandhya_arti": appArray.sandhyaTypeList[0]['isOn'],
+          "narasimha_arti": appArray.sandhyaTypeList[1]['isOn'],
+          "bhoga_offering": appArray.sandhyaTypeList[2]['isOn']
         },
         "chanting": {
-          "slot_1": {"rounds": 0, "quality": 5},
-          "slot_2": {"rounds": 8, "quality": 8},
-          "slot_3": {"rounds": 8, "quality": 6},
-          "slot_4": {"rounds": 4, "quality": 7}
+          "slot_1": {"rounds": chantinglist[0]['rounds'], "quality": chantinglist[0]['quality']},
+          "slot_2": {"rounds": chantinglist[1]['rounds'], "quality": chantinglist[1]['quality']},
+          "slot_3": {"rounds": chantinglist[2]['rounds'], "quality": chantinglist[2]['quality']},
+          "slot_4": {"rounds": chantinglist[3]['rounds'], "quality": chantinglist[3]['quality']}
         },
         "regulations": {
           "no_meat_eating": appArray.rulesList[0]['isOn'],
@@ -679,8 +1188,16 @@ class HomeScreenProvider extends ChangeNotifier {
           "only_prasadam": appArray.rulesList[4]['isOn']
         },
         "book_reading": [
-          {"book_id": 22, "chapter": 11, "reading_time": "00:50:00"},
-          {"book_id": 10, "chapter": 11, "reading_time": "00:40:00"}
+          {
+            "book_id": appArray.bookList[0]['book_id'],
+            "chapter": appArray.bookList[0]['chapter'],
+            "reading_time": appArray.bookList[0]['reading_time']
+          },
+          {
+            "book_id": appArray.bookList[1]['book_id'],
+            "chapter": appArray.bookList[1]['chapter'],
+            "reading_time": appArray.bookList[1]['reading_time']
+          }
         ],
         "association": {
           "hearing_sp": sadhanaHearing,
@@ -704,7 +1221,6 @@ class HomeScreenProvider extends ChangeNotifier {
         .postApi(api.sadhanaUpdate, body, isToken: true)
         .then((value) async {
       log("sadhanaUpdate  :: ${value.data}");
-
       hideLoading(context);
       notifyListeners();
       print("value.data ${value.data}");

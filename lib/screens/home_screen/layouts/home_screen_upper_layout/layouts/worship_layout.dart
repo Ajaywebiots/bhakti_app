@@ -37,20 +37,8 @@ class WorshipLayout extends StatelessWidget {
           CommonContainer(
               text: appFonts.sandhyaArti,
               timeText: '',
-              onTap: () {
-                homeScreenPvr.isSandhyaArti = !homeScreenPvr.isSandhyaArti;
-                if (homeScreenPvr.isSandhyaArti == true) {
-                  homeScreenPvr.onSandhyaArtiSelect(context);
-                }
-                homeScreenPvr.notifyListeners();
-              },
-              onToggle: (value) {
-                homeScreenPvr.isSandhyaArti = !homeScreenPvr.isSandhyaArti;
-                if (homeScreenPvr.isSandhyaArti == true) {
-                  homeScreenPvr.onSandhyaArtiSelect(context);
-                }
-                homeScreenPvr.notifyListeners();
-              },
+              onTap: () => homeScreenPvr.onSandhyaContainerTap(context),
+              onToggle: (value) => homeScreenPvr.onSandhyaContainerToggle(context),
               status: homeScreenPvr.isSandhyaArti,
               svgImage: eSvgAssets.sandhyaArti),
           const Positioned(
