@@ -1,6 +1,8 @@
 import 'dart:developer';
 import 'package:bhakti_app/config.dart';
 
+import '../../common_wheel_slider.dart';
+
 class BookLayout extends StatelessWidget {
   const BookLayout({super.key});
 
@@ -14,9 +16,8 @@ class BookLayout extends StatelessWidget {
             selectedBook['book_id'] == configBookList['book_id']);
       }).toList();
       List reverseList = List.from(appArray.bookList.reversed);
-      log("bookList: ${appArray.bookList}");
+      log("bookList : ${appArray.bookList}");
       log("filteredBooks $filteredBooks");
-
       return SizedBox(
           height: Sizes.s180,
           child: ScrollablePositionedList.builder(
@@ -54,11 +55,76 @@ class BookLayout extends StatelessWidget {
                   showDialog(
                       context: context,
                       builder: (BuildContext context) {
-                        return CommonDialog(
-                          text:reverseList[index]['book_name'],
-                          text1: 'Hour',
-                          text2: 'Minutes',
-                        );
+                        return Dialog(
+                            insetPadding:
+                                const EdgeInsets.symmetric(horizontal: 20),
+                            backgroundColor: Colors.transparent,
+                            alignment: Alignment.center,
+                            child: Container(
+                                decoration: BoxDecoration(
+                                    borderRadius: BorderRadius.circular(8),
+                                    color: Colors.white),
+                                width: double.infinity,
+                                height: Sizes.s420,
+                                child: Column(
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Center(
+                                              child: Text(filteredBooks[index]['book_name'],
+                                                  style: appCss
+                                                      .philosopherBold18
+                                                      .textColor(
+                                                          appColor(context)
+                                                              .appTheme
+                                                              .primary)))
+                                          .paddingSymmetric(vertical: 20),
+                                      Text(
+                                          textAlign: TextAlign.start,
+                                          'Hour',
+                                          style: appCss.dmDenseMedium17
+                                              .textColor(appColor(context)
+                                                  .appTheme
+                                                  .primary)),
+                                      const VSpace(Insets.i15),
+                                      CommonWheelSlider(
+                                          interval: 1,
+                                          totalCount: homeScreenPvr
+                                              .bookReadingTotalHour,
+                                          initValue:
+                                              homeScreenPvr.bookReadingInitHour,
+                                          currentIndex: homeScreenPvr
+                                              .bookReadingCurrentHour,
+                                          onValueChanged: (val) => homeScreenPvr
+                                              .onBookReadingHour(val,index)),
+                                      const VSpace(Insets.i15),
+                                      Text(
+                                          textAlign: TextAlign.start,
+                                          'Minutes',
+                                          style: appCss.dmDenseMedium17
+                                              .textColor(appColor(context)
+                                                  .appTheme
+                                                  .primary)),
+                                      const VSpace(Insets.i15),
+                                      CommonWheelSlider(
+                                          interval: 5,
+                                          totalCount: homeScreenPvr
+                                              .bookReadingTotalMinute,
+                                          initValue: homeScreenPvr
+                                              .bookReadingInitMinute,
+                                          currentIndex: homeScreenPvr
+                                              .bookReadingCurrentMinute,
+                                          onValueChanged: (val) => homeScreenPvr
+                                              .onBookReadingMinute(val,index)),
+                                      const VSpace(Insets.i50),
+                                      CommonSelectionButton(
+                                          onTapOne: () =>
+                                              Navigator.pop(context),
+                                          onTapTwo: () {
+                                            Navigator.pop(context);
+                                            homeScreenPvr.updateData(context);
+                                          })
+                                    ]).paddingAll(15)));
                       });
                 });
               }));

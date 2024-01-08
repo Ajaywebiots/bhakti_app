@@ -37,7 +37,7 @@ class AssociationLayout extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                        homeScreenPvr.sadhanaHearing.toString(),
+                                        homeScreenPvr.hearingSpTime24.toString(),
                                         style: appCss.dmDenseMedium16.textColor(
                                             appColor(context)
                                                 .appTheme
@@ -64,7 +64,7 @@ class AssociationLayout extends StatelessWidget {
                   top: 52,
                   child:
                       CommonCircleDesign(height: Sizes.s10, width: Sizes.s10))
-            ]).inkWell(onTap: () => homeScreenPvr.onHearingSelect(context)),
+            ]).inkWell(onTap: () => homeScreenPvr.onHearingSp(context)),
             const HSpace(Insets.i15),
             Stack(children: [
               Container(
@@ -92,7 +92,7 @@ class AssociationLayout extends StatelessWidget {
                               Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(homeScreenPvr.hearingGuru.toString(),
+                                    Text(homeScreenPvr.hearingGuruTime24.toString(),
                                         style: appCss.dmDenseMedium16.textColor(
                                             appColor(context)
                                                 .appTheme
@@ -119,7 +119,7 @@ class AssociationLayout extends StatelessWidget {
                   top: 52,
                   child:
                       CommonCircleDesign(height: Sizes.s10, width: Sizes.s10))
-            ]).inkWell(onTap: () => homeScreenPvr.onChantSelect(context)),
+            ]).inkWell(onTap: () => homeScreenPvr.onHearingGuru(context)),
             const HSpace(Insets.i15),
             Stack(children: [
               Container(
@@ -147,7 +147,7 @@ class AssociationLayout extends StatelessWidget {
                               Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(homeScreenPvr.hearingOthers.toString(),
+                                    Text(homeScreenPvr.hearingOthersTime24.toString(),
                                         style: appCss.dmDenseMedium16.textColor(
                                             appColor(context)
                                                 .appTheme
@@ -174,7 +174,7 @@ class AssociationLayout extends StatelessWidget {
                   top: 52,
                   child:
                       CommonCircleDesign(height: Sizes.s10, width: Sizes.s10))
-            ]).inkWell(onTap: () => homeScreenPvr.onChantSelect(context)),
+            ]).inkWell(onTap: () => homeScreenPvr.onHearingOther(context)),
             const HSpace(Insets.i15),
             Stack(children: [
               Container(
@@ -202,7 +202,7 @@ class AssociationLayout extends StatelessWidget {
                               Column(
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
-                                    Text(homeScreenPvr.preaching.toString(),
+                                    Text(homeScreenPvr.preachingTime24.toString(),
                                         style: appCss.dmDenseMedium16.textColor(
                                             appColor(context)
                                                 .appTheme
@@ -229,7 +229,7 @@ class AssociationLayout extends StatelessWidget {
                   top: 61,
                   child:
                       CommonCircleDesign(height: Sizes.s10, width: Sizes.s10))
-            ]).inkWell(onTap: () => homeScreenPvr.onPreachingSelect(context)),
+            ]).inkWell(onTap: () => homeScreenPvr.onPreaching(context)),
             const HSpace(Insets.i15),
             Stack(children: [
               Container(
@@ -258,7 +258,7 @@ class AssociationLayout extends StatelessWidget {
                                   crossAxisAlignment: CrossAxisAlignment.start,
                                   children: [
                                     Text(
-                                        homeScreenPvr.otherActivities
+                                        homeScreenPvr.othersActivitiesTime24
                                             .toString(),
                                         style: appCss.dmDenseMedium16.textColor(
                                             appColor(context)
@@ -286,7 +286,7 @@ class AssociationLayout extends StatelessWidget {
                   top: 52,
                   child:
                       CommonCircleDesign(height: Sizes.s10, width: Sizes.s10))
-            ]).inkWell(onTap: () => homeScreenPvr.onChantSelect(context))
+            ]).inkWell(onTap: () => homeScreenPvr.onOther(context))
           ]));
     });
   }

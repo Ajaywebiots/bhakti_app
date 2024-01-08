@@ -1,13 +1,10 @@
 import 'dart:developer';
 import 'dart:io';
-
 import 'package:bhakti_app/screens/home_screen/layouts/common_wheel_slider.dart';
 import 'package:calendar_date_picker2/calendar_date_picker2.dart';
 import 'package:intl/intl.dart';
 import 'package:vibration/vibration.dart';
-
 import '../config.dart';
-import '../customise/custom_wheel_sildersss/wheel_sliderssss.dart';
 
 class HomeScreenProvider extends ChangeNotifier {
   bookReadingPresentlyNavigate(context) {
@@ -59,41 +56,86 @@ class HomeScreenProvider extends ChangeNotifier {
   final dynamic sleepInitHour = 0;
 
   dynamic sleepCurrentHour = 0;
-  final dynamic sleepTotalMinute = 59;
+  final dynamic sleepTotalMinute = 11;
   final dynamic sleepInitMinute = 0;
 
   dynamic sleepCurrentMinute = 0;
 
+  String sleepAt24 = '';
+
   onSleepAtHour(val) {
+    // 24-hour format
+    int hour24 = val % 24;
+    sleepAt24 =
+        "${hour24.toString().padLeft(2, '0')}:${sleepCurrentMinute.toString().padLeft(2, '0')}:00";
+    log("Updated sleepAt (24-hour with seconds): $sleepAt24");
+
+    // 12-hour format
     int hour12 = val % 12;
     String period = (val < 12) ? 'AM' : 'PM';
     sleepAt =
         "${hour12.toString().padLeft(2, '0')}:${sleepCurrentMinute.toString().padLeft(2, '0')} $period";
-    print("Updated sleepAt: $sleepAt");
+
+    log("Updated sleepAt (12-hour): $sleepAt");
+
     sleepCurrentHour = val;
     notifyListeners();
     Vibration.vibrate(
-        duration: 10,
-        amplitude: 128,
-        pattern: [100, 100],
-        intensities: [1, 255]);
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
+  }
+
+  onWokeUpHour(val) {
+    // 24-hour format with seconds
+    int hour24 = val % 24;
+    wakeupTime24 =
+        "${hour24.toString().padLeft(2, '0')}:${wokeUpCurrentMinute.toString().padLeft(2, '0')}:00";
+    print("Updated wakeupTime (24-hour with seconds): $wakeupTime24");
+
+    // 12-hour format
+    int hour12 = val % 12;
+    String period = (val < 12) ? 'AM' : 'PM';
+    wakeupTime =
+        "${hour12.toString().padLeft(2, '0')}:${wokeUpCurrentMinute.toString().padLeft(2, '0')} $period";
+    print("Updated wakeupTime (12-hour): $wakeupTime");
+
+    wokeUpCurrentHour = val;
+    notifyListeners();
+    Vibration.vibrate(
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
   }
 
   onSleepAtMinute(val) {
+    // 24-hour format
+    int hour24 = sleepCurrentHour % 24;
+    sleepAt24 =
+        "${hour24.toString().padLeft(2, '0')}:${sleepCurrentHour.toString().padLeft(2, '0')}:00";
+    print("Updated sleepAt (24-hour with seconds): $sleepAt24");
+    // 12-hour format
     int hour12 = sleepCurrentHour % 12;
     String period = (sleepCurrentHour < 12) ? 'AM' : 'PM';
-    notifyListeners();
     sleepAt =
-        "${hour12.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')} $period";
+        "${hour12.toString().padLeft(2, '0')}:${sleepCurrentHour.toString().padLeft(2, '0')} $period";
+    print("Updated sleepAt (12-hour): $sleepAt");
+
+    notifyListeners();
     print("Updated sleepAt: $sleepAt");
     sleepCurrentMinute = val;
     notifyListeners();
 
     Vibration.vibrate(
-        duration: 10,
-        amplitude: 128,
-        pattern: [100, 100],
-        intensities: [1, 255]);
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
   }
 
   final dynamic wokeUpTotalHour = 24;
@@ -104,39 +146,28 @@ class HomeScreenProvider extends ChangeNotifier {
   final dynamic wokeUpInitMinute = 0;
   dynamic wokeUpCurrentMinute = 0;
 
-  onWokeUpHour(val) {
-    int hour12 = val % 12;
-    String period = (val < 12) ? 'AM' : 'PM';
-    wakeupTime =
-        "${hour12.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')} $period";
-    print("Updated sleepAt: $wakeupTime");
-    notifyListeners();
-    wokeUpCurrentHour = val;
-    Vibration.vibrate(
-        duration: 10,
-        amplitude: 128,
-        pattern: [100, 100],
-        intensities: [1, 255]);
-  }
+  String wakeupTime24 = "";
 
   onWokeUpMinute(val) {
     int hour12 = wokeUpCurrentHour % 12;
-    String period = (sleepCurrentHour < 12) ? 'AM' : 'PM';
+    String period = (wokeUpCurrentHour < 12) ? 'AM' : 'PM';
     notifyListeners();
     wakeupTime =
         "${hour12.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')} $period";
-    print("Updated sleepAt: $wakeupTime");
+    print("Updated wakeupTime: $wakeupTime");
     notifyListeners();
     wokeUpCurrentMinute = val;
 
     Vibration.vibrate(
-        duration: 10,
-        amplitude: 128,
-        pattern: [100, 100],
-        intensities: [1, 255]);
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
 
-    wakeupTime =
-        "${wokeUpCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}";
+    wakeupTime24 =
+        "${wokeUpCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}:00";
+    print("Updated wakeupTime (24-hour): $wakeupTime24");
   }
 
   bool isExpanded = false;
@@ -314,7 +345,7 @@ class HomeScreenProvider extends ChangeNotifier {
                             Text(
                                 textAlign: TextAlign.start,
                                 'Hour',
-                                style: appCss.dmDenseMedium14.textColor(
+                                style: appCss.dmDenseMedium17.textColor(
                                     appColor(context).appTheme.primary)),
                             const VSpace(Insets.i15),
                             CommonWheelSlider(
@@ -327,7 +358,7 @@ class HomeScreenProvider extends ChangeNotifier {
                             Text(
                                 textAlign: TextAlign.start,
                                 'Minutes',
-                                style: appCss.dmDenseMedium14.textColor(
+                                style: appCss.dmDenseMedium17.textColor(
                                     appColor(context).appTheme.primary)),
                             const VSpace(Insets.i15),
                             CommonWheelSlider(
@@ -336,7 +367,7 @@ class HomeScreenProvider extends ChangeNotifier {
                                 initValue: sleepInitMinute,
                                 currentIndex: sleepCurrentMinute,
                                 onValueChanged: (val) => onSleepAtMinute(val)),
-                            const VSpace(Insets.i60),
+                            const VSpace(Insets.i50),
                             CommonSelectionButton(
                                 onTapOne: () => Navigator.pop(context),
                                 onTapTwo: () {
@@ -380,7 +411,7 @@ class HomeScreenProvider extends ChangeNotifier {
                         Text(
                             textAlign: TextAlign.start,
                             'Hour',
-                            style: appCss.dmDenseMedium14
+                            style: appCss.dmDenseMedium17
                                 .textColor(appColor(context).appTheme.primary)),
                         const VSpace(Insets.i15),
                         CommonWheelSlider(
@@ -393,7 +424,7 @@ class HomeScreenProvider extends ChangeNotifier {
                         Text(
                             textAlign: TextAlign.start,
                             'Minutes',
-                            style: appCss.dmDenseMedium14
+                            style: appCss.dmDenseMedium17
                                 .textColor(appColor(context).appTheme.primary)),
                         const VSpace(Insets.i15),
                         CommonWheelSlider(
@@ -402,7 +433,7 @@ class HomeScreenProvider extends ChangeNotifier {
                             initValue: wokeUpInitMinute,
                             currentIndex: wokeUpCurrentMinute,
                             onValueChanged: (val) => onWokeUpMinute(val)),
-                        const VSpace(Insets.i60),
+                        const VSpace(Insets.i50),
                         CommonSelectionButton(
                             onTapOne: () => Navigator.pop(context),
                             onTapTwo: () {
@@ -434,7 +465,7 @@ class HomeScreenProvider extends ChangeNotifier {
         intensities: [1, 255]);
   }
 
-  onChantingCountQuality(val,index) {
+  onChantingCountQuality(val, index) {
     notifyListeners();
     chantingCountCurrentQuality = val;
     chantinglist[index]["quality"] = val;
@@ -471,7 +502,7 @@ class HomeScreenProvider extends ChangeNotifier {
                         Text(
                             textAlign: TextAlign.start,
                             'Count of Rounds',
-                            style: appCss.dmDenseMedium14
+                            style: appCss.dmDenseMedium17
                                 .textColor(appColor(context).appTheme.primary)),
                         const VSpace(Insets.i15),
                         CommonWheelSlider(
@@ -485,7 +516,7 @@ class HomeScreenProvider extends ChangeNotifier {
                         Text(
                             textAlign: TextAlign.start,
                             'Chanting Quality Rating',
-                            style: appCss.dmDenseMedium14
+                            style: appCss.dmDenseMedium17
                                 .textColor(appColor(context).appTheme.primary)),
                         const VSpace(Insets.i15),
                         CommonWheelSlider(
@@ -505,8 +536,6 @@ class HomeScreenProvider extends ChangeNotifier {
                               Navigator.pop(context);
                             })
                       ]).paddingAll(15)));
-
-          ;
         });
   }
 
@@ -584,32 +613,52 @@ class HomeScreenProvider extends ChangeNotifier {
 
   String sandhyaArtiTime = "";
 
+  String sandhyaArtiTime24 = "";
+
   onSandhyaArtiHour(val) {
+    // 12-hour format
     int hour12 = val % 12;
     String period = (val < 12) ? 'AM' : 'PM';
-    sandhyaArtiTime =
-        "${hour12.toString().padLeft(2, '0')}:${sandhyaArtiCurrentMinute.toString().padLeft(2, '0')} $period";
-    print("Updated sleepAt: $sandhyaArtiTime");
-    notifyListeners();
+    String sandhyaArtiTime12 =
+        "${hour12.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')} $period";
+    print("Updated sandhyaArtiTime (12-hour): $sandhyaArtiTime12");
+
+    // 24-hour format
+    sandhyaArtiTime24 =
+        "${val.toString().padLeft(2, '0')}:${sandhyaArtiCurrentMinute.toString().padLeft(2, '0')}";
+    print("Updated sandhyaArtiTime (24-hour): $sandhyaArtiTime24");
+
     sandhyaArtiCurrentHour = val;
+    sandhyaArtiTime = sandhyaArtiTime12;
+
+    notifyListeners();
     Vibration.vibrate(
-        duration: 10,
-        amplitude: 128,
-        pattern: [100, 100],
-        intensities: [1, 255]);
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
   }
 
   onSandhyaArtiMinute(val) {
-    sandhyaArtiTime =
-        "${wokeUpCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}";
-    print("Updated sleepAt: $sandhyaArtiTime");
+    // 12-hour format
+    String sandhyaArtiTime12 =
+        "${sandhyaArtiCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}";
+    print("Updated sandhyaArtiTime (12-hour): $sandhyaArtiTime12");
+
+    // 24-hour format
+    sandhyaArtiTime24 =
+        "${sandhyaArtiCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}";
+    print("Updated sandhyaArtiTime (24-hour): $sandhyaArtiTime24");
+    sandhyaArtiTime = sandhyaArtiTime12;
     notifyListeners();
-    wokeUpCurrentMinute = val;
+    sandhyaArtiCurrentMinute = val;
     Vibration.vibrate(
-        duration: 10,
-        amplitude: 128,
-        pattern: [100, 100],
-        intensities: [1, 255]);
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
   }
 
   onSandhyaToggle(val, e) {
@@ -648,7 +697,7 @@ class HomeScreenProvider extends ChangeNotifier {
                             Text(
                                 textAlign: TextAlign.start,
                                 'Hour',
-                                style: appCss.dmDenseMedium14.textColor(
+                                style: appCss.dmDenseMedium17.textColor(
                                     appColor(context).appTheme.primary)),
                             const VSpace(Insets.i15),
                             CommonWheelSlider(
@@ -662,7 +711,7 @@ class HomeScreenProvider extends ChangeNotifier {
                             Text(
                                 textAlign: TextAlign.start,
                                 'Minute',
-                                style: appCss.dmDenseMedium14.textColor(
+                                style: appCss.dmDenseMedium17.textColor(
                                     appColor(context).appTheme.primary)),
                             const VSpace(Insets.i15),
                             CommonWheelSlider(
@@ -672,9 +721,8 @@ class HomeScreenProvider extends ChangeNotifier {
                                 onValueChanged: (val) =>
                                     onSandhyaArtiMinute(val),
                                 totalCount: sandhyaArtiTotalMinute),
-                            const VSpace(Insets.i25),
+                            const VSpace(Insets.i15),
                             Container(
-                                padding: const EdgeInsets.all(15),
                                 decoration: BoxDecoration(
                                     borderRadius: BorderRadius.circular(8),
                                     color:
@@ -726,32 +774,52 @@ class HomeScreenProvider extends ChangeNotifier {
   final dynamic manglaArtiInitMinute = 0;
   dynamic manglaArtiCurrentMinute = 0;
 
+  String manglaArtiTime24 = "";
+
   onManglaArtiHour(val) {
+    // 12-hour format
     int hour12 = val % 12;
     String period = (val < 12) ? 'AM' : 'PM';
     mangalaArtiTime =
-        "${hour12.toString().padLeft(2, '0')}:${wokeUpCurrentMinute.toString().padLeft(2, '0')} $period";
-    print("Updated sleepAt: $mangalaArtiTime");
+        "${hour12.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')} $period";
+    print("Updated mangalaArtiTime (12-hour): $mangalaArtiTime");
+
+    // 24-hour format with seconds
+    manglaArtiTime24 =
+        "${val.toString().padLeft(2, '0')}:${manglaArtiCurrentMinute.toString().padLeft(2, '0')}:00";
+    print("Updated mangalaArtiTime (24-hour with seconds): $manglaArtiTime24");
+
+    manglaArtiCurrentHour = val;
     notifyListeners();
-    wokeUpCurrentHour = val;
     Vibration.vibrate(
-        duration: 10,
-        amplitude: 128,
-        pattern: [100, 100],
-        intensities: [1, 255]);
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
   }
 
   onManglaArtiMinute(val) {
-    wakeupTime =
-        "${wokeUpCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}";
-    print("Updated sleepAt: $wakeupTime");
+    // 12-hour format
+    int hour12 = manglaArtiCurrentHour % 12;
+    String period = (manglaArtiCurrentHour < 12) ? 'AM' : 'PM';
+    mangalaArtiTime =
+        "${hour12.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')} $period";
+    print("Updated mangalaArtiTime (12-hour): $mangalaArtiTime");
+
+    // 24-hour format with seconds
+    manglaArtiTime24 =
+        "${manglaArtiCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}:00";
+    print("Updated mangalaArtiTime (24-hour with seconds): $manglaArtiTime24");
+
     notifyListeners();
-    wokeUpCurrentMinute = val;
+    manglaArtiCurrentMinute = val;
     Vibration.vibrate(
-        duration: 10,
-        amplitude: 128,
-        pattern: [100, 100],
-        intensities: [1, 255]);
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
   }
 
   manglaArtiToggle(val, e) {
@@ -787,7 +855,7 @@ class HomeScreenProvider extends ChangeNotifier {
                         Text(
                             textAlign: TextAlign.start,
                             'Hour',
-                            style: appCss.dmDenseMedium14
+                            style: appCss.dmDenseMedium17
                                 .textColor(appColor(context).appTheme.primary)),
                         const VSpace(Insets.i15),
                         CommonWheelSlider(
@@ -800,7 +868,7 @@ class HomeScreenProvider extends ChangeNotifier {
                         Text(
                             textAlign: TextAlign.start,
                             'Minutes',
-                            style: appCss.dmDenseMedium14
+                            style: appCss.dmDenseMedium17
                                 .textColor(appColor(context).appTheme.primary)),
                         const VSpace(Insets.i15),
                         CommonWheelSlider(
@@ -809,9 +877,8 @@ class HomeScreenProvider extends ChangeNotifier {
                             initValue: manglaArtiInitMinute,
                             onValueChanged: (val) => onManglaArtiMinute(val),
                             totalCount: manglaArtiTotalMinute),
-                        const VSpace(Insets.i25),
+                        const VSpace(Insets.i15),
                         Container(
-                            padding: const EdgeInsets.all(15),
                             decoration: BoxDecoration(
                                 borderRadius: BorderRadius.circular(8),
                                 color: appColor(context).appTheme.whiteColor),
@@ -844,6 +911,52 @@ class HomeScreenProvider extends ChangeNotifier {
                             })
                       ]).paddingAll(15)));
         });
+  }
+
+  final dynamic bookReadingTotalHour = 24;
+  final dynamic bookReadingInitHour = 0;
+  dynamic bookReadingCurrentHour = 0;
+
+  final dynamic bookReadingTotalMinute = 11;
+  final dynamic bookReadingInitMinute = 0;
+  dynamic bookReadingCurrentMinute = 0;
+  List reverseList = List.from(appArray.bookList.reversed);
+
+  String bookReadingTime24 = '';
+
+  onBookReadingHour(val, index) {
+    // 24-hour format with seconds
+    bookReadingTime24 =
+        "${val.toString().padLeft(2, '0')}:${bookReadingCurrentMinute.toString().padLeft(2, '0')}:00";
+    print("Updated bookReadingTime (24-hour with seconds): $bookReadingTime24");
+
+    bookReadingCurrentHour = val;
+    reverseList[index]['reading_time'] = bookReadingTime24;
+
+    notifyListeners();
+    Vibration.vibrate(
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
+  }
+
+  onBookReadingMinute(val, index) {
+    // 24-hour format with seconds
+    bookReadingTime24 =
+        "${bookReadingCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}:00";
+    print("Updated bookReadingTime (24-hour with seconds): $bookReadingTime24");
+
+    notifyListeners();
+    bookReadingCurrentMinute = val;
+    reverseList[index]['reading_time'] = bookReadingTime24;
+    Vibration.vibrate(
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
   }
 
   Future<bool> showExitPopup(context) async {
@@ -884,32 +997,509 @@ class HomeScreenProvider extends ChangeNotifier {
         });
   }
 
-  onHearingSelect(context) {
+  final dynamic hearingSpTotalHour = 24;
+  final dynamic hearingSpInitHour = 0;
+  dynamic hearingSpCurrentHour = 0;
+
+  final dynamic hearingSpTotalMinute = 11;
+  final dynamic hearingSpInitMinute = 0;
+  dynamic hearingSpCurrentMinute = 0;
+
+  String hearingSpTime24 = '';
+
+  onHearingSpHour(val) {
+    // 24-hour format with seconds
+    hearingSpTime24 =
+        "${val.toString().padLeft(2, '0')}:${hearingSpCurrentMinute.toString().padLeft(2, '0')}:00";
+    print("Updated hearingSpTime (24-hour with seconds): $hearingSpTime24");
+
+    hearingSpCurrentHour = val;
+    notifyListeners();
+    Vibration.vibrate(
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
+  }
+
+  onHearingSpMinute(val) {
+    // 24-hour format with seconds
+    hearingSpTime24 =
+        "${hearingSpCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}:00";
+    print("Updated hearingSpTime (24-hour with seconds): $hearingSpTime24");
+
+    notifyListeners();
+    hearingSpCurrentMinute = val;
+    Vibration.vibrate(
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
+  }
+
+  onHearingSp(context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return CommonDialog(text: 'Hearing', text1: 'Hour', text2: 'Minutes');
+          return Dialog(
+              insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+              backgroundColor: Colors.transparent,
+              alignment: Alignment.center,
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white),
+                  width: double.infinity,
+                  height: Sizes.s400,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                                child: Text('Hearing Sp',
+                                    style: appCss.philosopherBold18.textColor(
+                                        appColor(context).appTheme.primary)))
+                            .paddingSymmetric(vertical: 20),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Hour',
+                            style: appCss.dmDenseMedium17
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 1,
+                            currentIndex: hearingSpCurrentHour,
+                            initValue: hearingSpInitHour,
+                            onValueChanged: (val) => onHearingSpHour(val),
+                            totalCount: hearingSpTotalHour),
+                        const VSpace(Insets.i10),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Minutes',
+                            style: appCss.dmDenseMedium17
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 5,
+                            currentIndex: hearingSpCurrentMinute,
+                            initValue: hearingSpInitMinute,
+                            onValueChanged: (val) => onHearingSpMinute(val),
+                            totalCount: hearingSpTotalMinute),
+                        const VSpace(Insets.i25),
+                        CommonSelectionButton(
+                            onTapOne: () => Navigator.pop(context),
+                            onTapTwo: () {
+                              updateData(context);
+                              Navigator.pop(context);
+                            })
+                      ]).paddingAll(15)));
         });
   }
 
-  onPreachingSelect(context) {
+  final dynamic hearingGuruTotalHour = 24;
+  final dynamic hearingGuruInitHour = 0;
+  dynamic hearingGuruCurrentHour = 0;
+
+  final dynamic hearingGuruTotalMinute = 11;
+  final dynamic hearingGuruInitMinute = 0;
+  dynamic hearingGuruCurrentMinute = 0;
+
+  String hearingGuruTime24 = '';
+
+  onHearingGuruHour(val) {
+    // 24-hour format with seconds
+    hearingGuruTime24 =
+        "${val.toString().padLeft(2, '0')}:${hearingGuruCurrentMinute.toString().padLeft(2, '0')}:00";
+    print("Updated hearingGuruTime (24-hour with seconds): $hearingGuruTime24");
+
+    hearingGuruCurrentHour = val;
+    notifyListeners();
+    Vibration.vibrate(
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
+  }
+
+  onHearingGuruMinute(val) {
+    // 24-hour format with seconds
+    hearingGuruTime24 =
+        "${hearingGuruCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}:00";
+    print("Updated hearingGuruTime (24-hour with seconds): $hearingGuruTime24");
+
+    notifyListeners();
+    hearingGuruCurrentMinute = val;
+    Vibration.vibrate(
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
+  }
+
+  onHearingGuru(context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return CommonDialog(
-              text: 'Preaching', text1: 'Hour', text2: 'Minutes');
+          return Dialog(
+              insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+              backgroundColor: Colors.transparent,
+              alignment: Alignment.center,
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white),
+                  width: double.infinity,
+                  height: Sizes.s400,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                                child: Text('Hearing Guru',
+                                    style: appCss.philosopherBold18.textColor(
+                                        appColor(context).appTheme.primary)))
+                            .paddingSymmetric(vertical: 20),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Hour',
+                            style: appCss.dmDenseMedium17
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 1,
+                            currentIndex: hearingGuruCurrentHour,
+                            initValue: hearingGuruInitHour,
+                            onValueChanged: (val) => onHearingGuruHour(val),
+                            totalCount: hearingGuruTotalHour),
+                        const VSpace(Insets.i10),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Minutes',
+                            style: appCss.dmDenseMedium17
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 5,
+                            currentIndex: hearingGuruCurrentMinute,
+                            initValue: hearingGuruInitMinute,
+                            onValueChanged: (val) => onHearingGuruMinute(val),
+                            totalCount: hearingGuruTotalMinute),
+                        const VSpace(Insets.i25),
+                        CommonSelectionButton(
+                            onTapOne: () => Navigator.pop(context),
+                            onTapTwo: () {
+                              updateData(context);
+                              Navigator.pop(context);
+                            })
+                      ]).paddingAll(15)));
         });
   }
 
-  onChantSelect(context) {
+  final dynamic hearingOthersTotalHour = 24;
+  final dynamic hearingOthersInitHour = 0;
+  dynamic hearingOthersCurrentHour = 0;
+
+  final dynamic hearingOthersTotalMinute = 11;
+  final dynamic hearingOthersInitMinute = 0;
+  dynamic hearingOthersCurrentMinute = 0;
+
+  String hearingOthersTime24 = '';
+
+  onHearingOthersHour(val) {
+    // 24-hour format with seconds
+    hearingOthersTime24 =
+        "${val.toString().padLeft(2, '0')}:${hearingOthersCurrentMinute.toString().padLeft(2, '0')}:00";
+    print(
+        "Updated hearingOthersTime (24-hour with seconds): $hearingOthersTime24");
+
+    hearingOthersCurrentHour = val;
+    notifyListeners();
+    Vibration.vibrate(
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
+  }
+
+  onHearingOthersMinute(val) {
+    // 24-hour format with seconds
+    hearingOthersTime24 =
+        "${hearingOthersCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}:00";
+    print(
+        "Updated hearingOthersTime (24-hour with seconds): $hearingOthersTime24");
+
+    notifyListeners();
+    hearingOthersCurrentMinute = val;
+    Vibration.vibrate(
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
+  }
+
+  onHearingOther(context) {
     showDialog(
         context: context,
         builder: (BuildContext context) {
-          return CommonDialog(
-            text: 'Chanting',
-            text1: 'Hour',
-            text2: 'Minutes',
-          );
+          return Dialog(
+              insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+              backgroundColor: Colors.transparent,
+              alignment: Alignment.center,
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white),
+                  width: double.infinity,
+                  height: Sizes.s400,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                                child: Text('Hearing Others',
+                                    style: appCss.philosopherBold18.textColor(
+                                        appColor(context).appTheme.primary)))
+                            .paddingSymmetric(vertical: 20),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Hour',
+                            style: appCss.dmDenseMedium17
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 1,
+                            currentIndex: hearingOthersCurrentHour,
+                            initValue: hearingOthersInitHour,
+                            onValueChanged: (val) => onHearingOthersHour(val),
+                            totalCount: hearingOthersTotalHour),
+                        const VSpace(Insets.i10),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Minutes',
+                            style: appCss.dmDenseMedium17
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 5,
+                            currentIndex: hearingOthersCurrentMinute,
+                            initValue: hearingOthersInitMinute,
+                            onValueChanged: (val) => onHearingOthersMinute(val),
+                            totalCount: hearingOthersTotalMinute),
+                        const VSpace(Insets.i25),
+                        CommonSelectionButton(
+                            onTapOne: () => Navigator.pop(context),
+                            onTapTwo: () {
+                              updateData(context);
+                              Navigator.pop(context);
+                            })
+                      ]).paddingAll(15)));
+        });
+  }
+
+  final dynamic preachingTotalHour = 24;
+  final dynamic preachingInitHour = 0;
+  dynamic preachingCurrentHour = 0;
+
+  final dynamic preachingTotalMinute = 11;
+  final dynamic preachingInitMinute = 0;
+  dynamic preachingCurrentMinute = 0;
+
+  String preachingTime24 = '';
+
+  onPreachingHour(val) {
+    // 24-hour format with seconds
+    preachingTime24 =
+        "${val.toString().padLeft(2, '0')}:${preachingCurrentMinute.toString().padLeft(2, '0')}:00";
+    print("Updated preachingTime (24-hour with seconds): $preachingTime24");
+
+    preachingCurrentHour = val;
+    notifyListeners();
+    Vibration.vibrate(
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
+  }
+
+  onPreachingMinute(val) {
+    // 24-hour format with seconds
+    preachingTime24 =
+        "${preachingCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}:00";
+    print("Updated preachingTime (24-hour with seconds): $preachingTime24");
+
+    notifyListeners();
+    preachingCurrentMinute = val;
+    Vibration.vibrate(
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
+  }
+
+  onPreaching(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+              insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+              backgroundColor: Colors.transparent,
+              alignment: Alignment.center,
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white),
+                  width: double.infinity,
+                  height: Sizes.s400,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                                child: Text('Preaching',
+                                    style: appCss.philosopherBold18.textColor(
+                                        appColor(context).appTheme.primary)))
+                            .paddingSymmetric(vertical: 20),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Hour',
+                            style: appCss.dmDenseMedium17
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 1,
+                            currentIndex: preachingCurrentHour,
+                            initValue: preachingInitHour,
+                            onValueChanged: (val) => onPreachingHour(val),
+                            totalCount: preachingTotalHour),
+                        const VSpace(Insets.i10),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Minutes',
+                            style: appCss.dmDenseMedium17
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 5,
+                            currentIndex: preachingCurrentMinute,
+                            initValue: preachingInitMinute,
+                            onValueChanged: (val) => onPreachingMinute(val),
+                            totalCount: preachingTotalMinute),
+                        const VSpace(Insets.i25),
+                        CommonSelectionButton(
+                            onTapOne: () => Navigator.pop(context),
+                            onTapTwo: () {
+                              updateData(context);
+                              Navigator.pop(context);
+                            })
+                      ]).paddingAll(15)));
+        });
+  }
+
+  final dynamic othersActivitiesTotalHour = 24;
+  final dynamic othersActivitiesInitHour = 0;
+  dynamic othersActivitiesCurrentHour = 0;
+
+  final dynamic othersActivitiesTotalMinute = 11;
+  final dynamic othersActivitiesInitMinute = 0;
+  dynamic othersActivitiesCurrentMinute = 0;
+
+  String othersActivitiesTime24 = '';
+
+  onOthersActivitiesHour(val) {
+    // 24-hour format with seconds
+    othersActivitiesTime24 =
+        "${val.toString().padLeft(2, '0')}:${othersActivitiesCurrentMinute.toString().padLeft(2, '0')}:00";
+    print(
+        "Updated othersActivitiesTime (24-hour with seconds): $othersActivitiesTime24");
+
+    othersActivitiesCurrentHour = val;
+    notifyListeners();
+    Vibration.vibrate(
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
+  }
+
+  onOthersActivitiesMinute(val) {
+    // 24-hour format with seconds
+    othersActivitiesTime24 =
+        "${othersActivitiesCurrentHour.toString().padLeft(2, '0')}:${val.toString().padLeft(2, '0')}:00";
+    print(
+        "Updated othersActivitiesTime (24-hour with seconds): $othersActivitiesTime24");
+
+    notifyListeners();
+    othersActivitiesCurrentMinute = val;
+    Vibration.vibrate(
+      duration: 10,
+      amplitude: 128,
+      pattern: [100, 100],
+      intensities: [1, 255],
+    );
+  }
+
+  onOther(context) {
+    showDialog(
+        context: context,
+        builder: (BuildContext context) {
+          return Dialog(
+              insetPadding: const EdgeInsets.symmetric(horizontal: 20),
+              backgroundColor: Colors.transparent,
+              alignment: Alignment.center,
+              child: Container(
+                  decoration: BoxDecoration(
+                      borderRadius: BorderRadius.circular(8),
+                      color: Colors.white),
+                  width: double.infinity,
+                  height: Sizes.s400,
+                  child: Column(
+                      crossAxisAlignment: CrossAxisAlignment.start,
+                      children: [
+                        Center(
+                                child: Text('Other Activities',
+                                    style: appCss.philosopherBold18.textColor(
+                                        appColor(context).appTheme.primary)))
+                            .paddingSymmetric(vertical: 20),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Hour',
+                            style: appCss.dmDenseMedium17
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 1,
+                            currentIndex: othersActivitiesCurrentHour,
+                            initValue: othersActivitiesInitHour,
+                            onValueChanged: (val) =>
+                                onOthersActivitiesHour(val),
+                            totalCount: othersActivitiesTotalHour),
+                        const VSpace(Insets.i10),
+                        Text(
+                            textAlign: TextAlign.start,
+                            'Minutes',
+                            style: appCss.dmDenseMedium17
+                                .textColor(appColor(context).appTheme.primary)),
+                        const VSpace(Insets.i15),
+                        CommonWheelSlider(
+                            interval: 5,
+                            currentIndex: othersActivitiesCurrentMinute,
+                            initValue: othersActivitiesInitMinute,
+                            onValueChanged: (val) =>
+                                onOthersActivitiesMinute(val),
+                            totalCount: othersActivitiesTotalMinute),
+                        const VSpace(Insets.i25),
+                        CommonSelectionButton(
+                            onTapOne: () => Navigator.pop(context),
+                            onTapTwo: () {
+                              updateData(context);
+                              Navigator.pop(context);
+                            })
+                      ]).paddingAll(15)));
         });
   }
 
@@ -941,11 +1531,6 @@ class HomeScreenProvider extends ChangeNotifier {
 
   List regulations = [];
 
-  String? sadhanaHearing;
-  String? hearingGuru;
-  String? hearingOthers;
-  String? preaching;
-  String? otherActivities;
   String? notes;
   int? small;
   int? medium;
@@ -955,7 +1540,7 @@ class HomeScreenProvider extends ChangeNotifier {
     showLoading(context);
     notifyListeners();
     DateTime getDate(DateTime d) => DateTime(d.year, d.month, d.day);
-      var toData = DateFormat("yyyy-MM-dd").format(selectedDate);
+    var toData = DateFormat("yyyy-MM-dd").format(selectedDate);
     var fromData = DateFormat("yyyy-MM-dd")
         .format(getDate(selectedDate).subtract(const Duration(days: 6)));
     try {
@@ -975,17 +1560,17 @@ class HomeScreenProvider extends ChangeNotifier {
         print("RESPONSEs ${value.data['book_reading']}");
         if (value.isSuccess!) {
           notifyListeners();
-
-
           Sadhana sadhana = Sadhana.fromJson(value.data);
+
           log("AAAA : ${sadhana.sadhanaData}");
           if (sadhana.sadhanaData.isNotEmpty) {
-
-            for(var sadhnaData in sadhana.sadhanaData){
-              if(sadhnaData["date"] == toData){
-
+            for (var sadhnaData in sadhana.sadhanaData) {
+              if (sadhnaData["date"] == toData) {
+                var sleepData = sadhnaData['data']['sleep'];
+                log("sleepdataaa :: $sleepData");
               }
             }
+
             notifyListeners();
             var sleepData = sadhana.sadhanaData[0]['data']['sleep'];
             var mangalaData = sadhana.sadhanaData[0]['data']['mangala_arti'];
@@ -1001,23 +1586,23 @@ class HomeScreenProvider extends ChangeNotifier {
 
             if (sadhana.sadhanaData[0]['data']['association'] != null) {
               log("ASSSS : ${sadhana.sadhanaData[0]['data']['association'] != "null"}");
-              sadhanaHearing =
+              hearingSpTime24 =
                   sadhana.sadhanaData[0]['data']['association']['hearing_sp'];
 
-              hearingGuru =
+              hearingGuruTime24 =
                   sadhana.sadhanaData[0]['data']['association']['hearing_guru'];
-              hearingOthers = sadhana.sadhanaData[0]['data']['association']
-                  ['hearing_others'];
-              preaching =
+              hearingOthersTime24 = sadhana.sadhanaData[0]['data']
+                  ['association']['hearing_others'];
+              preachingTime24 =
                   sadhana.sadhanaData[0]['data']['association']['preaching'];
-              otherActivities = sadhana.sadhanaData[0]['data']['association']
-                  ['other_activities'];
+              othersActivitiesTime24 = sadhana.sadhanaData[0]['data']
+                  ['association']['other_activities'];
             } else {
-              sadhanaHearing = 'N/A';
-              hearingGuru = 'N/A';
-              hearingOthers = 'N/A';
-              preaching = 'N/A';
-              otherActivities = 'N/A';
+              hearingSpTime24 = 'N/A';
+              hearingGuruTime24 = 'N/A';
+              hearingOthersTime24 = 'N/A';
+              preachingTime24 = 'N/A';
+              othersActivitiesTime24 = 'N/A';
             }
             notifyListeners();
             notes = sadhana.sadhanaData[0]['data']['notes'];
@@ -1029,7 +1614,6 @@ class HomeScreenProvider extends ChangeNotifier {
                 ['medium_books'];
             large = sadhana.sadhanaData[0]['data']['book_distribution']
                 ['big_books'];
-
             smallBookCtrl.text = small.toString();
             mediumBookCtrl.text = medium.toString();
             largeBookCtrl.text = large.toString();
@@ -1155,13 +1739,15 @@ class HomeScreenProvider extends ChangeNotifier {
   updateData(context) async {
     log("SSS $selectedDate");
     log("SSS $sleepAt");
+    log("SSS $sleepAt24");
     log("SSS $wakeupTime");
+    log("SSS $wakeupTime24");
     var body = {
       "date": DateFormat('yyyy-MM-dd').format(selectedDate),
       "data": {
-        "sleep": {"slept_time": sleepAt, "wakeup_time": wakeupTime},
+        "sleep": {"slept_time": sleepAt24, "wakeup_time": wakeupTime24},
         "mangala_arti": {
-          "time": mangalaArtiTime,
+          "time": manglaArtiTime24,
           "guru_astaka": appArray.manglaArtiTypeList[0]['isOn'],
           "narasimha_arti": appArray.manglaArtiTypeList[1]['isOn'],
           "tulasi_arti": appArray.manglaArtiTypeList[2]['isOn'],
@@ -1169,16 +1755,28 @@ class HomeScreenProvider extends ChangeNotifier {
           "bhoga_offering": appArray.manglaArtiTypeList[4]['isOn']
         },
         "sandhya_arti": {
-          "time": "07:30:00",
+          "time": sandhyaArtiTime24,
           "sandhya_arti": appArray.sandhyaTypeList[0]['isOn'],
           "narasimha_arti": appArray.sandhyaTypeList[1]['isOn'],
           "bhoga_offering": appArray.sandhyaTypeList[2]['isOn']
         },
         "chanting": {
-          "slot_1": {"rounds": chantinglist[0]['rounds'], "quality": chantinglist[0]['quality']},
-          "slot_2": {"rounds": chantinglist[1]['rounds'], "quality": chantinglist[1]['quality']},
-          "slot_3": {"rounds": chantinglist[2]['rounds'], "quality": chantinglist[2]['quality']},
-          "slot_4": {"rounds": chantinglist[3]['rounds'], "quality": chantinglist[3]['quality']}
+          "slot_1": {
+            "rounds": chantinglist[0]['rounds'],
+            "quality": chantinglist[0]['quality']
+          },
+          "slot_2": {
+            "rounds": chantinglist[1]['rounds'],
+            "quality": chantinglist[1]['quality']
+          },
+          "slot_3": {
+            "rounds": chantinglist[2]['rounds'],
+            "quality": chantinglist[2]['quality']
+          },
+          "slot_4": {
+            "rounds": chantinglist[3]['rounds'],
+            "quality": chantinglist[3]['quality']
+          }
         },
         "regulations": {
           "no_meat_eating": appArray.rulesList[0]['isOn'],
@@ -1200,11 +1798,11 @@ class HomeScreenProvider extends ChangeNotifier {
           }
         ],
         "association": {
-          "hearing_sp": sadhanaHearing,
-          "hearing_guru": hearingGuru,
-          "hearing_others": hearingOthers,
-          "preaching": preaching,
-          "other_activities": otherActivities
+          "hearing_sp": hearingSpTime24,
+          "hearing_guru": hearingGuruTime24,
+          "hearing_others": hearingOthersTime24,
+          "preaching": preachingTime24,
+          "other_activities": othersActivitiesTime24
         },
         "book_distribution": {
           "small_books": smallBookCtrl.text,

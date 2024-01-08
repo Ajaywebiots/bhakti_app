@@ -35,7 +35,7 @@ class HomeScreenBottomLayout extends StatelessWidget {
         const VSpace(Insets.i25),
         CommonLeftSideText(text: appFonts.notes),
         const VSpace(Insets.i15),
-        const NotesLayout(),
+        const NotesLayout()
       ]);
     });
   }

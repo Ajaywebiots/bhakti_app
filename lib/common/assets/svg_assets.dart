@@ -38,6 +38,7 @@ class SvgAssets {
   final tulsiImg = 'assets/svg/TulsiImg.svg';
   final bhog = 'assets/svg/bhog.svg';
   final sandhyaImg = 'assets/svg/sandhyaImg.svg';
+  final horizontalPointer = 'assets/svg/horizontalLinePointer.svg';
   final setting5 = 'assets/svg/setting-5.svg';
   final book1 = 'assets/svg/book1.svg';
   final shareMySadhana  = 'assets/svg/SharemySadhana.svg';

@@ -82,6 +82,7 @@ class AppCss {
   TextStyle dmDenseMedium21 = dmDense(fontWeight: medium,fontsize:FontSizes.f21);
   TextStyle dmDenseMedium20 = dmDense(fontWeight: medium,fontsize:FontSizes.f20);
   TextStyle dmDenseMedium18 = dmDense(fontWeight: medium,fontsize:FontSizes.f18);
+  TextStyle dmDenseMedium17 = dmDense(fontWeight: medium,fontsize:FontSizes.f17);
   TextStyle dmDenseMedium16 = dmDense(fontWeight: medium,fontsize:FontSizes.f16);
   TextStyle dmDenseMedium15 = dmDense(fontWeight: medium,fontsize:FontSizes.f15);
   TextStyle dmDenseMedium14 = dmDense(fontWeight: medium,fontsize:FontSizes.f14);
